@@ -63,6 +63,7 @@ public class CyActivator extends AbstractCyActivator {
 		// Our menu item should only be enabled if at least one network
 		// view exists.
 		// properties.put(ServiceProperties.ENABLE_FOR, "networkAndView");
+		System.out.println("in the cyActivator file before register service");
 
 		TaskFactory myFactory = new EnrichmentTaskFactory(registrar); // Implementation
 		registerService(context,
