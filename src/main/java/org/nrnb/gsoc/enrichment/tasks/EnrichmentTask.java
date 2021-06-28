@@ -5,7 +5,6 @@ import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 
-import java.net.http.HttpResponse;
 import java.util.*;
 
 public class EnrichmentTask extends AbstractTask {
@@ -28,6 +27,11 @@ public class EnrichmentTask extends AbstractTask {
 			add("GSTO1");
 			add("DMD");
 			add("GSTM2");
+			add("MLXIPL");
+			add("SMARCB1");
+			add("PIH1D1");
+			add("SMARCA4");
+			add("AGER");
 		}};
 
 		selectedNodes.add("Homo sapiens");
@@ -42,10 +46,11 @@ public class EnrichmentTask extends AbstractTask {
 		query.append("\"");
 		Map<String,String> parameters = generateQuery(query.toString());
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		HttpResponse<String> response = requestEngine.makePostRequest("gost/profile/",parameters);
+		List<String> response = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
 		StringBuffer responseBuffer = new StringBuffer("");
-		if(response!=null)
-			responseBuffer.append(response.body());
+		for(String it : response){
+			responseBuffer.append(it);
+		}
 		System.out.println(responseBuffer.toString());
 		System.out.println("Tasks completed");
 		System.out.println("Task output");

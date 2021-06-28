@@ -1,13 +1,21 @@
 package org.nrnb.gsoc.enrichment.RequestEngine;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.cytoscape.work.TaskMonitor;
 import org.json.simple.JSONValue;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,24 +48,52 @@ public class HTTPRequestEngine {
 
     }
 
-    public HttpResponse<String> makePostRequest(String endpoint , Map<String,String> parameters) {
-        HttpClient client = HttpClient.newHttpClient();
+    public List<String> makePostRequest(String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
         urlConverter.append(endpoint);
         String url = urlConverter.toString();
+        HttpPost httpPost = new HttpPost(url);
+
         String jsonBody = JSONValue.toJSONString(parameters);
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Content-Type","application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-                .build();
-        HttpResponse<String> response = null;
+        StringEntity entity = null;
         try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (InterruptedException | IOException e) {
-            System.out.println("No connection");
+            entity = new StringEntity(jsonBody);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        return response;
+        httpPost.setEntity(entity);
+        httpPost.setHeader("Accept", "application/json");
+        httpPost.setHeader("Content-type", "application/json");
+        CloseableHttpResponse response = null;
+        try {
+            response = httpclient.execute(httpPost);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int statusCode = response.getStatusLine().getStatusCode();
+        if(statusCode!=200 && statusCode!=202){
+            monitor.showMessage(TaskMonitor.Level.ERROR, "Got "+
+                    response.getStatusLine().getStatusCode()+" code from server");
+            return null;
+        }
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<String> strings = new ArrayList<>();
+        String line=null;
+        while(true) {
+            try {
+                if (!((line = reader.readLine()) != null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            strings.add(line);
+        }
+        return strings;
     }
 };
