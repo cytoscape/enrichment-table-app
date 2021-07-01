@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author ighosh
+ */
 public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     String name;
     String description;
@@ -19,10 +22,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     List<String> genes;
     List<Long> nodes;
 
-    public static final String enrichmentURLTest = "http://gamma.string-db.org/cgi/webservices/enrichmentWrapper.pl";
-    public static final String enrichmentURL = "http://version-10.string-db.org/cgi/webservices/enrichmentWrapper.pl";
-
-    // Change to an enum?
     public static enum TermSource {
         ALL("All", "All", "Enrichment: All"),
         ALLFILTERED("AllFilt", "All Filtered", "Enrichment: All Filtered"),
@@ -97,7 +96,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
      * goshv
      * significant
      * effective_domain_size -> total number of genes
-     * intersection_size ->
+     * intersection_size: number of genes in the query that are annotated to the corresponding term
      * term_size
      * query_size
      * precision
@@ -222,61 +221,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
     public void setNodesSUID(List<Long> nodes) {
         this.nodes = nodes;
-    }
-    public double getGoshv() {
-        return goshv;
-    }
-
-    public void setGoshv(double goshv) {
-        this.goshv = goshv;
-    }
-
-    public boolean isSignificant() {
-        return isSignificant;
-    }
-
-    public void setSignificant(boolean significant) {
-        isSignificant = significant;
-    }
-
-    public int getEffectiveDomainSIze() {
-        return effectiveDomainSIze;
-    }
-
-    public void setEffectiveDomainSIze(int effectiveDomainSIze) {
-        this.effectiveDomainSIze = effectiveDomainSIze;
-    }
-
-    public int getIntersectionSize() {
-        return intersectionSize;
-    }
-
-    public void setIntersectionSize(int intersectionSize) {
-        this.intersectionSize = intersectionSize;
-    }
-
-    public int getTermSize() {
-        return termSize;
-    }
-
-    public void setTermSize(int termSize) {
-        this.termSize = termSize;
-    }
-
-    public double getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(double precision) {
-        this.precision = precision;
-    }
-
-    public double getRecall() {
-        return recall;
-    }
-
-    public void setRecall(double recall) {
-        this.recall = recall;
     }
 
     public double getGoshv() {
