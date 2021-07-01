@@ -54,15 +54,15 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         public String toString() { return name; }
         static public List<String> getCategories() {
             List<String> cats = new ArrayList<String>();
-            for (TermSource tc: values()) {
-                cats.add(tc.getKey());
+            for (TermSource ts: values()) {
+                cats.add(ts.getKey());
             }
             return cats;
         }
         // return only the categories that should/could be filtered (exclude publications and all)
         static public List<TermSource> getValues() {
             List<TermSource> cats = new ArrayList<TermSource>();
-            for (TermSource tc: values()) {
+            for (TermSource ts: values()) {
                 if (tc != ALL && tc != ALLFILTERED)
                     cats.add(tc);
             }
@@ -70,22 +70,22 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         }
         static public List<String> getTables() {
             List<String> tables = new ArrayList<String>();
-            for (TermSource tc: values()) {
-                tables.add(tc.getTable());
+            for (TermSource ts: values()) {
+                tables.add(ts.getTable());
             }
             return tables;
         }
         static public boolean containsKey(String key) {
-            for (TermSource tc: values()) {
-                if (tc.getKey().equals(key))
+            for (TermSource ts: values()) {
+                if (ts.getKey().equals(key))
                     return true;
             }
             return false;
         }
         static public String getName(String key) {
-            for (TermSource tc: values()) {
-                if (tc.getKey().equals(key))
-                    return tc.getName();
+            for (TermSource ts: values()) {
+                if (ts.getKey().equals(key))
+                    return ts.getName();
             }
             return null;
         }
@@ -284,7 +284,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     }
 
     public int compareTo(EnrichmentTerm et) {
-        // if (t.toString() == null) return 1;
         if (this.pvalue < et.getPValue()) {
             return -1;
         } else if (this.pvalue == et.getPValue()) {
