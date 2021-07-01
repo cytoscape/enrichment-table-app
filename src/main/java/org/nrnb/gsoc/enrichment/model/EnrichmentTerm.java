@@ -14,7 +14,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     double pvalue;
     double goshv;
     boolean isSignificant;
-    int effectiveDomainSIze;
+    int effectiveDomainSize;
     int intersectionSize;
     int termSize;
     double precision;
@@ -143,7 +143,13 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = "";
         this.source = "";
         this.pvalue = -1.0;
-        this.pvalue = -1.0;
+        this.goshv=-1.0;
+        this.isSignificant = true;
+        this.effectiveDomainSize=0;
+        this.intersectionSize =0;
+        this.termSize = 0;
+        this.precision =-1.0;
+        this.recall = -1.0;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
 
@@ -165,10 +171,28 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = description;
         this.source = source;
         this.pvalue = pvalue;
-        this.pvalue = pvalue;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
     }
+    public EnrichmentTerm(String name, String description, String source,
+                          double pvalue, double goshv, boolean isSignificant,
+                          int effectiveDomainSize, int intersectionSize, int termSize,
+                          double precision, double recall) {
+        this.name = name;
+        this.description = description;
+        this.source = source;
+        this.pvalue = pvalue;
+        this.goshv = goshv;
+        this.isSignificant = isSignificant;
+        this.effectiveDomainSize = effectiveDomainSize;
+        this.intersectionSize = intersectionSize;
+        this.termSize = termSize;
+        this.precision = precision;
+        this.recall = recall;
+        this.genes = new ArrayList<String>();
+        this.nodes = new ArrayList<Long>();
+    }
+
 
     public String getName() {
         return name;
@@ -240,11 +264,11 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     }
 
     public int getEffectiveDomainSIze() {
-        return effectiveDomainSIze;
+        return effectiveDomainSize;
     }
 
-    public void setEffectiveDomainSIze(int effectiveDomainSIze) {
-        this.effectiveDomainSIze = effectiveDomainSIze;
+    public void setEffectiveDomainSIze(int effectiveDomainSize) {
+        this.effectiveDomainSize = effectiveDomainSize;
     }
 
     public int getIntersectionSize() {
