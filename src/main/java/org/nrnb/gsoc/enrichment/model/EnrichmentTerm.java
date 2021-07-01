@@ -223,6 +223,61 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public void setNodesSUID(List<Long> nodes) {
         this.nodes = nodes;
     }
+    public double getGoshv() {
+        return goshv;
+    }
+
+    public void setGoshv(double goshv) {
+        this.goshv = goshv;
+    }
+
+    public boolean isSignificant() {
+        return isSignificant;
+    }
+
+    public void setSignificant(boolean significant) {
+        isSignificant = significant;
+    }
+
+    public int getEffectiveDomainSIze() {
+        return effectiveDomainSIze;
+    }
+
+    public void setEffectiveDomainSIze(int effectiveDomainSIze) {
+        this.effectiveDomainSIze = effectiveDomainSIze;
+    }
+
+    public int getIntersectionSize() {
+        return intersectionSize;
+    }
+
+    public void setIntersectionSize(int intersectionSize) {
+        this.intersectionSize = intersectionSize;
+    }
+
+    public int getTermSize() {
+        return termSize;
+    }
+
+    public void setTermSize(int termSize) {
+        this.termSize = termSize;
+    }
+
+    public double getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+
+    public double getRecall() {
+        return recall;
+    }
+
+    public void setRecall(double recall) {
+        this.recall = recall;
+    }
 
     public double getGoshv() {
         return goshv;
