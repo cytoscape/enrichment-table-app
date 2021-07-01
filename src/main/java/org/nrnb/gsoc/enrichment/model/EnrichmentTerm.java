@@ -63,8 +63,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         static public List<TermSource> getValues() {
             List<TermSource> cats = new ArrayList<TermSource>();
             for (TermSource ts: values()) {
-                if (tc != ALL && tc != ALLFILTERED)
-                    cats.add(tc);
+                if (ts != ALL && ts != ALLFILTERED)
+                    cats.add(ts);
             }
             return cats;
         }
