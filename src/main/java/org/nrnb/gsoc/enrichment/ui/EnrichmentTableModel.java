@@ -3,7 +3,7 @@ package org.nrnb.gsoc.enrichment.ui;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
-import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermCategory;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -181,10 +181,10 @@ public class EnrichmentTableModel extends AbstractTableModel {
         fireTableCellUpdated(row, col);
     }
 
-    // filter by category and nodeSUID
+    // filter by source and nodeSUID
     public void filterByNodeSUID(List<Long> nodesToFilterSUID, boolean annotateAllNodes,
-                                 List<TermCategory> categories) {
-        filter(categories);
+                                 List<TermSource> sources) {
+        filter(sources);
         filterByNodeSUID(nodesToFilterSUID, annotateAllNodes);
     }
 
@@ -211,15 +211,15 @@ public class EnrichmentTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    // Filter the table by category
-    public void filter(List<TermCategory> categories) {
+    // Filter the table by souce
+    public void filter(List<TermSource> sources) {
         List<CyRow> rows = cyTable.getAllRows();
         Long[] rowArray = new Long[rows.size()];
         int i = 0;
         for (CyRow row : rows) {
             // implement this again
-            String termCategory = row.get(EnrichmentTerm.colSource, String.class);
-            if (categories.size() == 0 || inCategory(categories, termCategory)) {
+            String termSource = row.get(EnrichmentTerm.colSource, String.class);
+            if (sources.size() == 0 || inSource(sources, termSource)) {
                 rowArray[i] = row.get(EnrichmentTerm.colTermID, Long.class);
                 i++;
             }
@@ -227,17 +227,19 @@ public class EnrichmentTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    private boolean inCategory(List<TermCategory> categories, String termName) {
-        for (TermCategory tc: categories) {
-            if (tc.getName().equals(termName))
+    private boolean inSource(List<TermSource> sources, String termName) {
+        for (TermSource ts: sources) {
+            if (ts.getName().equals(termName))
                 return true;
         }
         return false;
     }
 
-
+    /**
+     *
+     * @return Array sorted by pvalue
+     */
     private Long[] pValueSort(Long[] rowArray, int length) {
-        // Already sorted, I think...
         return Arrays.copyOf(rowArray, length);
     }
 

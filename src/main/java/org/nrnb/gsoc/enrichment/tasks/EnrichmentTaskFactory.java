@@ -5,7 +5,6 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.AbstractTaskFactory;
 import org.cytoscape.work.TaskIterator;
 
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 
 public class EnrichmentTaskFactory extends AbstractTaskFactory {
 
@@ -24,6 +23,7 @@ public class EnrichmentTaskFactory extends AbstractTaskFactory {
 	}
 
 	public boolean isReady() {
+		// check if the network exists
 		if(netManager.getNetworkSet()!=null && netManager.getNetworkSet().size()>0){
 			return true;
 		}
@@ -31,9 +31,3 @@ public class EnrichmentTaskFactory extends AbstractTaskFactory {
 		return false;
 	}
 }
-/**
- * Default to get from the name column, tunables we would expose
- * Making the comboBox -> String valued tables -> Populate
- * Menu item active -> getting names from the name column of the network
- * Getting the
- */

@@ -7,10 +7,8 @@ import java.util.List;
 public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     String name;
     String description;
-    int year;
-    String category;
+    String source;
     double pvalue;
-    int genesBG;
     List<String> genes;
     List<Long> nodes;
 
@@ -18,7 +16,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String enrichmentURL = "http://version-10.string-db.org/cgi/webservices/enrichmentWrapper.pl";
 
     // Change to an enum?
-    public static enum TermCategory {
+    public static enum TermSource {
         ALL("All", "All", "Enrichment: All"),
         ALLFILTERED("AllFilt", "All Filtered", "Enrichment: All Filtered"),
         //GO:BP -> Biological process [Default]
@@ -35,7 +33,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         CORUM("CORUM","CORUM","CORUM");
 
         String key, name, table;
-        TermCategory(String key, String name, String table) {
+        TermSource(String key, String name, String table) {
             this.key = key;
             this.name = name;
             this.table = table;
@@ -47,15 +45,15 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         public String toString() { return name; }
         static public List<String> getCategories() {
             List<String> cats = new ArrayList<String>();
-            for (TermCategory tc: values()) {
+            for (TermSource tc: values()) {
                 cats.add(tc.getKey());
             }
             return cats;
         }
         // return only the categories that should/could be filtered (exclude publications and all)
-        static public List<TermCategory> getValues() {
-            List<TermCategory> cats = new ArrayList<TermCategory>();
-            for (TermCategory tc: values()) {
+        static public List<TermSource> getValues() {
+            List<TermSource> cats = new ArrayList<TermSource>();
+            for (TermSource tc: values()) {
                 if (tc != ALL && tc != ALLFILTERED)
                     cats.add(tc);
             }
@@ -63,20 +61,20 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         }
         static public List<String> getTables() {
             List<String> tables = new ArrayList<String>();
-            for (TermCategory tc: values()) {
+            for (TermSource tc: values()) {
                 tables.add(tc.getTable());
             }
             return tables;
         }
         static public boolean containsKey(String key) {
-            for (TermCategory tc: values()) {
+            for (TermSource tc: values()) {
                 if (tc.getKey().equals(key))
                     return true;
             }
             return false;
         }
         static public String getName(String key) {
-            for (TermCategory tc: values()) {
+            for (TermSource tc: values()) {
                 if (tc.getKey().equals(key))
                     return tc.getName();
             }
@@ -129,48 +127,36 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
             colEffectiveDomainSize,  colGenes, colGenesSUID };
     public static final String[] swingColumnsEnrichmentOld = new String[] { colChartColor, colName, colDescription, colPvalue,
             colEffectiveDomainSizeOld, colGenesSUID };
-    public static final int nodeSUIDColumn = 8;
-    public static final int chartColumnCol = 1;
-    public static final int nameColumn = 2;
 
-    public static final int nodeSUIDColumnPubl = 7;
-    public static final int fdrColumnPubl = 3;
-    public static final int idColumnPubl = 0;
 
     public EnrichmentTerm() {
         this.name = "";
-        this.year = 0;
         this.description = "";
-        this.category = "";
+        this.source = "";
         this.pvalue = -1.0;
         this.pvalue = -1.0;
-        this.genesBG = 0;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
 
     }
 
-    public EnrichmentTerm(String enrichmentCategory) {
+    public EnrichmentTerm(String enrichmentSource) {
         this.name = "";
-        this.year = 0;
         this.description = "";
-        this.category = enrichmentCategory;
+        this.source = enrichmentSource;
         this.pvalue = -1.0;
-        this.genesBG = 0;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
 
     }
 
-    public EnrichmentTerm(String name, int year, String description, String category,
-                          double pvalue, int genesBG) {
+    public EnrichmentTerm(String name, String description, String source,
+                          double pvalue) {
         this.name = name;
-        this.year = year;
         this.description = description;
-        this.category = category;
+        this.source = source;
         this.pvalue = pvalue;
         this.pvalue = pvalue;
-        this.genesBG = genesBG;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
     }
@@ -187,28 +173,16 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         return description;
     }
 
-    public void setDescription(String desc) {
-        this.description = desc;
-        if (desc.length() > 5 && desc.substring(1,5).matches("^\\d{4}")) {
-            this.description = desc.substring(6);
-            this.year = Integer.parseInt(desc.substring(1,5));
-        }
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getYear() {
-        return year;
+    public String getSource() {
+        return source;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public double getPValue() {
@@ -219,21 +193,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.pvalue = pvalue;
     }
 
-    public double getFDRPValue() {
-        return pvalue;
-    }
-
-    public void setFDRPValue(double pvalue) {
-        this.pvalue = pvalue;
-    }
-
-    public int getGenesBG() {
-        return genesBG;
-    }
-
-    public void setGenesBG(int genesBG) {
-        this.genesBG = genesBG;
-    }
 
     public int getNumberGenes() {
         return genes.size();
@@ -261,9 +220,9 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
     public int compareTo(EnrichmentTerm et) {
         // if (t.toString() == null) return 1;
-        if (this.pvalue < et.getFDRPValue()) {
+        if (this.pvalue < et.getPValue()) {
             return -1;
-        } else if (this.pvalue == et.getFDRPValue()) {
+        } else if (this.pvalue == et.getPValue()) {
             return 0;
         }
         return 1;
