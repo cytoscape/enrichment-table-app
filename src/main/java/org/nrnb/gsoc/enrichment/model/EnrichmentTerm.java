@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author ighosh
+ */
 public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     String name;
     String description;
@@ -11,7 +14,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     double pvalue;
     double goshv;
     boolean isSignificant;
-    int effectiveDomainSIze;
+    int effectiveDomainSize;
     int intersectionSize;
     int termSize;
     double precision;
@@ -19,10 +22,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     List<String> genes;
     List<Long> nodes;
 
-    public static final String enrichmentURLTest = "http://gamma.string-db.org/cgi/webservices/enrichmentWrapper.pl";
-    public static final String enrichmentURL = "http://version-10.string-db.org/cgi/webservices/enrichmentWrapper.pl";
-
-    // Change to an enum?
     public static enum TermSource {
         ALL("All", "All", "Enrichment: All"),
         ALLFILTERED("AllFilt", "All Filtered", "Enrichment: All Filtered"),
@@ -36,8 +35,11 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         KEGG("KEGG", "KEGG Pathways", "Enrichment: KEGG Pathways"),
         REACTOME("RCTM", "Reactome Pathways", "Enrichment: Reactome Pathways"),
         WIKIPATHWAYS("WikiPathways", "WikiPathways", "Enrichment: WikiPathways"),
+        TF("TF","TF","Enrichment: TF"),
         MIRNA("MIRNA","MIRNA","MIRNA"),
-        CORUM("CORUM","CORUM","CORUM");
+        HPA("HPA","HPA","Enrichment: HPA"),
+        CORUM("CORUM","CORUM","CORUM"),
+        HP("HP","Human Phenotype Ontology", "Enrichment: Human Phenotype Ontology");
 
         String key, name, table;
         TermSource(String key, String name, String table) {
@@ -52,38 +54,38 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         public String toString() { return name; }
         static public List<String> getCategories() {
             List<String> cats = new ArrayList<String>();
-            for (TermSource tc: values()) {
-                cats.add(tc.getKey());
+            for (TermSource ts: values()) {
+                cats.add(ts.getKey());
             }
             return cats;
         }
         // return only the categories that should/could be filtered (exclude publications and all)
         static public List<TermSource> getValues() {
             List<TermSource> cats = new ArrayList<TermSource>();
-            for (TermSource tc: values()) {
-                if (tc != ALL && tc != ALLFILTERED)
-                    cats.add(tc);
+            for (TermSource ts: values()) {
+                if (ts != ALL && ts != ALLFILTERED)
+                    cats.add(ts);
             }
             return cats;
         }
         static public List<String> getTables() {
             List<String> tables = new ArrayList<String>();
-            for (TermSource tc: values()) {
-                tables.add(tc.getTable());
+            for (TermSource ts: values()) {
+                tables.add(ts.getTable());
             }
             return tables;
         }
         static public boolean containsKey(String key) {
-            for (TermSource tc: values()) {
-                if (tc.getKey().equals(key))
+            for (TermSource ts: values()) {
+                if (ts.getKey().equals(key))
                     return true;
             }
             return false;
         }
         static public String getName(String key) {
-            for (TermSource tc: values()) {
-                if (tc.getKey().equals(key))
-                    return tc.getName();
+            for (TermSource ts: values()) {
+                if (ts.getKey().equals(key))
+                    return ts.getName();
             }
             return null;
         }
@@ -94,7 +96,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
      * goshv
      * significant
      * effective_domain_size -> total number of genes
-     * intersection_size ->
+     * intersection_size: number of genes in the query that are annotated to the corresponding term
      * term_size
      * query_size
      * precision
@@ -141,7 +143,13 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = "";
         this.source = "";
         this.pvalue = -1.0;
-        this.pvalue = -1.0;
+        this.goshv=-1.0;
+        this.isSignificant = true;
+        this.effectiveDomainSize=0;
+        this.intersectionSize =0;
+        this.termSize = 0;
+        this.precision =-1.0;
+        this.recall = -1.0;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
 
@@ -163,10 +171,28 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = description;
         this.source = source;
         this.pvalue = pvalue;
-        this.pvalue = pvalue;
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
     }
+    public EnrichmentTerm(String name, String description, String source,
+                          double pvalue, double goshv, boolean isSignificant,
+                          int effectiveDomainSize, int intersectionSize, int termSize,
+                          double precision, double recall) {
+        this.name = name;
+        this.description = description;
+        this.source = source;
+        this.pvalue = pvalue;
+        this.goshv = goshv;
+        this.isSignificant = isSignificant;
+        this.effectiveDomainSize = effectiveDomainSize;
+        this.intersectionSize = intersectionSize;
+        this.termSize = termSize;
+        this.precision = precision;
+        this.recall = recall;
+        this.genes = new ArrayList<String>();
+        this.nodes = new ArrayList<Long>();
+    }
+
 
     public String getName() {
         return name;
@@ -221,12 +247,67 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.nodes = nodes;
     }
 
+    public double getGoshv() {
+        return goshv;
+    }
+
+    public void setGoshv(double goshv) {
+        this.goshv = goshv;
+    }
+
+    public boolean isSignificant() {
+        return isSignificant;
+    }
+
+    public void setSignificant(boolean significant) {
+        isSignificant = significant;
+    }
+
+    public int getEffectiveDomainSIze() {
+        return effectiveDomainSize;
+    }
+
+    public void setEffectiveDomainSIze(int effectiveDomainSize) {
+        this.effectiveDomainSize = effectiveDomainSize;
+    }
+
+    public int getIntersectionSize() {
+        return intersectionSize;
+    }
+
+    public void setIntersectionSize(int intersectionSize) {
+        this.intersectionSize = intersectionSize;
+    }
+
+    public int getTermSize() {
+        return termSize;
+    }
+
+    public void setTermSize(int termSize) {
+        this.termSize = termSize;
+    }
+
+    public double getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+
+    public double getRecall() {
+        return recall;
+    }
+
+    public void setRecall(double recall) {
+        this.recall = recall;
+    }
+
     public String toString() {
         return name + "\t" + getNumberGenes() + "\t" + pvalue;
     }
 
     public int compareTo(EnrichmentTerm et) {
-        // if (t.toString() == null) return 1;
         if (this.pvalue < et.getPValue()) {
             return -1;
         } else if (this.pvalue == et.getPValue()) {
