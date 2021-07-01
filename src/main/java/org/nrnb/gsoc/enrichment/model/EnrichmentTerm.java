@@ -9,6 +9,13 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     String description;
     String source;
     double pvalue;
+    double goshv;
+    boolean isSignificant;
+    int effectiveDomainSIze;
+    int intersectionSize;
+    int termSize;
+    double precision;
+    double recall;
     List<String> genes;
     List<Long> nodes;
 
