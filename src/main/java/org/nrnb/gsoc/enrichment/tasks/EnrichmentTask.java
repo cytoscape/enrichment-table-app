@@ -21,7 +21,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	final CyApplicationManager applicationManager;
 	final CyNetwork network;
 	final CyNetworkView networkView;
-
+	private static int MAX_NUMBER_OF_NODES = 2000;
+	private boolean isLargeNetwork;
 	@Tunable(description = "Select nodes",
 			context = "nogui",
 			//tooltip = "Select the enrichment categories to show in the table",
@@ -34,6 +35,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			longDescription="By default, a query run for all nodes in the network",
 			exampleStringValue="false")
 	public boolean checkSelectedNodes = false;
+	// store the value as a property?
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
 		super();
@@ -43,12 +45,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		this.networkView = applicationManager.getCurrentNetworkView();
 		nodesToFilterBy = new ListMultipleSelection<CyNode>(network.getNodeList());
 		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
+		isLargeNetwork = false;
 	}
 
 	public void run(TaskMonitor monitor) {
 		// Get services from registrar if needed
 		System.out.println("Running the enrichment task...");
-		// TODO: Get the right list of nodes for making a query request
 		List<CyNode> nodeList;
 		Set<String> nodeNameList = new HashSet<String>();
 		List<Long> nodesToFilter = new ArrayList<Long>();
@@ -66,6 +68,24 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
 				nodeNameList.add(canonicalName);
 			}
+		}
+		/**
+		 * Check if request query is empty
+		 */
+		if(nodeNameList.isEmpty()){
+			monitor.showMessage(TaskMonitor.Level.ERROR,
+					"Task cannot be performed. No nodes selected for enrichment.");
+			System.out.println("Task cannot be performed. No nodes selected for enrichment.");
+		}
+
+		/**
+		 * Upper limit on the number of nodes that can be queried
+		 */
+		if(nodeNameList.size()>MAX_NUMBER_OF_NODES){
+			isLargeNetwork = true;
+			monitor.setStatusMessage("Cannot run query as size of query is too large");
+			monitor.setProgress(1.0);
+			return;
 		}
 
 		Set<String> selectedNodes = new HashSet<String>(){{
@@ -97,6 +117,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		for(String it : response){
 			responseBuffer.append(it);
 		}
+		if((responseBuffer.toString()).length()==0){
+			monitor.showMessage(TaskMonitor.Level.ERROR,
+					"Enrichment retrieval returned no results, possibly due to an error.");
+			monitor.setProgress(1.0);
+			return;
+		}
 		System.out.println(responseBuffer.toString());
 		System.out.println("Tasks completed");
 		System.out.println("Task output");
@@ -105,6 +131,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			System.out.print(node+" ");
 		}
 		monitor.setProgress(1.0);
+		return;
 	}
 
 	private Map<String, String> generateQuery(String query) {
