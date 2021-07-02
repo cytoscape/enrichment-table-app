@@ -174,6 +174,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
     }
+
     public EnrichmentTerm(String name, String description, String source,
                           double pvalue, double goshv, boolean isSignificant,
                           int effectiveDomainSize, int intersectionSize, int termSize,
@@ -192,7 +193,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.genes = new ArrayList<String>();
         this.nodes = new ArrayList<Long>();
     }
-
 
     public String getName() {
         return name;
