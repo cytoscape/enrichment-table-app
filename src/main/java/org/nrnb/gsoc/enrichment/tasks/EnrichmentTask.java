@@ -80,11 +80,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			add("SMARCA4");
 			add("AGER");
 		}};
-
 		selectedNodes.add("Homo sapiens");
 		StringBuffer query = new StringBuffer("");
 
-		Iterator<String> setIterator = selectedNodes.iterator();
+		Iterator<String> setIterator = nodeNameList.iterator();
 		query.append("\"");
 		while(setIterator.hasNext()){
 			query.append(setIterator.next());
@@ -101,6 +100,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		System.out.println(responseBuffer.toString());
 		System.out.println("Tasks completed");
 		System.out.println("Task output");
+		System.out.println(nodeNameList.size());
+		for(String node : nodeNameList){
+			System.out.print(node+" ");
+		}
 		monitor.setProgress(1.0);
 	}
 
