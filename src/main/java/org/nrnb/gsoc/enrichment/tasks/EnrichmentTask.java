@@ -137,6 +137,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	private Map<String, String> generateQuery(String query) {
 		HashMap<String,String> parameters = new HashMap<>();
 		System.out.println(query);
+		// TODO: add a box for taking this as an input
 		parameters.put("organism","hsapiens");
 		parameters.put("query",query);
 		return parameters;
