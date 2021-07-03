@@ -6,7 +6,9 @@ import org.cytoscape.model.events.RowsSetEvent;
 import org.cytoscape.model.events.RowsSetListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesEvent;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
+import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.util.swing.CyColorPaletteChooserFactory;
+import org.cytoscape.util.swing.IconManager;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -25,11 +27,14 @@ public class EnrichmentCytoPanel extends JPanel
     private static final Icon chartIcon = new ImageIcon(
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
     final Font iconFont;
+    final CyServiceRegistrar registrar;
 
-    public EnrichmentCytoPanel(LayoutManager layout, boolean isDoubleBuffered, CyColorPaletteChooserFactory colorChooserFactory, Font iconFont) {
-        super(layout, isDoubleBuffered);
-        this.colorChooserFactory = colorChooserFactory;
-        this.iconFont = iconFont;
+    public EnrichmentCytoPanel(CyServiceRegistrar registrar) {
+        this.registrar = registrar;
+        this.setLayout(new BorderLayout());
+        this.colorChooserFactory = registrar.getService(CyColorPaletteChooserFactory.class);
+        IconManager iconManager = registrar.getService(IconManager.class);
+        this.iconFont = iconManager.getIconFont(22.0f);
     }
 
     @Override
