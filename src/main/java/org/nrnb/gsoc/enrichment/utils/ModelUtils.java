@@ -1,0 +1,387 @@
+package org.nrnb.gsoc.enrichment.utils;
+
+import org.cytoscape.model.*;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
+import org.cytoscape.property.AbstractConfigDirPropsReader;
+import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.view.model.View;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
+
+import java.util.*;
+import java.util.regex.Pattern;
+
+public class ModelUtils {
+
+    // Namespaces
+    public static String STRINGDB_NAMESPACE = "stringdb";
+    public static String NAMESPACE_SEPARATOR = "::";
+
+    // Node information
+    public static String CANONICAL = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
+    public static String DISPLAY = "display name";
+    public static String FULLNAME = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "full name";
+    public static String ID = "@id";
+    public static String DESCRIPTION = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "description";
+    public static String NAMESPACE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "namespace";
+    public static String QUERYTERM = "query term";
+    public static String SEQUENCE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "sequence";
+    public static String STRINGID = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "database identifier";
+    public static String STYLE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "STRING style";
+    public static String TYPE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "node type";
+
+    public static String TISSUE_NAMESPACE = "tissue";
+    public static String COMPARTMENT_NAMESPACE = "compartment";
+    // public static String TM_LINKOUT = "TextMining Linkout";
+    public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
+    public static List<String> namespacedNodeAttributes = new ArrayList<String>(Arrays.asList("canonical name", "full name", "chemViz Passthrough",
+            "enhancedLabel Passthrough", "description", "disease score", "namespace", "sequence", "smiles", "species", "database identifier",
+            "STRING style", "node type", "textmining foreground", "textmining background", "textmining score"));
+
+    public static int NDOCUMENTS = 50;
+    public static int NEXPERIMENTS = 50;
+    public static int NKNOWLEDGE = 50;
+
+    public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
+    public static int SECOND_SEGMENT_LENGTH = 3;
+    public static int FIRST_SEGMENT_LENGTH = MAX_SHORT_NAME_LENGTH - SECOND_SEGMENT_LENGTH - 2;
+
+    //public static Pattern cidmPattern = Pattern.compile("\\(CIDm\\)0*");
+    public static Pattern cidmPattern = Pattern.compile("CIDm0*");
+    // public static String DISEASEINFO =
+    // "http://diseases.jensenlab.org/Entity?type1=9606&type2=-26";
+
+    // Edge information
+    public static String SCORE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "score";
+    public static String SCORE_NO_NAMESPACE = "score";
+    public static String INTERSPECIES = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "interspecies";
+
+    public static List<String> namespacedEdgeAttributes = new ArrayList<String>(Arrays.asList("score", "interspecies", "experiments", "cooccurrence",
+            "coexpression", "textmining", "databases", "neighborhood"));
+
+    // Network information
+    public static String CONFIDENCE = "confidence score";
+    public static String NET_ENRICHMENT_SETTINGS = "enrichmentSettings";
+
+
+    // Create network view size threshold
+    // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
+    // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
+    public static int DEF_VIEW_THRESHOLD = 3000;
+    public static String VIEW_THRESHOLD = "viewThreshold";
+
+    // Other stuff
+    public static String COMPOUND = "STITCH compounds";
+    public static String EMPTYLINE = "--------";
+
+    public static String REQUERY_MSG_USER =
+            "<html>This action cannot be performed on the current network as it <br />"
+                    + "appears to be an old STRING network. Would you like to get <br />"
+                    + "the latest STRING network for the nodes in your network?</html>";
+    public static String REQUERY_TITLE = "Re-query network?";
+
+    public static boolean haveQueryTerms(CyNetwork network) {
+        if (network == null) return false;
+        for (CyNode node: network.getNodeList()) {
+            if (network.getRow(node).get(QUERYTERM, String.class) != null)
+                return true;
+        }
+        return false;
+    }
+
+    public static void selectQueryTerms(CyNetwork network) {
+        for (CyNode node: network.getNodeList()) {
+            if (network.getRow(node).get(QUERYTERM, String.class) != null)
+                network.getRow(node).set(CyNetwork.SELECTED, true);
+            else
+                network.getRow(node).set(CyNetwork.SELECTED, false);
+        }
+    }
+
+    public static String getExisting(CyNetwork network) {
+        StringBuilder str = new StringBuilder();
+        for (CyNode node : network.getNodeList()) {
+            String stringID = network.getRow(node).get(STRINGID, String.class);
+            if (stringID != null && stringID.length() > 0)
+                str.append(stringID + "\n");
+        }
+        return str.toString();
+    }
+
+    public static String getSelected(CyNetwork network, View<CyNode> nodeView) {
+        StringBuilder selectedStr = new StringBuilder();
+        if (nodeView != null) {
+            String stringID = network.getRow(nodeView.getModel()).get(STRINGID, String.class);
+            selectedStr.append(stringID + "\n");
+        }
+
+        for (CyNode node : network.getNodeList()) {
+            if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
+                String stringID = network.getRow(node).get(STRINGID, String.class);
+                if (stringID != null && stringID.length() > 0)
+                    selectedStr.append(stringID + "\n");
+            }
+        }
+        return selectedStr.toString();
+    }
+
+    public static CyTable getEnrichmentTable(CyServiceRegistrar registrar, CyNetwork network, String name) {
+        CyTableManager tableManager = registrar.getService(CyTableManager.class);
+        Set<CyTable> currTables = tableManager.getAllTables(true);
+        for (CyTable current : currTables) {
+            if (name.equals(current.getTitle())
+                    && current.getColumn(EnrichmentTerm.colNetworkSUID) != null
+                    && current.getAllRows().size() > 0) {
+                CyRow tempRow = current.getAllRows().get(0);
+                if (tempRow.get(EnrichmentTerm.colNetworkSUID, Long.class) != null && tempRow
+                        .get(EnrichmentTerm.colNetworkSUID, Long.class).equals(network.getSUID())) {
+                    return current;
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+    public static void setupEnrichmentTable(CyTable enrichmentTable) {
+        if (enrichmentTable.getColumn(EnrichmentTerm.colGenesSUID) == null) {
+            enrichmentTable.createListColumn(EnrichmentTerm.colGenesSUID, Long.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colNetworkSUID) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colNetworkSUID, Long.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colName) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colName, String.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colPvalue) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colPvalue, Double.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
+            enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colChartColor) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colChartColor, String.class, false);
+        }
+    }
+
+    public static double getMaxFdrLogValue(List<EnrichmentTerm> terms) {
+        double maxValue = 0;
+        for (EnrichmentTerm term : terms) {
+            double termValue = -Math.log10(term.getPValue());
+            if (termValue > maxValue)
+                maxValue = termValue;
+        }
+        if (maxValue > 10.0)
+            return 10.0;
+        return maxValue;
+    }
+
+
+    public static String listToString(List<?> list) {
+        String str = "";
+        if (list == null || list.size() == 0) return str;
+        for (int i = 0; i < list.size()-1; i++) {
+            str += list.get(i)+",";
+        }
+        return str + list.get(list.size()-1).toString();
+    }
+
+    public static List<String> stringToList(String string) {
+        if (string == null || string.length() == 0) return new ArrayList<String>();
+        String [] arr = string.split(",");
+        return Arrays.asList(arr);
+    }
+
+    public static void updateEnrichmentSettings(CyNetwork network, Map<String, String> settings) {
+        String setting = "";
+        int index = 0;
+        for (String key: settings.keySet()) {
+            if (index > 0) {
+                setting += ";";
+            }
+            setting += key+"="+settings.get(key);
+            index ++;
+        }
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_ENRICHMENT_SETTINGS);
+        network.getRow(network).set(NET_ENRICHMENT_SETTINGS, setting);
+    }
+    public static void createColumnIfNeeded(CyTable table, Class<?> clazz, String columnName) {
+        if (table.getColumn(columnName) != null)
+            return;
+
+        table.createColumn(columnName, clazz, false);
+    }
+
+
+    public static Map<String, String> getEnrichmentSettings(CyNetwork network) {
+        Map<String, String> settings = new HashMap<String, String>();
+        String setting = network.getRow(network).get(NET_ENRICHMENT_SETTINGS, String.class);
+        if (setting == null || setting.length() == 0)
+            return settings;
+
+        String[] settingArray = setting.split(";");
+        for (String s: settingArray) {
+            String[] pair = s.split("=");
+            if (pair.length == 2) {
+                settings.put(pair[0], pair[1]);
+            }
+        }
+        return settings;
+    }
+
+
+    public static class ConfigPropsReader extends AbstractConfigDirPropsReader {
+        ConfigPropsReader(SavePolicy policy, String name) {
+            super(name, "stringApp.props", policy);
+        }
+    }
+
+
+    // Method to convert terms entered in search text to
+    // appropriate newline-separated string to send to server
+    public static String convertTerms(String terms, boolean splitComma, boolean splitSpaces) {
+        String regexSp = "\\s+(?=((\\\\[\\\\\"]|[^\\\\\"])*\"(\\\\[\\\\\"]|[^\\\\\"])*\")*(\\\\[\\\\\"]|[^\\\\\"])*$)";
+        String regexComma = "[,]+(?=((\\\\[\\\\\"]|[^\\\\\"])*\"(\\\\[\\\\\"]|[^\\\\\"])*\")*(\\\\[\\\\\"]|[^\\\\\"])*$)";
+        if (splitSpaces) {
+            // Substitute newlines for space
+            terms = terms.replaceAll(regexSp, "\n");
+        }
+
+        if (splitComma) {
+            // Substitute newlines for commas
+            terms = terms.replaceAll(regexComma, "\n");
+        }
+
+        // Strip off any blank lines
+        terms = terms.replaceAll("(?m)^\\s*", "");
+        return terms;
+    }
+    public static void replaceListColumnIfNeeded(CyTable table, Class<?> clazz, String columnName) {
+        if (table.getColumn(columnName) != null)
+            table.deleteColumn(columnName);
+
+        table.createListColumn(columnName, clazz, false);
+    }
+    public static void replaceColumnIfNeeded(CyTable table, Class<?> clazz, String columnName) {
+        if (table.getColumn(columnName) != null)
+            table.deleteColumn(columnName);
+
+        table.createColumn(columnName, clazz, false);
+    }
+
+    public static void copyRow(CyTable fromTable, CyTable toTable, CyIdentifiable from, CyIdentifiable to, List<String> columnsCreated) {
+        for (CyColumn col: fromTable.getColumns()) {
+            // TODO: Is it OK to not check for this?
+            //if (!columnsCreated.contains(col.getName()))
+            //	continue;
+            if (col.getName().equals(CyNetwork.SUID))
+                continue;
+            if (from.getClass().equals(CyNode.class) && col.getName().equals(CyNetwork.NAME))
+                continue;
+            if (col.getName().equals(CyNetwork.SELECTED))
+                continue;
+            if (from.getClass().equals(CyNode.class) && col.getName().equals(CyRootNetwork.SHARED_NAME))
+                continue;
+            if (col.getName().equals(ModelUtils.QUERYTERM) || col.getName().equals(ModelUtils.DISPLAY) || col.getName().equals(ModelUtils.ID)) {
+                Object v = fromTable.getRow(from.getSUID()).getRaw(col.getName());
+                toTable.getRow(to.getSUID()).set(col.getName() + ".copy", v);
+                continue;
+            }
+            // TODO: Is it OK to overwrite interaction type?
+            //if (from.getClass().equals(CyEdge.class) && col.getName().equals(CyRootNetwork.SHARED_INTERACTION))
+            //	continue;
+            //if (from.getClass().equals(CyEdge.class) && col.getName().equals(CyEdge.INTERACTION))
+            //	continue;
+            Object v = fromTable.getRow(from.getSUID()).getRaw(col.getName());
+            toTable.getRow(to.getSUID()).set(col.getName(), v);
+        }
+    }
+
+    public static void copyNodes(CyNetwork fromNetwork, CyNetwork toNetwork, Map<String, CyNode> nodeMap,
+                                 String keyColumn, List<String> toColumns) {
+        for (CyNode node: fromNetwork.getNodeList()) {
+            String key = fromNetwork.getRow(node).get(keyColumn, String.class);
+            // TODO: double-check what happens when key == null
+            if (key != null && !nodeMap.containsKey(key)) {
+                CyNode newNode = toNetwork.addNode();
+                nodeMap.put(key, newNode);
+                toNetwork.getRow(newNode).set(CyNetwork.NAME, key);
+                for (String col: toColumns) {
+                    toNetwork.getRow(newNode).set(col, key);
+                }
+            }
+        }
+    }
+
+    public static void createNodeMap(CyNetwork network, Map<String, CyNode> nodeMap, String column) {
+        // Get all of the nodes in the network
+        for (CyNode node: network.getNodeList()) {
+            String key = network.getRow(node).get(column, String.class);
+            nodeMap.put(key, node);
+        }
+    }
+
+    public static List<String> copyColumns(CyTable fromTable, CyTable toTable) {
+        List<String> columns = new ArrayList<String>();
+        for (CyColumn col: fromTable.getColumns()) {
+            String fqn = col.getName();
+            // Does that column already exist in our target?
+            if (toTable.getColumn(fqn) == null) {
+                // No, create it.
+                if (col.getType().equals(List.class)) {
+                    // There is no easy way to handle this, unfortunately...
+                    // toTable.createListColumn(fqn, col.getListElementType(), col.isImmutable(), (List<?>)col.getDefaultValue());
+                    if (col.getListElementType().equals(String.class))
+                        toTable.createListColumn(fqn, String.class, col.isImmutable(),
+                                (List<String>)col.getDefaultValue());
+                    else if (col.getListElementType().equals(Long.class))
+                        toTable.createListColumn(fqn, Long.class, col.isImmutable(),
+                                (List<Long>)col.getDefaultValue());
+                    else if (col.getListElementType().equals(Double.class))
+                        toTable.createListColumn(fqn, Double.class, col.isImmutable(),
+                                (List<Double>)col.getDefaultValue());
+                    else if (col.getListElementType().equals(Integer.class))
+                        toTable.createListColumn(fqn, Integer.class, col.isImmutable(),
+                                (List<Integer>)col.getDefaultValue());
+                    else if (col.getListElementType().equals(Boolean.class))
+                        toTable.createListColumn(fqn, Boolean.class, col.isImmutable(),
+                                (List<Boolean>)col.getDefaultValue());
+                } else {
+                    toTable.createColumn(fqn, col.getType(), col.isImmutable(), col.getDefaultValue());
+                    columns.add(fqn);
+                }
+            } else if (fqn.equals(ModelUtils.QUERYTERM) || fqn.equals(ModelUtils.DISPLAY) || fqn.equals(ModelUtils.ID)) {
+                toTable.createColumn(fqn + ".copy", col.getType(), col.isImmutable(), col.getDefaultValue());
+                columns.add(fqn + ".copy");
+            }
+        }
+        return columns;
+    }
+
+    public static CyNetworkView getNetworkView(CyServiceRegistrar registrar, CyNetwork network) {
+        Collection<CyNetworkView> views =
+                registrar.getService(CyNetworkViewManager.class).getNetworkViews(network);
+
+        // At some point, figure out a better way to do this
+        for (CyNetworkView view: views) {
+            return view;
+        }
+        return null;
+    }
+
+    public static void copyNodeAttributes(CyNetwork from, CyNetwork to,
+                                          Map<String, CyNode> nodeMap, String column) {
+        // System.out.println("copyNodeAttributes");
+        List<String> columnsCreated = copyColumns(from.getDefaultNodeTable(), to.getDefaultNodeTable());
+        for (CyNode node: from.getNodeList()) {
+            String nodeKey = from.getRow(node).get(column, String.class);
+            if (!nodeMap.containsKey(nodeKey))
+                continue;
+            CyNode newNode = nodeMap.get(nodeKey);
+            copyRow(from.getDefaultNodeTable(), to.getDefaultNodeTable(), node, newNode, columnsCreated);
+        }
+    }
+
+}

@@ -105,6 +105,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
      * group_id
      * intersections -> list of actual gene symbols
      */
+    public static final int nodeSUIDColumn = 8;
+    public static final int chartColumnCol = 1;
 
     public static final String colSource = "source";
     public static final String colTermID = "term id"; //native
@@ -137,6 +139,10 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String[] swingColumnsEnrichmentOld = new String[] { colChartColor, colName, colDescription, colPvalue,
             colEffectiveDomainSizeOld, colGenesSUID };
 
+    public static final String colEnrichmentTermsNames = "enrichmentTermsNames";
+    public static final String colEnrichmentTermsIntegers = "enrichmentTermsIntegers";
+    public static final String colEnrichmentPassthrough = "enrichmentPassthrough";
+    public static final int nameColumn = 2;
 
     public EnrichmentTerm() {
         this.name = "";
