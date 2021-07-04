@@ -35,20 +35,11 @@ public class ModelUtils {
     public static String COMPARTMENT_NAMESPACE = "compartment";
     // public static String TM_LINKOUT = "TextMining Linkout";
     public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
-    public static List<String> namespacedNodeAttributes = new ArrayList<String>(Arrays.asList("canonical name", "full name", "chemViz Passthrough",
-            "enhancedLabel Passthrough", "description", "disease score", "namespace", "sequence", "smiles", "species", "database identifier",
-            "PROFILER style", "node type", "textmining foreground", "textmining background", "textmining score"));
 
 
     public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
     public static int SECOND_SEGMENT_LENGTH = 3;
     public static int FIRST_SEGMENT_LENGTH = MAX_SHORT_NAME_LENGTH - SECOND_SEGMENT_LENGTH - 2;
-
-
-    // Edge information
-    public static String SCORE = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "score";
-    public static String SCORE_NO_NAMESPACE = "score";
-    public static String INTERSPECIES = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "interspecies";
 
 
     // Network information
