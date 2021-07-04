@@ -15,21 +15,21 @@ import java.util.regex.Pattern;
 public class ModelUtils {
 
     // Namespaces
-    public static String STRINGDB_NAMESPACE = "stringdb";
+    public static String PROFILERDB_NAMESPACE = "stringdb";
     public static String NAMESPACE_SEPARATOR = "::";
 
     // Node information
-    public static String CANONICAL = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
+    public static String CANONICAL = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
     public static String DISPLAY = "display name";
-    public static String FULLNAME = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "full name";
+    public static String FULLNAME = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "full name";
     public static String ID = "@id";
-    public static String DESCRIPTION = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "description";
-    public static String NAMESPACE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "namespace";
+    public static String DESCRIPTION = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "description";
+    public static String NAMESPACE = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "namespace";
     public static String QUERYTERM = "query term";
-    public static String SEQUENCE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "sequence";
-    public static String STRINGID = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "database identifier";
-    public static String STYLE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "STRING style";
-    public static String TYPE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "node type";
+    public static String SEQUENCE = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "sequence";
+    public static String PROFILERID = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "database identifier";
+    public static String STYLE = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "PROFILER style";
+    public static String TYPE = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "node type";
 
     public static String TISSUE_NAMESPACE = "tissue";
     public static String COMPARTMENT_NAMESPACE = "compartment";
@@ -37,28 +37,19 @@ public class ModelUtils {
     public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
     public static List<String> namespacedNodeAttributes = new ArrayList<String>(Arrays.asList("canonical name", "full name", "chemViz Passthrough",
             "enhancedLabel Passthrough", "description", "disease score", "namespace", "sequence", "smiles", "species", "database identifier",
-            "STRING style", "node type", "textmining foreground", "textmining background", "textmining score"));
+            "PROFILER style", "node type", "textmining foreground", "textmining background", "textmining score"));
 
-    public static int NDOCUMENTS = 50;
-    public static int NEXPERIMENTS = 50;
-    public static int NKNOWLEDGE = 50;
 
     public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
     public static int SECOND_SEGMENT_LENGTH = 3;
     public static int FIRST_SEGMENT_LENGTH = MAX_SHORT_NAME_LENGTH - SECOND_SEGMENT_LENGTH - 2;
 
-    //public static Pattern cidmPattern = Pattern.compile("\\(CIDm\\)0*");
-    public static Pattern cidmPattern = Pattern.compile("CIDm0*");
-    // public static String DISEASEINFO =
-    // "http://diseases.jensenlab.org/Entity?type1=9606&type2=-26";
 
     // Edge information
-    public static String SCORE = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "score";
+    public static String SCORE = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "score";
     public static String SCORE_NO_NAMESPACE = "score";
-    public static String INTERSPECIES = STRINGDB_NAMESPACE + NAMESPACE_SEPARATOR + "interspecies";
+    public static String INTERSPECIES = PROFILERDB_NAMESPACE + NAMESPACE_SEPARATOR + "interspecies";
 
-    public static List<String> namespacedEdgeAttributes = new ArrayList<String>(Arrays.asList("score", "interspecies", "experiments", "cooccurrence",
-            "coexpression", "textmining", "databases", "neighborhood"));
 
     // Network information
     public static String CONFIDENCE = "confidence score";
@@ -71,14 +62,8 @@ public class ModelUtils {
     public static int DEF_VIEW_THRESHOLD = 3000;
     public static String VIEW_THRESHOLD = "viewThreshold";
 
-    // Other stuff
-    public static String COMPOUND = "STITCH compounds";
     public static String EMPTYLINE = "--------";
 
-    public static String REQUERY_MSG_USER =
-            "<html>This action cannot be performed on the current network as it <br />"
-                    + "appears to be an old STRING network. Would you like to get <br />"
-                    + "the latest STRING network for the nodes in your network?</html>";
     public static String REQUERY_TITLE = "Re-query network?";
 
     public static boolean haveQueryTerms(CyNetwork network) {
@@ -102,9 +87,9 @@ public class ModelUtils {
     public static String getExisting(CyNetwork network) {
         StringBuilder str = new StringBuilder();
         for (CyNode node : network.getNodeList()) {
-            String stringID = network.getRow(node).get(STRINGID, String.class);
-            if (stringID != null && stringID.length() > 0)
-                str.append(stringID + "\n");
+            String profilerID = network.getRow(node).get(PROFILERID, String.class);
+            if (profilerID != null && profilerID.length() > 0)
+                str.append(profilerID + "\n");
         }
         return str.toString();
     }
@@ -112,15 +97,15 @@ public class ModelUtils {
     public static String getSelected(CyNetwork network, View<CyNode> nodeView) {
         StringBuilder selectedStr = new StringBuilder();
         if (nodeView != null) {
-            String stringID = network.getRow(nodeView.getModel()).get(STRINGID, String.class);
-            selectedStr.append(stringID + "\n");
+            String profilerID = network.getRow(nodeView.getModel()).get(PROFILERID, String.class);
+            selectedStr.append(profilerID + "\n");
         }
 
         for (CyNode node : network.getNodeList()) {
             if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
-                String stringID = network.getRow(node).get(STRINGID, String.class);
-                if (stringID != null && stringID.length() > 0)
-                    selectedStr.append(stringID + "\n");
+                String profilerID = network.getRow(node).get(PROFILERID, String.class);
+                if (profilerID != null && profilerID.length() > 0)
+                    selectedStr.append(profilerID + "\n");
             }
         }
         return selectedStr.toString();

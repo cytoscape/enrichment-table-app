@@ -52,7 +52,7 @@ public class EnrichmentCytoPanel extends JPanel
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
     final Font iconFont;
     final CyServiceRegistrar registrar;
-    private static final Icon icon = new TextIcon(ENRICH_LAYERS, getIconFont(20.0f), STRING_COLORS, 14, 14);
+    private static final Icon icon = new TextIcon(ENRICH_LAYERS, getIconFont(20.0f), PROFILER_COLORS, 14, 14);
     Map<String, JTable> enrichmentTables;
     final CyApplicationManager applicationManager;
 
