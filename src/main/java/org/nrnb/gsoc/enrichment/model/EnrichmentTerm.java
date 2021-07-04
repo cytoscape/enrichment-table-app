@@ -143,6 +143,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colEnrichmentTermsIntegers = "enrichmentTermsIntegers";
     public static final String colEnrichmentPassthrough = "enrichmentPassthrough";
     public static final int nameColumn = 2;
+    public static final int pvalueColumn = 4;
 
     public EnrichmentTerm() {
         this.name = "";

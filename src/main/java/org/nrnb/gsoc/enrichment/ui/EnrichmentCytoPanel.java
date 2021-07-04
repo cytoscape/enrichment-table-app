@@ -22,10 +22,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
 
@@ -34,9 +39,15 @@ import static org.nrnb.gsoc.enrichment.utils.IconUtils.*;
 public class EnrichmentCytoPanel extends JPanel
         implements CytoPanelComponent2, ListSelectionListener, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
     EnrichmentTableModel tableModel;
+    Map<String, JTable> enrichmentTables;
+    JPanel topPanel;
+    JPanel mainPanel;
+    JScrollPane scrollPane;
+    List<String> availableTables;
     final CyColorPaletteChooserFactory colorChooserFactory;
     public final static String showTable = TermSource.ALL.getTable();
     JLabel labelRows;
+    JButton butSettings;
     JButton butDrawCharts;
     JButton butResetCharts;
     JButton butAnalyzedNodes;
@@ -53,8 +64,15 @@ public class EnrichmentCytoPanel extends JPanel
     final Font iconFont;
     final CyServiceRegistrar registrar;
     private static final Icon icon = new TextIcon(ENRICH_LAYERS, getIconFont(20.0f), PROFILER_COLORS, 14, 14);
-    Map<String, JTable> enrichmentTables;
     final CyApplicationManager applicationManager;
+
+    final String butSettingsName = "Network-specific enrichment panel settings";
+    final String butFilterName = "Filter enrichment table";
+    final String butDrawChartsName = "Draw charts using default color palette";
+    final String butResetChartsName = "Reset charts";
+    final String butEnrichmentMapName = "Create EnrichmentMap";
+    final String butAnalyzedNodesName = "Select all analyzed nodes";
+    final String butExportTableDescr = "Export enrichment table";
 
     public EnrichmentCytoPanel(CyServiceRegistrar registrar) {
         this.registrar = registrar;
@@ -64,8 +82,33 @@ public class EnrichmentCytoPanel extends JPanel
         this.iconFont = iconManager.getIconFont(22.0f);
         applicationManager = registrar.getService(CyApplicationManager.class);
     }
-    // TODO: Rewrite a simpler implementation with less fancy stuff
 
+    @Override
+    public String getIdentifier() {
+        return "org.nrnb.gsoc.enrichment";
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
+    @Override
+    public CytoPanelName getCytoPanelName() {
+        return CytoPanelName.SOUTH;
+    }
+
+    @Override
+    public String getTitle() {
+        return "gProfiler Enrichment";
+    }
+
+    @Override
+    public Icon getIcon() {
+        return icon;
+    }
+
+    // TODO: Rewrite a simpler implementation with less fancy stuff
     /**
      * @param e
      */
@@ -125,6 +168,195 @@ public class EnrichmentCytoPanel extends JPanel
         return filteredEnrichmentTable;
     }
 
+    public void initPanel(CyNetwork network, boolean noSignificant) {
+        this.removeAll();
+
+        Set<CyTable> currTables = ModelUtils.getEnrichmentTables(registrar, network);
+        availableTables = new ArrayList<String>();
+        for (CyTable currTable : currTables) {
+            createJTable(currTable);
+            availableTables.add(currTable.getTitle());
+        }
+        if (noSignificant) {
+            mainPanel = new JPanel(new BorderLayout());
+            JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria.",
+                    SwingConstants.CENTER);
+            mainPanel.add(label, BorderLayout.CENTER);
+            this.add(mainPanel, BorderLayout.CENTER);
+        } else if (availableTables.size() == 0) {
+            mainPanel = new JPanel(new BorderLayout());
+            JLabel label = new JLabel("No enrichment has been retrieved for this network.",
+                    SwingConstants.CENTER);
+            mainPanel.add(label, BorderLayout.CENTER);
+            this.add(mainPanel, BorderLayout.CENTER);
+        } else {
+            JPanel buttonsPanelLeft = new JPanel();
+            BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
+            buttonsPanelLeft.setLayout(layoutLeft);
+            butFilter = new JButton(IconManager.ICON_FILTER);
+            butFilter.setFont(iconFont);
+            butFilter.addActionListener(this);
+            butFilter.setToolTipText(butFilterName);
+            butFilter.setBorderPainted(false);
+            butFilter.setContentAreaFilled(false);
+            butFilter.setFocusPainted(false);
+            butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
+
+            butDrawCharts = new JButton(chartIcon);
+            butDrawCharts.addActionListener(this);
+            butDrawCharts.setToolTipText(butDrawChartsName);
+            butDrawCharts.setBorderPainted(false);
+            butDrawCharts.setContentAreaFilled(false);
+            butDrawCharts.setFocusPainted(false);
+            butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+
+
+            butResetCharts = new JButton(IconManager.ICON_CIRCLE_O);
+            butResetCharts.setFont(iconFont);
+            butResetCharts.addActionListener(this);
+            butResetCharts.setToolTipText(butResetChartsName);
+            butResetCharts.setBorderPainted(false);
+            butResetCharts.setContentAreaFilled(false);
+            butResetCharts.setFocusPainted(false);
+            butResetCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+
+            // Add enrichment map button here if EnrichmentMap is loaded
+            butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
+            butEnrichmentMap.addActionListener(this);
+            butEnrichmentMap.setToolTipText(butEnrichmentMapName);
+            butEnrichmentMap.setBorderPainted(false);
+            butEnrichmentMap.setContentAreaFilled(false);
+            butEnrichmentMap.setFocusPainted(false);
+            butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
+
+            buttonsPanelLeft.add(butFilter);
+            buttonsPanelLeft.add(butDrawCharts);
+            buttonsPanelLeft.add(butResetCharts);
+            buttonsPanelLeft.add(butEnrichmentMap);
+
+            // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
+            JPanel buttonsPanelRight = new JPanel();
+            BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
+            buttonsPanelRight.setLayout(layoutRight);
+            butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
+            butAnalyzedNodes.addActionListener(this);
+            butAnalyzedNodes.setFont(iconFont);
+            butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
+            butAnalyzedNodes.setBorderPainted(false);
+            butAnalyzedNodes.setContentAreaFilled(false);
+            butAnalyzedNodes.setFocusPainted(false);
+            butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
+
+            butExportTable = new JButton(IconManager.ICON_SAVE);
+            butExportTable.addActionListener(this);
+            butExportTable.setFont(iconFont);
+            butExportTable.setToolTipText(butExportTableDescr);
+            butExportTable.setBorderPainted(false);
+            butExportTable.setContentAreaFilled(false);
+            butExportTable.setFocusPainted(false);
+            butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
+
+            butSettings = new JButton(IconManager.ICON_COG);
+            butSettings.setFont(iconFont);
+            butSettings.addActionListener(this);
+            butSettings.setToolTipText(butSettingsName);
+            butSettings.setBorderPainted(false);
+            butSettings.setContentAreaFilled(false);
+            butSettings.setFocusPainted(false);
+            butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+
+            buttonsPanelRight.add(butAnalyzedNodes);
+            buttonsPanelRight.add(butExportTable);
+            buttonsPanelRight.add(butSettings);
+
+            JTable currentTable = enrichmentTables.get(showTable);
+
+
+            labelRows = new JLabel("");
+            updateLabelRows();
+            labelRows.setHorizontalAlignment(JLabel.RIGHT);
+            Font labelFont = labelRows.getFont();
+            labelRows.setFont(labelFont.deriveFont((float)(labelFont.getSize() * 0.8)));
+
+            topPanel = new JPanel(new BorderLayout());
+            topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
+            topPanel.add(buttonsPanelRight, BorderLayout.EAST);
+            // topPanel.add(boxTables, BorderLayout.EAST);
+            this.add(topPanel, BorderLayout.NORTH);
+
+            mainPanel = new JPanel(new BorderLayout());
+            scrollPane = new JScrollPane(currentTable);
+            mainPanel.setLayout(new GridLayout(1, 1));
+            mainPanel.add(scrollPane, BorderLayout.CENTER);
+            this.add(mainPanel, BorderLayout.CENTER);
+        }
+
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void createJTable(CyTable cyTable) {
+        tableModel = new EnrichmentTableModel(cyTable, EnrichmentTerm.swingColumnsEnrichment);
+        JTable jTable = new JTable(tableModel);
+        TableColumnModel tcm = jTable.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(EnrichmentTerm.nodeSUIDColumn));
+        tcm.getColumn(EnrichmentTerm.pvalueColumn).setCellRenderer(new DecimalFormatRenderer());
+        jTable.setFillsViewportHeight(true);
+        jTable.setAutoCreateRowSorter(true);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable.getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jTable.getSelectionModel().addListSelectionListener(this);
+        jTable.getModel().addTableModelListener(this);
+        jTable.setDefaultRenderer(Color.class, new ColorRenderer(true));
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        popupMenu = new JPopupMenu();
+        menuItemReset = new JMenuItem("Remove color");
+        menuItemReset.addActionListener(this);
+        popupMenu.add(menuItemReset);
+        jTable.setComponentPopupMenu(popupMenu);
+        jTable.addMouseListener(new MouseAdapter() {
+
+            public void mousePressed(MouseEvent e) {
+                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
+                    JTable source = (JTable) e.getSource();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+                    if (!source.isRowSelected(row)) {
+                        source.changeSelection(row, column, false, false);
+                    }
+                }
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
+                    JTable source = (JTable) e.getSource();
+                    int row = source.rowAtPoint(e.getPoint());
+                    int column = source.columnAtPoint(e.getPoint());
+                    if (!source.isRowSelected(row)) {
+                        source.changeSelection(row, column, false, false);
+                    }
+                }
+            }
+        });
+
+        enrichmentTables.put(cyTable.getTitle(), jTable);
+    }
+    static class DecimalFormatRenderer extends DefaultTableCellRenderer {
+        private static final DecimalFormat formatter = new DecimalFormat("0.#####E0");
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            try {
+                if (value != null && (double) value < 0.001) {
+                    value = formatter.format((Number) value);
+                }
+            } catch (Exception ex) {
+                // ignore and return original value
+            }
+            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+                    column);
+        }
+    }
 
     public void updateFilteredEnrichmentTable() {
         if (filteredEnrichmentTable == null)
@@ -170,8 +402,6 @@ public class EnrichmentCytoPanel extends JPanel
         if (color == null || termName == null)
             return;
 
-        //currentTable.getModel().setValueAt(Color.OPAQUE, currentTable.convertRowIndexToModel(currentRow),
-        //		EnrichmentTerm.chartColumnCol);
         for (CyRow row : enrichmentTable.getAllRows()) {
             if (enrichmentTable.getColumn(EnrichmentTerm.colName) != null
                     && row.get(EnrichmentTerm.colName, String.class) != null
@@ -181,24 +411,16 @@ public class EnrichmentCytoPanel extends JPanel
         }
         tableModel.fireTableDataChanged();
 
-        // re-draw charts if the user changed the color
-        Map<EnrichmentTerm, String> preselectedTerms = getUserSelectedTerms();
-/*
-        if (preselectedTerms.size() > 0)
-            ViewUtils.drawCharts(manager, preselectedTerms, manager.getChartType(network));
-*/
     }
+
     private Map<EnrichmentTerm, String> getUserSelectedTerms() {
         Map<EnrichmentTerm, String> selectedTerms = new LinkedHashMap<EnrichmentTerm, String>();
         CyNetwork network = applicationManager.getCurrentNetwork();
         if (network == null)
             return selectedTerms;
 
-        // Set<CyTable> currTables = ModelUtils.getEnrichmentTables(manager, network);
-        // for (CyTable currTable : currTables) {
         CyTable currTable = ModelUtils.getEnrichmentTable(registrar, network,
                 TermSource.ALL.getTable());
-        // currTable.getColumn(EnrichmentTerm.colShowChart) == null ||
         if (currTable == null || currTable.getRowCount() == 0) {
             return selectedTerms;
         }
@@ -225,7 +447,6 @@ public class EnrichmentCytoPanel extends JPanel
                 }
             }
         }
-        // System.out.println(selectedTerms);
         return selectedTerms;
     }
     public void resetCharts() {
@@ -255,7 +476,6 @@ public class EnrichmentCytoPanel extends JPanel
                 row.set(EnrichmentTerm.colChartColor, "");
             }
         }
-        // initPanel();
         tableModel.fireTableDataChanged();
     }
 
@@ -285,16 +505,15 @@ public class EnrichmentCytoPanel extends JPanel
             }
         }
     }
+
     public void updateLabelRows() {
         if (tableModel == null)
             return;
         String labelTxt = "";
         if (tableModel.getAllRowCount() != tableModel.getRowCount()) {
             labelTxt = tableModel.getRowCount() + " rows ("+tableModel.getAllRowCount()+" before filtering)";
-            // System.out.println("filtered:" + labelTxt);
         } else {
             labelTxt = tableModel.getAllRowCount() + " rows";
-            // System.out.println("total rows: " + labelTxt);
         }
         if (labelRows != null)
             labelRows.setText(labelTxt);
@@ -312,30 +531,6 @@ public class EnrichmentCytoPanel extends JPanel
         currentTable.tableChanged(e);
     }
 
-    @Override
-    public String getIdentifier() {
-        return "org.nrnb.gsoc.enrichment";
-    }
-
-    @Override
-    public Component getComponent() {
-        return this;
-    }
-
-    @Override
-    public CytoPanelName getCytoPanelName() {
-        return CytoPanelName.SOUTH;
-    }
-
-    @Override
-    public String getTitle() {
-        return "gProfiler Enrichment";
-    }
-
-    @Override
-    public Icon getIcon() {
-        return icon;
-    }
 
     @Override
     public void handleEvent(RowsSetEvent rse) {

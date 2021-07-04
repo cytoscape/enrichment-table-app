@@ -8,6 +8,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -205,6 +206,24 @@ public class ModelUtils {
             }
         }
         return settings;
+    }
+    public static Set<CyTable> getEnrichmentTables(CyServiceRegistrar registrar, CyNetwork network) {
+        CyTableManager tableManager = registrar.getService(CyTableManager.class);
+        Set<CyTable> netTables = new HashSet<CyTable>();
+        Set<String> tableNames = new HashSet<String>(TermSource.getTables());
+        Set<CyTable> currTables = tableManager.getAllTables(true);
+        for (CyTable current : currTables) {
+            if (tableNames.contains(current.getTitle())
+                    && current.getColumn(EnrichmentTerm.colNetworkSUID) != null
+                    && current.getAllRows().size() > 0) {
+                CyRow tempRow = current.getAllRows().get(0);
+                if (tempRow.get(EnrichmentTerm.colNetworkSUID, Long.class) != null && tempRow
+                        .get(EnrichmentTerm.colNetworkSUID, Long.class).equals(network.getSUID())) {
+                    netTables.add(current);
+                }
+            }
+        }
+        return netTables;
     }
 
 

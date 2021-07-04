@@ -21,10 +21,7 @@ public abstract class IconUtils {
     public static final String[] LAYERED_PROFILER_ICON = new String[] { PROFILER_ICON_LAYER_1, PROFILER_ICON_LAYER_2, PROFILER_ICON_LAYER_3 };
     public static final Color[] PROFILER_COLORS = new Color[] { new Color(163, 172, 216), Color.WHITE, Color.BLACK, Color.WHITE, Color.BLACK };
 
-    public static final String[] DISEASE_LAYERS = new String[] { PROFILER_ICON_LAYER_1, PROFILER_ICON_LAYER_2, PROFILER_ICON_LAYER_3, PROFILER_ICON_LAYER_4 };
     public static final String[] ENRICH_LAYERS = new String[] { PROFILER_ICON_LAYER_1, PROFILER_ICON_LAYER_2, PROFILER_ICON_LAYER_3, PROFILER_ICON_LAYER_4 };
-    public static final String[] PUBMED_LAYERS = new String[] { PROFILER_ICON_LAYER_1, PROFILER_ICON_LAYER_2, PROFILER_ICON_LAYER_3, PROFILER_ICON_LAYER_4 };
-    public static final String[] STITCH_LAYERS = new String[] { PROFILER_ICON_LAYER_1, PROFILER_ICON_LAYER_2, PROFILER_ICON_LAYER_3, PROFILER_ICON_LAYER_4 };
     public static final String[] PROFILER_LAYERS = new String[] { PROFILER_ICON_LAYER_1, PROFILER_ICON_LAYER_2, PROFILER_ICON_LAYER_3, PROFILER_ICON_LAYER_4, PROFILER_LAYER };
 
     public static final String[] LAYERED_EM_ICON = new String[] { EM_ICON_LAYER_1, EM_ICON_LAYER_2, EM_ICON_LAYER_3 };
