@@ -137,7 +137,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String[] swingColumnsEnrichment = new String[] { colChartColor, colName, colDescription, colPvalue,
             colEffectiveDomainSize,  colGenes, colGenesSUID };
     public static final String[] swingColumnsEnrichmentOld = new String[] { colChartColor, colName, colDescription, colPvalue,
-            colEffectiveDomainSizeOld, colGenesSUID };
+            colEffectiveDomainSizeOld,colGenes, colGenesSUID };
 
     public static final String colEnrichmentTermsNames = "enrichmentTermsNames";
     public static final String colEnrichmentTermsIntegers = "enrichmentTermsIntegers";

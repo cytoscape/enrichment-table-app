@@ -73,8 +73,8 @@ public class EnrichmentCytoPanel extends JPanel
     final String butEnrichmentMapName = "Create EnrichmentMap";
     final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
-
-    public EnrichmentCytoPanel(CyServiceRegistrar registrar) {
+    private boolean noSignificant;
+    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant) {
         this.registrar = registrar;
         this.setLayout(new BorderLayout());
         this.colorChooserFactory = registrar.getService(CyColorPaletteChooserFactory.class);
@@ -82,7 +82,8 @@ public class EnrichmentCytoPanel extends JPanel
         this.iconFont = iconManager.getIconFont(22.0f);
         applicationManager = registrar.getService(CyApplicationManager.class);
         enrichmentTables = new HashMap<String, JTable>();
-        initPanel(false);
+        this.noSignificant = noSignificant;
+        initPanel(this.noSignificant);
     }
 
     @Override

@@ -24,6 +24,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	final CyServiceRegistrar registrar;
 	final CyApplicationManager applicationManager;
 	final CyNetwork network;
+	private boolean noSignificant;
 	final CyNetworkView networkView;
 	private static int MAX_NUMBER_OF_NODES = 2000;
 	private boolean isLargeNetwork;
@@ -44,6 +45,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
 		super();
+		this.noSignificant = false;
 		this.registrar = registrar;
 		applicationManager = registrar.getService(CyApplicationManager.class);
 		this.network = applicationManager.getCurrentNetwork();
@@ -81,6 +83,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Task cannot be performed. No nodes selected for enrichment.");
 			System.out.println("Task cannot be performed. No nodes selected for enrichment.");
+			this.noSignificant = true;
 		}
 
 		/**
@@ -125,6 +128,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if((responseBuffer.toString()).length()==0){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no results, possibly due to an error.");
+			this.noSignificant = true;
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -143,7 +147,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(show){
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
-			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar);
+			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,noSignificant);
 			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
 			registrar.registerService(panel, RowsSetListener.class,new Properties());
 			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
