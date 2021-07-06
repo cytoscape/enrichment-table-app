@@ -7,6 +7,8 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
@@ -372,10 +374,31 @@ public class ModelUtils {
      * @param response JSON response received by making API call
      * @return structured list of data which can be used to populate result table
      */
-    public static List<EnrichmentTerm> getEnrichmentfromJSON(String response){
-        List<EnrichmentTerm> tableValues = new ArrayList<>();
-        return tableValues;
+    public static List<EnrichmentTerm> getEnrichmentfromJSON(JSONObject response){
+        JSONArray enrichmentArray = getResultsFromJSON(response, JSONArray.class);
+        if (enrichmentArray == null) {
+            return null;
+        }
+        List<EnrichmentTerm> results = new ArrayList<>();
+        for(Object enrObject : enrichmentArray){
+
+        }
+        return results;
     }
+
+    public static <T> T getResultsFromJSON(JSONObject json, Class<? extends T> clazz) {
+        if (json == null)
+            return null;
+
+        // System.out.println("json: " + json.toJSONString());
+
+        Object result = json.get("result");
+        if (!clazz.isAssignableFrom(result.getClass()))
+            return null;
+
+        return (T) result;
+    }
+
     public static void copyNodeAttributes(CyNetwork from, CyNetwork to,
                                           Map<String, CyNode> nodeMap, String column) {
         // System.out.println("copyNodeAttributes");

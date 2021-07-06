@@ -130,10 +130,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setProgress(1.0);
 			return;
 		}
-		responseBuffer.append(result.toString());
-		if((responseBuffer.toString()).length()==0){
+		responseBuffer.append((result.get("result")).toString());
+		if((responseBuffer.toString()).length()==2){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
-					"Enrichment retrieval returned no results, possibly due to an error.");
+					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
 			this.noSignificant = true;
 			monitor.setProgress(1.0);
 			return;
