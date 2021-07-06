@@ -1,9 +1,12 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.swing.*;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTableUtil;
+import org.cytoscape.model.events.RowsSetListener;
+import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.AbstractTask;
@@ -13,6 +16,7 @@ import org.cytoscape.work.Tunable;
 import org.cytoscape.work.json.JSONResult;
 import org.cytoscape.work.util.ListMultipleSelection;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
+import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
 import java.util.*;
 
@@ -23,6 +27,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	final CyNetworkView networkView;
 	private static int MAX_NUMBER_OF_NODES = 2000;
 	private boolean isLargeNetwork;
+	private boolean show = true;
 	@Tunable(description = "Select nodes",
 			context = "nogui",
 			//tooltip = "Select the enrichment categories to show in the table",
@@ -130,6 +135,21 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		for(String node : nodeNameList){
 			System.out.print(node+" ");
 		}
+		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+		/**
+		 * Check if we already show the cytopanel or not
+		 */
+		if(show){
+			monitor.setStatusMessage("Show enrichment panel");
+			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar);
+			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
+			registrar.registerService(panel, RowsSetListener.class,new Properties());
+			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
+
+		}
 		monitor.setProgress(1.0);
 		return;
 	}
@@ -137,6 +157,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	private Map<String, String> generateQuery(String query) {
 		HashMap<String,String> parameters = new HashMap<>();
 		System.out.println(query);
+		// TODO: add a box for taking this as an input
 		parameters.put("organism","hsapiens");
 		parameters.put("query",query);
 		return parameters;
