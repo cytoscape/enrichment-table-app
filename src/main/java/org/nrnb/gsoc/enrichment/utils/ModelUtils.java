@@ -366,6 +366,16 @@ public class ModelUtils {
         return null;
     }
 
+    /**
+     * Parse through the response received and return a structured list to populate the result table
+     *
+     * @param response JSON response received by making API call
+     * @return structured list of data which can be used to populate result table
+     */
+    public static List<EnrichmentTerm> getEnrichmentfromJSON(String response){
+        List<EnrichmentTerm> tableValues = new ArrayList<>();
+        return tableValues;
+    }
     public static void copyNodeAttributes(CyNetwork from, CyNetwork to,
                                           Map<String, CyNode> nodeMap, String column) {
         // System.out.println("copyNodeAttributes");
