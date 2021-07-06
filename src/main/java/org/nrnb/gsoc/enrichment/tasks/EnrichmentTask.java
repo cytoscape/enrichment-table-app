@@ -15,6 +15,7 @@ import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.json.JSONResult;
 import org.cytoscape.work.util.ListMultipleSelection;
+import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
@@ -120,11 +121,16 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		query.append("\"");
 		Map<String,String> parameters = generateQuery(query.toString());
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		List<String> response = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
+		JSONObject result = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
 		StringBuffer responseBuffer = new StringBuffer("");
-		for(String it : response){
-			responseBuffer.append(it);
+		if(result==null){
+			monitor.showMessage(TaskMonitor.Level.ERROR,
+					"Enrichment retrieval returned no results, possibly due to an error.");
+			this.noSignificant = true;
+			monitor.setProgress(1.0);
+			return;
 		}
+		responseBuffer.append(result.toString());
 		if((responseBuffer.toString()).length()==0){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no results, possibly due to an error.");

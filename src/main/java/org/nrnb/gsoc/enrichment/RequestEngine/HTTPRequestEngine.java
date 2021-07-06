@@ -6,7 +6,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.cytoscape.work.TaskMonitor;
+
 import org.json.simple.JSONValue;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +52,7 @@ public class HTTPRequestEngine {
 
     }
 
-    public List<String> makePostRequest(String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+    public JSONObject makePostRequest(String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
@@ -77,22 +82,14 @@ public class HTTPRequestEngine {
                     response.getStatusLine().getStatusCode()+" code from server");
             return null;
         }
-        BufferedReader reader = null;
+        JSONObject jsonResponse=null;
         try {
-            reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        List<String> strings = new ArrayList<>();
-        String line=null;
-        while(true) {
-            try {
-                if (!((line = reader.readLine()) != null)) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            strings.add(line);
-        }
-        return strings;
+        return jsonResponse;
     }
 };
