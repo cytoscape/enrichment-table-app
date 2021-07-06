@@ -81,6 +81,8 @@ public class EnrichmentCytoPanel extends JPanel
         IconManager iconManager = registrar.getService(IconManager.class);
         this.iconFont = iconManager.getIconFont(22.0f);
         applicationManager = registrar.getService(CyApplicationManager.class);
+        enrichmentTables = new HashMap<String, JTable>();
+        initPanel(false);
     }
 
     @Override
@@ -156,9 +158,9 @@ public class EnrichmentCytoPanel extends JPanel
 
         CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
         CyTableManager tableManager = registrar.getService(CyTableManager.class);
-        filteredEnrichmentTable = tableFactory.createTable(TermSource.ALLFILTERED.getTable(),
+        filteredEnrichmentTable = tableFactory.createTable(TermSource.ALL.getTable(),
                 EnrichmentTerm.colTermID, Long.class, false, true);
-        filteredEnrichmentTable.setTitle("STRING Enrichment: filtered");
+        filteredEnrichmentTable.setTitle("gProfiler Enrichment");
         filteredEnrichmentTable.setSavePolicy(SavePolicy.DO_NOT_SAVE);
         tableManager.addTable(filteredEnrichmentTable);
         ModelUtils.setupEnrichmentTable(filteredEnrichmentTable);
@@ -166,6 +168,13 @@ public class EnrichmentCytoPanel extends JPanel
         updateFilteredEnrichmentTable();
 
         return filteredEnrichmentTable;
+    }
+
+    public void initPanel(boolean noSignificant) {
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        if (network == null)
+            return;
+        initPanel(network, noSignificant);
     }
 
     public void initPanel(CyNetwork network, boolean noSignificant) {

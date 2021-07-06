@@ -142,12 +142,15 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		 */
 		if(show){
 			monitor.setStatusMessage("Show enrichment panel");
+			System.out.println("Show enrichment panel");
 			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar);
 			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
 			registrar.registerService(panel, RowsSetListener.class,new Properties());
 			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
 				cytoPanel.setState(CytoPanelState.DOCK);
+			cytoPanel.setSelectedIndex(
+					cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
 
 		}
 		monitor.setProgress(1.0);

@@ -229,7 +229,7 @@ public class ModelUtils {
 
     public static class ConfigPropsReader extends AbstractConfigDirPropsReader {
         ConfigPropsReader(SavePolicy policy, String name) {
-            super(name, "stringApp.props", policy);
+            super(name, "gProfiler.props", policy);
         }
     }
 

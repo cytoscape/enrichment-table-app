@@ -30,26 +30,21 @@ public class ExportEnrichmentTableTask extends AbstractTask {
             tooltip="<html>Note: for convenience spaces are replaced by underscores.</html>", gravity = 2.0)
     public File fileName = null;
 
-    @Tunable(description = "Filtered terms only",
-            longDescription = "Save only the enrichment terms after filtering.",
-            exampleStringValue = "false", gravity = 3.0)
-    public boolean filtered = false;
     final CyServiceRegistrar registrar;
     public ExportEnrichmentTableTask(CyServiceRegistrar registrar, CyNetwork network, EnrichmentCytoPanel panel, CyTable table, boolean filtered) {
         this.registrar = registrar;
         this.enrichmentPanel = panel;
         this.selectedTable = table;
-        this.filtered = filtered;
     }
 
     @Override
     public void run(TaskMonitor taskMonitor) throws Exception {
-        taskMonitor.setTitle("Export STRING Enrichment table");
+        taskMonitor.setTitle("Export gProfiler Enrichment table");
         ExportTableTaskFactory exportTF = registrar.getService(ExportTableTaskFactory.class);
 
         if (selectedTable != null && fileName != null) {
             File file = fileName;
-            if (filtered && enrichmentPanel != null) {
+            if (enrichmentPanel != null) {
                 selectedTable = enrichmentPanel.getFilteredTable();
             }
             taskMonitor.showMessage(TaskMonitor.Level.INFO,
@@ -61,6 +56,6 @@ public class ExportEnrichmentTableTask extends AbstractTask {
 
     @ProvidesTitle
     public String getTitle() {
-        return "Export STRING Enrichment table";
+        return "Export gProfiler Enrichment table";
     }
 }
