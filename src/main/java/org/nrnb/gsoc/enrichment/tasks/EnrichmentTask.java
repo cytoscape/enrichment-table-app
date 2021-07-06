@@ -5,6 +5,7 @@ import org.cytoscape.application.swing.*;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTableUtil;
+import org.cytoscape.model.events.RowsSetListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
@@ -17,7 +18,6 @@ import org.cytoscape.work.util.ListMultipleSelection;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
-import javax.sql.RowSetListener;
 import java.util.*;
 
 public class EnrichmentTask extends AbstractTask implements ObservableTask {
@@ -144,7 +144,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Show enrichment panel");
 			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar);
 			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
-			registrar.registerService(panel, RowSetListener.class,new Properties());
+			registrar.registerService(panel, RowsSetListener.class,new Properties());
 			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
 				cytoPanel.setState(CytoPanelState.DOCK);
