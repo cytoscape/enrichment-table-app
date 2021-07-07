@@ -51,7 +51,11 @@ public class EnrichmentTableModel extends AbstractTableModel {
         final String colName = columnNames[col];
         final Long rowName = rowNames[row];
         if (colName.equals(EnrichmentTerm.colChartColor)) {
-            return Color.class;
+            String hexColor = cyTable.getRow(rowName).get(colName, String.class);
+            if (hexColor != null && !hexColor.equals(""))
+                return Color.decode(hexColor);
+            else
+                return Color.WHITE;
         } else if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
             return cyTable.getRow(rowName).get(colName, Integer.class);
         } else if (colName.equals(EnrichmentTerm.colIntersectionSize)) {
@@ -241,6 +245,7 @@ public class EnrichmentTableModel extends AbstractTableModel {
         List<CyRow> rows = cyTable.getAllRows();
         rowNames = new Long[rows.size()];
         int i = 0;
+        System.out.println(rows.size());
         for (CyRow row : rows) {
             rowNames[i] = row.get(EnrichmentTerm.colTermID, Long.class);
             i++;

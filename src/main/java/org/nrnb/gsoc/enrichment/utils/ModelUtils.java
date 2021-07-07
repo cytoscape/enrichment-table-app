@@ -125,20 +125,11 @@ public class ModelUtils {
 
 
     public static void setupEnrichmentTable(CyTable enrichmentTable) {
-        if (enrichmentTable.getColumn(EnrichmentTerm.colGenesSUID) == null) {
-            enrichmentTable.createListColumn(EnrichmentTerm.colGenesSUID, Long.class, false);
-        }
-        if (enrichmentTable.getColumn(EnrichmentTerm.colNetworkSUID) == null) {
-            enrichmentTable.createColumn(EnrichmentTerm.colNetworkSUID, Long.class, false);
-        }
         if (enrichmentTable.getColumn(EnrichmentTerm.colName) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colName, String.class, false);
         }
         if (enrichmentTable.getColumn(EnrichmentTerm.colPvalue) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colPvalue, Double.class, false);
-        }
-        if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
-            enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
         }
         if (enrichmentTable.getColumn(EnrichmentTerm.colChartColor) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colChartColor, String.class, false);
@@ -398,7 +389,7 @@ public class ModelUtils {
                 currTerm.setEffectiveDomainSize(((Number) enr.get("effective_domain_size")).intValue());
             }
             if(enr.containsKey("p_value")){
-                currTerm.setPValue(((Number) enr.get("p_value")).intValue());
+                currTerm.setPValue(((Number) enr.get("p_value")).doubleValue());
             }
             if(enr.containsKey("precision")){
                 currTerm.setPrecision(((Number) enr.get("precision")).intValue());

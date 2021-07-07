@@ -185,6 +185,20 @@ public class EnrichmentCytoPanel extends JPanel
 
         availableTables = new ArrayList<String>();
         createJTable(enrichmentTable);
+        // Check if values are being received correctly
+        List<CyRow> rows = enrichmentTable.getAllRows();
+        System.out.println(rows.size());
+/*
+        for(CyRow row: rows){
+            Map<String,Object> mp = row.getAllValues();
+            for (Map.Entry<String,Object> entry : mp.entrySet())   {
+                System.out.println(entry.getKey());
+                System.out.println(entry.getValue());
+            }
+
+            System.out.println(mp.size());
+        }
+*/
         availableTables.add(enrichmentTable.getTitle());
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
@@ -278,9 +292,11 @@ public class EnrichmentCytoPanel extends JPanel
             buttonsPanelRight.add(butExportTable);
             buttonsPanelRight.add(butSettings);
 
-            JTable currentTable = enrichmentTables.get(showTable);
+            JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
 
-
+            if (tableModel != null) {
+                updateFilteredEnrichmentTable();
+            }
             labelRows = new JLabel("");
             updateLabelRows();
             labelRows.setHorizontalAlignment(JLabel.RIGHT);
@@ -305,7 +321,8 @@ public class EnrichmentCytoPanel extends JPanel
     }
 
     private void createJTable(CyTable cyTable) {
-        tableModel = new EnrichmentTableModel(cyTable, EnrichmentTerm.swingColumnsEnrichment);
+        tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
+        System.out.println(tableModel.getColumnCount());
         JTable jTable = new JTable(tableModel);
         TableColumnModel tcm = jTable.getColumnModel();
         tcm.getColumn(EnrichmentTerm.pvalueColumn).setCellRenderer(new DecimalFormatRenderer());
@@ -317,6 +334,7 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.getModel().addTableModelListener(this);
         jTable.setDefaultRenderer(Color.class, new ColorRenderer(true));
         CyNetwork network = applicationManager.getCurrentNetwork();
+        jTable.setDefaultEditor(Color.class, new ColorEditor(registrar, this, colorChooserFactory, network));
         popupMenu = new JPopupMenu();
         menuItemReset = new JMenuItem("Remove color");
         menuItemReset.addActionListener(this);
@@ -346,7 +364,8 @@ public class EnrichmentCytoPanel extends JPanel
                 }
             }
         });
-        enrichmentTables.put(cyTable.getTitle(), jTable);
+        enrichmentTables.put(enrichmentTable.getTitle(), jTable);
+
     }
     static class DecimalFormatRenderer extends DefaultTableCellRenderer {
         private static final DecimalFormat formatter = new DecimalFormat("0.#####E0");
