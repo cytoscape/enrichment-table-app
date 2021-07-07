@@ -40,6 +40,7 @@ import static org.nrnb.gsoc.enrichment.utils.IconUtils.*;
 
 public class EnrichmentCytoPanel extends JPanel
         implements CytoPanelComponent2, ListSelectionListener, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
+    private final CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
     Map<String, JTable> enrichmentTables;
     JPanel topPanel;
@@ -77,8 +78,10 @@ public class EnrichmentCytoPanel extends JPanel
     final String butExportTableDescr = "Export enrichment table";
     private boolean noSignificant;
     private JSONObject result;
+    CyTableFactory tableFactory;
+    CyTableManager tableManager;
 
-    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
+    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant,CyTable enrichmentTable, JSONObject result) {
         this.registrar = registrar;
         this.result = result;
         this.setLayout(new BorderLayout());
@@ -87,6 +90,7 @@ public class EnrichmentCytoPanel extends JPanel
         this.iconFont = iconManager.getIconFont(22.0f);
         applicationManager = registrar.getService(CyApplicationManager.class);
         enrichmentTables = new HashMap<String, JTable>();
+        this.enrichmentTable = enrichmentTable;
         this.noSignificant = noSignificant;
         initPanel(this.noSignificant);
     }
@@ -162,31 +166,7 @@ public class EnrichmentCytoPanel extends JPanel
             return null;
         }
 
-        CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
-        CyTableManager tableManager = registrar.getService(CyTableManager.class);
-       // List<EnrichmentTerm> tableData = ModelUtils.getEnrichmentfromJSON(result);
-        filteredEnrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
-        filteredEnrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
-        filteredEnrichmentTable.setTitle("gProfiler Enrichment");
-        filteredEnrichmentTable.setSavePolicy(SavePolicy.DO_NOT_SAVE);
-        tableManager.addTable(filteredEnrichmentTable);
-        ModelUtils.setupEnrichmentTable(filteredEnrichmentTable);
-        List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result) ;
-        if(processTerms.size()==0){
-            CyRow row = filteredEnrichmentTable.getRow((long) 0);
-            row.set(EnrichmentTerm.colNetworkSUID, network.getSUID());
-        }
 
-        //populate the result table
-        for(int i=0;i<processTerms.size();i++){
-            // populate all other values that need to be entered into the table
-            EnrichmentTerm term = processTerms.get(i);
-            CyRow row = filteredEnrichmentTable.getRow((long) i);
-            row.set(EnrichmentTerm.colName, term.getName());
-            //row.set(EnrichmentTerm.colDescription, term.getDescription());
-            row.set(EnrichmentTerm.colPvalue, term.getPValue());
-            row.set(EnrichmentTerm.colChartColor, "");
-        }
 
         updateFilteredEnrichmentTable();
 
@@ -203,13 +183,9 @@ public class EnrichmentCytoPanel extends JPanel
     public void initPanel(CyNetwork network, boolean noSignificant) {
         this.removeAll();
 
-        Set<CyTable> currTables = ModelUtils.getEnrichmentTables(registrar, network);
         availableTables = new ArrayList<String>();
-      //  System.out.println(currTables.size());
-        for (CyTable currTable : currTables) {
-            createJTable(currTable);
-            availableTables.add(currTable.getTitle());
-        }
+        createJTable(enrichmentTable);
+        availableTables.add(enrichmentTable.getTitle());
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
             JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria.",
@@ -332,7 +308,6 @@ public class EnrichmentCytoPanel extends JPanel
         tableModel = new EnrichmentTableModel(cyTable, EnrichmentTerm.swingColumnsEnrichment);
         JTable jTable = new JTable(tableModel);
         TableColumnModel tcm = jTable.getColumnModel();
-        tcm.removeColumn(tcm.getColumn(EnrichmentTerm.nodeSUIDColumn));
         tcm.getColumn(EnrichmentTerm.pvalueColumn).setCellRenderer(new DecimalFormatRenderer());
         jTable.setFillsViewportHeight(true);
         jTable.setAutoCreateRowSorter(true);
@@ -408,7 +383,7 @@ public class EnrichmentCytoPanel extends JPanel
             CyRow row = currTable.getRow(rowNames[i]);
             CyRow filtRow = filteredEnrichmentTable.getRow(rowNames[i]);
             filtRow.set(EnrichmentTerm.colName, row.get(EnrichmentTerm.colName, String.class));
-            filtRow.set(EnrichmentTerm.colDescription, "");
+            filtRow.set(EnrichmentTerm.colDescription, row.get(EnrichmentTerm.colDescription, String.class));
             filtRow.set(EnrichmentTerm.colPvalue, row.get(EnrichmentTerm.colPvalue, Double.class));
             filtRow.set(EnrichmentTerm.colGenes, row.getList(EnrichmentTerm.colGenes, String.class));
             filtRow.set(EnrichmentTerm.colGenesSUID, row.getList(EnrichmentTerm.colGenesSUID, Long.class));

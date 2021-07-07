@@ -185,7 +185,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(show){
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
-			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
+			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
 			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
 			registrar.registerService(panel, RowsSetListener.class,new Properties());
 			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
