@@ -452,7 +452,6 @@ public class EnrichmentCytoPanel extends JPanel
                             row.get(EnrichmentTerm.colTermSize, Integer.class),
                             row.get(EnrichmentTerm.colPrecision, Double.class),
                             row.get(EnrichmentTerm.colRecall, Double.class));
-                    enrTerm.setNodesSUID(row.getList(EnrichmentTerm.colGenesSUID, Long.class));
                     selectedTerms.put(enrTerm, row.get(EnrichmentTerm.colChartColor, String.class));
                 }
             }
@@ -560,7 +559,7 @@ public class EnrichmentCytoPanel extends JPanel
             }
         }
         if (selectedNetwork != null) {
-//            initPanel(selectedNetwork, false);
+            initPanel(selectedNetwork, false);
             return;
         }
     }

@@ -17,7 +17,9 @@ import org.cytoscape.work.json.JSONResult;
 import org.cytoscape.work.util.ListMultipleSelection;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
+import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.*;
 
@@ -145,6 +147,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		for(String node : nodeNameList){
 			System.out.print(node+" ");
 		}
+		List<EnrichmentTerm> tableData = ModelUtils.getEnrichmentfromJSON(result);
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		/**

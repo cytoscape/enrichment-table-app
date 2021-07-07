@@ -381,7 +381,43 @@ public class ModelUtils {
         }
         List<EnrichmentTerm> results = new ArrayList<>();
         for(Object enrObject : enrichmentArray){
-
+            JSONObject enr = (JSONObject) enrObject;
+            EnrichmentTerm currTerm = new EnrichmentTerm();
+            if(enr.containsKey("description")){
+                currTerm.setDescription((String) enr.get("description"));
+            }
+            if(enr.containsKey("intersection_size")){
+                currTerm.setIntersectionSize(((Number) enr.get("intersection_size")).intValue());
+            }
+            if(enr.containsKey("effective_domain_size")){
+                currTerm.setEffectiveDomainSize(((Number) enr.get("effective_domain_size")).intValue());
+            }
+            if(enr.containsKey("p_value")){
+                currTerm.setPValue(((Number) enr.get("p_value")).intValue());
+            }
+            if(enr.containsKey("precision")){
+                currTerm.setPrecision(((Number) enr.get("precision")).intValue());
+            }
+            if(enr.containsKey("recall")){
+                currTerm.setRecall(((Number) enr.get("recall")).intValue());
+            }
+            if(enr.containsKey("goshv")){
+                currTerm.setGoshv(((Number) enr.get("goshv")).intValue());
+            }
+            if(enr.containsKey("term_size")){
+                currTerm.setTermSize(((Number) enr.get("term_size")).intValue());
+            }
+            if(enr.containsKey("significant")){
+                currTerm.setSignificant(((Boolean) enr.get("significant")).booleanValue());
+            }
+            if(enr.containsKey("source")){
+                currTerm.setSource((String) enr.get("source"));
+            }
+            if(enr.containsKey("name")){
+                currTerm.setName((String) enr.get("name"));
+            }
+            results.add(currTerm);
+            System.out.println(currTerm.getName());
         }
         return results;
     }

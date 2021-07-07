@@ -19,8 +19,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     int termSize;
     double precision;
     double recall;
-    List<String> genes;
-    List<Long> nodes;
+//    List<String> genes;
+//    List<Long> nodes;
 
     public static enum TermSource {
         ALL("All", "All", "Enrichment: All"),
@@ -157,8 +157,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.termSize = 0;
         this.precision =-1.0;
         this.recall = -1.0;
-        this.genes = new ArrayList<String>();
-        this.nodes = new ArrayList<Long>();
+//        this.genes = new ArrayList<String>();
+//        this.nodes = new ArrayList<Long>();
 
     }
 
@@ -167,8 +167,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = "";
         this.source = enrichmentSource;
         this.pvalue = -1.0;
-        this.genes = new ArrayList<String>();
-        this.nodes = new ArrayList<Long>();
+//        this.genes = new ArrayList<String>();
+//        this.nodes = new ArrayList<Long>();
 
     }
 
@@ -178,8 +178,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = description;
         this.source = source;
         this.pvalue = pvalue;
-        this.genes = new ArrayList<String>();
-        this.nodes = new ArrayList<Long>();
+//        this.genes = new ArrayList<String>();
+//        this.nodes = new ArrayList<Long>();
     }
 
     public EnrichmentTerm(String name, String description, String source,
@@ -197,8 +197,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.termSize = termSize;
         this.precision = precision;
         this.recall = recall;
-        this.genes = new ArrayList<String>();
-        this.nodes = new ArrayList<Long>();
+//        this.genes = new ArrayList<String>();
+//        this.nodes = new ArrayList<Long>();
     }
 
     public String getName() {
@@ -233,27 +233,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.pvalue = pvalue;
     }
 
-
-    public int getNumberGenes() {
-        return genes.size();
-    }
-
-    public List<String> getGenes() {
-        return genes;
-    }
-
-    public void setGenes(List<String> genes) {
-        this.genes = genes;
-    }
-
-    public List<Long> getNodesSUID() {
-        return nodes;
-    }
-
-    public void setNodesSUID(List<Long> nodes) {
-        this.nodes = nodes;
-    }
-
     public double getGoshv() {
         return goshv;
     }
@@ -270,11 +249,11 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         isSignificant = significant;
     }
 
-    public int getEffectiveDomainSIze() {
+    public int getEffectiveDomainSize() {
         return effectiveDomainSize;
     }
 
-    public void setEffectiveDomainSIze(int effectiveDomainSize) {
+    public void setEffectiveDomainSize(int effectiveDomainSize) {
         this.effectiveDomainSize = effectiveDomainSize;
     }
 
@@ -311,7 +290,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     }
 
     public String toString() {
-        return name + "\t" + getNumberGenes() + "\t" + pvalue;
+        return name + "\t" + pvalue;
     }
 
     public int compareTo(EnrichmentTerm et) {
