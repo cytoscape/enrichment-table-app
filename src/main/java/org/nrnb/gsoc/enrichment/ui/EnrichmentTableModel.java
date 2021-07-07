@@ -72,8 +72,6 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return cyTable.getRow(rowName).getList(colName, String.class);
         } else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
             return cyTable.getRow(rowName).getList(colName, Boolean.class);
-        } else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
-            return cyTable.getRow(rowName).getList(colName, Long.class);
         } else {
             return cyTable.getRow(rowName).get(colName, String.class);
         }
@@ -114,8 +112,6 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return cyTable.getRow(rowName).getList(colName, String.class);
         } else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
             return cyTable.getRow(rowName).getList(colName, Boolean.class);
-        } else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
-            return cyTable.getRow(rowName).getList(colName, Long.class);
         } else {
             return cyTable.getRow(rowName).get(colName, String.class);
         }
@@ -146,8 +142,6 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return String.class;
         } else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
             return Boolean.class;
-        } else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
-            return List.class;
         } else {
             return String.class;
         }
