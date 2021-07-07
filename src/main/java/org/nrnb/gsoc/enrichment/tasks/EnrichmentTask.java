@@ -2,9 +2,7 @@ package org.nrnb.gsoc.enrichment.tasks;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.*;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyTableUtil;
+import org.cytoscape.model.*;
 import org.cytoscape.model.events.RowsSetListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.CyServiceRegistrar;
@@ -31,6 +29,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	final CyNetworkView networkView;
 	private static int MAX_NUMBER_OF_NODES = 2000;
 	private boolean isLargeNetwork;
+	public CyTable enrichmentTable = null;
+
 	private boolean show = true;
 	@Tunable(description = "Select nodes",
 			context = "nogui",
@@ -147,7 +147,36 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		for(String node : nodeNameList){
 			System.out.print(node+" ");
 		}
-		List<EnrichmentTerm> tableData = ModelUtils.getEnrichmentfromJSON(result);
+		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
+		CyTableManager tableManager = registrar.getService(CyTableManager.class);
+		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
+		tableManager.addTable(enrichmentTable);
+		ModelUtils.setupEnrichmentTable(enrichmentTable);
+		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result) ;
+
+		// populate table with data
+		if(processTerms==null){
+			monitor.showMessage(TaskMonitor.Level.ERROR,
+					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
+			return;
+		}
+		if(processTerms.size()==0){
+			CyRow row = enrichmentTable.getRow((long) 0);
+			row.set(EnrichmentTerm.colNetworkSUID, network.getSUID());
+		}
+
+		//populate the result table
+		for(int i=0;i<processTerms.size();i++){
+			// populate all other values that need to be entered into the table
+			EnrichmentTerm term = processTerms.get(i);
+			CyRow row = enrichmentTable.getRow((long) i);
+			row.set(EnrichmentTerm.colName, term.getName());
+			row.set(EnrichmentTerm.colDescription, term.getDescription());
+			row.set(EnrichmentTerm.colPvalue, term.getPValue());
+			row.set(EnrichmentTerm.colChartColor, "");
+		}
+		System.out.println(enrichmentTable.getTitle());
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		/**
@@ -156,7 +185,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(show){
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
-			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,noSignificant);
+			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
 			registrar.registerService(panel, RowsSetListener.class,new Properties());
 			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());

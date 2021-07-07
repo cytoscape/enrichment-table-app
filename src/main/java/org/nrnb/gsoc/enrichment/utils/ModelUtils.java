@@ -143,6 +143,9 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colChartColor) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colChartColor, String.class, false);
         }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colDescription) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colDescription, String.class, false);
+        }
     }
 
     public static double getMaxFdrLogValue(List<EnrichmentTerm> terms) {
@@ -214,6 +217,7 @@ public class ModelUtils {
         Set<CyTable> netTables = new HashSet<CyTable>();
         Set<String> tableNames = new HashSet<String>(TermSource.getTables());
         Set<CyTable> currTables = tableManager.getAllTables(true);
+
         for (CyTable current : currTables) {
             if (tableNames.contains(current.getTitle())
                     && current.getColumn(EnrichmentTerm.colNetworkSUID) != null
@@ -223,6 +227,7 @@ public class ModelUtils {
                         .get(EnrichmentTerm.colNetworkSUID, Long.class).equals(network.getSUID())) {
                     netTables.add(current);
                 }
+                System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
             }
         }
         return netTables;
@@ -417,7 +422,7 @@ public class ModelUtils {
                 currTerm.setName((String) enr.get("name"));
             }
             results.add(currTerm);
-            System.out.println(currTerm.getName());
+            System.out.println(currTerm.getDescription());
         }
         return results;
     }

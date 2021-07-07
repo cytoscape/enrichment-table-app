@@ -12,6 +12,8 @@ import org.cytoscape.util.swing.IconManager;
 import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
+import org.cytoscape.work.TaskMonitor;
+import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
@@ -74,8 +76,11 @@ public class EnrichmentCytoPanel extends JPanel
     final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
     private boolean noSignificant;
-    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant) {
+    private JSONObject result;
+
+    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
         this.registrar = registrar;
+        this.result = result;
         this.setLayout(new BorderLayout());
         this.colorChooserFactory = registrar.getService(CyColorPaletteChooserFactory.class);
         IconManager iconManager = registrar.getService(IconManager.class);
@@ -159,12 +164,29 @@ public class EnrichmentCytoPanel extends JPanel
 
         CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
         CyTableManager tableManager = registrar.getService(CyTableManager.class);
-        filteredEnrichmentTable = tableFactory.createTable(TermSource.ALL.getTable(),
-                EnrichmentTerm.colTermID, Long.class, false, true);
+       // List<EnrichmentTerm> tableData = ModelUtils.getEnrichmentfromJSON(result);
+        filteredEnrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+        filteredEnrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
         filteredEnrichmentTable.setTitle("gProfiler Enrichment");
         filteredEnrichmentTable.setSavePolicy(SavePolicy.DO_NOT_SAVE);
         tableManager.addTable(filteredEnrichmentTable);
         ModelUtils.setupEnrichmentTable(filteredEnrichmentTable);
+        List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result) ;
+        if(processTerms.size()==0){
+            CyRow row = filteredEnrichmentTable.getRow((long) 0);
+            row.set(EnrichmentTerm.colNetworkSUID, network.getSUID());
+        }
+
+        //populate the result table
+        for(int i=0;i<processTerms.size();i++){
+            // populate all other values that need to be entered into the table
+            EnrichmentTerm term = processTerms.get(i);
+            CyRow row = filteredEnrichmentTable.getRow((long) i);
+            row.set(EnrichmentTerm.colName, term.getName());
+            //row.set(EnrichmentTerm.colDescription, term.getDescription());
+            row.set(EnrichmentTerm.colPvalue, term.getPValue());
+            row.set(EnrichmentTerm.colChartColor, "");
+        }
 
         updateFilteredEnrichmentTable();
 
@@ -183,6 +205,7 @@ public class EnrichmentCytoPanel extends JPanel
 
         Set<CyTable> currTables = ModelUtils.getEnrichmentTables(registrar, network);
         availableTables = new ArrayList<String>();
+      //  System.out.println(currTables.size());
         for (CyTable currTable : currTables) {
             createJTable(currTable);
             availableTables.add(currTable.getTitle());
@@ -348,7 +371,6 @@ public class EnrichmentCytoPanel extends JPanel
                 }
             }
         });
-
         enrichmentTables.put(cyTable.getTitle(), jTable);
     }
     static class DecimalFormatRenderer extends DefaultTableCellRenderer {
@@ -386,7 +408,7 @@ public class EnrichmentCytoPanel extends JPanel
             CyRow row = currTable.getRow(rowNames[i]);
             CyRow filtRow = filteredEnrichmentTable.getRow(rowNames[i]);
             filtRow.set(EnrichmentTerm.colName, row.get(EnrichmentTerm.colName, String.class));
-            filtRow.set(EnrichmentTerm.colDescription, row.get(EnrichmentTerm.colDescription, String.class));
+            filtRow.set(EnrichmentTerm.colDescription, "");
             filtRow.set(EnrichmentTerm.colPvalue, row.get(EnrichmentTerm.colPvalue, Double.class));
             filtRow.set(EnrichmentTerm.colGenes, row.getList(EnrichmentTerm.colGenes, String.class));
             filtRow.set(EnrichmentTerm.colGenesSUID, row.getList(EnrichmentTerm.colGenesSUID, Long.class));
