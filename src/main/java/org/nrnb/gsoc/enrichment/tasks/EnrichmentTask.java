@@ -40,10 +40,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			gravity = 1.0)
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
-	@Tunable(description = "Query will run only for selected nodes",
-			longDescription="By default, a query run for all nodes in the network",
-			exampleStringValue="false")
-	public boolean checkSelectedNodes = false;
+
 	// store the value as a property?
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
@@ -64,8 +61,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		List<CyNode> nodeList;
 		Set<String> nodeNameList = new HashSet<String>();
 		List<Long> nodesToFilter = new ArrayList<Long>();
-		if(this.checkSelectedNodes){
-			nodeList = nodesToFilterBy.getSelectedValues();
+		nodeList = nodesToFilterBy.getSelectedValues();
+		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
 				nodesToFilter.add(node.getSUID());
 				String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
