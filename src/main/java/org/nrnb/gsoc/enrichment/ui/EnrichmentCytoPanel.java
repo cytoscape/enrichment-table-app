@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentSettingsTask;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
@@ -44,6 +45,7 @@ public class EnrichmentCytoPanel extends JPanel
     private final CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
     Map<String, JTable> enrichmentTables;
+    // TODO: Advanced settings panel option
     JPanel topPanel;
     JPanel mainPanel;
     JScrollPane scrollPane;
@@ -53,7 +55,7 @@ public class EnrichmentCytoPanel extends JPanel
     JLabel labelRows;
     JButton butSettings;
     JButton butDrawCharts;
-    JButton butResetCharts;
+    JButton butResetTable;
     JButton butAnalyzedNodes;
     JButton butExportTable;
     JButton butFilter;
@@ -62,6 +64,9 @@ public class EnrichmentCytoPanel extends JPanel
     JPopupMenu popupMenu;
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
+    /**
+     * TODO: Quick settings options -> Drop down to select column and auto complete species
+     */
 
     private static final Icon chartIcon = new ImageIcon(
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
@@ -73,7 +78,7 @@ public class EnrichmentCytoPanel extends JPanel
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butFilterName = "Filter enrichment table";
     final String butDrawChartsName = "Draw charts using default color palette";
-    final String butResetChartsName = "Reset charts";
+    final String butResetTableName = "Reset result table";
     final String butEnrichmentMapName = "Create EnrichmentMap";
     final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
@@ -130,7 +135,9 @@ public class EnrichmentCytoPanel extends JPanel
         CyNetwork network = applicationManager.getCurrentNetwork();
         TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
 
-        if (e.getSource().equals(butExportTable)) {
+        if (e.getSource().equals(butResetTable)) {
+            tm.execute(new TaskIterator(new EnrichmentTask(registrar)));
+        } else if (e.getSource().equals(butExportTable)) {
             if (network != null) {
                 if (tableModel.getAllRowCount() != tableModel.getRowCount())
                     tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
@@ -243,15 +250,18 @@ public class EnrichmentCytoPanel extends JPanel
             butDrawCharts.setFocusPainted(false);
             butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
-
-            butResetCharts = new JButton(IconManager.ICON_CIRCLE_O);
-            butResetCharts.setFont(iconFont);
-            butResetCharts.addActionListener(this);
-            butResetCharts.setToolTipText(butResetChartsName);
-            butResetCharts.setBorderPainted(false);
-            butResetCharts.setContentAreaFilled(false);
-            butResetCharts.setFocusPainted(false);
-            butResetCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+            /**
+             * JComboBox for setting the default value of the node to be chosen for performing the query
+             */
+            
+            butResetTable = new JButton(IconManager.ICON_CIRCLE_O);
+            butResetTable.setFont(iconFont);
+            butResetTable.addActionListener(this);
+            butResetTable.setToolTipText(butResetTableName);
+            butResetTable.setBorderPainted(false);
+            butResetTable.setContentAreaFilled(false);
+            butResetTable.setFocusPainted(false);
+            butResetTable.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
             // Add enrichment map button here if EnrichmentMap is loaded
             butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
@@ -264,7 +274,7 @@ public class EnrichmentCytoPanel extends JPanel
 
             buttonsPanelLeft.add(butFilter);
             buttonsPanelLeft.add(butDrawCharts);
-            buttonsPanelLeft.add(butResetCharts);
+            buttonsPanelLeft.add(butResetTable);
             buttonsPanelLeft.add(butEnrichmentMap);
 
             // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));

@@ -53,15 +53,6 @@ public class EnrichmentSettings implements ActionListener, RequestsUIHelper {
 
     public void actionPerformed(ActionEvent e) {
 
-		/*
-		ColorPaletteChooserDialog dialog = new ColorPaletteChooserDialog(null, PALETTE_TYPE.QUALITATIVE);
-		if (defaultPalette.getSelectedValue() != null)
-			dialog.setColorBrewer(defaultPalette.getSelectedValue());
-		boolean okPressed = dialog.showDialog();
-		if (okPressed) {
-			defaultPalette.setSelectedValue(dialog.getColorPalette());
-		}
-		*/
     }
 
     public void setUIHelper(TunableUIHelper helper) {

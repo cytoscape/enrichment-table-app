@@ -32,6 +32,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public CyTable enrichmentTable = null;
 
 	private boolean show = true;
+
 	@Tunable(description = "Select nodes",
 			context = "nogui",
 			//tooltip = "Select the enrichment categories to show in the table",
@@ -41,7 +42,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
 
-	// store the value as a property?
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
 		super();
