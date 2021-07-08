@@ -76,6 +76,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				nodeNameList.add(canonicalName);
 			}
 		}
+
 		/**
 		 * Check if request query is empty
 		 */
@@ -96,19 +97,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			return;
 		}
 
-		Set<String> selectedNodes = new HashSet<String>(){{
-			add("CASQ2");
-			add("CASQ1");
-			add("GSTO1");
-			add("DMD");
-			add("GSTM2");
-			add("MLXIPL");
-			add("SMARCB1");
-			add("PIH1D1");
-			add("SMARCA4");
-			add("AGER");
-		}};
-		selectedNodes.add("Homo sapiens");
 		StringBuffer query = new StringBuffer("");
 
 		Iterator<String> setIterator = nodeNameList.iterator();

@@ -16,6 +16,7 @@ import org.cytoscape.work.TaskMonitor;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentSettingsTask;
 import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
@@ -146,6 +147,15 @@ public class EnrichmentCytoPanel extends JPanel
             // System.out.println("action listener: " + table.getSelectedRow() + " : " + table.getSelectedColumn());
             if (table.getSelectedRow() > -1) {
                 resetColor(table.getSelectedRow());
+            } else if(e.getSource().equals(butExportTable)){
+                if (tableModel.getAllRowCount() != tableModel.getRowCount())
+                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
+                            TermSource.ALL.getTable()), true)));
+                else
+                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
+                            TermSource.ALL.getTable()), false)));
+            } else if (e.getSource().equals(butSettings)) {
+                tm.execute(new TaskIterator(new EnrichmentSettingsTask(registrar)));
             }
         }
 
