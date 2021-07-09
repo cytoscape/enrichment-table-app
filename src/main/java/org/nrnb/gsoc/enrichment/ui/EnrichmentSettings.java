@@ -25,24 +25,39 @@ public class EnrichmentSettings implements ActionListener, RequestsUIHelper {
     private CyNetwork network;
     private Component parent;
 
-
-    @Tunable(description = "Number of terms to chart",
-            tooltip = "Set the default number of terms to use for charts",
-            longDescription = "Set the default number of terms to use for charts",
-            exampleStringValue = "5",
-            groups = {"Enrichment Defaults"},
-            gravity = 101.0, params="slider=true")
-    public BoundedInteger nTerms = new BoundedInteger(1, 5, 8, false, false);
-
     @Tunable(description = "Overlap cutoff",
-            tooltip = "<html>This is the maximum Jaccard similarity that will be allowed.<br/>"+
-                    "Values larger than this cutoff will be excluded.</html>",
-            longDescription = "This is the maximum Jaccard similarity that will be allowed."+
-                    "Values larger than this cutoff will be excluded.",
+            tooltip = "<html>This is the custom significance threshold.<br/>"+
+                    "Values below the threshold will be excluded.</html>",
+            longDescription = "This is the custom significance threshold. Values below the threshold will be excluded.",
             exampleStringValue = "0.5",
             groups = {"Enrichment Defaults"},
             params="slider=true", gravity = 109.0)
-    public BoundedDouble overlapCutoff = new BoundedDouble(0.0, 0.5, 1.0, false, false);
+    public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.5, 1.0, false, false);
+    @Tunable(description = "Decides what results should be shown.",
+            longDescription = "Unless this is set to true, we only show results above the significance threshold.",
+            groups = {"Enrichment Defaults"},
+            tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
+    public boolean all_results = false;
+    @Tunable(description = "Type of domain scope",
+            tooltip = "Set the desired domain scope",
+            longDescription = "Set the desired domain scope",
+            exampleStringValue = "annotated",
+            groups = {"Enrichment Defaults"},
+            gravity = 100.0)
+    public ListSingleSelection<String> domain_scope;
+
+    @Tunable(description = "Type of testing correction method",
+            tooltip = "Set the type of testing correction method",
+            longDescription = "Set the type of testing correction method",
+            exampleStringValue = "g_SCS",
+            groups = {"Enrichment Defaults"},
+            gravity = 100.0)
+    public ListSingleSelection<String> significance_threshold_method;
+
+    @Tunable(description = "Make these settings the default",
+            longDescription = "Unless this is set to true, these settings only apply to the current network",
+            tooltip = "<html>Unless this is set to true, these settings only apply to the current network.</html>")
+    public boolean makeDefault = false;
 
     public EnrichmentSettings(CyServiceRegistrar registrar) {
         this.registrar = registrar;
