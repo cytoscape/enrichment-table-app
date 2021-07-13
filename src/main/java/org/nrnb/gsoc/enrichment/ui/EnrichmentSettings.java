@@ -33,6 +33,7 @@ public class EnrichmentSettings implements ActionListener, RequestsUIHelper {
             groups = {"Enrichment Defaults"},
             params="slider=true", gravity = 109.0)
     public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.5, 1.0, false, false);
+    
     @Tunable(description = "Decides what results should be shown.",
             longDescription = "Unless this is set to true, we only show results above the significance threshold.",
             groups = {"Enrichment Defaults"},

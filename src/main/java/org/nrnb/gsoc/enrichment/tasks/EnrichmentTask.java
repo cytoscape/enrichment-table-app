@@ -98,14 +98,15 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 
 		StringBuffer query = new StringBuffer("");
-
 		Iterator<String> setIterator = nodeNameList.iterator();
-		query.append("\"");
 		while(setIterator.hasNext()){
 			query.append(setIterator.next());
-			query.append(" ");
+			if(setIterator.hasNext()){
+				query.append(" ");
+			}
 		}
-		query.append("\"");
+
+
 		Map<String,String> parameters = generateQuery(query.toString());
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
 		JSONObject result = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
