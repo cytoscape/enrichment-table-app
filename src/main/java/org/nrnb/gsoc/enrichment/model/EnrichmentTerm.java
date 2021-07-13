@@ -19,8 +19,10 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     int termSize;
     double precision;
     double recall;
-//    List<String> genes;
-//    List<Long> nodes;
+
+
+    List<String> genes;
+    List<Long> nodes;
 
     public static enum TermSource {
         ALL("All", "All", "Enrichment: All"),
@@ -134,7 +136,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colChartColor = "chart color"; // Data visualization option -> takes the enrichment table and visualize
 
 
-    public static final String[] swingColumnsEnrichment = new String[] { colChartColor, colTermID, colName, colDescription, colPvalue};
+    public static final String[] swingColumnsEnrichment = new String[] { colChartColor, colTermID, colName, colDescription, colPvalue, colGenes};
     public static final String[] swingColumnsEnrichmentOld = new String[] { colChartColor, colName, colDescription, colPvalue,
             colEffectiveDomainSizeOld,colGenes, colGenesSUID };
 
@@ -286,6 +288,22 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
     public void setRecall(double recall) {
         this.recall = recall;
+    }
+
+    public void setGenes(List<String> genes) {
+        this.genes = genes;
+    }
+
+    public List<String> getGenes() {
+        return genes;
+    }
+
+    public void setNodesSUID(List<Long> nodes) {
+        this.nodes = nodes;
+    }
+
+    public List<Long> getNodesSUID(){
+        return nodes;
     }
 
     public String toString() {

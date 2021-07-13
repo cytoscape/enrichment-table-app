@@ -66,6 +66,7 @@ public class HTTPRequestEngine {
             entity = new StringEntity(jsonBody);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
         httpPost.setEntity(entity);
         httpPost.setHeader("Accept", "application/json");
@@ -75,6 +76,7 @@ public class HTTPRequestEngine {
             response = httpclient.execute(httpPost);
         } catch (IOException e) {
             e.printStackTrace();
+            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode!=200 && statusCode!=202){
@@ -87,8 +89,10 @@ public class HTTPRequestEngine {
             jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
         } catch (IOException e) {
             e.printStackTrace();
+            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         } catch (ParseException e) {
             e.printStackTrace();
+            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
         return jsonResponse;
     }
