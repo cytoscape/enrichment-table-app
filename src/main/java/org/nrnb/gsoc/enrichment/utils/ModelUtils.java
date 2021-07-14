@@ -137,6 +137,9 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colDescription) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colDescription, String.class, false);
         }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
+            enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
+        }
     }
 
     public static double getMaxFdrLogValue(List<EnrichmentTerm> terms) {
@@ -218,7 +221,7 @@ public class ModelUtils {
                         .get(EnrichmentTerm.colNetworkSUID, Long.class).equals(network.getSUID())) {
                     netTables.add(current);
                 }
-                System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
+                //System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
             }
         }
         return netTables;
@@ -370,7 +373,7 @@ public class ModelUtils {
      * @param response JSON response received by making API call
      * @return structured list of data which can be used to populate result table
      */
-    public static List<EnrichmentTerm> getEnrichmentfromJSON(JSONObject response){
+    public static List<EnrichmentTerm> getEnrichmentfromJSON(JSONObject response, CyNetwork network, List<String> nodeNameList,Map<String, Long> stringNodesMap){
         JSONArray enrichmentArray = getResultsFromJSON(response, JSONArray.class);
         if (enrichmentArray == null) {
             return null;
@@ -411,9 +414,26 @@ public class ModelUtils {
             }
             if(enr.containsKey("name")){
                 currTerm.setName((String) enr.get("name"));
+            } if(enr.containsKey("intersections")){
+                //System.out.println("Intersections");
+                List<String> currGeneList = new ArrayList<String>();
+                List<Long> currNodeList = new ArrayList<Long>();
+                JSONArray genes = (JSONArray)enr.get("intersections");
+                for(int i=0;i<genes.size();i++){
+                   // System.out.println(genes.get(i));
+                    if((genes.get(i)).toString().length()>2){
+                        String enrGeneEnsemblID = (String)nodeNameList.get(i);
+                        String enrGeneNodeName = enrGeneEnsemblID;
+                        final Long nodeSUID = stringNodesMap.get(enrGeneNodeName);
+                        currNodeList.add(nodeSUID);
+                        currGeneList.add(nodeNameList.get(i));
+                    }
+                }
+                currTerm.setGenes(currGeneList);
+                currTerm.setNodesSUID(currNodeList);
             }
             results.add(currTerm);
-            System.out.println(currTerm.getDescription());
+            //System.out.println(currTerm.getDescription());
         }
         return results;
     }
@@ -421,8 +441,6 @@ public class ModelUtils {
     public static <T> T getResultsFromJSON(JSONObject json, Class<? extends T> clazz) {
         if (json == null)
             return null;
-
-        // System.out.println("json: " + json.toJSONString());
 
         Object result = json.get("result");
         if (!clazz.isAssignableFrom(result.getClass()))

@@ -41,6 +41,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			gravity = 1.0)
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
+	final Map<String, Long> stringNodesMap;
 
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
@@ -53,6 +54,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		nodesToFilterBy = new ListMultipleSelection<CyNode>(network.getNodeList());
 		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
 		isLargeNetwork = false;
+		stringNodesMap = new HashMap<>();
 	}
 
 	public void run(TaskMonitor monitor) {
@@ -74,6 +76,9 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				nodesToFilter.add(node.getSUID());
 				String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
 				nodeNameList.add(canonicalName);
+				if(canonicalName!=null){
+					stringNodesMap.put(canonicalName, node.getSUID());
+				}
 			}
 		}
 
@@ -98,14 +103,15 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 
 		StringBuffer query = new StringBuffer("");
-
 		Iterator<String> setIterator = nodeNameList.iterator();
-		query.append("\"");
 		while(setIterator.hasNext()){
 			query.append(setIterator.next());
-			query.append(" ");
+			if(setIterator.hasNext()){
+				query.append(" ");
+			}
 		}
-		query.append("\"");
+
+
 		Map<String,String> parameters = generateQuery(query.toString());
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
 		JSONObject result = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
@@ -138,7 +144,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
 		tableManager.addTable(enrichmentTable);
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
-		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result) ;
+		List<String> nodeNames = new ArrayList<String> (nodeNameList);
+		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,stringNodesMap) ;
 
 		// populate table with data
 		if(processTerms==null){
@@ -160,6 +167,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colDescription, term.getDescription());
 			row.set(EnrichmentTerm.colPvalue, term.getPValue());
 			row.set(EnrichmentTerm.colChartColor, "");
+			row.set(EnrichmentTerm.colGenes,term.getGenes());
 		}
 		System.out.println(enrichmentTable.getTitle());
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
