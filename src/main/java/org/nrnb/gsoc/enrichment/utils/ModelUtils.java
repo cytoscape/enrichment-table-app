@@ -9,8 +9,10 @@ import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.json.simple.JSONArray;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -140,6 +142,41 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
             enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
         }
+    }
+
+    public static List<String> getProfilerColumnNames(CyTable nodeTable) {
+        List<String> profilerColumnNames = new ArrayList<String>();
+        for (CyColumn col : nodeTable.getColumns()) {
+            if (col.getType().equals(String.class)) {
+                profilerColumnNames.add(col.getName());
+            }
+        }
+        return profilerColumnNames;
+    }
+
+    // Reference: https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist/34081506
+    public static Map<String,String> getOrganisms() {
+        List<String> allSpecies = new ArrayList<String>();
+        HTTPRequestEngine requestEngine = new HTTPRequestEngine();
+        JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
+        JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
+        JSONArray jsonArrayID = (JSONArray) result.get("id");
+        Map<String,String> scientificNametoID = new HashMap<>();
+        if(jsonArrayID!=null && jsonArrayScientificName!=null){
+            for(int i=0;i<jsonArrayID.size();i++){
+                scientificNametoID.put(jsonArrayScientificName.get(i).toString(),jsonArrayID.get(i).toString());
+            }
+        }
+
+
+        return scientificNametoID;
+    }
+    public static List<String> getOrganismsName(Map<String,String> scientificNametoID ) {
+        List<String> allSpecies = new ArrayList<String>();
+        for(String name : scientificNametoID.keySet()){
+            allSpecies.add(name);
+        }
+        return allSpecies;
     }
 
     public static double getMaxFdrLogValue(List<EnrichmentTerm> terms) {

@@ -1,6 +1,7 @@
 package org.nrnb.gsoc.enrichment.RequestEngine;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -50,6 +51,42 @@ public class HTTPRequestEngine {
         defaultParameters.put("background","[]");
         defaultParameters.put("no_evidences", "false");
 
+    }
+
+    public JSONObject makeGetRequest(String endpoint) {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        StringBuffer urlConverter = new StringBuffer();
+        urlConverter.append(this.basicURL);
+        urlConverter.append(endpoint);
+        String url = urlConverter.toString();
+        HttpGet httpGet = new HttpGet(url);
+
+        httpGet.setHeader("Accept", "application/json");
+        httpGet.setHeader("Content-type", "application/json");
+        CloseableHttpResponse response = null;
+        try {
+            response = httpclient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+//            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+        }
+        int statusCode = response.getStatusLine().getStatusCode();
+        if(statusCode!=200 && statusCode!=202){
+//            monitor.showMessage(TaskMonitor.Level.ERROR, "Got "+
+//                    response.getStatusLine().getStatusCode()+" code from server");
+            return null;
+        }
+        JSONObject jsonResponse=null;
+        try {
+            jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+//            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+        } catch (ParseException e) {
+            e.printStackTrace();
+//            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+        }
+        return jsonResponse;
     }
 
     public JSONObject makePostRequest(String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
