@@ -2,6 +2,9 @@ package org.nrnb.gsoc.enrichment;
 
 import java.util.Properties;
 
+import org.cytoscape.application.swing.*;
+import org.cytoscape.model.events.RowsSetListener;
+import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.ServiceProperties;
@@ -9,6 +12,7 @@ import org.cytoscape.work.TaskFactory;
 
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
 
+import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -70,5 +74,16 @@ public class CyActivator extends AbstractCyActivator {
 			myFactory,
 			TaskFactory.class, // Interface
 			properties); // Service properties
+		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+		CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,false,null,null);
+		registrar.registerService(panel, CytoPanelComponent.class,new Properties());
+		registrar.registerService(panel, RowsSetListener.class,new Properties());
+		registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+		if (cytoPanel.getState() == CytoPanelState.HIDE)
+			cytoPanel.setState(CytoPanelState.DOCK);
+		cytoPanel.setSelectedIndex(
+				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+
 	}
 }
