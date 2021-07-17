@@ -42,7 +42,7 @@ import static org.nrnb.gsoc.enrichment.utils.IconUtils.*;
 
 public class EnrichmentCytoPanel extends JPanel
         implements CytoPanelComponent2, ListSelectionListener, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
-    private final CyTable enrichmentTable;
+    private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
     Map<String, JTable> enrichmentTables;
     // TODO: Advanced settings panel option
@@ -100,7 +100,10 @@ public class EnrichmentCytoPanel extends JPanel
         this.noSignificant = noSignificant;
         initPanel(this.noSignificant);
     }
-
+    public void setEnrichmentTable(CyTable enrichmentTable){
+        this.enrichmentTable = enrichmentTable;
+        initPanel(this.noSignificant);
+    }
     @Override
     public String getIdentifier() {
         return "org.nrnb.gsoc.enrichment";
@@ -192,6 +195,111 @@ public class EnrichmentCytoPanel extends JPanel
 
     public void initPanel(boolean noSignificant) {
         CyNetwork network = applicationManager.getCurrentNetwork();
+/*
+        for(CyRow row: rows){
+            Map<String,Object> mp = row.getAllValues();
+            for (Map.Entry<String,Object> entry : mp.entrySet())   {
+                System.out.println(entry.getKey());
+                System.out.println(entry.getValue());
+            }
+
+            System.out.println(mp.size());
+        }
+*/
+        /**
+         * Initialise the top panel design
+         */
+        JPanel buttonsPanelLeft = new JPanel();
+        BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
+        buttonsPanelLeft.setLayout(layoutLeft);
+        butFilter = new JButton(IconManager.ICON_FILTER);
+        butFilter.setFont(iconFont);
+        butFilter.addActionListener(this);
+        butFilter.setToolTipText(butFilterName);
+        butFilter.setBorderPainted(false);
+        butFilter.setContentAreaFilled(false);
+        butFilter.setFocusPainted(false);
+        butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
+        butFilter.setEnabled(false);
+
+        butDrawCharts = new JButton(chartIcon);
+        butDrawCharts.addActionListener(this);
+        butDrawCharts.setToolTipText(butDrawChartsName);
+        butDrawCharts.setBorderPainted(false);
+        butDrawCharts.setContentAreaFilled(false);
+        butDrawCharts.setFocusPainted(false);
+        butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butDrawCharts.setEnabled(false);
+
+        /**
+         * JComboBox for setting the default value of the node to be chosen for performing the query
+         */
+
+        butResetTable = new JButton(IconManager.ICON_CIRCLE_O);
+        butResetTable.setFont(iconFont);
+        butResetTable.addActionListener(this);
+        butResetTable.setToolTipText(butResetTableName);
+        butResetTable.setBorderPainted(false);
+        butResetTable.setContentAreaFilled(false);
+        butResetTable.setFocusPainted(false);
+        butResetTable.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butResetTable.setEnabled(false);
+        // Add enrichment map button here if EnrichmentMap is loaded
+        butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
+        butEnrichmentMap.addActionListener(this);
+        butEnrichmentMap.setToolTipText(butEnrichmentMapName);
+        butEnrichmentMap.setBorderPainted(false);
+        butEnrichmentMap.setContentAreaFilled(false);
+        butEnrichmentMap.setFocusPainted(false);
+        butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
+        butEnrichmentMap.setEnabled(false);
+
+        buttonsPanelLeft.add(butFilter);
+        buttonsPanelLeft.add(butDrawCharts);
+        buttonsPanelLeft.add(butResetTable);
+        buttonsPanelLeft.add(butEnrichmentMap);
+
+        // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
+        JPanel buttonsPanelRight = new JPanel();
+        BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
+        buttonsPanelRight.setLayout(layoutRight);
+        butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
+        butAnalyzedNodes.addActionListener(this);
+        butAnalyzedNodes.setFont(iconFont);
+        butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
+        butAnalyzedNodes.setBorderPainted(false);
+        butAnalyzedNodes.setContentAreaFilled(false);
+        butAnalyzedNodes.setFocusPainted(false);
+        butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
+        butAnalyzedNodes.setEnabled(false);
+
+        butExportTable = new JButton(IconManager.ICON_SAVE);
+        butExportTable.addActionListener(this);
+        butExportTable.setFont(iconFont);
+        butExportTable.setToolTipText(butExportTableDescr);
+        butExportTable.setBorderPainted(false);
+        butExportTable.setContentAreaFilled(false);
+        butExportTable.setFocusPainted(false);
+        butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
+        butExportTable.setEnabled(false);
+
+        butSettings = new JButton(IconManager.ICON_COG);
+        butSettings.setFont(iconFont);
+        butSettings.addActionListener(this);
+        butSettings.setToolTipText(butSettingsName);
+        butSettings.setBorderPainted(false);
+        butSettings.setContentAreaFilled(false);
+        butSettings.setFocusPainted(false);
+        butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+
+        buttonsPanelRight.add(butAnalyzedNodes);
+        buttonsPanelRight.add(butExportTable);
+        buttonsPanelRight.add(butSettings);
+        topPanel = new JPanel(new BorderLayout());
+        topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
+        topPanel.add(buttonsPanelRight, BorderLayout.EAST);
+        // topPanel.add(boxTables, BorderLayout.EAST);
+        this.add(topPanel, BorderLayout.NORTH);
         if (network == null)
             return;
         initPanel(network, noSignificant);
@@ -217,6 +325,100 @@ public class EnrichmentCytoPanel extends JPanel
         }
 */
         availableTables.add(enrichmentTable.getTitle());
+        /**
+         * Initialise the top panel design
+         */
+        JPanel buttonsPanelLeft = new JPanel();
+        BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
+        buttonsPanelLeft.setLayout(layoutLeft);
+        butFilter = new JButton(IconManager.ICON_FILTER);
+        butFilter.setFont(iconFont);
+        butFilter.addActionListener(this);
+        butFilter.setToolTipText(butFilterName);
+        butFilter.setBorderPainted(false);
+        butFilter.setContentAreaFilled(false);
+        butFilter.setFocusPainted(false);
+        butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
+        butFilter.setEnabled(false);
+
+        butDrawCharts = new JButton(chartIcon);
+        butDrawCharts.addActionListener(this);
+        butDrawCharts.setToolTipText(butDrawChartsName);
+        butDrawCharts.setBorderPainted(false);
+        butDrawCharts.setContentAreaFilled(false);
+        butDrawCharts.setFocusPainted(false);
+        butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butDrawCharts.setEnabled(false);
+
+        /**
+         * JComboBox for setting the default value of the node to be chosen for performing the query
+         */
+
+        butResetTable = new JButton(IconManager.ICON_CIRCLE_O);
+        butResetTable.setFont(iconFont);
+        butResetTable.addActionListener(this);
+        butResetTable.setToolTipText(butResetTableName);
+        butResetTable.setBorderPainted(false);
+        butResetTable.setContentAreaFilled(false);
+        butResetTable.setFocusPainted(false);
+        butResetTable.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butResetTable.setEnabled(false);
+        // Add enrichment map button here if EnrichmentMap is loaded
+        butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
+        butEnrichmentMap.addActionListener(this);
+        butEnrichmentMap.setToolTipText(butEnrichmentMapName);
+        butEnrichmentMap.setBorderPainted(false);
+        butEnrichmentMap.setContentAreaFilled(false);
+        butEnrichmentMap.setFocusPainted(false);
+        butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
+        butEnrichmentMap.setEnabled(false);
+
+        buttonsPanelLeft.add(butFilter);
+        buttonsPanelLeft.add(butDrawCharts);
+        buttonsPanelLeft.add(butResetTable);
+        buttonsPanelLeft.add(butEnrichmentMap);
+
+        // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
+        JPanel buttonsPanelRight = new JPanel();
+        BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
+        buttonsPanelRight.setLayout(layoutRight);
+        butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
+        butAnalyzedNodes.addActionListener(this);
+        butAnalyzedNodes.setFont(iconFont);
+        butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
+        butAnalyzedNodes.setBorderPainted(false);
+        butAnalyzedNodes.setContentAreaFilled(false);
+        butAnalyzedNodes.setFocusPainted(false);
+        butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
+        butAnalyzedNodes.setEnabled(false);
+
+        butExportTable = new JButton(IconManager.ICON_SAVE);
+        butExportTable.addActionListener(this);
+        butExportTable.setFont(iconFont);
+        butExportTable.setToolTipText(butExportTableDescr);
+        butExportTable.setBorderPainted(false);
+        butExportTable.setContentAreaFilled(false);
+        butExportTable.setFocusPainted(false);
+        butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
+        butExportTable.setEnabled(false);
+
+        butSettings = new JButton(IconManager.ICON_COG);
+        butSettings.setFont(iconFont);
+        butSettings.addActionListener(this);
+        butSettings.setToolTipText(butSettingsName);
+        butSettings.setBorderPainted(false);
+        butSettings.setContentAreaFilled(false);
+        butSettings.setFocusPainted(false);
+        butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+
+        buttonsPanelRight.add(butAnalyzedNodes);
+        buttonsPanelRight.add(butExportTable);
+        buttonsPanelRight.add(butSettings);
+        topPanel = new JPanel(new BorderLayout());
+        topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
+        topPanel.add(buttonsPanelRight, BorderLayout.EAST);
+        // topPanel.add(boxTables, BorderLayout.EAST);
+        this.add(topPanel, BorderLayout.NORTH);
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
             JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria.",
@@ -230,87 +432,13 @@ public class EnrichmentCytoPanel extends JPanel
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
         } else {
-            JPanel buttonsPanelLeft = new JPanel();
-            BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
-            buttonsPanelLeft.setLayout(layoutLeft);
-            butFilter = new JButton(IconManager.ICON_FILTER);
-            butFilter.setFont(iconFont);
-            butFilter.addActionListener(this);
-            butFilter.setToolTipText(butFilterName);
-            butFilter.setBorderPainted(false);
-            butFilter.setContentAreaFilled(false);
-            butFilter.setFocusPainted(false);
-            butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
 
-            butDrawCharts = new JButton(chartIcon);
-            butDrawCharts.addActionListener(this);
-            butDrawCharts.setToolTipText(butDrawChartsName);
-            butDrawCharts.setBorderPainted(false);
-            butDrawCharts.setContentAreaFilled(false);
-            butDrawCharts.setFocusPainted(false);
-            butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
-
-            /**
-             * JComboBox for setting the default value of the node to be chosen for performing the query
-             */
-            
-            butResetTable = new JButton(IconManager.ICON_CIRCLE_O);
-            butResetTable.setFont(iconFont);
-            butResetTable.addActionListener(this);
-            butResetTable.setToolTipText(butResetTableName);
-            butResetTable.setBorderPainted(false);
-            butResetTable.setContentAreaFilled(false);
-            butResetTable.setFocusPainted(false);
-            butResetTable.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
-
-            // Add enrichment map button here if EnrichmentMap is loaded
-            butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
-            butEnrichmentMap.addActionListener(this);
-            butEnrichmentMap.setToolTipText(butEnrichmentMapName);
-            butEnrichmentMap.setBorderPainted(false);
-            butEnrichmentMap.setContentAreaFilled(false);
-            butEnrichmentMap.setFocusPainted(false);
-            butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
-
-            buttonsPanelLeft.add(butFilter);
-            buttonsPanelLeft.add(butDrawCharts);
-            buttonsPanelLeft.add(butResetTable);
-            buttonsPanelLeft.add(butEnrichmentMap);
-
-            // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
-            JPanel buttonsPanelRight = new JPanel();
-            BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
-            buttonsPanelRight.setLayout(layoutRight);
-            butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
-            butAnalyzedNodes.addActionListener(this);
-            butAnalyzedNodes.setFont(iconFont);
-            butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
-            butAnalyzedNodes.setBorderPainted(false);
-            butAnalyzedNodes.setContentAreaFilled(false);
-            butAnalyzedNodes.setFocusPainted(false);
-            butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
-
-            butExportTable = new JButton(IconManager.ICON_SAVE);
-            butExportTable.addActionListener(this);
-            butExportTable.setFont(iconFont);
-            butExportTable.setToolTipText(butExportTableDescr);
-            butExportTable.setBorderPainted(false);
-            butExportTable.setContentAreaFilled(false);
-            butExportTable.setFocusPainted(false);
-            butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
-
-            butSettings = new JButton(IconManager.ICON_COG);
-            butSettings.setFont(iconFont);
-            butSettings.addActionListener(this);
-            butSettings.setToolTipText(butSettingsName);
-            butSettings.setBorderPainted(false);
-            butSettings.setContentAreaFilled(false);
-            butSettings.setFocusPainted(false);
-            butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
-
-            buttonsPanelRight.add(butAnalyzedNodes);
-            buttonsPanelRight.add(butExportTable);
-            buttonsPanelRight.add(butSettings);
+            butFilter.setEnabled(true);
+            butDrawCharts.setEnabled(true);
+            butExportTable.setEnabled(false);
+            butAnalyzedNodes.setEnabled(false);
+            butResetTable.setEnabled(false);
+            butEnrichmentMap.setEnabled(false);
 
             JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
 
@@ -323,11 +451,7 @@ public class EnrichmentCytoPanel extends JPanel
             Font labelFont = labelRows.getFont();
             labelRows.setFont(labelFont.deriveFont((float)(labelFont.getSize() * 0.8)));
 
-            topPanel = new JPanel(new BorderLayout());
-            topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
-            topPanel.add(buttonsPanelRight, BorderLayout.EAST);
-            // topPanel.add(boxTables, BorderLayout.EAST);
-            this.add(topPanel, BorderLayout.NORTH);
+
 
             mainPanel = new JPanel(new BorderLayout());
             scrollPane = new JScrollPane(currentTable);
