@@ -69,21 +69,21 @@ public class CyActivator extends AbstractCyActivator {
 		// properties.put(ServiceProperties.ENABLE_FOR, "networkAndView");
 		System.out.println("in the cyActivator file before register service");
 
-		TaskFactory myFactory = new EnrichmentTaskFactory(registrar); // Implementation
-		registerService(context,
-			myFactory,
-			TaskFactory.class, // Interface
-			properties); // Service properties
+
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,false,null,null);
-		registrar.registerService(panel, CytoPanelComponent.class,new Properties());
-		registrar.registerService(panel, RowsSetListener.class,new Properties());
-		registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null,null);
+		registrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
+		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
+		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 		if (cytoPanel.getState() == CytoPanelState.HIDE)
 			cytoPanel.setState(CytoPanelState.DOCK);
 		cytoPanel.setSelectedIndex(
 				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-
+		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
+		registerService(context,
+				myFactory,
+				TaskFactory.class, // Interface
+				properties); // Service properties
 	}
 }

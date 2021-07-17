@@ -30,7 +30,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	private static int MAX_NUMBER_OF_NODES = 2000;
 	private boolean isLargeNetwork;
 	public CyTable enrichmentTable = null;
-
+	CytoPanelComponent2 enrichmentPanel=null;
 	private boolean show = true;
 
 	@Tunable(description = "Select nodes",
@@ -43,6 +43,19 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	final Map<String, Long> stringNodesMap;
 
+	public EnrichmentTask(final CyServiceRegistrar registrar, CytoPanelComponent2 enrichmentPanel) {
+		super();
+		this.noSignificant = false;
+		this.registrar = registrar;
+		applicationManager = registrar.getService(CyApplicationManager.class);
+		this.network = applicationManager.getCurrentNetwork();
+		this.networkView = applicationManager.getCurrentNetworkView();
+		nodesToFilterBy = new ListMultipleSelection<CyNode>(network.getNodeList());
+		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
+		isLargeNetwork = false;
+		stringNodesMap = new HashMap<>();
+		this.enrichmentPanel = enrichmentPanel;
+	}
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
 		super();
@@ -178,10 +191,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(show){
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
-			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
-			registrar.registerService(panel,CytoPanelComponent.class,new Properties());
-			registrar.registerService(panel, RowsSetListener.class,new Properties());
-			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+			if(enrichmentPanel==null){
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+			}
+			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
+			registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
+			registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
 				cytoPanel.setState(CytoPanelState.DOCK);
 			cytoPanel.setSelectedIndex(

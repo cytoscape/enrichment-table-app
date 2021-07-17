@@ -1,5 +1,6 @@
 package org.nrnb.gsoc.enrichment.utils;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.cytoscape.model.*;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.property.AbstractConfigDirPropsReader;
@@ -50,7 +51,12 @@ public class ModelUtils {
     // Network information
     public static String CONFIDENCE = "confidence score";
     public static String NET_ENRICHMENT_SETTINGS = "enrichmentSettings";
-
+    public static String NET_ORGANISMS = "organisms";
+    public static String NET_GENE_ID_COLUMN = "Gene ID Column";
+    public static String NET_NO_IEA = "No IEA";
+    public static String NET_DOMAIN_SCOPE = "Domain Scope";
+    public static String NET_SIGNIFICANCE_THRESHOLD_METHOD = "Significance Threshold Method";
+    public static String NET_BACKGROUND = "Background";
 
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
@@ -144,11 +150,11 @@ public class ModelUtils {
         }
     }
 
-    public static List<String> getProfilerColumnNames(CyTable nodeTable) {
-        List<String> profilerColumnNames = new ArrayList<String>();
+    public static List<CyColumn> getProfilerColumn(CyTable nodeTable) {
+        List<CyColumn> profilerColumnNames = new ArrayList<CyColumn>();
         for (CyColumn col : nodeTable.getColumns()) {
             if (col.getType().equals(String.class)) {
-                profilerColumnNames.add(col.getName());
+                profilerColumnNames.add(col);
             }
         }
         return profilerColumnNames;
@@ -473,6 +479,136 @@ public class ModelUtils {
             //System.out.println(currTerm.getDescription());
         }
         return results;
+    }
+
+    //Network information getters and setters
+    public static void setNetOrganism(CyNetwork network, String species) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_ORGANISMS);
+        network.getRow(network).set(NET_ORGANISMS, species);
+    }
+
+    /**
+     *
+     * @param network
+     * @return Column to be chosen for fetching GeneID
+     */
+    public static String getNetGeneIDColumn(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_ORGANISMS) == null)
+            return null;
+        return network.getRow(network).get(NET_ORGANISMS, String.class);
+    }
+
+    /**
+     * Sets the column which is to be used to choose GeneID
+     * @param network
+     * @param column
+     */
+
+    public static void setNetGeneIDColumn(CyNetwork network, String column) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
+        network.getRow(network).set(NET_GENE_ID_COLUMN, column);
+    }
+
+    public static CyColumn getNetOrganism(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+            return null;
+        return network.getRow(network).get(NET_GENE_ID_COLUMN, CyColumn.class);
+    }
+
+    /**
+     * background setter
+     */
+    public static void setNetBackground(CyNetwork network, List<String> background) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_BACKGROUND);
+        network.getRow(network).set(NET_BACKGROUND, background);
+    }
+    /**
+     * background getter
+     */
+    public static List<String> getNetBackground(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+            return null;
+        return network.getRow(network).get(NET_BACKGROUND, List.class);
+    }
+
+
+    /**
+     * significance_threshold_method setter
+     */
+    public static void setNetSignificanceThresholdMethod(CyNetwork network, String significanceThresholdMethod) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
+        network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, significanceThresholdMethod);
+    }
+    /**
+     * significance_threshold_method getter
+     */
+    public static String getNetSignificanceThresholdMethod(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+            return null;
+        return network.getRow(network).get(NET_SIGNIFICANCE_THRESHOLD_METHOD, String.class);
+    }
+
+    /**
+     * domain_scope setter
+     */
+    public static void setNetDomainScope(CyNetwork network, Boolean domainScope) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
+        network.getRow(network).set(NET_DOMAIN_SCOPE, domainScope);
+    }
+    /**
+     * no_iea getter
+     */
+    public static String getNetDomainScope(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+            return null;
+        return network.getRow(network).get(NET_DOMAIN_SCOPE, String.class);
+    }
+
+    /**
+     * no_iea setter
+     */
+    public static void setNetNoIEA(CyNetwork network, Boolean noIEA) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_NO_IEA);
+        network.getRow(network).set(NET_NO_IEA, noIEA);
+    }
+    /**
+     * no_iea getter
+     */
+    public static Boolean getNetNoIEA(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_NO_IEA) == null)
+            return null;
+        return network.getRow(network).get(NET_NO_IEA, Boolean.class);
+    }
+
+    /**
+     * measure_underrepresentation setter
+     */
+    public static void setNetMeasureUnderrepresentation(CyNetwork network, Boolean allResults) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
+        network.getRow(network).set(NET_GENE_ID_COLUMN, allResults);
+    }
+    /**
+     * measure_underrepresentation getter
+     */
+    public static Boolean getNetDoesMeasureUnderrepresentation(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+            return null;
+        return network.getRow(network).get(NET_GENE_ID_COLUMN, Boolean.class);
+    }
+    /**
+     * all_results setter
+     */
+    public static void setNetAllResults(CyNetwork network, Boolean allResults) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
+        network.getRow(network).set(NET_GENE_ID_COLUMN, allResults);
+    }
+    /**
+     * all_results getter
+     */
+    public static Boolean getNetAllResults(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+            return null;
+        return network.getRow(network).get(NET_GENE_ID_COLUMN, Boolean.class);
     }
 
     public static <T> T getResultsFromJSON(JSONObject json, Class<? extends T> clazz) {

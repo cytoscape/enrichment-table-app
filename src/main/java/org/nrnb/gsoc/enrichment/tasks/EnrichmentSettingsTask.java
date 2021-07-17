@@ -38,7 +38,7 @@ public class EnrichmentSettingsTask extends AbstractTask {
             longDescription="Column to choose for getting GeneIDs.",
             exampleStringValue = "LABEL",
             params="lookup=begins", groups={"Query Defaults (take effect after restarting Cytoscape)"}, gravity=10.0)
-    public ListSingleSelection<String> geneID;
+    public ListSingleSelection<CyColumn> geneID;
     final CyTable nodeTable;
     public Map<String,String> scientificNametoID;
     public EnrichmentSettingsTask(CyServiceRegistrar registrar) {
@@ -47,10 +47,11 @@ public class EnrichmentSettingsTask extends AbstractTask {
         this.network = applicationManager.getCurrentNetwork();
         nodeTable = network.getDefaultNodeTable();
         enrichmentSettings = new EnrichmentSettings(registrar);
-        organism = new ListSingleSelection<String>(ModelUtils.getProfilerColumnNames(nodeTable));
+        geneID = new ListSingleSelection<CyColumn>(ModelUtils.getProfilerColumn(nodeTable));
         scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
-        geneID = new ListSingleSelection<String>(ModelUtils.getOrganismsName(scientificNametoID));
+        organism   = new ListSingleSelection<String>(ModelUtils.getOrganismsName(scientificNametoID));
     }
+    //user sets the cycol -> update default -> the run the query
     @Override
     public void run(TaskMonitor monitor) throws Exception {
         monitor.setTitle("Enrichment settings");
