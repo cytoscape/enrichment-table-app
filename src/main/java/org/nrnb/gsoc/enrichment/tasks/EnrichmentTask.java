@@ -30,7 +30,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	private static int MAX_NUMBER_OF_NODES = 2000;
 	private boolean isLargeNetwork;
 	public CyTable enrichmentTable = null;
-	CytoPanelComponent2 enrichmentPanel=null;
+	EnrichmentCytoPanel enrichmentPanel=null;
 	private boolean show = true;
 
 	@Tunable(description = "Select nodes",
@@ -54,7 +54,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
 		isLargeNetwork = false;
 		stringNodesMap = new HashMap<>();
-		this.enrichmentPanel = enrichmentPanel;
+		this.enrichmentPanel = (EnrichmentCytoPanel) enrichmentPanel;
 	}
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
@@ -193,6 +193,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			System.out.println("Show enrichment panel");
 			if(enrichmentPanel==null){
 				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+			} else{
+				enrichmentPanel.setEnrichmentTable(enrichmentTable);
 			}
 			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
 			registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
