@@ -59,6 +59,7 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butAnalyzedNodes;
     JButton butExportTable;
     JButton butFilter;
+    JButton butRunProfiler;
     JButton butEnrichmentMap;
     JMenuItem menuItemReset;
     JPopupMenu popupMenu;
@@ -82,6 +83,7 @@ public class EnrichmentCytoPanel extends JPanel
     final String butEnrichmentMapName = "Create EnrichmentMap";
     final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
+    final String butRunProfilerName = "Filter enrichment table";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
@@ -195,23 +197,22 @@ public class EnrichmentCytoPanel extends JPanel
 
     public void initPanel(boolean noSignificant) {
         CyNetwork network = applicationManager.getCurrentNetwork();
-/*
-        for(CyRow row: rows){
-            Map<String,Object> mp = row.getAllValues();
-            for (Map.Entry<String,Object> entry : mp.entrySet())   {
-                System.out.println(entry.getKey());
-                System.out.println(entry.getValue());
-            }
-
-            System.out.println(mp.size());
-        }
-*/
         /**
          * Initialise the top panel design
          */
         JPanel buttonsPanelLeft = new JPanel();
         BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
         buttonsPanelLeft.setLayout(layoutLeft);
+
+        butRunProfiler = new JButton(IconManager.ICON_REFRESH);
+        butRunProfiler.setFont(iconFont);
+        butRunProfiler.addActionListener(this);
+        butRunProfiler.setToolTipText(butRunProfilerName);
+        butRunProfiler.setBorderPainted(false);
+        butRunProfiler.setContentAreaFilled(false);
+        butRunProfiler.setFocusPainted(false);
+        butRunProfiler.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
+
         butFilter = new JButton(IconManager.ICON_FILTER);
         butFilter.setFont(iconFont);
         butFilter.addActionListener(this);
@@ -254,7 +255,9 @@ public class EnrichmentCytoPanel extends JPanel
         butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
         butEnrichmentMap.setEnabled(false);
 
+        buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
+
         buttonsPanelLeft.add(butDrawCharts);
         buttonsPanelLeft.add(butResetTable);
         buttonsPanelLeft.add(butEnrichmentMap);
