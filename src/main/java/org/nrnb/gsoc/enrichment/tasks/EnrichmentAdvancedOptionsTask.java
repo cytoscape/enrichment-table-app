@@ -8,7 +8,7 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.*;
 import org.cytoscape.work.util.ListSingleSelection;
-import org.nrnb.gsoc.enrichment.ui.EnrichmentSettings;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentSettings;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.ArrayList;
@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ighosh98
+ * @description Creates the Advanced Options Panel
+ */
 public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyServiceRegistrar registrar;
     final CyApplicationManager applicationManager;
@@ -36,7 +40,8 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         this.network = applicationManager.getCurrentNetwork();
         nodeTable = network.getDefaultNodeTable();
         enrichmentSettings = new EnrichmentSettings(registrar,nodeTable);
-     }
+        scientificNametoID = ModelUtils.getOrganisms();
+    }
 
     //user sets the cycol -> update default -> the run the query
     @Override

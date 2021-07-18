@@ -24,6 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ighosh98
+ * @description Creates the settings panel
+ */
 public class EnrichmentSettings implements ActionListener, RequestsUIHelper {
     private final CyApplicationManager applicationManager;
     private CyServiceRegistrar registrar;
@@ -78,7 +82,7 @@ public class EnrichmentSettings implements ActionListener, RequestsUIHelper {
         applicationManager = registrar.getService(CyApplicationManager.class);
         this.network = applicationManager.getCurrentNetwork();
         geneID = new ListSingleSelection<CyColumn>(ModelUtils.getProfilerColumn(nodeTable));
-        scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
+        scientificNametoID = ModelUtils.getOrganisms();
         organism   = new ListSingleSelection<String>(ModelUtils.getOrganismsName(scientificNametoID));
 
     }

@@ -3,6 +3,9 @@ package org.nrnb.gsoc.enrichment.utils;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * @author ighosh98
+ */
 public abstract class IconUtils {
 
     // stringApp Icon

@@ -18,6 +18,9 @@ import org.json.simple.JSONArray;
 import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * @author ighosh98
+ */
 public class ModelUtils {
 
     // Namespaces
@@ -165,7 +168,6 @@ public class ModelUtils {
         if(scientificNametoID!=null){
             return scientificNametoID;
         }
-        List<String> allSpecies = new ArrayList<String>();
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
         JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
         JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
@@ -176,8 +178,6 @@ public class ModelUtils {
                 scientificNametoID.put(jsonArrayScientificName.get(i).toString(),jsonArrayID.get(i).toString());
             }
         }
-
-
         return scientificNametoID;
     }
     public static List<String> getOrganismsName(Map<String,String> scientificNametoID ) {
@@ -331,11 +331,6 @@ public class ModelUtils {
                 toTable.getRow(to.getSUID()).set(col.getName() + ".copy", v);
                 continue;
             }
-            // TODO: Is it OK to overwrite interaction type?
-            //if (from.getClass().equals(CyEdge.class) && col.getName().equals(CyRootNetwork.SHARED_INTERACTION))
-            //	continue;
-            //if (from.getClass().equals(CyEdge.class) && col.getName().equals(CyEdge.INTERACTION))
-            //	continue;
             Object v = fromTable.getRow(from.getSUID()).getRaw(col.getName());
             toTable.getRow(to.getSUID()).set(col.getName(), v);
         }
@@ -518,6 +513,9 @@ public class ModelUtils {
         return network.getRow(network).get(NET_GENE_ID_COLUMN, CyColumn.class);
     }
 
+    /**
+     * @description @see <a href="https://biit.cs.ut.ee/gprofiler/page/apis"> API Documentation </a> for gProfiler for more details:
+     */
     /**
      * background setter
      */

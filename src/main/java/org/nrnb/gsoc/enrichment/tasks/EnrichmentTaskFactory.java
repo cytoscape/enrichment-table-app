@@ -7,7 +7,9 @@ import org.cytoscape.work.AbstractTaskFactory;
 import org.cytoscape.work.TaskIterator;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
-
+/**
+ * @author ighosh98
+ */
 public class EnrichmentTaskFactory extends AbstractTaskFactory {
 
 	final CyServiceRegistrar registrar;

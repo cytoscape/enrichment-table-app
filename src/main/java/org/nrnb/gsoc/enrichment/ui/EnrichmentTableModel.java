@@ -10,6 +10,10 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+/**
+ * @author ighosh98
+ * @description This class defines how the data fetched from the API request will be stored and displayed to the customer
+ */
 public class EnrichmentTableModel extends AbstractTableModel {
     private String[] columnNames;
     private CyTable cyTable;

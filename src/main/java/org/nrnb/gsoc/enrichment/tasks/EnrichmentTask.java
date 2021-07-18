@@ -21,6 +21,10 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.*;
 
+/**
+ * @author ighosh98
+ * @description Runs the gProfiler task to fetch data and populate the table
+ */
 public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	final CyServiceRegistrar registrar;
 	final CyApplicationManager applicationManager;

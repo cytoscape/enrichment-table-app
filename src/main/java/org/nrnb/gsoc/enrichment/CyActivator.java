@@ -19,6 +19,7 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.osgi.framework.BundleContext;
 
 /**
+ * @author ighosh98
  * {@code CyActivator} is a class that is a starting point for OSGi bundles.
  * 
  * A quick overview of OSGi: The common currency of OSGi is the <i>service</i>.
@@ -71,7 +72,6 @@ public class CyActivator extends AbstractCyActivator {
 		// view exists.
 		// properties.put(ServiceProperties.ENABLE_FOR, "networkAndView");
 		System.out.println("in the cyActivator file before register service");
-		Map<String,String> scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
 
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);

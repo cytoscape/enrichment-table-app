@@ -12,6 +12,9 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
+/**
+ * @author ighosh98
+ */
 public class ExportEnrichmentTableTaskFactory extends AbstractNetworkTaskFactory {
     final CyServiceRegistrar registrar;
     final CytoPanel cytoPanel;

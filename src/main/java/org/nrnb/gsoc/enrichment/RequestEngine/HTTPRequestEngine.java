@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * For handling API requests to gProfiler. The api firing request must be a task which is run on the task thread
+ * @author ighosh98
+ * @description Handles all the API requests to gProfiler. The api firing request must be a task which is run on the task thread
  */
 public class HTTPRequestEngine {
 

@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author ighosh98
+ */
 public class TextIcon implements Icon {
 
     private final Color TRANSPARENT_COLOR = new Color(255, 255, 255, 0);

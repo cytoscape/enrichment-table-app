@@ -5,9 +5,26 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author ighosh
+ * @author ighosh98
+ * @description Class that structures and stores data fetched from making the API request to gProfiler's server
  */
 public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
+
+    /**
+     * @description Data fields to be fetched from GOst API response
+     * source
+     * goshv
+     * significant
+     * effective_domain_size -> total number of genes
+     * intersection_size: number of genes in the query that are annotated to the corresponding term
+     * term_size
+     * query_size
+     * precision
+     * recall
+     * source_order -> might be used to generate manhattan plots
+     * group_id
+     * intersections -> list of actual gene symbols
+     */
     String name;
     String description;
     String source;
@@ -93,20 +110,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         }
     }
 
-    /**
-     * source
-     * goshv
-     * significant
-     * effective_domain_size -> total number of genes
-     * intersection_size: number of genes in the query that are annotated to the corresponding term
-     * term_size
-     * query_size
-     * precision
-     * recall
-     * source_order -> might be used to generate manhattan plots
-     * group_id
-     * intersections -> list of actual gene symbols
-     */
+
     public static final int nodeSUIDColumn = 8;
     public static final int chartColumnCol = 1;
 

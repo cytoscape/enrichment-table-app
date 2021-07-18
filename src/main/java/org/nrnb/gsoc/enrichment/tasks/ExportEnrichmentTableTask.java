@@ -21,6 +21,10 @@ import org.cytoscape.work.util.ListMultipleSelection;
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
+/**
+ * @author ighosh98
+ * @description Allows users to save the file to a given location with a specific file name
+ */
 public class ExportEnrichmentTableTask extends AbstractTask {
 
     private EnrichmentCytoPanel enrichmentPanel;
