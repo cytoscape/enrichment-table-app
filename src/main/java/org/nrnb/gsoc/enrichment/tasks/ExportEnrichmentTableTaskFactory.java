@@ -39,7 +39,7 @@ public class ExportEnrichmentTableTaskFactory extends AbstractNetworkTaskFactory
     @Override
     public TaskIterator createTaskIterator(CyNetwork network) {
         return new TaskIterator(new ExportEnrichmentTableTask(registrar, network, panel,
-                ModelUtils.getEnrichmentTable(registrar, network, TermSource.ALL.getTable()), false));
+                ModelUtils.getEnrichmentTable(registrar, network, TermSource.ALL.getTable())));
     }
 
 }
