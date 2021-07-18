@@ -5,7 +5,6 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.AbstractTaskFactory;
 import org.cytoscape.work.TaskIterator;
-import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
 /**
  * @author ighosh98

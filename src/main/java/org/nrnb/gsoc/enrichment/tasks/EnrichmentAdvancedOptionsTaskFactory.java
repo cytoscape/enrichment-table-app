@@ -1,6 +1,5 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
-import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.task.AbstractNetworkTaskFactory;

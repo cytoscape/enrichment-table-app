@@ -1,6 +1,5 @@
 package org.nrnb.gsoc.enrichment.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.cytoscape.model.*;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.property.AbstractConfigDirPropsReader;
@@ -13,18 +12,17 @@ import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
-import org.json.simple.JSONArray;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * @author ighosh98
+ * @description
  */
 public class ModelUtils {
 
     // Namespaces
-    public static String PROFILERDB_NAMESPACE = "stringdb";
+    public static String PROFILERDB_NAMESPACE = "gProfiler";
     public static String NAMESPACE_SEPARATOR = "::";
 
     // Node information
@@ -501,7 +499,6 @@ public class ModelUtils {
      * @param network
      * @param column
      */
-
     public static void setNetGeneIDColumn(CyNetwork network, String column) {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
         network.getRow(network).set(NET_GENE_ID_COLUMN, column);
@@ -514,8 +511,9 @@ public class ModelUtils {
     }
 
     /**
-     * @description @see <a href="https://biit.cs.ut.ee/gprofiler/page/apis"> API Documentation </a> for gProfiler for more details:
+     * @description @see <a href="https://biit.cs.ut.ee/gprofiler/page/apis"> API Documentation </a> for gProfiler for more details
      */
+
     /**
      * background setter
      */

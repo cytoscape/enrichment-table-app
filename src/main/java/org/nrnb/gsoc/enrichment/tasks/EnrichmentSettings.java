@@ -10,18 +10,13 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.swing.RequestsUIHelper;
 import org.cytoscape.work.swing.TunableUIHelper;
-import org.cytoscape.work.swing.util.UserAction;
 import org.cytoscape.work.util.BoundedDouble;
-import org.cytoscape.work.util.BoundedInteger;
 import org.cytoscape.work.util.ListSingleSelection;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

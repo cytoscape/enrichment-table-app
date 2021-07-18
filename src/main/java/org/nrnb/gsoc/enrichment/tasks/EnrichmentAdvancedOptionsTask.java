@@ -1,24 +1,17 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
 import org.cytoscape.application.CyApplicationManager;
-import org.cytoscape.application.swing.CySwingApplication;
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.*;
-import org.cytoscape.work.util.ListSingleSelection;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentSettings;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author ighosh98
- * @description Creates the Advanced Options Panel
+ * @description Creates the Advanced Options Panel for fine tuning the query
  */
 public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyServiceRegistrar registrar;
