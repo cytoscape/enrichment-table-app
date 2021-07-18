@@ -42,6 +42,7 @@ public class ModelUtils {
     // public static String TM_LINKOUT = "TextMining Linkout";
     public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
 
+    public static Map<String,String> scientificNametoID = null;
 
     public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
     public static int SECOND_SEGMENT_LENGTH = 3;
@@ -159,15 +160,17 @@ public class ModelUtils {
         }
         return profilerColumnNames;
     }
-
     // Reference: https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist/34081506
     public static Map<String,String> getOrganisms() {
+        if(scientificNametoID!=null){
+            return scientificNametoID;
+        }
         List<String> allSpecies = new ArrayList<String>();
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
         JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
         JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
         JSONArray jsonArrayID = (JSONArray) result.get("id");
-        Map<String,String> scientificNametoID = new HashMap<>();
+        scientificNametoID = new HashMap<>();
         if(jsonArrayID!=null && jsonArrayScientificName!=null){
             for(int i=0;i<jsonArrayID.size();i++){
                 scientificNametoID.put(jsonArrayScientificName.get(i).toString(),jsonArrayID.get(i).toString());

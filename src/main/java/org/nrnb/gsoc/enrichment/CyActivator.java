@@ -1,5 +1,7 @@
 package org.nrnb.gsoc.enrichment;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.cytoscape.application.swing.*;
@@ -13,6 +15,7 @@ import org.cytoscape.work.TaskFactory;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
+import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -68,7 +71,7 @@ public class CyActivator extends AbstractCyActivator {
 		// view exists.
 		// properties.put(ServiceProperties.ENABLE_FOR, "networkAndView");
 		System.out.println("in the cyActivator file before register service");
-
+		Map<String,String> scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
 
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);

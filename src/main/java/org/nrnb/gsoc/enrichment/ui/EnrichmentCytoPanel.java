@@ -3,7 +3,6 @@ package org.nrnb.gsoc.enrichment.ui;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CytoPanelComponent2;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.cytoscape.command.AvailableCommands;
 import org.cytoscape.model.*;
 import org.cytoscape.model.events.*;
 import org.cytoscape.service.util.CyServiceRegistrar;
@@ -12,11 +11,10 @@ import org.cytoscape.util.swing.IconManager;
 import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
-import org.cytoscape.work.TaskMonitor;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentSettingsTask;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTask;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
@@ -169,7 +167,7 @@ public class EnrichmentCytoPanel extends JPanel
                     tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
                             TermSource.ALL.getTable()), false)));
             } else if (e.getSource().equals(butSettings)) {
-                tm.execute(new TaskIterator(new EnrichmentSettingsTask(registrar)));
+                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
             }
         }
 

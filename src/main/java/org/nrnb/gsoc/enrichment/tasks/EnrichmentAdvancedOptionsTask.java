@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EnrichmentSettingsTask extends AbstractTask {
+public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyServiceRegistrar registrar;
     final CyApplicationManager applicationManager;
     final CyNetwork network;
@@ -28,29 +28,16 @@ public class EnrichmentSettingsTask extends AbstractTask {
             longDescription = "Unless this is set to true, these settings only apply to the current network",
             tooltip = "<html>Unless this is set to true, these settings only apply to the current network.</html>")
     public boolean makeDefault = false;
-    @Tunable(description="Organism",
-            longDescription="Default species for network queries.",
-            exampleStringValue = "Homo Sapiens",
-            params="lookup=begins", groups={"Query Defaults (take effect after restarting Cytoscape)"}, gravity=10.0)
-    public ListSingleSelection<String> organism;
-
-    @Tunable(description="Gene ID Column",
-            longDescription="Column to choose for getting GeneIDs.",
-            exampleStringValue = "LABEL",
-            params="lookup=begins", groups={"Query Defaults (take effect after restarting Cytoscape)"}, gravity=10.0)
-    public ListSingleSelection<CyColumn> geneID;
     final CyTable nodeTable;
     public Map<String,String> scientificNametoID;
-    public EnrichmentSettingsTask(CyServiceRegistrar registrar) {
+    public EnrichmentAdvancedOptionsTask(CyServiceRegistrar registrar) {
         this.registrar = registrar;
         applicationManager = registrar.getService(CyApplicationManager.class);
         this.network = applicationManager.getCurrentNetwork();
         nodeTable = network.getDefaultNodeTable();
-        enrichmentSettings = new EnrichmentSettings(registrar);
-        geneID = new ListSingleSelection<CyColumn>(ModelUtils.getProfilerColumn(nodeTable));
-        scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
-        organism   = new ListSingleSelection<String>(ModelUtils.getOrganismsName(scientificNametoID));
-    }
+        enrichmentSettings = new EnrichmentSettings(registrar,nodeTable);
+     }
+
     //user sets the cycol -> update default -> the run the query
     @Override
     public void run(TaskMonitor monitor) throws Exception {
