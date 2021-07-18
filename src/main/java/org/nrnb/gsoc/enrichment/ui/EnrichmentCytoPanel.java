@@ -411,7 +411,7 @@ public class EnrichmentCytoPanel extends JPanel
 
             butFilter.setEnabled(true);
             butDrawCharts.setEnabled(true);
-            butExportTable.setEnabled(false);
+            butExportTable.setEnabled(true);
             butAnalyzedNodes.setEnabled(false);
             butEnrichmentMap.setEnabled(false);
 
