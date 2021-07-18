@@ -135,7 +135,6 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colEffectiveDomainSizeOld = "# enriched genes";
 
     public static final String colNetworkSUID = "network.SUID";// session unique id
-    // public static final String colShowChart = "showInPieChart";
 
     public static final String colChartColor = "chart color"; // Data visualization option -> takes the enrichment table and visualize
 

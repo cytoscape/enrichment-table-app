@@ -39,9 +39,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	@Tunable(description = "Select nodes",
 			context = "nogui",
-			//tooltip = "Select the enrichment categories to show in the table",
-			//longDescription = "Select the enrichment categories to show in the table",
-			//exampleStringValue = "GO Process",
 			gravity = 1.0)
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
