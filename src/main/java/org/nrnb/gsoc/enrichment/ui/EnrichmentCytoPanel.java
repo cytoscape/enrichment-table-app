@@ -712,7 +712,7 @@ public class EnrichmentCytoPanel extends JPanel
     @Override
     public void handleEvent(SelectedNodesAndEdgesEvent event) {
         JTable table = enrichmentTables.get(showTable);
-        if (table.getSelectedRow() > -1 &&
+        if (table!=null && table.getSelectedRow() > -1 &&
                 table.getSelectedColumnCount() == 1 &&
                 table.getSelectedColumn() != EnrichmentTerm.chartColumnCol)
             return;
