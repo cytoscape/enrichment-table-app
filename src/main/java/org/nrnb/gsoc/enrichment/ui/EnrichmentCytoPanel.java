@@ -145,12 +145,9 @@ public class EnrichmentCytoPanel extends JPanel
         }
         else if (e.getSource().equals(butExportTable)) {
             if (network != null) {
-                if (tableModel.getAllRowCount() != tableModel.getRowCount())
-                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
-                            TermSource.ALL.getTable()), true)));
-                else
-                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
-                            TermSource.ALL.getTable()), false)));
+                if(enrichmentTable!=null) {
+                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
+                }
             }
         } else if (e.getSource().equals(menuItemReset)) {
             // System.out.println("reset color now");
@@ -161,12 +158,8 @@ public class EnrichmentCytoPanel extends JPanel
             if (table.getSelectedRow() > -1) {
                 resetColor(table.getSelectedRow());
             } else if(e.getSource().equals(butExportTable)){
-                if (tableModel.getAllRowCount() != tableModel.getRowCount())
-                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
-                            TermSource.ALL.getTable()), true)));
-                else
-                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, ModelUtils.getEnrichmentTable(registrar, network,
-                            TermSource.ALL.getTable()), false)));
+                if (enrichmentTable!=null)
+                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
             } else if (e.getSource().equals(butSettings)) {
                 tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
             }
@@ -411,7 +404,7 @@ public class EnrichmentCytoPanel extends JPanel
 
             butFilter.setEnabled(true);
             butDrawCharts.setEnabled(true);
-            butExportTable.setEnabled(false);
+            butExportTable.setEnabled(true);
             butAnalyzedNodes.setEnabled(false);
             butEnrichmentMap.setEnabled(false);
 
