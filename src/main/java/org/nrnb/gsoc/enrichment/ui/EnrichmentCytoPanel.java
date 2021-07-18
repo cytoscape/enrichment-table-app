@@ -139,8 +139,10 @@ public class EnrichmentCytoPanel extends JPanel
     public void actionPerformed(ActionEvent e) {
         CyNetwork network = applicationManager.getCurrentNetwork();
         TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
-
-        if (e.getSource().equals(butResetTable)) {
+        if (e.getSource().equals(butRunProfiler)) {
+            tm.execute(new TaskIterator(new EnrichmentTask(registrar,this)));
+        }
+        else if (e.getSource().equals(butResetTable)) {
             tm.execute(new TaskIterator(new EnrichmentTask(registrar)));
         } else if (e.getSource().equals(butExportTable)) {
             if (network != null) {
@@ -376,6 +378,7 @@ public class EnrichmentCytoPanel extends JPanel
         butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
         butEnrichmentMap.setEnabled(false);
 
+        buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
         buttonsPanelLeft.add(butDrawCharts);
         buttonsPanelLeft.add(butResetTable);
