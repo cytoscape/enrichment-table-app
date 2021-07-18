@@ -69,12 +69,9 @@ public class HTTPRequestEngine {
             response = httpclient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
-//            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode!=200 && statusCode!=202){
-//            monitor.showMessage(TaskMonitor.Level.ERROR, "Got "+
-//                    response.getStatusLine().getStatusCode()+" code from server");
             return null;
         }
         JSONObject jsonResponse=null;
@@ -82,10 +79,8 @@ public class HTTPRequestEngine {
             jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
         } catch (IOException e) {
             e.printStackTrace();
-//            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         } catch (ParseException e) {
             e.printStackTrace();
-//            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
         return jsonResponse;
     }

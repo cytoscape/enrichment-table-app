@@ -65,9 +65,10 @@ public class EnrichmentCytoPanel extends JPanel
     JPopupMenu popupMenu;
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
-    /**
-     * TODO: Quick settings options -> Drop down to select column and auto complete species
-     */
+
+
+     // TODO: Quick settings options -> Drop down to select column and auto complete species
+
 
     private static final Icon chartIcon = new ImageIcon(
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
@@ -307,17 +308,6 @@ public class EnrichmentCytoPanel extends JPanel
         // Check if values are being received correctly
         List<CyRow> rows = enrichmentTable.getAllRows();
         System.out.println(rows.size());
-/*
-        for(CyRow row: rows){
-            Map<String,Object> mp = row.getAllValues();
-            for (Map.Entry<String,Object> entry : mp.entrySet())   {
-                System.out.println(entry.getKey());
-                System.out.println(entry.getValue());
-            }
-
-            System.out.println(mp.size());
-        }
-*/
         availableTables.add(enrichmentTable.getTitle());
         /**
          * Initialise the top panel design

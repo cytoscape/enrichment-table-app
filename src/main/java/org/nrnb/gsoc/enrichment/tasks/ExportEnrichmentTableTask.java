@@ -29,16 +29,23 @@ public class ExportEnrichmentTableTask extends AbstractTask {
 
     private EnrichmentCytoPanel enrichmentPanel;
     private CyTable selectedTable;
+    @Tunable(description = "Select tables to export", gravity = 1.0)
+    public ListMultipleSelection<String> availableTables = new ListMultipleSelection<String>();;
+    private Set<CyTable> enrichmentTables;
 
     @Tunable(description = "Save Table as", params = "input=false",
             tooltip="<html>Note: for convenience spaces are replaced by underscores.</html>", gravity = 2.0)
-    public File fileName = null;
-
+    public File prefix = null;
+    @Tunable(description = "Filtered terms only",
+            longDescription = "Save only the enrichment terms after filtering.",
+            exampleStringValue = "false", gravity = 3.0)
+    public boolean filtered = false;
     final CyServiceRegistrar registrar;
     public ExportEnrichmentTableTask(CyServiceRegistrar registrar, CyNetwork network, EnrichmentCytoPanel panel, CyTable table, boolean filtered) {
         this.registrar = registrar;
         this.enrichmentPanel = panel;
         this.selectedTable = table;
+        this.filtered = filtered;
     }
 
     @Override
@@ -46,8 +53,8 @@ public class ExportEnrichmentTableTask extends AbstractTask {
         taskMonitor.setTitle("Export gProfiler Enrichment table");
         ExportTableTaskFactory exportTF = registrar.getService(ExportTableTaskFactory.class);
 
-        if (selectedTable != null && fileName != null) {
-            File file = fileName;
+        if (selectedTable != null && prefix != null) {
+            File file = new File(prefix.getAbsolutePath()+trimmedTable(selectedTable.getTitle()));
             if (enrichmentPanel != null) {
                 selectedTable = enrichmentPanel.getFilteredTable();
             }
@@ -56,6 +63,9 @@ public class ExportEnrichmentTableTask extends AbstractTask {
             TaskIterator ti = exportTF.createTaskIterator(selectedTable, file);
             insertTasksAfterCurrentTask(ti);
         }
+    }
+    private String trimmedTable(String table) {
+        return table.substring("STRING Enrichment: ".length()).replace(' ','_');
     }
 
     @ProvidesTitle
