@@ -56,7 +56,6 @@ public class EnrichmentCytoPanel extends JPanel
     JLabel labelRows;
     JButton butSettings;
     JButton butDrawCharts;
-    JButton butAnalyzedNodes;
     JButton butExportTable;
     JButton butFilter;
     JButton butRunProfiler;
@@ -80,9 +79,9 @@ public class EnrichmentCytoPanel extends JPanel
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butFilterName = "Filter enrichment table";
     final String butDrawChartsName = "Draw charts using default color palette";
-   // final String butResetTableName = "Reset result table";
+    // final String butResetTableName = "Reset result table";
     final String butEnrichmentMapName = "Create EnrichmentMap";
-    final String butAnalyzedNodesName = "Select all analyzed nodes";
+    // final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Filter enrichment table";
     private boolean noSignificant;
@@ -251,15 +250,6 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelRight = new JPanel();
         BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
         buttonsPanelRight.setLayout(layoutRight);
-        butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
-        butAnalyzedNodes.addActionListener(this);
-        butAnalyzedNodes.setFont(iconFont);
-        butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
-        butAnalyzedNodes.setBorderPainted(false);
-        butAnalyzedNodes.setContentAreaFilled(false);
-        butAnalyzedNodes.setFocusPainted(false);
-        butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
-        butAnalyzedNodes.setEnabled(false);
 
         butExportTable = new JButton(IconManager.ICON_SAVE);
         butExportTable.addActionListener(this);
@@ -280,7 +270,6 @@ public class EnrichmentCytoPanel extends JPanel
         butSettings.setFocusPainted(false);
         butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
-        buttonsPanelRight.add(butAnalyzedNodes);
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butSettings);
         topPanel = new JPanel(new BorderLayout());
@@ -351,15 +340,6 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelRight = new JPanel();
         BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
         buttonsPanelRight.setLayout(layoutRight);
-        butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
-        butAnalyzedNodes.addActionListener(this);
-        butAnalyzedNodes.setFont(iconFont);
-        butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
-        butAnalyzedNodes.setBorderPainted(false);
-        butAnalyzedNodes.setContentAreaFilled(false);
-        butAnalyzedNodes.setFocusPainted(false);
-        butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
-        butAnalyzedNodes.setEnabled(false);
 
         butExportTable = new JButton(IconManager.ICON_SAVE);
         butExportTable.addActionListener(this);
@@ -380,7 +360,6 @@ public class EnrichmentCytoPanel extends JPanel
         butSettings.setFocusPainted(false);
         butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
-        buttonsPanelRight.add(butAnalyzedNodes);
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butSettings);
         topPanel = new JPanel(new BorderLayout());
@@ -405,7 +384,6 @@ public class EnrichmentCytoPanel extends JPanel
             butFilter.setEnabled(true);
             butDrawCharts.setEnabled(true);
             butExportTable.setEnabled(true);
-            butAnalyzedNodes.setEnabled(false);
             butEnrichmentMap.setEnabled(false);
 
             JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
