@@ -59,6 +59,7 @@ public class ModelUtils {
     public static String NET_DOMAIN_SCOPE = "Domain Scope";
     public static String NET_SIGNIFICANCE_THRESHOLD_METHOD = "Significance Threshold Method";
     public static String NET_BACKGROUND = "Background";
+    public static String NET_USER_THRESHOLD = "User Threshold";
 
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
@@ -530,6 +531,22 @@ public class ModelUtils {
         return network.getRow(network).get(NET_BACKGROUND, List.class);
     }
 
+    /**
+     * user_threshold setter
+     */
+    public static void setNetUserThreshold(CyNetwork network, Double userThreshold) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), Double.class, NET_USER_THRESHOLD);
+        network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, userThreshold);
+    }
+    /**
+     * significance_threshold_method getter
+     */
+    public static Double getNetUserThreshold(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+            return null;
+        return network.getRow(network).get(NET_USER_THRESHOLD, Double.class);
+    }
+
 
     /**
      * significance_threshold_method setter
@@ -550,7 +567,7 @@ public class ModelUtils {
     /**
      * domain_scope setter
      */
-    public static void setNetDomainScope(CyNetwork network, Boolean domainScope) {
+    public static void setNetDomainScope(CyNetwork network, String domainScope) {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
         network.getRow(network).set(NET_DOMAIN_SCOPE, domainScope);
     }
