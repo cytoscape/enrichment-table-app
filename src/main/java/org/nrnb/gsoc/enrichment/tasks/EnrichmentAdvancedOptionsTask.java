@@ -78,7 +78,14 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     public ListSingleSelection<CyColumn> geneID;
 
     public Map<String,String> scientificNametoID;
+    /**
+     * evidence codes -> Hard code it as true
+     */
 
+    /**
+     *
+     * @param registrar
+     */
     public EnrichmentAdvancedOptionsTask(CyServiceRegistrar registrar) {
         this.registrar = registrar;
         applicationManager = registrar.getService(CyApplicationManager.class);
