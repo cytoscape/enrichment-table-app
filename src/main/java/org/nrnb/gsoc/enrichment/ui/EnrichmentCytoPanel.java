@@ -87,8 +87,8 @@ public class EnrichmentCytoPanel extends JPanel
     private JSONObject result;
     CyTableFactory tableFactory;
     CyTableManager tableManager;
-
-    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant,CyTable enrichmentTable, JSONObject result) {
+    Map<String,String> scientificNametoID;
+    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant,CyTable enrichmentTable, JSONObject result,Map<String,String> scientificNametoID) {
         this.registrar = registrar;
         this.result = result;
         this.setLayout(new BorderLayout());
@@ -99,6 +99,7 @@ public class EnrichmentCytoPanel extends JPanel
         enrichmentTables = new HashMap<String, JTable>();
         this.enrichmentTable = enrichmentTable;
         this.noSignificant = noSignificant;
+        this.scientificNametoID = scientificNametoID;
         initPanel(this.noSignificant);
     }
 
@@ -141,7 +142,7 @@ public class EnrichmentCytoPanel extends JPanel
         CyNetwork network = applicationManager.getCurrentNetwork();
         TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
         if (e.getSource().equals(butRunProfiler)) {
-            tm.execute(new TaskIterator(new EnrichmentTask(registrar,this)));
+            tm.execute(new TaskIterator(new EnrichmentTask(registrar,this,scientificNametoID)));
         }
         else if (e.getSource().equals(butExportTable)) {
             if (network != null) {
@@ -151,7 +152,7 @@ public class EnrichmentCytoPanel extends JPanel
             }
         } else if (e.getSource().equals(butAdvancedOptions)) {
             if (network != null) {
-                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar,scientificNametoID)));
             }
             System.out.println("Command executed");
         } else if (e.getSource().equals(menuItemReset)) {
@@ -166,7 +167,7 @@ public class EnrichmentCytoPanel extends JPanel
                 if (enrichmentTable!=null)
                     tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
             } else if (e.getSource().equals(butAdvancedOptions)) {
-                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar,scientificNametoID)));
             }
         }
     }

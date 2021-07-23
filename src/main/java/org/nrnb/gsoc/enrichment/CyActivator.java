@@ -12,6 +12,8 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 
+import org.json.simple.JSONObject;
+import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
@@ -75,7 +77,8 @@ public class CyActivator extends AbstractCyActivator {
 
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null,null);
+		Map<String,String> scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
+		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null,null,scientificNametoID);
 		registrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
 		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
@@ -83,7 +86,7 @@ public class CyActivator extends AbstractCyActivator {
 			cytoPanel.setState(CytoPanelState.DOCK);
 		cytoPanel.setSelectedIndex(
 				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
+		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel,scientificNametoID); // Implementation
 		registerService(context,
 				myFactory,
 				TaskFactory.class, // Interface

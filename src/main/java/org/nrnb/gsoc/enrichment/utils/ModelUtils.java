@@ -61,6 +61,7 @@ public class ModelUtils {
     public static String NET_SIGNIFICANCE_THRESHOLD_METHOD = "Significance Threshold Method";
     public static String NET_BACKGROUND = "Background";
     public static String NET_USER_THRESHOLD = "User Threshold";
+    public static String  NET_ALL_RESULTS = "All Results";
 
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
@@ -164,12 +165,12 @@ public class ModelUtils {
         return profilerColumnNames;
     }
     // Reference: https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist/34081506
-    public static Map<String,String> getOrganisms(TaskMonitor monitor) {
+    public static Map<String,String> getOrganisms() {
         if(scientificNametoID!=null){
             return scientificNametoID;
         }
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-        JSONObject result = requestEngine.makeGetRequest("util/organisms_list/",monitor);
+        JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
         JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
         JSONArray jsonArrayID = (JSONArray) result.get("id");
         scientificNametoID = new HashMap<>();
@@ -620,16 +621,16 @@ public class ModelUtils {
      * all_results setter
      */
     public static void setNetAllResults(CyNetwork network, Boolean allResults) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
-        network.getRow(network).set(NET_GENE_ID_COLUMN, allResults);
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_ALL_RESULTS);
+        network.getRow(network).set(NET_ALL_RESULTS, allResults);
     }
     /**
      * all_results getter
      */
     public static Boolean getNetAllResults(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_ALL_RESULTS) == null)
             return null;
-        return network.getRow(network).get(NET_GENE_ID_COLUMN, Boolean.class);
+        return network.getRow(network).get(NET_ALL_RESULTS, Boolean.class);
     }
 
     public static <T> T getResultsFromJSON(JSONObject json, Class<? extends T> clazz) {

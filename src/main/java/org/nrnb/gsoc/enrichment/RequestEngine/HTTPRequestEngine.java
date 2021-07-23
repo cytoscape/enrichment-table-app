@@ -50,7 +50,7 @@ public class HTTPRequestEngine {
 
     }
 
-    public JSONObject makeGetRequest(String endpoint, TaskMonitor monitor) {
+    public JSONObject makeGetRequest(String endpoint) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
