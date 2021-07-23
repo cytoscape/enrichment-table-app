@@ -77,7 +77,7 @@ public class EnrichmentSettings implements ActionListener, RequestsUIHelper {
         applicationManager = registrar.getService(CyApplicationManager.class);
         this.network = applicationManager.getCurrentNetwork();
         geneID = new ListSingleSelection<CyColumn>(ModelUtils.getProfilerColumn(nodeTable));
-        scientificNametoID = ModelUtils.getOrganisms();
+//        scientificNametoID = ModelUtils.getOrganisms(monitor);
         organism   = new ListSingleSelection<String>(ModelUtils.getOrganismsName(scientificNametoID));
 
     }

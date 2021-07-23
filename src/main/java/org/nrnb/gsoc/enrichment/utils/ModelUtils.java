@@ -7,6 +7,7 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
+import org.cytoscape.work.TaskMonitor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
@@ -163,12 +164,12 @@ public class ModelUtils {
         return profilerColumnNames;
     }
     // Reference: https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist/34081506
-    public static Map<String,String> getOrganisms() {
+    public static Map<String,String> getOrganisms(TaskMonitor monitor) {
         if(scientificNametoID!=null){
             return scientificNametoID;
         }
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-        JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
+        JSONObject result = requestEngine.makeGetRequest("util/organisms_list/",monitor);
         JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
         JSONArray jsonArrayID = (JSONArray) result.get("id");
         scientificNametoID = new HashMap<>();
