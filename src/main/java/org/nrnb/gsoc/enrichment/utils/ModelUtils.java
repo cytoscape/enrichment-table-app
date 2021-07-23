@@ -552,6 +552,10 @@ public class ModelUtils {
      * significance_threshold_method setter
      */
     public static void setNetSignificanceThresholdMethod(CyNetwork network, String significanceThresholdMethod) {
+        if(network.getDefaultNetworkTable()==null){
+            System.out.println("No default netwrok table");
+            return;
+        }
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
         network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, significanceThresholdMethod);
     }

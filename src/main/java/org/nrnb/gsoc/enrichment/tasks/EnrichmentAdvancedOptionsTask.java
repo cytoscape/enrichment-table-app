@@ -22,13 +22,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyApplicationManager applicationManager;
     final CyNetwork network;
 
-    @ContainsTunables
-    public EnrichmentSettings enrichmentSettings;
 
-    @Tunable(description = "Make these settings the default",
-            longDescription = "Unless this is set to true, these settings only apply to the current network",
-            tooltip = "<html>Unless this is set to true, these settings only apply to the current network.</html>")
-    public boolean makeDefault = false;
     final CyTable nodeTable;
 
     @Tunable(description = "Overlap cutoff",
@@ -71,11 +65,11 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             gravity = 100.0)
     public ListSingleSelection<String> significance_threshold_method;
 
-    @Tunable(description="Organism",
-            longDescription="Default species for network queries.",
-            exampleStringValue = "Homo Sapiens",
-            params="lookup=begins", groups={"Query Defaults (take effect after restarting Cytoscape)"}, gravity=10.0)
-    public ListSingleSelection<String> organism;
+//    @Tunable(description="Organism",
+//            longDescription="Default species for network queries.",
+//            exampleStringValue = "Homo Sapiens",
+//            params="lookup=begins", groups={"Query Defaults (take effect after restarting Cytoscape)"}, gravity=10.0)
+//    public ListSingleSelection<String> organism;
 
     @Tunable(description="Gene ID Column",
             longDescription="Column to choose for getting GeneIDs.",
@@ -90,31 +84,27 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         applicationManager = registrar.getService(CyApplicationManager.class);
         this.network = applicationManager.getCurrentNetwork();
         nodeTable = network.getDefaultNodeTable();
-        enrichmentSettings = new EnrichmentSettings(registrar,nodeTable);
-        scientificNametoID = ModelUtils.getOrganisms();
+//        scientificNametoID = ModelUtils.getOrganisms();
     }
 
     //user sets the cycol -> update default -> the run the query
     @Override
     public void run(TaskMonitor monitor) throws Exception {
         monitor.setTitle("Enrichment settings");
-        // TODO: Implement scenario where values must be options value must be stored as default
-        if(makeDefault){
-            // save values to network
-            ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method.getSelectedValue());
-            ModelUtils.setNetGeneIDColumn(network,geneID.toString());
-            ModelUtils.setNetAllResults(network,all_results);
-            ModelUtils.setNetDomainScope(network,domain_scope.getSelectedValue());
-            ModelUtils.setNetMeasureUnderrepresentation(network,measure_underrepresentation);
-            ModelUtils.setNetNoIEA(network,no_iea);
-            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
-            ModelUtils.setNetUserThreshold(network,user_threshold.getValue());
-        }
         /**
          * The values must be stored and used
          */
-        // TODO: maybe this is a way to automatically apply settings?
-        TaskManager<?, ?> tm = (TaskManager<?, ?>) registrar.getService(TaskManager.class);
+        if(network!=null) {
+            // save values to network
+            ModelUtils.setNetSignificanceThresholdMethod(network, significance_threshold_method.getSelectedValue());
+            ModelUtils.setNetGeneIDColumn(network, geneID.toString());
+            ModelUtils.setNetAllResults(network, all_results);
+            ModelUtils.setNetDomainScope(network, domain_scope.getSelectedValue());
+            ModelUtils.setNetMeasureUnderrepresentation(network, measure_underrepresentation);
+            ModelUtils.setNetNoIEA(network, no_iea);
+            ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
+        }
+        return;
     }
 
     @ProvidesTitle

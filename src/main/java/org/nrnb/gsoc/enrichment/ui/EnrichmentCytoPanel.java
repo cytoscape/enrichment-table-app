@@ -150,7 +150,10 @@ public class EnrichmentCytoPanel extends JPanel
                 }
             }
         } else if (e.getSource().equals(butAdvancedOptions)) {
-            tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+            if (network != null) {
+                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+            }
+            System.out.println("Command executed");
         } else if (e.getSource().equals(menuItemReset)) {
             // System.out.println("reset color now");
             Component c = (Component) e.getSource();
