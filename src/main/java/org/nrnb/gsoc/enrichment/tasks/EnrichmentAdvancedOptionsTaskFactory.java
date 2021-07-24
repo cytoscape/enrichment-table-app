@@ -12,14 +12,12 @@ import java.util.Map;
  */
 public class EnrichmentAdvancedOptionsTaskFactory extends AbstractNetworkTaskFactory {
     final CyServiceRegistrar registrar;
-    Map<String,String> scientificNametoID;
-    public EnrichmentAdvancedOptionsTaskFactory(CyServiceRegistrar registrar,Map<String,String> scientificNametoID) {
+    public EnrichmentAdvancedOptionsTaskFactory(CyServiceRegistrar registrar) {
         this.registrar = registrar;
-        this.scientificNametoID=scientificNametoID;
     }
 
     @Override
     public TaskIterator createTaskIterator(CyNetwork network) {
-        return new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar,scientificNametoID));
+        return new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar));
     }
 }

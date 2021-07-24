@@ -43,11 +43,9 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
 	final Map<String, Long> stringNodesMap;
-	Map<String,String> scientificNametoID;
-	public EnrichmentTask(final CyServiceRegistrar registrar, CytoPanelComponent2 enrichmentPanel,Map<String,String> scientificNametoID) {
+	public EnrichmentTask(final CyServiceRegistrar registrar, CytoPanelComponent2 enrichmentPanel) {
 		super();
 		this.noSignificant = false;
-		this.scientificNametoID = scientificNametoID;
 		this.registrar = registrar;
 		applicationManager = registrar.getService(CyApplicationManager.class);
 		this.network = applicationManager.getCurrentNetwork();
@@ -194,7 +192,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result, scientificNametoID);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
 			} else{
 				enrichmentPanel.setEnrichmentTable(enrichmentTable);
 			}

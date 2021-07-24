@@ -77,8 +77,7 @@ public class CyActivator extends AbstractCyActivator {
 
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		Map<String,String> scientificNametoID = new HashMap<>(ModelUtils.getOrganisms());
-		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null,null,scientificNametoID);
+		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null,null);
 		registrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
 		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
@@ -86,7 +85,7 @@ public class CyActivator extends AbstractCyActivator {
 			cytoPanel.setState(CytoPanelState.DOCK);
 		cytoPanel.setSelectedIndex(
 				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel,scientificNametoID); // Implementation
+		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
 		registerService(context,
 				myFactory,
 				TaskFactory.class, // Interface

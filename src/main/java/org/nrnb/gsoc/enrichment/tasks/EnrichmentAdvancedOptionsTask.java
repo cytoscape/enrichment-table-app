@@ -86,11 +86,12 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
      *
      * @param registrar
      */
-    public EnrichmentAdvancedOptionsTask(CyServiceRegistrar registrar,Map<String,String> scientificNametoID) {
+    public EnrichmentAdvancedOptionsTask(CyServiceRegistrar registrar) {
         this.registrar = registrar;
         applicationManager = registrar.getService(CyApplicationManager.class);
         this.network = applicationManager.getCurrentNetwork();
         nodeTable = network.getDefaultNodeTable();
+        this.scientificNametoID = ModelUtils.getOrganisms();
         List<String> speciesList = new ArrayList<>();
         for(Map.Entry<String,String> it:scientificNametoID.entrySet()){
             speciesList.add(it.getKey());
