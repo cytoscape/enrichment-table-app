@@ -171,6 +171,10 @@ public class ModelUtils {
         }
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
         JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
+        if(result==null){
+            return scientificNametoID;
+        }
+        // TODO: Fix get request template
         JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
         JSONArray jsonArrayID = (JSONArray) result.get("id");
         scientificNametoID = new HashMap<>();

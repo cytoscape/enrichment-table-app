@@ -93,11 +93,13 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         nodeTable = network.getDefaultNodeTable();
         this.scientificNametoID = ModelUtils.getOrganisms();
         List<String> speciesList = new ArrayList<>();
-        for(Map.Entry<String,String> it:scientificNametoID.entrySet()){
-            speciesList.add(it.getKey());
+        if(scientificNametoID!=null) {
+            for (Map.Entry<String, String> it : scientificNametoID.entrySet()) {
+                speciesList.add(it.getKey());
+            }
+            organism = new ListSingleSelection<String>(speciesList);
         }
         geneID = new ListSingleSelection<CyColumn>(new ArrayList<CyColumn>(nodeTable.getColumns()));
-        organism = new ListSingleSelection<String>(speciesList);
         significance_threshold_method = new ListSingleSelection<String>(new ArrayList<String>(){
             {
                 add("g_SCS");
