@@ -438,19 +438,29 @@ public class ModelUtils {
                 currTerm.setEffectiveDomainSize(((Number) enr.get("effective_domain_size")).intValue());
             }
             if(enr.containsKey("p_value")){
-                currTerm.setPValue(((Number) enr.get("p_value")).doubleValue());
+                String content = enr.get("p_value").toString();
+                double pValue = Double.parseDouble(content);
+                currTerm.setPValue(pValue);
             }
             if(enr.containsKey("precision")){
-                currTerm.setPrecision(((Number) enr.get("precision")).intValue());
+                String content = enr.get("precision").toString();
+                double precision = Double.parseDouble(content);
+                currTerm.setPrecision(precision);
             }
             if(enr.containsKey("recall")){
-                currTerm.setRecall(((Number) enr.get("recall")).intValue());
+                String content = enr.get("recall").toString();
+                double recall = Double.parseDouble(content);
+                currTerm.setRecall(recall);
             }
             if(enr.containsKey("goshv")){
-                currTerm.setGoshv(((Number) enr.get("goshv")).intValue());
+                String content = enr.get("goshv").toString();
+                double goshv = Double.parseDouble(content);
+                currTerm.setRecall(goshv);
             }
             if(enr.containsKey("term_size")){
-                currTerm.setTermSize(((Number) enr.get("term_size")).intValue());
+                String content = enr.get("term_size").toString();
+                int termSize = Integer.parseInt(content);
+                currTerm.setTermSize(termSize);
             }
             if(enr.containsKey("significant")){
                 currTerm.setSignificant(((Boolean) enr.get("significant")).booleanValue());

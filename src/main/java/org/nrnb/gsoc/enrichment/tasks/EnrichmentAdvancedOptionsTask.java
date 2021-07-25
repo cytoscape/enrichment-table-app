@@ -115,7 +115,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 add("custom_annotated");
             }
         });
-//        scientificNametoID = ModelUtils.getOrganisms();
     }
 
     //user sets the cycol -> update default -> the run the query

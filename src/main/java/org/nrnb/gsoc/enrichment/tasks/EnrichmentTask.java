@@ -238,6 +238,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	@Override
 	public List<Class<?>> getResultClasses() {
-		return Arrays.asList(JSONResult.class, String.class);
+		return Arrays.asList(JSONResult.class, String.class, Long.class, CyTable.class);
 	}
 }
