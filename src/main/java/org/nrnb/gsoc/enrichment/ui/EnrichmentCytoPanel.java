@@ -43,6 +43,7 @@ import static org.nrnb.gsoc.enrichment.utils.IconUtils.*;
  */
 public class EnrichmentCytoPanel extends JPanel
         implements CytoPanelComponent2, ListSelectionListener, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
+
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
     Map<String, JTable> enrichmentTables;
@@ -54,9 +55,8 @@ public class EnrichmentCytoPanel extends JPanel
     final CyColorPaletteChooserFactory colorChooserFactory;
     public final static String showTable = TermSource.ALL.getTable();
     JLabel labelRows;
-    JButton butSettings;
+    JButton butAdvancedOptions;
     JButton butDrawCharts;
-    JButton butAnalyzedNodes;
     JButton butExportTable;
     JButton butFilter;
     JButton butRunProfiler;
@@ -66,9 +66,7 @@ public class EnrichmentCytoPanel extends JPanel
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
 
-
      // TODO: Quick settings options -> Drop down to select column and auto complete species
-
 
     private static final Icon chartIcon = new ImageIcon(
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
@@ -80,16 +78,15 @@ public class EnrichmentCytoPanel extends JPanel
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butFilterName = "Filter enrichment table";
     final String butDrawChartsName = "Draw charts using default color palette";
-   // final String butResetTableName = "Reset result table";
+    // final String butResetTableName = "Reset result table";
     final String butEnrichmentMapName = "Create EnrichmentMap";
-    final String butAnalyzedNodesName = "Select all analyzed nodes";
+    // final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Filter enrichment table";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
     CyTableManager tableManager;
-
     public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant,CyTable enrichmentTable, JSONObject result) {
         this.registrar = registrar;
         this.result = result;
@@ -103,10 +100,12 @@ public class EnrichmentCytoPanel extends JPanel
         this.noSignificant = noSignificant;
         initPanel(this.noSignificant);
     }
+
     public void setEnrichmentTable(CyTable enrichmentTable){
         this.enrichmentTable = enrichmentTable;
         initPanel(this.noSignificant);
     }
+
     @Override
     public String getIdentifier() {
         return "org.nrnb.gsoc.enrichment";
@@ -149,6 +148,11 @@ public class EnrichmentCytoPanel extends JPanel
                     tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
                 }
             }
+        } else if (e.getSource().equals(butAdvancedOptions)) {
+            if (network != null) {
+                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+            }
+            System.out.println("Command executed");
         } else if (e.getSource().equals(menuItemReset)) {
             // System.out.println("reset color now");
             Component c = (Component) e.getSource();
@@ -160,11 +164,10 @@ public class EnrichmentCytoPanel extends JPanel
             } else if(e.getSource().equals(butExportTable)){
                 if (enrichmentTable!=null)
                     tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
-            } else if (e.getSource().equals(butSettings)) {
+            } else if (e.getSource().equals(butAdvancedOptions)) {
                 tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
             }
         }
-
     }
 
     public CyTable getFilteredTable() {
@@ -182,10 +185,7 @@ public class EnrichmentCytoPanel extends JPanel
             return null;
         }
 
-
-
         updateFilteredEnrichmentTable();
-
         return filteredEnrichmentTable;
     }
 
@@ -251,15 +251,6 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelRight = new JPanel();
         BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
         buttonsPanelRight.setLayout(layoutRight);
-        butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
-        butAnalyzedNodes.addActionListener(this);
-        butAnalyzedNodes.setFont(iconFont);
-        butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
-        butAnalyzedNodes.setBorderPainted(false);
-        butAnalyzedNodes.setContentAreaFilled(false);
-        butAnalyzedNodes.setFocusPainted(false);
-        butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
-        butAnalyzedNodes.setEnabled(false);
 
         butExportTable = new JButton(IconManager.ICON_SAVE);
         butExportTable.addActionListener(this);
@@ -271,18 +262,17 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
         butExportTable.setEnabled(false);
 
-        butSettings = new JButton(IconManager.ICON_COG);
-        butSettings.setFont(iconFont);
-        butSettings.addActionListener(this);
-        butSettings.setToolTipText(butSettingsName);
-        butSettings.setBorderPainted(false);
-        butSettings.setContentAreaFilled(false);
-        butSettings.setFocusPainted(false);
-        butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butAdvancedOptions = new JButton(IconManager.ICON_COG);
+        butAdvancedOptions.setFont(iconFont);
+        butAdvancedOptions.addActionListener(this);
+        butAdvancedOptions.setToolTipText(butSettingsName);
+        butAdvancedOptions.setBorderPainted(false);
+        butAdvancedOptions.setContentAreaFilled(false);
+        butAdvancedOptions.setFocusPainted(false);
+        butAdvancedOptions.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
-        buttonsPanelRight.add(butAnalyzedNodes);
         buttonsPanelRight.add(butExportTable);
-        buttonsPanelRight.add(butSettings);
+        buttonsPanelRight.add(butAdvancedOptions);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
@@ -351,15 +341,6 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelRight = new JPanel();
         BoxLayout layoutRight = new BoxLayout(buttonsPanelRight, BoxLayout.LINE_AXIS);
         buttonsPanelRight.setLayout(layoutRight);
-        butAnalyzedNodes = new JButton(IconManager.ICON_CHECK_SQUARE_O);
-        butAnalyzedNodes.addActionListener(this);
-        butAnalyzedNodes.setFont(iconFont);
-        butAnalyzedNodes.setToolTipText(butAnalyzedNodesName);
-        butAnalyzedNodes.setBorderPainted(false);
-        butAnalyzedNodes.setContentAreaFilled(false);
-        butAnalyzedNodes.setFocusPainted(false);
-        butAnalyzedNodes.setBorder(BorderFactory.createEmptyBorder(2, 20, 2, 10));
-        butAnalyzedNodes.setEnabled(false);
 
         butExportTable = new JButton(IconManager.ICON_SAVE);
         butExportTable.addActionListener(this);
@@ -371,18 +352,17 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
         butExportTable.setEnabled(false);
 
-        butSettings = new JButton(IconManager.ICON_COG);
-        butSettings.setFont(iconFont);
-        butSettings.addActionListener(this);
-        butSettings.setToolTipText(butSettingsName);
-        butSettings.setBorderPainted(false);
-        butSettings.setContentAreaFilled(false);
-        butSettings.setFocusPainted(false);
-        butSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butAdvancedOptions = new JButton(IconManager.ICON_COG);
+        butAdvancedOptions.setFont(iconFont);
+        butAdvancedOptions.addActionListener(this);
+        butAdvancedOptions.setToolTipText(butSettingsName);
+        butAdvancedOptions.setBorderPainted(false);
+        butAdvancedOptions.setContentAreaFilled(false);
+        butAdvancedOptions.setFocusPainted(false);
+        butAdvancedOptions.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
-        buttonsPanelRight.add(butAnalyzedNodes);
         buttonsPanelRight.add(butExportTable);
-        buttonsPanelRight.add(butSettings);
+        buttonsPanelRight.add(butAdvancedOptions);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
@@ -405,7 +385,6 @@ public class EnrichmentCytoPanel extends JPanel
             butFilter.setEnabled(true);
             butDrawCharts.setEnabled(true);
             butExportTable.setEnabled(true);
-            butAnalyzedNodes.setEnabled(false);
             butEnrichmentMap.setEnabled(false);
 
             JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
@@ -479,6 +458,7 @@ public class EnrichmentCytoPanel extends JPanel
         enrichmentTables.put(enrichmentTable.getTitle(), jTable);
 
     }
+
     static class DecimalFormatRenderer extends DefaultTableCellRenderer {
         private static final DecimalFormat formatter = new DecimalFormat("0.#####E0");
 
@@ -586,6 +566,7 @@ public class EnrichmentCytoPanel extends JPanel
         }
         return selectedTerms;
     }
+
     public void resetCharts() {
         CyNetwork network = applicationManager.getCurrentNetwork();
         if (network == null || tableModel == null)
@@ -667,7 +648,6 @@ public class EnrichmentCytoPanel extends JPanel
         JTable currentTable = enrichmentTables.get(showTable);
         currentTable.tableChanged(e);
     }
-
 
     @Override
     public void handleEvent(RowsSetEvent rse) {

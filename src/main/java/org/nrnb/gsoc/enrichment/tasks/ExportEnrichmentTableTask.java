@@ -2,7 +2,6 @@ package org.nrnb.gsoc.enrichment.tasks;
 
 
 import java.io.File;
-import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
@@ -13,7 +12,6 @@ import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
-import org.cytoscape.work.util.ListMultipleSelection;
 
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;

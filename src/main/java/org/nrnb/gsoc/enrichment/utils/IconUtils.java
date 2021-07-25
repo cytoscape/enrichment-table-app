@@ -5,12 +5,13 @@ import java.io.IOException;
 
 /**
  * @author ighosh98
+ * @description  Icons designs
  */
 public abstract class IconUtils {
 
-    // stringApp Icon
+    // gProfiler Icon
     public static final String PROFILER_ICON = "\uE903";
-    // stringApp Icon layers
+    // gProfiler Icon layers
     public static final String PROFILER_ICON_LAYER_1 = "\uE904";
     public static final String PROFILER_ICON_LAYER_2 = "\uE905";
     public static final String PROFILER_ICON_LAYER_3 = "\uE906";

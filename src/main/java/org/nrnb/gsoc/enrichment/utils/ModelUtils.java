@@ -1,6 +1,5 @@
 package org.nrnb.gsoc.enrichment.utils;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.cytoscape.model.*;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.property.AbstractConfigDirPropsReader;
@@ -8,23 +7,23 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
+import org.cytoscape.work.TaskMonitor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
-import org.json.simple.JSONArray;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * @author ighosh98
+ * @description
  */
 public class ModelUtils {
 
     // Namespaces
-    public static String PROFILERDB_NAMESPACE = "stringdb";
+    public static String PROFILERDB_NAMESPACE = "gProfiler";
     public static String NAMESPACE_SEPARATOR = "::";
 
     // Node information
@@ -61,6 +60,8 @@ public class ModelUtils {
     public static String NET_DOMAIN_SCOPE = "Domain Scope";
     public static String NET_SIGNIFICANCE_THRESHOLD_METHOD = "Significance Threshold Method";
     public static String NET_BACKGROUND = "Background";
+    public static String NET_USER_THRESHOLD = "User Threshold";
+    public static String  NET_ALL_RESULTS = "All Results";
 
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
@@ -169,9 +170,18 @@ public class ModelUtils {
             return scientificNametoID;
         }
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-        JSONObject result = requestEngine.makeGetRequest("util/organisms_list/");
-        JSONArray jsonArrayScientificName = (JSONArray) result.get("scientific_name");
-        JSONArray jsonArrayID = (JSONArray) result.get("id");
+        JSONArray result = requestEngine.makeGetRequest("util/organisms_list/");
+        if(result==null){
+            return scientificNametoID;
+        }
+        JSONArray jsonArrayScientificName = new JSONArray();
+        JSONArray jsonArrayID= new JSONArray();
+        for(int i=0;i<result.size();i++){
+            JSONObject jsonObject = (JSONObject) result.get(i);
+            jsonArrayScientificName.add(jsonObject.get("scientific_name"));
+            jsonArrayID.add(jsonObject.get("id"));
+        }
+
         scientificNametoID = new HashMap<>();
         if(jsonArrayID!=null && jsonArrayScientificName!=null){
             for(int i=0;i<jsonArrayID.size();i++){
@@ -433,19 +443,29 @@ public class ModelUtils {
                 currTerm.setEffectiveDomainSize(((Number) enr.get("effective_domain_size")).intValue());
             }
             if(enr.containsKey("p_value")){
-                currTerm.setPValue(((Number) enr.get("p_value")).doubleValue());
+                String content = enr.get("p_value").toString();
+                double pValue = Double.parseDouble(content);
+                currTerm.setPValue(pValue);
             }
             if(enr.containsKey("precision")){
-                currTerm.setPrecision(((Number) enr.get("precision")).intValue());
+                String content = enr.get("precision").toString();
+                double precision = Double.parseDouble(content);
+                currTerm.setPrecision(precision);
             }
             if(enr.containsKey("recall")){
-                currTerm.setRecall(((Number) enr.get("recall")).intValue());
+                String content = enr.get("recall").toString();
+                double recall = Double.parseDouble(content);
+                currTerm.setRecall(recall);
             }
             if(enr.containsKey("goshv")){
-                currTerm.setGoshv(((Number) enr.get("goshv")).intValue());
+                String content = enr.get("goshv").toString();
+                double goshv = Double.parseDouble(content);
+                currTerm.setRecall(goshv);
             }
             if(enr.containsKey("term_size")){
-                currTerm.setTermSize(((Number) enr.get("term_size")).intValue());
+                String content = enr.get("term_size").toString();
+                int termSize = Integer.parseInt(content);
+                currTerm.setTermSize(termSize);
             }
             if(enr.containsKey("significant")){
                 currTerm.setSignificant(((Boolean) enr.get("significant")).booleanValue());
@@ -501,7 +521,6 @@ public class ModelUtils {
      * @param network
      * @param column
      */
-
     public static void setNetGeneIDColumn(CyNetwork network, String column) {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
         network.getRow(network).set(NET_GENE_ID_COLUMN, column);
@@ -514,8 +533,9 @@ public class ModelUtils {
     }
 
     /**
-     * @description @see <a href="https://biit.cs.ut.ee/gprofiler/page/apis"> API Documentation </a> for gProfiler for more details:
+     * @description @see <a href="https://biit.cs.ut.ee/gprofiler/page/apis"> API Documentation </a> for gProfiler for more details
      */
+
     /**
      * background setter
      */
@@ -532,11 +552,31 @@ public class ModelUtils {
         return network.getRow(network).get(NET_BACKGROUND, List.class);
     }
 
+    /**
+     * user_threshold setter
+     */
+    public static void setNetUserThreshold(CyNetwork network, Double userThreshold) {
+        createColumnIfNeeded(network.getDefaultNetworkTable(), Double.class, NET_USER_THRESHOLD);
+        network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, userThreshold);
+    }
+    /**
+     * significance_threshold_method getter
+     */
+    public static Double getNetUserThreshold(CyNetwork network) {
+        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+            return null;
+        return network.getRow(network).get(NET_USER_THRESHOLD, Double.class);
+    }
+
 
     /**
      * significance_threshold_method setter
      */
     public static void setNetSignificanceThresholdMethod(CyNetwork network, String significanceThresholdMethod) {
+        if(network.getDefaultNetworkTable()==null){
+            System.out.println("No default netwrok table");
+            return;
+        }
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
         network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, significanceThresholdMethod);
     }
@@ -552,7 +592,7 @@ public class ModelUtils {
     /**
      * domain_scope setter
      */
-    public static void setNetDomainScope(CyNetwork network, Boolean domainScope) {
+    public static void setNetDomainScope(CyNetwork network, String domainScope) {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
         network.getRow(network).set(NET_DOMAIN_SCOPE, domainScope);
     }
@@ -600,16 +640,16 @@ public class ModelUtils {
      * all_results setter
      */
     public static void setNetAllResults(CyNetwork network, Boolean allResults) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
-        network.getRow(network).set(NET_GENE_ID_COLUMN, allResults);
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_ALL_RESULTS);
+        network.getRow(network).set(NET_ALL_RESULTS, allResults);
     }
     /**
      * all_results getter
      */
     public static Boolean getNetAllResults(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_ALL_RESULTS) == null)
             return null;
-        return network.getRow(network).get(NET_GENE_ID_COLUMN, Boolean.class);
+        return network.getRow(network).get(NET_ALL_RESULTS, Boolean.class);
     }
 
     public static <T> T getResultsFromJSON(JSONObject json, Class<? extends T> clazz) {
