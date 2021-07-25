@@ -8,6 +8,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.cytoscape.work.TaskMonitor;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -50,16 +51,14 @@ public class HTTPRequestEngine {
 
     }
 
-    public JSONObject makeGetRequest(String endpoint) {
+    public JSONArray makeGetRequest(String endpoint) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
         urlConverter.append(endpoint);
         String url = urlConverter.toString();
         HttpGet httpGet = new HttpGet(url);
-
         httpGet.setHeader("Accept", "application/json");
-        httpGet.setHeader("Content-type", "application/json");
         CloseableHttpResponse response = null;
         try {
             response = httpclient.execute(httpGet);
@@ -70,9 +69,9 @@ public class HTTPRequestEngine {
         if(statusCode!=200 && statusCode!=202){
             return null;
         }
-        JSONObject jsonResponse=null;
+        JSONArray jsonResponse=null;
         try {
-            jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
+            jsonResponse = (JSONArray) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
