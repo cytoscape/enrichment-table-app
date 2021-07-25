@@ -43,7 +43,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
 	final Map<String, Long> stringNodesMap;
-
 	public EnrichmentTask(final CyServiceRegistrar registrar, CytoPanelComponent2 enrichmentPanel) {
 		super();
 		this.noSignificant = false;
@@ -239,6 +238,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	@Override
 	public List<Class<?>> getResultClasses() {
-		return Arrays.asList(JSONResult.class, String.class);
+		return Arrays.asList(JSONResult.class, String.class, Long.class, CyTable.class);
 	}
 }

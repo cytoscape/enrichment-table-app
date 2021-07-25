@@ -12,6 +12,8 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 
+import org.json.simple.JSONObject;
+import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
