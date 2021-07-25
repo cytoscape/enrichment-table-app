@@ -62,7 +62,7 @@ public class ModelUtils {
     public static String NET_BACKGROUND = "Background";
     public static String NET_USER_THRESHOLD = "User Threshold";
     public static String  NET_ALL_RESULTS = "All Results";
-
+    public static String  NET_MEASURE_UNDERREPRESENTATION = "Measure Underrepresentation";
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
     // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
@@ -526,10 +526,10 @@ public class ModelUtils {
         network.getRow(network).set(NET_GENE_ID_COLUMN, column);
     }
 
-    public static CyColumn getNetOrganism(CyNetwork network) {
+    public static String getNetOrganism(CyNetwork network) {
         if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
             return null;
-        return network.getRow(network).get(NET_GENE_ID_COLUMN, CyColumn.class);
+        return network.getRow(network).get(NET_GENE_ID_COLUMN, String.class);
     }
 
     /**
@@ -557,13 +557,13 @@ public class ModelUtils {
      */
     public static void setNetUserThreshold(CyNetwork network, Double userThreshold) {
         createColumnIfNeeded(network.getDefaultNetworkTable(), Double.class, NET_USER_THRESHOLD);
-        network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, userThreshold);
+        network.getRow(network).set(NET_USER_THRESHOLD, userThreshold);
     }
     /**
      * significance_threshold_method getter
      */
     public static Double getNetUserThreshold(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_USER_THRESHOLD) == null)
             return null;
         return network.getRow(network).get(NET_USER_THRESHOLD, Double.class);
     }
@@ -577,14 +577,14 @@ public class ModelUtils {
             System.out.println("No default netwrok table");
             return;
         }
-        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
+        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_SIGNIFICANCE_THRESHOLD_METHOD);
         network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, significanceThresholdMethod);
     }
     /**
      * significance_threshold_method getter
      */
     public static String getNetSignificanceThresholdMethod(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_DOMAIN_SCOPE) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_SIGNIFICANCE_THRESHOLD_METHOD) == null)
             return null;
         return network.getRow(network).get(NET_SIGNIFICANCE_THRESHOLD_METHOD, String.class);
     }
@@ -609,7 +609,7 @@ public class ModelUtils {
      * no_iea setter
      */
     public static void setNetNoIEA(CyNetwork network, Boolean noIEA) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_NO_IEA);
+        createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_NO_IEA);
         network.getRow(network).set(NET_NO_IEA, noIEA);
     }
     /**
@@ -625,22 +625,22 @@ public class ModelUtils {
      * measure_underrepresentation setter
      */
     public static void setNetMeasureUnderrepresentation(CyNetwork network, Boolean allResults) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_GENE_ID_COLUMN);
-        network.getRow(network).set(NET_GENE_ID_COLUMN, allResults);
+        createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_MEASURE_UNDERREPRESENTATION);
+        network.getRow(network).set(NET_MEASURE_UNDERREPRESENTATION, allResults);
     }
     /**
      * measure_underrepresentation getter
      */
     public static Boolean getNetDoesMeasureUnderrepresentation(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_MEASURE_UNDERREPRESENTATION) == null)
             return null;
-        return network.getRow(network).get(NET_GENE_ID_COLUMN, Boolean.class);
+        return network.getRow(network).get(NET_MEASURE_UNDERREPRESENTATION, Boolean.class);
     }
     /**
      * all_results setter
      */
     public static void setNetAllResults(CyNetwork network, Boolean allResults) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_ALL_RESULTS);
+        createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_ALL_RESULTS);
         network.getRow(network).set(NET_ALL_RESULTS, allResults);
     }
     /**
