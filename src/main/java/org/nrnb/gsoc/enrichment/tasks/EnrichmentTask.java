@@ -77,6 +77,14 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Set<String> nodeNameList = new HashSet<String>();
 		List<Long> nodesToFilter = new ArrayList<Long>();
 		nodeList = nodesToFilterBy.getSelectedValues();
+
+		/**
+		 * Set default geneID column for making appropriate query request
+		 */
+		if(ModelUtils.getNetGeneIDColumn(network)!=null){
+			network.getRow(network).set(CyNetwork.NAME,ModelUtils.getNetGeneIDColumn(network));
+		}
+
 		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
 				nodesToFilter.add(node.getSUID());

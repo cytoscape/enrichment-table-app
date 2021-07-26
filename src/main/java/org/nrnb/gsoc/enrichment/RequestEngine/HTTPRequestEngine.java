@@ -6,6 +6,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.work.TaskMonitor;
 
 import org.json.simple.JSONArray;
@@ -13,6 +14,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -80,14 +82,50 @@ public class HTTPRequestEngine {
         return jsonResponse;
     }
 
-    public JSONObject makePostRequest(String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+        boolean runDetailedQuery = false;
+        if(ModelUtils.getNetOrganism(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("organism",ModelUtils.getNetOrganism(network));
+        }
+        if(ModelUtils.getNetUserThreshold(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("user_threshold",ModelUtils.getNetUserThreshold(network).toString());
+        }
+        if(ModelUtils.getNetUserThreshold(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("all_results",ModelUtils.getNetAllResults(network).toString());
+        }
+        if(ModelUtils.getNetNoIEA(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("no_iea",ModelUtils.getNetNoIEA(network).toString());
+        }
+        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network).toString());
+        }
+
+        if(ModelUtils.getNetDomainScope(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("domain_scope",ModelUtils.getNetDomainScope(network));
+        }
+
+        if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
+            runDetailedQuery = true;
+            defaultParameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
+        }
+
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
         urlConverter.append(endpoint);
         String url = urlConverter.toString();
         HttpPost httpPost = new HttpPost(url);
-
+        if(runDetailedQuery){
+            for (Map.Entry<String, String> it : defaultParameters.entrySet()) {
+                parameters.put(it.getKey(),it.getValue());
+            }
+        }
         String jsonBody = JSONValue.toJSONString(parameters);
         StringEntity entity = null;
         try {

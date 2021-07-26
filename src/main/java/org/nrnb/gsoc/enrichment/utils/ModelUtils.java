@@ -631,7 +631,7 @@ public class ModelUtils {
     /**
      * measure_underrepresentation getter
      */
-    public static Boolean getNetDoesMeasureUnderrepresentation(CyNetwork network) {
+    public static Boolean getNetMeasureUnderrepresentation(CyNetwork network) {
         if (network.getDefaultNetworkTable().getColumn(NET_MEASURE_UNDERREPRESENTATION) == null)
             return null;
         return network.getRow(network).get(NET_MEASURE_UNDERREPRESENTATION, Boolean.class);
