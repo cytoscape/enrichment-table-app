@@ -134,8 +134,9 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 
 		Map<String,String> parameters = generateQuery(query.toString());
+
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		JSONObject result = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
+		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor);
 		StringBuffer responseBuffer = new StringBuffer("");
 		if(result==null){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
@@ -221,7 +222,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		HashMap<String,String> parameters = new HashMap<>();
 		System.out.println(query);
 		// TODO: add a box for taking this as an input
-		parameters.put("organism","hsapiens");
+		if(ModelUtils.getNetOrganism(network)!=null){
+			parameters.put("organism",ModelUtils.getNetOrganism(network));
+		} else{
+			parameters.put("organism","hsapiens");
+		}
 		parameters.put("query",query);
 		return parameters;
 	}

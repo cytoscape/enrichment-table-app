@@ -7,6 +7,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.work.TaskMonitor;
 
 import org.json.simple.JSONArray;
@@ -19,8 +20,7 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ighosh98
@@ -84,10 +84,7 @@ public class HTTPRequestEngine {
 
     public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
         boolean runDetailedQuery = false;
-        if(ModelUtils.getNetOrganism(network)!=null){
-            runDetailedQuery = true;
-            defaultParameters.put("organism",ModelUtils.getNetOrganism(network));
-        }
+
         if(ModelUtils.getNetUserThreshold(network)!=null){
             runDetailedQuery = true;
             defaultParameters.put("user_threshold",ModelUtils.getNetUserThreshold(network).toString());
@@ -114,6 +111,22 @@ public class HTTPRequestEngine {
             runDetailedQuery = true;
             defaultParameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
         }
+
+        StringBuffer backgroundNodes = new StringBuffer("");
+        List<CyNode> nodeList = network.getNodeList();
+        Set<String> nodeNameList = new HashSet<>();
+        for (CyNode node : nodeList) {
+            String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+            nodeNameList.add(canonicalName);
+        }
+        Iterator<String> setIterator = nodeNameList.iterator();
+        while(setIterator.hasNext()){
+            backgroundNodes.append(setIterator.next());
+            if(setIterator.hasNext()){
+                backgroundNodes.append(" ");
+            }
+        }
+        defaultParameters.put("background",backgroundNodes.toString());
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
