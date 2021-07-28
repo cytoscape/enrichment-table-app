@@ -6,6 +6,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.work.TaskMonitor;
 
 import org.json.simple.JSONArray;
@@ -13,12 +15,12 @@ import org.json.simple.JSONValue;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ighosh98
@@ -80,14 +82,62 @@ public class HTTPRequestEngine {
         return jsonResponse;
     }
 
-    public JSONObject makePostRequest(String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+        boolean runDetailedQuery = false;
+
+//        if(ModelUtils.getNetUserThreshold(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("user_threshold",ModelUtils.getNetUserThreshold(network).toString());
+//            System.out.println(defaultParameters.get("user_threshold"));
+//        }
+//        if(ModelUtils.getNetUserThreshold(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("all_results",ModelUtils.getNetAllResults(network).toString());
+//            System.out.println(defaultParameters.get("all_results"));
+//        }
+//        if(ModelUtils.getNetNoIEA(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("no_iea",ModelUtils.getNetNoIEA(network).toString());
+//        }
+//        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network).toString());
+//        }
+//
+        if(ModelUtils.getNetDomainScope(network)!=null){
+            runDetailedQuery = true;
+            parameters.put("domain_scope",ModelUtils.getNetDomainScope(network));
+            System.out.println(parameters.get("domain_scope"));
+        }
+
+        if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
+            runDetailedQuery = true;
+            parameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
+            System.out.println(parameters.get("significance_threshold_method"));
+        }
+
+        StringBuffer backgroundNodes = new StringBuffer("");
+        List<CyNode> nodeList = network.getNodeList();
+        Set<String> nodeNameList = new HashSet<>();
+        for (CyNode node : nodeList) {
+            String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+            nodeNameList.add(canonicalName);
+        }
+        Iterator<String> setIterator = nodeNameList.iterator();
+        while(setIterator.hasNext()){
+            backgroundNodes.append(setIterator.next());
+            if(setIterator.hasNext()){
+                backgroundNodes.append(" ");
+            }
+        }
+        defaultParameters.put("background",backgroundNodes.toString());
+
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
         urlConverter.append(endpoint);
         String url = urlConverter.toString();
         HttpPost httpPost = new HttpPost(url);
-
         String jsonBody = JSONValue.toJSONString(parameters);
         StringEntity entity = null;
         try {

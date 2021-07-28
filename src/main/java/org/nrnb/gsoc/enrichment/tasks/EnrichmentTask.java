@@ -77,6 +77,14 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Set<String> nodeNameList = new HashSet<String>();
 		List<Long> nodesToFilter = new ArrayList<Long>();
 		nodeList = nodesToFilterBy.getSelectedValues();
+
+		/**
+		 * Set default geneID column for making appropriate query request
+		 */
+		if(ModelUtils.getNetGeneIDColumn(network)!=null){
+			network.getRow(network).set(CyNetwork.NAME,ModelUtils.getNetGeneIDColumn(network));
+		}
+
 		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
 				nodesToFilter.add(node.getSUID());
@@ -126,8 +134,9 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 
 		Map<String,String> parameters = generateQuery(query.toString());
+
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		JSONObject result = requestEngine.makePostRequest("gost/profile/",parameters,monitor);
+		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor);
 		StringBuffer responseBuffer = new StringBuffer("");
 		if(result==null){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
@@ -213,7 +222,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		HashMap<String,String> parameters = new HashMap<>();
 		System.out.println(query);
 		// TODO: add a box for taking this as an input
-		parameters.put("organism","hsapiens");
+		if(ModelUtils.getNetOrganism(network)!=null){
+			parameters.put("organism",ModelUtils.getNetOrganism(network));
+		} else{
+			parameters.put("organism","hsapiens");
+		}
+		System.out.println(parameters.get("organism"));
 		parameters.put("query",query);
 		return parameters;
 	}
