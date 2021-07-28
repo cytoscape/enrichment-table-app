@@ -162,6 +162,7 @@ public class HTTPRequestEngine {
         if(statusCode!=200 && statusCode!=202){
             monitor.showMessage(TaskMonitor.Level.ERROR, "Got "+
                     response.getStatusLine().getStatusCode()+" code from server");
+            monitor.setStatusMessage("Invalid Query Parameters");
             return null;
         }
         JSONObject jsonResponse=null;

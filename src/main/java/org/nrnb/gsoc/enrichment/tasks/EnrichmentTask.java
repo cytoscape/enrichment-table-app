@@ -77,6 +77,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Set<String> nodeNameList = new HashSet<String>();
 		List<Long> nodesToFilter = new ArrayList<Long>();
 		nodeList = nodesToFilterBy.getSelectedValues();
+		monitor.setTitle("gProfiler Enrichment Analysis");
 
 		/**
 		 * Set default geneID column for making appropriate query request
@@ -141,6 +142,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(result==null){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no results, possibly due to an error.");
+			monitor.setStatusMessage("Enrichment retrieval returned no results, due to invalid Query Parameters");
 			this.noSignificant = true;
 			monitor.setProgress(1.0);
 			return;
