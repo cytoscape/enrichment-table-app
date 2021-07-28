@@ -511,9 +511,9 @@ public class ModelUtils {
      * @return Column to be chosen for fetching GeneID
      */
     public static String getNetGeneIDColumn(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_ORGANISMS) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
             return null;
-        return network.getRow(network).get(NET_ORGANISMS, String.class);
+        return network.getRow(network).get(NET_GENE_ID_COLUMN, String.class);
     }
 
     /**

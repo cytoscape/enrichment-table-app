@@ -288,7 +288,7 @@ public class EnrichmentCytoPanel extends JPanel
 
         availableTables = new ArrayList<String>();
         createJTable(enrichmentTable);
-        // Check if values are being received correctly
+        // Check if values are git mbeing received correctly
         List<CyRow> rows = enrichmentTable.getAllRows();
         System.out.println(rows.size());
         availableTables.add(enrichmentTable.getTitle());

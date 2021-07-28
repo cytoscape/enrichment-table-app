@@ -120,8 +120,10 @@ public class HTTPRequestEngine {
         List<CyNode> nodeList = network.getNodeList();
         Set<String> nodeNameList = new HashSet<>();
         for (CyNode node : nodeList) {
-            String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
-            nodeNameList.add(canonicalName);
+            String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+            if(canonicalName!=null && canonicalName.length()>0 && !canonicalName.contains(" ")){
+                nodeNameList.add(canonicalName);
+            }
         }
         Iterator<String> setIterator = nodeNameList.iterator();
         while(setIterator.hasNext()){
@@ -130,8 +132,8 @@ public class HTTPRequestEngine {
                 backgroundNodes.append(" ");
             }
         }
-        defaultParameters.put("background",backgroundNodes.toString());
-
+        parameters.put("background",backgroundNodes.toString());
+        System.out.println(backgroundNodes.toString());
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
