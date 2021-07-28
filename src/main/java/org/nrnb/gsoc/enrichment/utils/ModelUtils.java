@@ -527,9 +527,9 @@ public class ModelUtils {
     }
 
     public static String getNetOrganism(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
+        if (network.getDefaultNetworkTable().getColumn(NET_ORGANISMS) == null)
             return null;
-        return network.getRow(network).get(NET_GENE_ID_COLUMN, String.class);
+        return network.getRow(network).get(NET_ORGANISMS, String.class);
     }
 
     /**

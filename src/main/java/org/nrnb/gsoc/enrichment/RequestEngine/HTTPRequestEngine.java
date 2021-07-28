@@ -85,31 +85,35 @@ public class HTTPRequestEngine {
     public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
         boolean runDetailedQuery = false;
 
-        if(ModelUtils.getNetUserThreshold(network)!=null){
-            runDetailedQuery = true;
-            defaultParameters.put("user_threshold",ModelUtils.getNetUserThreshold(network).toString());
-        }
-        if(ModelUtils.getNetUserThreshold(network)!=null){
-            runDetailedQuery = true;
-            defaultParameters.put("all_results",ModelUtils.getNetAllResults(network).toString());
-        }
-        if(ModelUtils.getNetNoIEA(network)!=null){
-            runDetailedQuery = true;
-            defaultParameters.put("no_iea",ModelUtils.getNetNoIEA(network).toString());
-        }
-        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
-            runDetailedQuery = true;
-            defaultParameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network).toString());
-        }
-
+//        if(ModelUtils.getNetUserThreshold(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("user_threshold",ModelUtils.getNetUserThreshold(network).toString());
+//            System.out.println(defaultParameters.get("user_threshold"));
+//        }
+//        if(ModelUtils.getNetUserThreshold(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("all_results",ModelUtils.getNetAllResults(network).toString());
+//            System.out.println(defaultParameters.get("all_results"));
+//        }
+//        if(ModelUtils.getNetNoIEA(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("no_iea",ModelUtils.getNetNoIEA(network).toString());
+//        }
+//        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
+//            runDetailedQuery = true;
+//            defaultParameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network).toString());
+//        }
+//
         if(ModelUtils.getNetDomainScope(network)!=null){
             runDetailedQuery = true;
-            defaultParameters.put("domain_scope",ModelUtils.getNetDomainScope(network));
+            parameters.put("domain_scope",ModelUtils.getNetDomainScope(network));
+            System.out.println(parameters.get("domain_scope"));
         }
 
         if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
             runDetailedQuery = true;
-            defaultParameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
+            parameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
+            System.out.println(parameters.get("significance_threshold_method"));
         }
 
         StringBuffer backgroundNodes = new StringBuffer("");
@@ -134,11 +138,6 @@ public class HTTPRequestEngine {
         urlConverter.append(endpoint);
         String url = urlConverter.toString();
         HttpPost httpPost = new HttpPost(url);
-        if(runDetailedQuery){
-            for (Map.Entry<String, String> it : defaultParameters.entrySet()) {
-                parameters.put(it.getKey(),it.getValue());
-            }
-        }
         String jsonBody = JSONValue.toJSONString(parameters);
         StringEntity entity = null;
         try {

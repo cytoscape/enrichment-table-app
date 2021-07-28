@@ -227,6 +227,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		} else{
 			parameters.put("organism","hsapiens");
 		}
+		System.out.println(parameters.get("organism"));
 		parameters.put("query",query);
 		return parameters;
 	}
