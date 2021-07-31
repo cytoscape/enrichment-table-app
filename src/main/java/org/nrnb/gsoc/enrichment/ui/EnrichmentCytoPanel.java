@@ -287,6 +287,12 @@ public class EnrichmentCytoPanel extends JPanel
         this.removeAll();
 
         availableTables = new ArrayList<String>();
+        if(enrichmentTable==null){
+            CyTableManager tableManager = registrar.getService(CyTableManager.class);
+            tableFactory = registrar.getService(CyTableFactory.class);
+            enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+            tableManager.addTable(enrichmentTable);
+        }
         createJTable(enrichmentTable);
         // Check if values are git mbeing received correctly
         List<CyRow> rows = enrichmentTable.getAllRows();
