@@ -120,7 +120,12 @@ public class HTTPRequestEngine {
         List<CyNode> nodeList = network.getNodeList();
         Set<String> nodeNameList = new HashSet<>();
         for (CyNode node : nodeList) {
-            String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+            String canonicalName;
+            if(ModelUtils.getNetGeneIDColumn(network)==null){
+                canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+            } else{
+                canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+            }
             if(canonicalName!=null && canonicalName.length()>0 && !canonicalName.contains(" ")){
                 nodeNameList.add(canonicalName);
             }

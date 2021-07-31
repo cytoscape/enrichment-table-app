@@ -89,14 +89,24 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
 				nodesToFilter.add(node.getSUID());
-				String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+				String canonicalName;
+				if(ModelUtils.getNetGeneIDColumn(network)==null){
+					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+				} else{
+					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+				}
 				nodeNameList.add(canonicalName);
 			}
 		} else{
 			nodeList = network.getNodeList();
 			for(CyNode  node:nodeList){
 				nodesToFilter.add(node.getSUID());
-				String canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+				String canonicalName;
+				if(ModelUtils.getNetGeneIDColumn(network)==null){
+					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+				} else{
+					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+				}
 				if(canonicalName!=null && canonicalName.length()>0){
 					nodeNameList.add(canonicalName);
 					stringNodesMap.put(canonicalName, node.getSUID());
