@@ -82,28 +82,28 @@ public class HTTPRequestEngine {
         return jsonResponse;
     }
 
-    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,String> parameters, TaskMonitor monitor) {
+    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor) {
         boolean runDetailedQuery = false;
 
-//        if(ModelUtils.getNetUserThreshold(network)!=null){
-//            runDetailedQuery = true;
-//            defaultParameters.put("user_threshold",ModelUtils.getNetUserThreshold(network).toString());
-//            System.out.println(defaultParameters.get("user_threshold"));
-//        }
-//        if(ModelUtils.getNetUserThreshold(network)!=null){
-//            runDetailedQuery = true;
-//            defaultParameters.put("all_results",ModelUtils.getNetAllResults(network).toString());
-//            System.out.println(defaultParameters.get("all_results"));
-//        }
-//        if(ModelUtils.getNetNoIEA(network)!=null){
-//            runDetailedQuery = true;
-//            defaultParameters.put("no_iea",ModelUtils.getNetNoIEA(network).toString());
-//        }
-//        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
-//            runDetailedQuery = true;
-//            defaultParameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network).toString());
-//        }
-//
+        if(ModelUtils.getNetUserThreshold(network)!=null){
+            runDetailedQuery = true;
+            parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
+            System.out.println(defaultParameters.get("user_threshold"));
+        }
+        if(ModelUtils.getNetUserThreshold(network)!=null){
+            runDetailedQuery = true;
+            parameters.put("all_results",ModelUtils.getNetAllResults(network));
+            System.out.println(defaultParameters.get("all_results"));
+        }
+        if(ModelUtils.getNetNoIEA(network)!=null){
+            runDetailedQuery = true;
+            parameters.put("no_iea",ModelUtils.getNetNoIEA(network));
+        }
+        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
+            runDetailedQuery = true;
+            parameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network));
+        }
+
         if(ModelUtils.getNetDomainScope(network)!=null){
             runDetailedQuery = true;
             parameters.put("domain_scope",ModelUtils.getNetDomainScope(network));

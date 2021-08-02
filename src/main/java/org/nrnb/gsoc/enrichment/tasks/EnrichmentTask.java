@@ -144,7 +144,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 
 
-		Map<String,String> parameters = generateQuery(query.toString());
+		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
 		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor);
@@ -230,8 +230,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		return;
 	}
 
-	private Map<String, String> generateQuery(String query) {
-		HashMap<String,String> parameters = new HashMap<>();
+	private Map<String, Object> generateQuery(String query) {
+		HashMap<String,Object> parameters = new HashMap<>();
 		System.out.println(query);
 		// TODO: add a box for taking this as an input
 		if(ModelUtils.getNetOrganism(network)!=null){
