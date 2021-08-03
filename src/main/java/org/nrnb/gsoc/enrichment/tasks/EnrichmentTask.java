@@ -147,7 +147,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor);
+		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,!nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		if(result==null){
 			monitor.showMessage(TaskMonitor.Level.ERROR,

@@ -62,7 +62,7 @@ public class HTTPRequestEngine {
         return jsonResponse;
     }
 
-    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor) {
+    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
         boolean runDetailedQuery = false;
 
         if(ModelUtils.getNetUserThreshold(network)!=null){
@@ -92,24 +92,26 @@ public class HTTPRequestEngine {
         }
 
         StringBuffer backgroundNodes = new StringBuffer("");
-        List<CyNode> nodeList = network.getNodeList();
-        Set<String> nodeNameList = new HashSet<>();
-        for (CyNode node : nodeList) {
-            String canonicalName;
-            if(ModelUtils.getNetGeneIDColumn(network)==null){
-                canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
-            } else{
-                canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+        if(isBackgroundNeeded) {
+            List<CyNode> nodeList = network.getNodeList();
+            Set<String> nodeNameList = new HashSet<>();
+            for (CyNode node : nodeList) {
+                String canonicalName;
+                if (ModelUtils.getNetGeneIDColumn(network) == null) {
+                    canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+                } else {
+                    canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+                }
+                if (canonicalName != null && canonicalName.length() > 0 && !canonicalName.contains(" ")) {
+                    nodeNameList.add(canonicalName);
+                }
             }
-            if(canonicalName!=null && canonicalName.length()>0 && !canonicalName.contains(" ")){
-                nodeNameList.add(canonicalName);
-            }
-        }
-        Iterator<String> setIterator = nodeNameList.iterator();
-        while(setIterator.hasNext()){
-            backgroundNodes.append(setIterator.next());
-            if(setIterator.hasNext()){
-                backgroundNodes.append(" ");
+            Iterator<String> setIterator = nodeNameList.iterator();
+            while (setIterator.hasNext()) {
+                backgroundNodes.append(setIterator.next());
+                if (setIterator.hasNext()) {
+                    backgroundNodes.append(" ");
+                }
             }
         }
         parameters.put("background",backgroundNodes.toString());
