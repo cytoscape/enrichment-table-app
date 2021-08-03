@@ -29,28 +29,8 @@ import java.util.*;
 public class HTTPRequestEngine {
 
     private final String basicURL = "https://biit.cs.ut.ee/gprofiler/api/";
-    HashMap<String,String> defaultParameters;
 
     public HTTPRequestEngine(){
-        /**
-         * Initializing default parameters
-         * Reference for values: https://github.com/PathwayCommons/app-ui/blob/master/src/server/external-services/gprofiler/gprofiler.js
-         */
-        defaultParameters = new HashMap<>();
-        defaultParameters.put("organism",new String("hsapiens"));
-        defaultParameters.put("sources","['GO:BP', 'REAC']");
-        defaultParameters.put("user_threshold","0.05");
-        defaultParameters.put("all_results","false");
-        defaultParameters.put("ordered","false");
-        defaultParameters.put("combined", "false");
-        defaultParameters.put("measure_underrepresentation", "false");
-        defaultParameters.put("no_iea", "false");
-        defaultParameters.put("domain_scope","annotated");
-        defaultParameters.put("numeric_ns","ENTREZGENE_ACC");
-        defaultParameters.put("significance_threshold_method","g_SCS");
-        defaultParameters.put("background","[]");
-        defaultParameters.put("no_evidences", "false");
-
     }
 
     public JSONArray makeGetRequest(String endpoint) {
@@ -88,12 +68,12 @@ public class HTTPRequestEngine {
         if(ModelUtils.getNetUserThreshold(network)!=null){
             runDetailedQuery = true;
             parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
-            System.out.println(defaultParameters.get("user_threshold"));
+            System.out.println(parameters.get("user_threshold"));
         }
         if(ModelUtils.getNetUserThreshold(network)!=null){
             runDetailedQuery = true;
             parameters.put("all_results",ModelUtils.getNetAllResults(network));
-            System.out.println(defaultParameters.get("all_results"));
+            System.out.println(parameters.get("all_results"));
         }
         if(ModelUtils.getNetNoIEA(network)!=null){
             runDetailedQuery = true;
@@ -104,11 +84,6 @@ public class HTTPRequestEngine {
             parameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network));
         }
 
-        if(ModelUtils.getNetDomainScope(network)!=null){
-            runDetailedQuery = true;
-            parameters.put("domain_scope",ModelUtils.getNetDomainScope(network));
-            System.out.println(parameters.get("domain_scope"));
-        }
 
         if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
             runDetailedQuery = true;
@@ -138,6 +113,12 @@ public class HTTPRequestEngine {
             }
         }
         parameters.put("background",backgroundNodes.toString());
+        if(backgroundNodes.toString().isEmpty()){
+            parameters.put("domain_scope","annotated");
+            System.out.println(parameters.get("domain_scope"));
+        } else{
+            parameters.put("domain_scope","custom_annotated");
+        }
         System.out.println(backgroundNodes.toString());
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();

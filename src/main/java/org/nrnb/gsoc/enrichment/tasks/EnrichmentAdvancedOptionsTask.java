@@ -55,13 +55,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             groups = {"Default Parameter Values"},
             tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
     public boolean measure_underrepresentation = false;
-    @Tunable(description = "Type of domain scope",
-            tooltip = "Set the desired domain scope",
-            longDescription = "Set the desired domain scope",
-            exampleStringValue = "annotated",
-            groups = {"Default Parameter Values"},
-            gravity = 100.0)
-    public ListSingleSelection<String> domain_scope;
 
     @Tunable(description = "Type of testing correction method",
             tooltip = "Set the type of testing correction method",
@@ -110,14 +103,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 add("fdr");
             }
         });
-        domain_scope = new ListSingleSelection<String>(new ArrayList<String>(){
-            {
-                add("annotated");
-                add("custom");
-                add("known");
-                add("custom_annotated");
-            }
-        });
     }
 
     //user sets the cycol -> update default -> the run the query
@@ -132,7 +117,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             ModelUtils.setNetSignificanceThresholdMethod(network, significance_threshold_method.getSelectedValue());
             ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue().toString());
             ModelUtils.setNetAllResults(network, all_results);
-            ModelUtils.setNetDomainScope(network, domain_scope.getSelectedValue());
             ModelUtils.setNetMeasureUnderrepresentation(network, measure_underrepresentation);
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
