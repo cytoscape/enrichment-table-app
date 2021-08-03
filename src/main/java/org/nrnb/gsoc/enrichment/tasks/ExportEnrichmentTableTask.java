@@ -59,6 +59,6 @@ public class ExportEnrichmentTableTask extends AbstractTask {
 
     @ProvidesTitle
     public String getTitle() {
-        return "Export gProfiler Enrichment table";
+        return "Export Enrichment table";
     }
 }

@@ -33,6 +33,11 @@ public class HTTPRequestEngine {
     public HTTPRequestEngine(){
     }
 
+    /**
+     * @description function fires GET Request
+     * @param endpoint API endpoint
+     * @return
+     */
     public JSONArray makeGetRequest(String endpoint) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
@@ -62,6 +67,15 @@ public class HTTPRequestEngine {
         return jsonResponse;
     }
 
+    /**
+     * @description function fires POST Request by filling in necessary parameters
+     * @param network Network being used for fetching data
+     * @param endpoint API endpoint
+     * @param parameters all parameters fetched from the network or set by the user
+     * @param monitor Task Monitor
+     * @param isBackgroundNeeded decides if we need the background nodes or not
+     * @return
+     */
     public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
         boolean runDetailedQuery = false;
 

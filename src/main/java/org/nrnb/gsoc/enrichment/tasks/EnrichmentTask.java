@@ -80,7 +80,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		monitor.setTitle("gProfiler Enrichment Analysis");
 
 		/**
-		 * Set default geneID column for making appropriate query request
+		 * @description Set default geneID column for making appropriate query request
 		 */
 		if(ModelUtils.getNetGeneIDColumn(network)!=null){
 			network.getRow(network).set(CyNetwork.NAME,ModelUtils.getNetGeneIDColumn(network));
@@ -115,7 +115,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 
 		/**
-		 * Check if request query is empty
+		 * @description Check if request query is empty
 		 */
 		if(nodeNameList.isEmpty()){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
@@ -125,7 +125,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 
 		/**
-		 * Upper limit on the number of nodes that can be queried
+		 * @description Upper limit on the number of nodes that can be queried
 		 */
 		if(nodeNameList.size()>MAX_NUMBER_OF_NODES){
 			isLargeNetwork = true;
@@ -230,6 +230,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		return;
 	}
 
+	/**
+	 *  @description generates a basic query structure
+	 * @param query field that needs to be added
+	 * @return map with all parameters required to fire an API request
+	 */
 	private Map<String, Object> generateQuery(String query) {
 		HashMap<String,Object> parameters = new HashMap<>();
 		System.out.println(query);

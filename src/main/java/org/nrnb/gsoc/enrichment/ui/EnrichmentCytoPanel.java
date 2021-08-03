@@ -39,7 +39,7 @@ import static org.nrnb.gsoc.enrichment.utils.IconUtils.*;
 
 /**
  * @author ighosh98
- * @description Result Panel which stores the result of the gPRofiler querying task and provides other tools to modify the querying tasks
+ * @description Result Panel which stores the result of the gProfiler querying task and provides other tools to modify the querying tasks
  */
 public class EnrichmentCytoPanel extends JPanel
         implements CytoPanelComponent2, ListSelectionListener, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
@@ -123,7 +123,7 @@ public class EnrichmentCytoPanel extends JPanel
 
     @Override
     public String getTitle() {
-        return "gProfiler Enrichment";
+        return "Enrichment Table";
     }
 
     @Override
@@ -189,6 +189,10 @@ public class EnrichmentCytoPanel extends JPanel
         return filteredEnrichmentTable;
     }
 
+    /**
+     * @description Initialises the panel design
+     * @param noSignificant
+     */
     public void initPanel(boolean noSignificant) {
         CyNetwork network = applicationManager.getCurrentNetwork();
         /**
@@ -283,6 +287,11 @@ public class EnrichmentCytoPanel extends JPanel
         initPanel(network, noSignificant);
     }
 
+    /**
+     * @description Initialises the panel design
+     * @param network
+     * @param noSignificant
+     */
     public void initPanel(CyNetwork network, boolean noSignificant) {
         this.removeAll();
 
@@ -417,6 +426,10 @@ public class EnrichmentCytoPanel extends JPanel
         this.repaint();
     }
 
+    /**
+     * @description Creates the settings table
+     * @param cyTable
+     */
     private void createJTable(CyTable cyTable) {
         tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
         System.out.println(tableModel.getColumnCount());
@@ -535,72 +548,6 @@ public class EnrichmentCytoPanel extends JPanel
         }
         tableModel.fireTableDataChanged();
 
-    }
-
-    private Map<EnrichmentTerm, String> getUserSelectedTerms() {
-        Map<EnrichmentTerm, String> selectedTerms = new LinkedHashMap<EnrichmentTerm, String>();
-        CyNetwork network = applicationManager.getCurrentNetwork();
-        if (network == null)
-            return selectedTerms;
-
-        CyTable currTable = ModelUtils.getEnrichmentTable(registrar, network,
-                TermSource.ALL.getTable());
-        if (currTable == null || currTable.getRowCount() == 0) {
-            return selectedTerms;
-        }
-        for (CyRow row : currTable.getAllRows()) {
-            if (currTable.getColumn(EnrichmentTerm.colChartColor) != null
-                    && row.get(EnrichmentTerm.colChartColor, String.class) != null
-                    && !row.get(EnrichmentTerm.colChartColor, String.class).equals("")
-                    && !row.get(EnrichmentTerm.colChartColor, String.class).equals("#ffffff")) {
-                String selTerm = row.get(EnrichmentTerm.colName, String.class);
-                if (selTerm != null) {
-                    EnrichmentTerm enrTerm = new EnrichmentTerm(selTerm,
-                            row.get(EnrichmentTerm.colDescription, String.class),
-                            row.get(EnrichmentTerm.colSource, String.class),
-                            row.get(EnrichmentTerm.colPvalue, Double.class),
-                            row.get(EnrichmentTerm.colGoshv, Double.class),
-                            row.get(EnrichmentTerm.colIsSignificant, Boolean.class),
-                            row.get(EnrichmentTerm.colEffectiveDomainSize, Integer.class),
-                            row.get(EnrichmentTerm.colIntersectionSize, Integer.class),
-                            row.get(EnrichmentTerm.colTermSize, Integer.class),
-                            row.get(EnrichmentTerm.colPrecision, Double.class),
-                            row.get(EnrichmentTerm.colRecall, Double.class));
-                    selectedTerms.put(enrTerm, row.get(EnrichmentTerm.colChartColor, String.class));
-                }
-            }
-        }
-        return selectedTerms;
-    }
-
-    public void resetCharts() {
-        CyNetwork network = applicationManager.getCurrentNetwork();
-        if (network == null || tableModel == null)
-            return;
-
-        CyTable nodeTable = network.getDefaultNodeTable();
-        // replace columns
-        ModelUtils.replaceListColumnIfNeeded(nodeTable, String.class,
-                EnrichmentTerm.colEnrichmentTermsNames);
-        ModelUtils.replaceListColumnIfNeeded(nodeTable, Integer.class,
-                EnrichmentTerm.colEnrichmentTermsIntegers);
-        ModelUtils.replaceColumnIfNeeded(nodeTable, String.class,
-                EnrichmentTerm.colEnrichmentPassthrough);
-
-        // remove colors from table?
-        CyTable currTable = ModelUtils.getEnrichmentTable(registrar, network,
-                TermSource.ALL.getTable());
-        if (currTable == null || currTable.getRowCount() == 0) {
-            return;
-        }
-        for (CyRow row : currTable.getAllRows()) {
-            if (currTable.getColumn(EnrichmentTerm.colChartColor) != null
-                    && row.get(EnrichmentTerm.colChartColor, String.class) != null
-                    && !row.get(EnrichmentTerm.colChartColor, String.class).equals("")) {
-                row.set(EnrichmentTerm.colChartColor, "");
-            }
-        }
-        tableModel.fireTableDataChanged();
     }
 
     @Override
