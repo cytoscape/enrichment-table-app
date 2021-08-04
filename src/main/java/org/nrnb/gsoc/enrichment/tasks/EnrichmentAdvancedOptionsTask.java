@@ -37,21 +37,12 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             params="slider=true", gravity = 109.0)
     public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.5, 1.0, false, false);
 
-    @Tunable(description = "Return all results",
-            longDescription = "Boolean. Default false. If true, the API also returns results that are below the significance threshold.",
-            groups = {"Optional settings"},
-            tooltip = "<html>Default false. If true, the API also returns results that are below the significance threshold.</html>")
-    public boolean all_results = false;
     @Tunable(description = "Decides if electronic annotations should be excluded or not",
             longDescription = "Unless this is set to true, we only show electronic annotations should be included.",
             groups = {"Optional settings"},
             tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
-    public boolean no_iea = false;
-    @Tunable(description = "Decides if we should return under-represented functional terms or not",
-            longDescription = "Unless this is set to true, we only show electronic annotations should be included.",
-            groups = {"Optional settings"},
-            tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
-    public boolean measure_underrepresentation = false;
+    public boolean no_iea = true;
+
 
     @Tunable(description = "Type of testing correction method",
             tooltip = "Set the type of testing correction method",
