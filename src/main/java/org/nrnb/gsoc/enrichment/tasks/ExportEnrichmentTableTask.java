@@ -40,7 +40,7 @@ public class ExportEnrichmentTableTask extends AbstractTask {
 
     @Override
     public void run(TaskMonitor taskMonitor) throws Exception {
-        taskMonitor.setTitle("Export gProfiler Enrichment table");
+        taskMonitor.setTitle("Export Enrichment table");
         ExportTableTaskFactory exportTF = registrar.getService(ExportTableTaskFactory.class);
         System.out.println(selectedTable);
         if(network==null){
@@ -53,7 +53,7 @@ public class ExportEnrichmentTableTask extends AbstractTask {
             System.out.println("export table " + selectedTable + " to " + file.getAbsolutePath());
             TaskIterator ti = exportTF.createTaskIterator(selectedTable, file);
             insertTasksAfterCurrentTask(ti);
-            System.out.println("Export gProfiler Enrichment table");
+            System.out.println("Export Enrichment table");
         }
     }
 
