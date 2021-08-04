@@ -149,11 +149,22 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
 		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,!nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
+		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
+		CyTableManager tableManager = registrar.getService(CyTableManager.class);
+		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
+		tableManager.addTable(enrichmentTable);
 		if(result==null){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no results, possibly due to an error.");
 			monitor.setStatusMessage("Enrichment retrieval returned no results, due to invalid Query Parameters");
 			this.noSignificant = true;
+			if(enrichmentPanel==null){
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+			} else{
+				enrichmentPanel.initPanel(true);
+			}
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -162,6 +173,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
 			this.noSignificant = true;
+			if(enrichmentPanel==null){
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+			} else{
+				enrichmentPanel.initPanel(true);
+			}
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -172,11 +188,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		for(String node : nodeNameList){
 			System.out.print(node+" ");
 		}
-		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
-		CyTableManager tableManager = registrar.getService(CyTableManager.class);
-		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
-		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
-		tableManager.addTable(enrichmentTable);
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
 		List<String> nodeNames = new ArrayList<String> (nodeNameList);
 		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,stringNodesMap) ;
@@ -203,7 +214,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colGenes,term.getGenes());
 		}
 		System.out.println(enrichmentTable.getTitle());
-		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		/**
 		 * Check if we already show the cytopanel or not
