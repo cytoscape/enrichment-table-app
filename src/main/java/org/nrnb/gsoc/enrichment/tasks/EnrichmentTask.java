@@ -200,7 +200,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colName, term.getName());
 			row.set(EnrichmentTerm.colDescription, term.getDescription());
 			row.set(EnrichmentTerm.colPvalue, term.getPValue());
-			row.set(EnrichmentTerm.colChartColor, "");
 			row.set(EnrichmentTerm.colGenes,term.getGenes());
 		}
 		System.out.println(enrichmentTable.getTitle());

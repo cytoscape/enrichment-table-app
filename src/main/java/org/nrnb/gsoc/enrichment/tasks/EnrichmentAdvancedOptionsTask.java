@@ -100,8 +100,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             // save values to network
             ModelUtils.setNetSignificanceThresholdMethod(network, significance_threshold_method.getSelectedValue());
             ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue().toString());
-            ModelUtils.setNetAllResults(network, all_results);
-            ModelUtils.setNetMeasureUnderrepresentation(network, measure_underrepresentation);
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
         }

@@ -165,9 +165,7 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colPvalue) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colPvalue, Double.class, false);
         }
-        if (enrichmentTable.getColumn(EnrichmentTerm.colChartColor) == null) {
-            enrichmentTable.createColumn(EnrichmentTerm.colChartColor, String.class, false);
-        }
+
         if (enrichmentTable.getColumn(EnrichmentTerm.colDescription) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colDescription, String.class, false);
         }

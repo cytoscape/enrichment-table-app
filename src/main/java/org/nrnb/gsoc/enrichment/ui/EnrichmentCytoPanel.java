@@ -77,7 +77,6 @@ public class EnrichmentCytoPanel extends JPanel
 
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butFilterName = "Filter enrichment table";
-    final String butDrawChartsName = "Draw charts using default color palette";
     // final String butResetTableName = "Reset result table";
     final String butEnrichmentMapName = "Create EnrichmentMap";
     // final String butAnalyzedNodesName = "Select all analyzed nodes";
@@ -223,7 +222,6 @@ public class EnrichmentCytoPanel extends JPanel
 
         butDrawCharts = new JButton(chartIcon);
         butDrawCharts.addActionListener(this);
-        butDrawCharts.setToolTipText(butDrawChartsName);
         butDrawCharts.setBorderPainted(false);
         butDrawCharts.setContentAreaFilled(false);
         butDrawCharts.setFocusPainted(false);
@@ -322,15 +320,6 @@ public class EnrichmentCytoPanel extends JPanel
         butFilter.setFocusPainted(false);
         butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
         butFilter.setEnabled(false);
-
-        butDrawCharts = new JButton(chartIcon);
-        butDrawCharts.addActionListener(this);
-        butDrawCharts.setToolTipText(butDrawChartsName);
-        butDrawCharts.setBorderPainted(false);
-        butDrawCharts.setContentAreaFilled(false);
-        butDrawCharts.setFocusPainted(false);
-        butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
-        butDrawCharts.setEnabled(false);
 
         /**
          * JComboBox for setting the default value of the node to be chosen for performing the query
@@ -518,7 +507,6 @@ public class EnrichmentCytoPanel extends JPanel
             filtRow.set(EnrichmentTerm.colGenes, row.getList(EnrichmentTerm.colGenes, String.class));
             filtRow.set(EnrichmentTerm.colGenesSUID, row.getList(EnrichmentTerm.colGenesSUID, Long.class));
             filtRow.set(EnrichmentTerm.colNetworkSUID, row.get(EnrichmentTerm.colNetworkSUID, Long.class));
-            filtRow.set(EnrichmentTerm.colChartColor, "");
         }
     }
 
@@ -543,7 +531,7 @@ public class EnrichmentCytoPanel extends JPanel
             if (enrichmentTable.getColumn(EnrichmentTerm.colName) != null
                     && row.get(EnrichmentTerm.colName, String.class) != null
                     && row.get(EnrichmentTerm.colName, String.class).equals(termName)) {
-                row.set(EnrichmentTerm.colChartColor, "");
+             //   row.set(EnrichmentTerm.colChartColor, "");
             }
         }
         tableModel.fireTableDataChanged();

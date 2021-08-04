@@ -135,11 +135,10 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
     public static final String colNetworkSUID = "network.SUID";// session unique id
 
-    public static final String colChartColor = "chart color"; // Data visualization option -> takes the enrichment table and visualize
 
 
-    public static final String[] swingColumnsEnrichment = new String[] { colChartColor, colTermID, colName, colDescription, colPvalue, colGenes};
-    public static final String[] swingColumnsEnrichmentOld = new String[] { colChartColor, colName, colDescription, colPvalue,
+    public static final String[] swingColumnsEnrichment = new String[] {  colTermID, colName, colDescription, colPvalue, colGenes};
+    public static final String[] swingColumnsEnrichmentOld = new String[] { colName, colDescription, colPvalue,
             colEffectiveDomainSizeOld,colGenes, colGenesSUID };
 
     public static final String colEnrichmentTermsNames = "enrichmentTermsNames";
