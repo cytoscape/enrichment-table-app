@@ -35,7 +35,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             exampleStringValue = "0.05",
             groups = {"Optional settings"},
             params="slider=true", gravity = 109.0)
-    public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.5, 1.0, false, false);
+    public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.05, 1.0, false, false);
 
     @Tunable(description = "Decides if electronic annotations should be excluded or not",
             longDescription = "Unless this is set to true, we only show electronic annotations should be included.",
@@ -102,6 +102,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue().toString());
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
+            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
         }
         return;
     }

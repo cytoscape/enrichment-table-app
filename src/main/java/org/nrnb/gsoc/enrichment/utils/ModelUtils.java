@@ -28,10 +28,10 @@ public class ModelUtils {
 
     // Node information
     public static String CANONICAL = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
-    public static String DISPLAY = "display name";
+    public static String DISPLAY = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "display name";
     public static String FULLNAME = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "full name";
-    public static String ID = "@id";
-    public static String QUERYTERM = "query term";
+    public static String ID = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "@id";
+    public static String QUERYTERM = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "query term";
     public static String PROFILERID = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "database identifier";
 
     public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
@@ -44,7 +44,6 @@ public class ModelUtils {
 
 
     // Network information
-    public static String CONFIDENCE = "confidence score";
     public static String NET_ENRICHMENT_SETTINGS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "enrichmentSettings";
     public static String NET_ORGANISMS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "organisms";
     public static String NET_GENE_ID_COLUMN = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "Gene ID Column";
@@ -59,11 +58,6 @@ public class ModelUtils {
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
     // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
     public static int DEF_VIEW_THRESHOLD = 3000;
-    public static String VIEW_THRESHOLD = "viewThreshold";
-
-    public static String EMPTYLINE = "--------";
-
-    public static String REQUERY_TITLE = "Re-query network?";
 
     /**
      *
