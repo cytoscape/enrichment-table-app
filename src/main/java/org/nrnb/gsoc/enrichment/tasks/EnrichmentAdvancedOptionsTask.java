@@ -62,7 +62,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             longDescription="Column to choose for getting GeneIDs.",
             exampleStringValue = "LABEL",
             params="lookup=begins", groups={"Required settings"}, gravity=10.0)
-    public ListSingleSelection<CyColumn> geneID;
+    public ListSingleSelection<String> geneID;
 
     public Map<String,String> scientificNametoID;
 
@@ -78,8 +78,17 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 speciesList.add(it.getKey());
             }
             organism = new ListSingleSelection<String>(speciesList);
+            organism.setSelectedValue("hsapiens");
+            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
         }
-        geneID = new ListSingleSelection<CyColumn>(new ArrayList<CyColumn>(nodeTable.getColumns()));
+        List<String> stringCol = new ArrayList<String>();
+        for (CyColumn col : nodeTable.getColumns()) {
+            if (col.getType().equals(String.class)) {
+                stringCol.add(col.getName());
+            }
+        }
+        geneID = new ListSingleSelection<String>(stringCol);
+        ModelUtils.setNetGeneIDColumn(network,"name");
         significance_threshold_method = new ListSingleSelection<String>(new ArrayList<String>(){
             {
                 add("g_SCS");
