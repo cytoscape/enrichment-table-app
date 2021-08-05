@@ -78,7 +78,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 speciesList.add(it.getKey());
             }
             organism = new ListSingleSelection<String>(speciesList);
-            organism.setSelectedValue("hsapiens");
+            organism.setSelectedValue("Homo Sapiens");
             ModelUtils.setNetOrganism(network,organism.getSelectedValue());
         }
         List<String> stringCol = new ArrayList<String>();
@@ -88,6 +88,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             }
         }
         geneID = new ListSingleSelection<String>(stringCol);
+        geneID.setSelectedValue("name");
         ModelUtils.setNetGeneIDColumn(network,"name");
         significance_threshold_method = new ListSingleSelection<String>(new ArrayList<String>(){
             {
