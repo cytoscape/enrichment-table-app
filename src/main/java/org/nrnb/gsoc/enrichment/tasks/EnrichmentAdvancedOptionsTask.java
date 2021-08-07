@@ -79,7 +79,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             }
             organism = new ListSingleSelection<String>(speciesList);
             organism.setSelectedValue("Homo Sapiens");
-            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
+            ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
         }
         List<String> stringCol = new ArrayList<String>();
         for (CyColumn col : nodeTable.getColumns()) {
@@ -112,7 +112,11 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue().toString());
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
-            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
+            if(scientificNametoID.containsKey(organism.getSelectedValue())){
+                ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
+            } else{
+                monitor.setStatusMessage("Could not find organism. Your entry is incorrect");
+            }
         }
         return;
     }

@@ -35,7 +35,7 @@ public class ModelUtils {
 
     public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
 
-    public static Map<String,String> scientificNametoID = null;
+    public static Map<String,String> scientificNametoID = ModelUtils.getOrganisms();
 
     public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
     public static int SECOND_SEGMENT_LENGTH = 3;

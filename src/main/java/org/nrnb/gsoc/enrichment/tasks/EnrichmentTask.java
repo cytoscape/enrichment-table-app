@@ -21,6 +21,8 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.*;
 
+import static org.nrnb.gsoc.enrichment.utils.ModelUtils.scientificNametoID;
+
 /**
  * @author ighosh98
  * @description Runs the gProfiler task to fetch data and populate the table
@@ -249,7 +251,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		System.out.println(query);
 		// TODO: add a box for taking this as an input
 		if(ModelUtils.getNetOrganism(network)!=null){
-			parameters.put("organism",ModelUtils.getNetOrganism(network));
+			parameters.put("organism", scientificNametoID.get(ModelUtils.getNetOrganism(network)));
 		} else{
 			parameters.put("organism","hsapiens");
 		}
