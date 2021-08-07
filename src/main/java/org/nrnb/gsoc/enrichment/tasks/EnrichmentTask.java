@@ -154,7 +154,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
 		CyTableManager tableManager = registrar.getService(CyTableManager.class);
-		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colID,Long.class,false, true);
 		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
 		tableManager.addTable(enrichmentTable);
 		if(result==null){
@@ -191,6 +191,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			System.out.print(node+" ");
 		}
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
+		System.out.println(enrichmentTable.getColumns());;
+
 		List<String> nodeNames = new ArrayList<String> (nodeNameList);
 		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,stringNodesMap) ;
 
@@ -210,9 +212,16 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			// populate all other values that need to be entered into the table
 			EnrichmentTerm term = processTerms.get(i);
 			CyRow row = enrichmentTable.getRow((long) i);
+			row.set(EnrichmentTerm.colTermID,term.getTermID());
 			row.set(EnrichmentTerm.colName, term.getName());
 			row.set(EnrichmentTerm.colDescription, term.getDescription());
 			row.set(EnrichmentTerm.colPvalue, term.getPValue());
+			row.set(EnrichmentTerm.colQuerySize,term.getQuerySize());
+			row.set(EnrichmentTerm.colEffectiveDomainSize,term.getEffectiveDomainSize());
+			row.set(EnrichmentTerm.colTermSize,term.getTermSize());
+			row.set(EnrichmentTerm.colIntersectionSize,term.getIntersectionSize());
+			row.set(EnrichmentTerm.colPrecision,term.getPrecision());
+			row.set(EnrichmentTerm.colRecall,term.getRecall());
 			row.set(EnrichmentTerm.colGenes,term.getGenes());
 		}
 		System.out.println(enrichmentTable.getTitle());

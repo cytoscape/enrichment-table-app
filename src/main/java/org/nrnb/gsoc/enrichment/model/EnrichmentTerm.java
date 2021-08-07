@@ -37,6 +37,9 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     double recall;
 
 
+    String termID;//same as native
+
+
     List<String> genes;
     List<Long> nodes;
 
@@ -114,10 +117,11 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final int chartColumnCol = 1;
 
     public static final String colSource = "source";
+    public static final String colID = "id";
     public static final String colTermID = "term id"; //native
     public static final String colName = "term name";
     public static final String colDescription = "description";
-    public static final String colPvalue = "p-value";
+    public static final String colPvalue = "adjusted p-value";
     public static final String colGoshv = "goshv";
     public static final String colIsSignificant = "Significant";
     public static final String colEffectiveDomainSize = "# genes";
@@ -126,7 +130,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colQuerySize = "Query Size";
     public static final String colPrecision = "precision";
     public static final String colRecall = "recall";
-    public static final String colSourceOrder = "Source Order";
+//    public static final String colSourceOrder = "Source Order";
     public static final String colGroupID = "Group ID";
     public static final String colGenes = "genes"; // list of genes
 
@@ -137,13 +141,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
 
 
-    public static final String[] swingColumnsEnrichment = new String[] {  colTermID, colName, colDescription, colPvalue, colGenes};
-    public static final String[] swingColumnsEnrichmentOld = new String[] { colName, colDescription, colPvalue,
-            colEffectiveDomainSizeOld,colGenes, colGenesSUID };
+    public static final String[] swingColumnsEnrichment = new String[] {  colID, colTermID, colName, colDescription, colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall, colGenes};
 
-    public static final String colEnrichmentTermsNames = "enrichmentTermsNames";
-    public static final String colEnrichmentTermsIntegers = "enrichmentTermsIntegers";
-    public static final String colEnrichmentPassthrough = "enrichmentPassthrough";
     public static final int nameColumn = 2;
     public static final int pvalueColumn = 4;
 
@@ -201,6 +200,27 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.recall = recall;
 //        this.genes = new ArrayList<String>();
 //        this.nodes = new ArrayList<Long>();
+    }
+
+    /**
+     * All getters and setters of the API response fields
+     */
+    public int getQuerySize() {
+        return querySize;
+    }
+
+    public void setQuerySize(int querySize) {
+        this.querySize = querySize;
+    }
+
+    int querySize;
+
+    public String getTermID() {
+        return termID;
+    }
+
+    public void setTermID(String termID) {
+        this.termID = termID;
     }
 
     public String getName() {

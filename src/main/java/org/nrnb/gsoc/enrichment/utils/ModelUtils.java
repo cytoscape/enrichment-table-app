@@ -162,6 +162,28 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colDescription) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colDescription, String.class, false);
         }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colTermID) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colTermID, String.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colIntersectionSize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colIntersectionSize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colEffectiveDomainSize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colEffectiveDomainSize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colTermSize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colTermSize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colPrecision) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colPrecision, Double.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colQuerySize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colQuerySize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colRecall) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colRecall, Double.class, false);
+        }
+
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
             enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
         }
@@ -520,6 +542,10 @@ public class ModelUtils {
                 double recall = Double.parseDouble(content);
                 currTerm.setRecall(recall);
             }
+            if(enr.containsKey("native")){
+                String content = enr.get("native").toString();
+                currTerm.setTermID(content);
+            }
             if(enr.containsKey("goshv")){
                 String content = enr.get("goshv").toString();
                 double goshv = Double.parseDouble(content);
@@ -530,11 +556,21 @@ public class ModelUtils {
                 int termSize = Integer.parseInt(content);
                 currTerm.setTermSize(termSize);
             }
+            if(enr.containsKey("query_size")){
+                String content = enr.get("query_size").toString();
+                int termSize = Integer.parseInt(content);
+                currTerm.setQuerySize(termSize);
+            }
             if(enr.containsKey("significant")){
                 currTerm.setSignificant(((Boolean) enr.get("significant")).booleanValue());
             }
             if(enr.containsKey("source")){
-                currTerm.setSource((String) enr.get("source"));
+                String content = enr.get("source").toString();
+                if(content==null){
+                    currTerm.setSource((String) "");
+                } else{
+                    currTerm.setSource((String) content);
+                }
             }
             if(enr.containsKey("name")){
                 currTerm.setName((String) enr.get("name"));
