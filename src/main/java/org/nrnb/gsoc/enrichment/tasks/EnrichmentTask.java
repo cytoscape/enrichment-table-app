@@ -147,7 +147,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,!nodeList.isEmpty());
+		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
@@ -254,7 +254,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			parameters.put("organism","hsapiens");
 		}
 		System.out.println(parameters.get("organism"));
-		parameters.put("query",query);
+		if(query==null){
+			parameters.put("query","");
+ 		} else{
+			parameters.put("query",query);
+		}
 		return parameters;
 	}
 

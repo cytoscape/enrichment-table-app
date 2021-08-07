@@ -23,8 +23,8 @@ import java.util.*;
 public class ModelUtils {
 
     // Namespaces
-    public static String ENRICHMENT_NAMESPACE = "enrichmenttable";
-    public static String NAMESPACE_SEPARATOR = "::";
+    public static String ENRICHMENT_NAMESPACE = "";
+    public static String NAMESPACE_SEPARATOR = "";
     // Node information
     public static String CANONICAL = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
     public static String DISPLAY = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "display name";
@@ -684,21 +684,6 @@ public class ModelUtils {
         return network.getRow(network).get(NET_NO_IEA, Boolean.class);
     }
 
-    /**
-     * measure_underrepresentation setter
-     */
-    public static void setNetMeasureUnderrepresentation(CyNetwork network, Boolean allResults) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_MEASURE_UNDERREPRESENTATION);
-        network.getRow(network).set(NET_MEASURE_UNDERREPRESENTATION, allResults);
-    }
-    /**
-     * measure_underrepresentation getter
-     */
-    public static Boolean getNetMeasureUnderrepresentation(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_MEASURE_UNDERREPRESENTATION) == null)
-            return null;
-        return network.getRow(network).get(NET_MEASURE_UNDERREPRESENTATION, Boolean.class);
-    }
     /**
      * all_results setter
      */

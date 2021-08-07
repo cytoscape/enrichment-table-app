@@ -84,7 +84,7 @@ public class HTTPRequestEngine {
             parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
             System.out.println(parameters.get("user_threshold"));
         }
-        if(ModelUtils.getNetUserThreshold(network)!=null){
+        if(ModelUtils.getNetAllResults(network)!=null){
             runDetailedQuery = true;
             parameters.put("all_results",ModelUtils.getNetAllResults(network));
             System.out.println(parameters.get("all_results"));
@@ -92,10 +92,6 @@ public class HTTPRequestEngine {
         if(ModelUtils.getNetNoIEA(network)!=null){
             runDetailedQuery = true;
             parameters.put("no_iea",ModelUtils.getNetNoIEA(network));
-        }
-        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
-            runDetailedQuery = true;
-            parameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network));
         }
 
 
@@ -128,14 +124,15 @@ public class HTTPRequestEngine {
                 }
             }
         }
-        parameters.put("background",backgroundNodes.toString());
+        if(!backgroundNodes.toString().isEmpty())
+            parameters.put("background",backgroundNodes.toString());
         if(backgroundNodes.toString().isEmpty()){
             parameters.put("domain_scope","annotated");
             System.out.println(parameters.get("domain_scope"));
         } else{
             parameters.put("domain_scope","custom_annotated");
         }
-        System.out.println(backgroundNodes.toString());
+      //  System.out.println(backgroundNodes.toString());
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);
