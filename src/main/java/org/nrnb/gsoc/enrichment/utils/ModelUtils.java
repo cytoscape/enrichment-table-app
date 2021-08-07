@@ -23,8 +23,8 @@ import java.util.*;
 public class ModelUtils {
 
     // Namespaces
-    public static String ENRICHMENT_NAMESPACE = "EnrichmentTable";
-    public static String NAMESPACE_SEPARATOR = "::";
+    public static String ENRICHMENT_NAMESPACE = "";
+    public static String NAMESPACE_SEPARATOR = "";
 
     // Node information
     public static String CANONICAL = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
