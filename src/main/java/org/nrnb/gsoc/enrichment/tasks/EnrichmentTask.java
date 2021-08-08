@@ -81,13 +81,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		nodeList = nodesToFilterBy.getSelectedValues();
 		monitor.setTitle("gProfiler Enrichment Analysis");
 
-		/**
-		 * @description Set default geneID column for making appropriate query request
-		 */
-		if(ModelUtils.getNetGeneIDColumn(network)!=null){
-			network.getRow(network).set(CyNetwork.NAME,ModelUtils.getNetGeneIDColumn(network));
-		}
-
 		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
 				nodesToFilter.add(node.getSUID());
@@ -163,7 +156,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Enrichment retrieval returned no results, due to invalid Query Parameters");
 			this.noSignificant = true;
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
 				enrichmentPanel.initPanel(true);
 			}
@@ -176,7 +169,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
 			this.noSignificant = true;
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
 				enrichmentPanel.initPanel(true);
 			}
@@ -233,7 +226,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
 				enrichmentPanel.setEnrichmentTable(enrichmentTable);
 			}

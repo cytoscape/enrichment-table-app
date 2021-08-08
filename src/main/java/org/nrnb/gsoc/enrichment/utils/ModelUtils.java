@@ -23,8 +23,8 @@ import java.util.*;
 public class ModelUtils {
 
     // Namespaces
-    public static String ENRICHMENT_NAMESPACE = "";
-    public static String NAMESPACE_SEPARATOR = "";
+    public static String ENRICHMENT_NAMESPACE = "EnrichmentTable";
+    public static String NAMESPACE_SEPARATOR = "::";
     // Node information
     public static String CANONICAL = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
     public static String DISPLAY = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "display name";
@@ -610,8 +610,9 @@ public class ModelUtils {
      * @return Column to be chosen for fetching GeneID
      */
     public static String getNetGeneIDColumn(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
-            return null;
+        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null){
+            network.getRow(network).set(NET_GENE_ID_COLUMN, ENRICHMENT_NAMESPACE+NAMESPACE_SEPARATOR+"name");
+        }
         return network.getRow(network).get(NET_GENE_ID_COLUMN, String.class);
     }
 
