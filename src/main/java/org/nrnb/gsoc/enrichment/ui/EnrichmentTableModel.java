@@ -6,7 +6,6 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -198,8 +197,6 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return false;
     }
 
-
-
     // filter by source and nodeSUID
     public void filterByNodeSUID(List<Long> nodesToFilterSUID, boolean annotateAllNodes,
                                  List<TermSource> sources) {
@@ -262,6 +259,9 @@ public class EnrichmentTableModel extends AbstractTableModel {
         return Arrays.copyOf(rowArray, length);
     }
 
+    /**
+     * @description Initialize the data model
+     */
     private void initData() {
         List<CyRow> rows = cyTable.getAllRows();
         rowNames = new Long[rows.size()];

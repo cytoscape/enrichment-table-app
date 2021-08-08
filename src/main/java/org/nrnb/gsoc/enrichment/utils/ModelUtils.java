@@ -25,6 +25,7 @@ public class ModelUtils {
     // Namespaces
     public static String ENRICHMENT_NAMESPACE = "EnrichmentTable";
     public static String NAMESPACE_SEPARATOR = "::";
+
     // Node information
     public static String CANONICAL = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
     public static String DISPLAY = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "display name";
@@ -32,14 +33,10 @@ public class ModelUtils {
     public static String ID = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "@id";
     public static String QUERYTERM = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "query term";
     public static String PROFILERID = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "database identifier";
-
-    public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
-
     public static Map<String,String> scientificNametoID = ModelUtils.getOrganisms();
 
     public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
     public static int SECOND_SEGMENT_LENGTH = 3;
-    public static int FIRST_SEGMENT_LENGTH = MAX_SHORT_NAME_LENGTH - SECOND_SEGMENT_LENGTH - 2;
 
 
     // Network information
@@ -128,7 +125,7 @@ public class ModelUtils {
      * @param registrar
      * @param network
      * @param name
-     * @return
+     * @return the latest enrichment table
      */
     public static CyTable getEnrichmentTable(CyServiceRegistrar registrar, CyNetwork network, String name) {
         CyTableManager tableManager = registrar.getService(CyTableManager.class);
@@ -148,7 +145,7 @@ public class ModelUtils {
     }
 
     /**
-     *
+     * @description Initialize the Enrichment Table
      * @param enrichmentTable
      */
     public static void setupEnrichmentTable(CyTable enrichmentTable) {
@@ -206,7 +203,7 @@ public class ModelUtils {
 
     /**
      *
-     * @return
+     * @return a mapping of organisms actual names to it's code names [ Example "Homo Sapien" : "hsapiens"
      * Reference: https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist/34081506
      */
     public static Map<String,String> getOrganisms() {
@@ -236,7 +233,7 @@ public class ModelUtils {
     }
 
     /**
-     *
+     * @description returns the name of the organism
      * @param scientificNametoID
      * @return
      */
@@ -248,27 +245,12 @@ public class ModelUtils {
         return allSpecies;
     }
 
-    /**
-     *
-     * @param terms
-     * @return
-     */
-    public static double getMaxFdrLogValue(List<EnrichmentTerm> terms) {
-        double maxValue = 0;
-        for (EnrichmentTerm term : terms) {
-            double termValue = -Math.log10(term.getPValue());
-            if (termValue > maxValue)
-                maxValue = termValue;
-        }
-        if (maxValue > 10.0)
-            return 10.0;
-        return maxValue;
-    }
+
 
     /**
-     *
+     * @description converts list to strinf
      * @param list
-     * @return
+     * @return {String} Comma separated List
      */
     public static String listToString(List<?> list) {
         String str = "";
@@ -280,9 +262,9 @@ public class ModelUtils {
     }
 
     /**
-     *
+     * @description Convert comma separated strign to list
      * @param string
-     * @return
+     * @return list
      */
     public static List<String> stringToList(String string) {
         if (string == null || string.length() == 0) return new ArrayList<String>();
@@ -309,6 +291,9 @@ public class ModelUtils {
         network.getRow(network).set(NET_ENRICHMENT_SETTINGS, setting);
     }
 
+    /**
+     * @description Helper function to create column in the enrichment table if there is a need
+     */
     public static void createColumnIfNeeded(CyTable table, Class<?> clazz, String columnName) {
         if (table.getColumn(columnName) != null)
             return;
@@ -319,7 +304,7 @@ public class ModelUtils {
     /**
      *
      * @param network
-     * @return
+     * @return Enrichment Settings
      */
     public static Map<String, String> getEnrichmentSettings(CyNetwork network) {
         Map<String, String> settings = new HashMap<String, String>();
@@ -341,7 +326,7 @@ public class ModelUtils {
      *
      * @param registrar
      * @param network
-     * @return
+     * @return Set of Enrichment tables registered corresponding to a network
      */
     public static Set<CyTable> getEnrichmentTables(CyServiceRegistrar registrar, CyNetwork network) {
         CyTableManager tableManager = registrar.getService(CyTableManager.class);
@@ -364,35 +349,8 @@ public class ModelUtils {
         return netTables;
     }
 
-    /**
-     *
-     */
-    public static class ConfigPropsReader extends AbstractConfigDirPropsReader {
-        ConfigPropsReader(SavePolicy policy, String name) {
-            super(name, "gProfiler.props", policy);
-        }
-    }
 
 
-    // Method to convert terms entered in search text to
-    // appropriate newline-separated string to send to server
-    public static String convertTerms(String terms, boolean splitComma, boolean splitSpaces) {
-        String regexSp = "\\s+(?=((\\\\[\\\\\"]|[^\\\\\"])*\"(\\\\[\\\\\"]|[^\\\\\"])*\")*(\\\\[\\\\\"]|[^\\\\\"])*$)";
-        String regexComma = "[,]+(?=((\\\\[\\\\\"]|[^\\\\\"])*\"(\\\\[\\\\\"]|[^\\\\\"])*\")*(\\\\[\\\\\"]|[^\\\\\"])*$)";
-        if (splitSpaces) {
-            // Substitute newlines for space
-            terms = terms.replaceAll(regexSp, "\n");
-        }
-
-        if (splitComma) {
-            // Substitute newlines for commas
-            terms = terms.replaceAll(regexComma, "\n");
-        }
-
-        // Strip off any blank lines
-        terms = terms.replaceAll("(?m)^\\s*", "");
-        return terms;
-    }
 
     public static void replaceListColumnIfNeeded(CyTable table, Class<?> clazz, String columnName) {
         if (table.getColumn(columnName) != null)
@@ -643,6 +601,7 @@ public class ModelUtils {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_BACKGROUND);
         network.getRow(network).set(NET_BACKGROUND, background);
     }
+
     /**
      * background getter
      */
@@ -659,6 +618,7 @@ public class ModelUtils {
         createColumnIfNeeded(network.getDefaultNetworkTable(), Double.class, NET_USER_THRESHOLD);
         network.getRow(network).set(NET_USER_THRESHOLD, userThreshold);
     }
+
     /**
      * significance_threshold_method getter
      */
@@ -667,7 +627,6 @@ public class ModelUtils {
             return null;
         return network.getRow(network).get(NET_USER_THRESHOLD, Double.class);
     }
-
 
     /**
      * significance_threshold_method setter
@@ -680,6 +639,7 @@ public class ModelUtils {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_SIGNIFICANCE_THRESHOLD_METHOD);
         network.getRow(network).set(NET_SIGNIFICANCE_THRESHOLD_METHOD, significanceThresholdMethod);
     }
+
     /**
      * significance_threshold_method getter
      */
@@ -696,6 +656,7 @@ public class ModelUtils {
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_DOMAIN_SCOPE);
         network.getRow(network).set(NET_DOMAIN_SCOPE, domainScope);
     }
+
     /**
      * no_iea getter
      */
@@ -712,6 +673,7 @@ public class ModelUtils {
         createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_NO_IEA);
         network.getRow(network).set(NET_NO_IEA, noIEA);
     }
+
     /**
      * no_iea getter
      */
@@ -728,6 +690,7 @@ public class ModelUtils {
         createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_ALL_RESULTS);
         network.getRow(network).set(NET_ALL_RESULTS, allResults);
     }
+
     /**
      * all_results getter
      */

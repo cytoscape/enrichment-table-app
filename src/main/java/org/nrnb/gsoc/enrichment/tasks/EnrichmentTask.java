@@ -74,7 +74,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	public void run(TaskMonitor monitor) {
 		// Get services from registrar if needed
-		System.out.println("Running the enrichment task...");
 		List<CyNode> nodeList;
 		Set<String> nodeNameList = new HashSet<String>();
 		List<Long> nodesToFilter = new ArrayList<Long>();
@@ -115,7 +114,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(nodeNameList.isEmpty()){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Task cannot be performed. No nodes selected for enrichment.");
-			System.out.println("Task cannot be performed. No nodes selected for enrichment.");
 			this.noSignificant = true;
 		}
 

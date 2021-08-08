@@ -47,7 +47,6 @@ public class EnrichmentCytoPanel extends JPanel
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
     Map<String, JTable> enrichmentTables;
-    // TODO: Advanced settings panel option
     JPanel topPanel;
     JPanel mainPanel;
     JScrollPane scrollPane;
@@ -64,7 +63,6 @@ public class EnrichmentCytoPanel extends JPanel
     JMenuItem menuItemReset;
     JPopupMenu popupMenu;
     CyTable filteredEnrichmentTable = null;
-    boolean clearSelection = false;
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
 
@@ -77,15 +75,14 @@ public class EnrichmentCytoPanel extends JPanel
 
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butFilterName = "Filter enrichment table";
-    // final String butResetTableName = "Reset result table";
     final String butEnrichmentMapName = "Create EnrichmentMap";
-    // final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Filter enrichment table";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
     CyTableManager tableManager;
+
     public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
         this.registrar = registrar;
         this.result = result;
@@ -129,10 +126,6 @@ public class EnrichmentCytoPanel extends JPanel
         return icon;
     }
 
-    // TODO: Rewrite a simpler implementation with less fancy stuff
-    /**
-     * @param e
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         CyNetwork network = applicationManager.getCurrentNetwork();
@@ -230,7 +223,6 @@ public class EnrichmentCytoPanel extends JPanel
         /**
          * JComboBox for setting the default value of the node to be chosen for performing the query
          */
-
 
         // Add enrichment map button here if EnrichmentMap is loaded
         butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));

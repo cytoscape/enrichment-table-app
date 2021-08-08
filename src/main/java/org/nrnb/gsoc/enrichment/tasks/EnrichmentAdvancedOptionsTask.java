@@ -24,8 +24,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyServiceRegistrar registrar;
     final CyApplicationManager applicationManager;
     final CyNetwork network;
-
-
     final CyTable nodeTable;
 
     @Tunable(description = "Adjusted p-value threshold",
@@ -42,7 +40,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             groups = {"Optional settings"},
             tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
     public boolean no_iea = true;
-
 
     @Tunable(description = "Type of testing correction method",
             tooltip = "Set the type of testing correction method",
@@ -125,5 +122,4 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     public String getTitle() {
         return "Settings";
     }
-
 }

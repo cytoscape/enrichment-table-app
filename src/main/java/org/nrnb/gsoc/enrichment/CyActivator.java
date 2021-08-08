@@ -70,10 +70,6 @@ public class CyActivator extends AbstractCyActivator {
 		properties.put(ServiceProperties.COMMAND_NAMESPACE, "enrichment");
 		properties.put(ServiceProperties.COMMAND, "analysis");
 
-		// Our menu item should only be enabled if at least one network
-		// view exists.
-		// properties.put(ServiceProperties.ENABLE_FOR, "networkAndView");
-		System.out.println("in the cyActivator file before register service");
 
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
