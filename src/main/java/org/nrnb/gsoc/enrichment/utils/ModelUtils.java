@@ -23,7 +23,7 @@ import java.util.*;
 public class ModelUtils {
 
     // Namespaces
-    public static String ENRICHMENT_NAMESPACE = "enrichmenttable";
+    public static String ENRICHMENT_NAMESPACE = "EnrichmentTable";
     public static String NAMESPACE_SEPARATOR = "::";
     // Node information
     public static String CANONICAL = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "canonical name";
@@ -35,7 +35,7 @@ public class ModelUtils {
 
     public static List<String> ignoreKeys = new ArrayList<String>(Arrays.asList("image", "canonical", "@id", "description"));
 
-    public static Map<String,String> scientificNametoID = null;
+    public static Map<String,String> scientificNametoID = ModelUtils.getOrganisms();
 
     public static int MAX_SHORT_NAME_LENGTH = 15; // 15 characters, or 14 characters plus the dot
     public static int SECOND_SEGMENT_LENGTH = 3;
@@ -162,6 +162,28 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colDescription) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colDescription, String.class, false);
         }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colTermID) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colTermID, String.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colIntersectionSize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colIntersectionSize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colEffectiveDomainSize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colEffectiveDomainSize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colTermSize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colTermSize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colPrecision) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colPrecision, Double.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colQuerySize) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colQuerySize, Integer.class, false);
+        }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colRecall) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colRecall, Double.class, false);
+        }
+
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
             enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
         }
@@ -520,6 +542,10 @@ public class ModelUtils {
                 double recall = Double.parseDouble(content);
                 currTerm.setRecall(recall);
             }
+            if(enr.containsKey("native")){
+                String content = enr.get("native").toString();
+                currTerm.setTermID(content);
+            }
             if(enr.containsKey("goshv")){
                 String content = enr.get("goshv").toString();
                 double goshv = Double.parseDouble(content);
@@ -530,11 +556,21 @@ public class ModelUtils {
                 int termSize = Integer.parseInt(content);
                 currTerm.setTermSize(termSize);
             }
+            if(enr.containsKey("query_size")){
+                String content = enr.get("query_size").toString();
+                int termSize = Integer.parseInt(content);
+                currTerm.setQuerySize(termSize);
+            }
             if(enr.containsKey("significant")){
                 currTerm.setSignificant(((Boolean) enr.get("significant")).booleanValue());
             }
             if(enr.containsKey("source")){
-                currTerm.setSource((String) enr.get("source"));
+                String content = enr.get("source").toString();
+                if(content==null){
+                    currTerm.setSource((String) "");
+                } else{
+                    currTerm.setSource((String) content);
+                }
             }
             if(enr.containsKey("name")){
                 currTerm.setName((String) enr.get("name"));
@@ -574,8 +610,9 @@ public class ModelUtils {
      * @return Column to be chosen for fetching GeneID
      */
     public static String getNetGeneIDColumn(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null)
-            return null;
+        if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null){
+            network.getRow(network).set(NET_GENE_ID_COLUMN, ENRICHMENT_NAMESPACE+NAMESPACE_SEPARATOR+"name");
+        }
         return network.getRow(network).get(NET_GENE_ID_COLUMN, String.class);
     }
 
@@ -684,21 +721,6 @@ public class ModelUtils {
         return network.getRow(network).get(NET_NO_IEA, Boolean.class);
     }
 
-    /**
-     * measure_underrepresentation setter
-     */
-    public static void setNetMeasureUnderrepresentation(CyNetwork network, Boolean allResults) {
-        createColumnIfNeeded(network.getDefaultNetworkTable(), Boolean.class, NET_MEASURE_UNDERREPRESENTATION);
-        network.getRow(network).set(NET_MEASURE_UNDERREPRESENTATION, allResults);
-    }
-    /**
-     * measure_underrepresentation getter
-     */
-    public static Boolean getNetMeasureUnderrepresentation(CyNetwork network) {
-        if (network.getDefaultNetworkTable().getColumn(NET_MEASURE_UNDERREPRESENTATION) == null)
-            return null;
-        return network.getRow(network).get(NET_MEASURE_UNDERREPRESENTATION, Boolean.class);
-    }
     /**
      * all_results setter
      */

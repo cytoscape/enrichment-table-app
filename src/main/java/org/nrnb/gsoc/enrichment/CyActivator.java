@@ -77,7 +77,7 @@ public class CyActivator extends AbstractCyActivator {
 
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null,null);
+		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null);
 		registrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
 		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());

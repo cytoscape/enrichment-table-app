@@ -21,6 +21,8 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.*;
 
+import static org.nrnb.gsoc.enrichment.utils.ModelUtils.scientificNametoID;
+
 /**
  * @author ighosh98
  * @description Runs the gProfiler task to fetch data and populate the table
@@ -78,13 +80,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		List<Long> nodesToFilter = new ArrayList<Long>();
 		nodeList = nodesToFilterBy.getSelectedValues();
 		monitor.setTitle("gProfiler Enrichment Analysis");
-
-		/**
-		 * @description Set default geneID column for making appropriate query request
-		 */
-		if(ModelUtils.getNetGeneIDColumn(network)!=null){
-			network.getRow(network).set(CyNetwork.NAME,ModelUtils.getNetGeneIDColumn(network));
-		}
 
 		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
@@ -147,12 +142,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,!nodeList.isEmpty());
+		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
 		CyTableManager tableManager = registrar.getService(CyTableManager.class);
-		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colID,Long.class,false, true);
 		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
 		tableManager.addTable(enrichmentTable);
 		if(result==null){
@@ -161,7 +156,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Enrichment retrieval returned no results, due to invalid Query Parameters");
 			this.noSignificant = true;
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
 				enrichmentPanel.initPanel(true);
 			}
@@ -174,7 +169,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
 			this.noSignificant = true;
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
 				enrichmentPanel.initPanel(true);
 			}
@@ -189,6 +184,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			System.out.print(node+" ");
 		}
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
+		System.out.println(enrichmentTable.getColumns());;
+
 		List<String> nodeNames = new ArrayList<String> (nodeNameList);
 		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,stringNodesMap) ;
 
@@ -208,9 +205,16 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			// populate all other values that need to be entered into the table
 			EnrichmentTerm term = processTerms.get(i);
 			CyRow row = enrichmentTable.getRow((long) i);
+			row.set(EnrichmentTerm.colTermID,term.getTermID());
 			row.set(EnrichmentTerm.colName, term.getName());
 			row.set(EnrichmentTerm.colDescription, term.getDescription());
 			row.set(EnrichmentTerm.colPvalue, term.getPValue());
+			row.set(EnrichmentTerm.colQuerySize,term.getQuerySize());
+			row.set(EnrichmentTerm.colEffectiveDomainSize,term.getEffectiveDomainSize());
+			row.set(EnrichmentTerm.colTermSize,term.getTermSize());
+			row.set(EnrichmentTerm.colIntersectionSize,term.getIntersectionSize());
+			row.set(EnrichmentTerm.colPrecision,term.getPrecision());
+			row.set(EnrichmentTerm.colRecall,term.getRecall());
 			row.set(EnrichmentTerm.colGenes,term.getGenes());
 		}
 		System.out.println(enrichmentTable.getTitle());
@@ -222,7 +226,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Show enrichment panel");
 			System.out.println("Show enrichment panel");
 			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,enrichmentTable,result);
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
 				enrichmentPanel.setEnrichmentTable(enrichmentTable);
 			}
@@ -249,12 +253,16 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		System.out.println(query);
 		// TODO: add a box for taking this as an input
 		if(ModelUtils.getNetOrganism(network)!=null){
-			parameters.put("organism",ModelUtils.getNetOrganism(network));
+			parameters.put("organism", scientificNametoID.get(ModelUtils.getNetOrganism(network)));
 		} else{
 			parameters.put("organism","hsapiens");
 		}
 		System.out.println(parameters.get("organism"));
-		parameters.put("query",query);
+		if(query==null){
+			parameters.put("query","");
+ 		} else{
+			parameters.put("query",query);
+		}
 		return parameters;
 	}
 
