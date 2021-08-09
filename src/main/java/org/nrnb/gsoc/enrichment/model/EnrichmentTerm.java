@@ -132,7 +132,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colPvalue = "adjusted p-value";
     public static final String colGoshv = "goshv";
     public static final String colIsSignificant = "Significant";
-    public static final String colEffectiveDomainSize = "# genes";
+    public static final String colEffectiveDomainSize = "Background Size";
     public static final String colIntersectionSize = " Intersection Size";
     public static final String colTermSize = "Term Size";
     public static final String colQuerySize = "Query Size";
@@ -159,15 +159,15 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.effectiveDomainSize=0;
         this.intersectionSize =0;
         this.termSize = 0;
-        this.precision =-1.0;
-        this.recall = -1.0;
+        this.precision =0.0;
+        this.recall = 0.0;
     }
 
     public EnrichmentTerm(String enrichmentSource) {
         this.name = "";
         this.description = "";
         this.source = enrichmentSource;
-        this.pvalue = -1.0;
+        this.pvalue = 0.0;
     }
 
     public EnrichmentTerm(String name, String description, String source,
