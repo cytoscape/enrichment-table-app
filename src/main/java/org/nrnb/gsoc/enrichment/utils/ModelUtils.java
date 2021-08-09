@@ -499,6 +499,7 @@ public class ModelUtils {
                 String content = enr.get("recall").toString();
                 double recall = Double.parseDouble(content);
                 currTerm.setRecall(recall);
+                System.out.println(recall);
             }
             if(enr.containsKey("native")){
                 String content = enr.get("native").toString();
@@ -507,7 +508,7 @@ public class ModelUtils {
             if(enr.containsKey("goshv")){
                 String content = enr.get("goshv").toString();
                 double goshv = Double.parseDouble(content);
-                currTerm.setRecall(goshv);
+                //currTerm.setRecall(goshv);
             }
             if(enr.containsKey("term_size")){
                 String content = enr.get("term_size").toString();
