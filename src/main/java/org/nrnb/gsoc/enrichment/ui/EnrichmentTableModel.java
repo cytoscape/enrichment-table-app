@@ -6,7 +6,6 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -65,16 +64,32 @@ public class EnrichmentTableModel extends AbstractTableModel {
         } else if (colName.equals(EnrichmentTerm.colGoshv)) {
             return cyTable.getRow(rowName).get(colName, Double.class);
         } else if (colName.equals(EnrichmentTerm.colTermID)) {
-            return cyTable.getRow(rowName).get(colName, Long.class);
+            return cyTable.getRow(rowName).get(colName, String.class);
         } else if (colName.equals(EnrichmentTerm.colGroupID)) {
             return cyTable.getRow(rowName).get(colName, Long.class);
         } else if (colName.equals(EnrichmentTerm.colTermSize)) {
             return cyTable.getRow(rowName).get(colName, Integer.class);
         } else if (colName.equals(EnrichmentTerm.colGenes)) {
             return cyTable.getRow(rowName).getList(colName, String.class);
-        }else if (colName.equals(EnrichmentTerm.colPvalue)) {
+        } else if (colName.equals(EnrichmentTerm.colID)) {
+            return cyTable.getRow(rowName).get(colName, Long.class);
+        } else if (colName.equals(EnrichmentTerm.colPvalue)) {
             return cyTable.getRow(rowName).get(colName, Double.class);
-        } else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
+        } else if(colName.equals(EnrichmentTerm.colIntersectionSize)){
+            return cyTable.getRow(rowName).get(colName, Integer.class);
+        }
+        else if(colName.equals(EnrichmentTerm.colEffectiveDomainSize)){
+            return cyTable.getRow(rowName).get(colName, Integer.class);
+
+        }
+        else if(colName.equals(EnrichmentTerm.colTermSize)){
+            return cyTable.getRow(rowName).get(colName, Integer.class);
+
+        }
+        else if(colName.equals(EnrichmentTerm.colPrecision)){
+            return cyTable.getRow(rowName).get(colName, Double.class);
+        }
+        else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
             return cyTable.getRow(rowName).getList(colName, Boolean.class);
         } else {
             return cyTable.getRow(rowName).get(colName, String.class);
@@ -100,7 +115,10 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return cyTable.getRow(rowName).get(colName, Double.class);
         } else if (colName.equals(EnrichmentTerm.colGoshv)) {
             return cyTable.getRow(rowName).get(colName, Double.class);
-        } else if (colName.equals(EnrichmentTerm.colTermID)) {
+        } else if(colName.equals(EnrichmentTerm.colID)) {
+            return cyTable.getRow(rowName).get(colName, Long.class);
+        }
+        else if (colName.equals(EnrichmentTerm.colTermID)) {
             return cyTable.getRow(rowName).get(colName, String.class);
         } else if (colName.equals(EnrichmentTerm.colGroupID)) {
             return cyTable.getRow(rowName).get(colName, String.class);
@@ -109,6 +127,22 @@ public class EnrichmentTableModel extends AbstractTableModel {
         } else if (colName.equals(EnrichmentTerm.colGenes)) {
             return cyTable.getRow(rowName).getList(colName, String.class);
         } else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
+            return cyTable.getRow(rowName).getList(colName, Boolean.class);
+        } else if(colName.equals(EnrichmentTerm.colIntersectionSize)){
+            return cyTable.getRow(rowName).get(colName, Integer.class);
+        }
+        else if(colName.equals(EnrichmentTerm.colEffectiveDomainSize)){
+            return cyTable.getRow(rowName).get(colName, Integer.class);
+
+        }
+        else if(colName.equals(EnrichmentTerm.colTermSize)){
+            return cyTable.getRow(rowName).get(colName, Integer.class);
+
+        }
+        else if(colName.equals(EnrichmentTerm.colPrecision)){
+            return cyTable.getRow(rowName).get(colName, Double.class);
+        }
+        else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
             return cyTable.getRow(rowName).getList(colName, Boolean.class);
         } else {
             return cyTable.getRow(rowName).get(colName, String.class);
@@ -128,6 +162,8 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return Double.class;
         } else if (colName.equals(EnrichmentTerm.colGoshv)) {
             return Double.class;
+        } else if (colName.equals(EnrichmentTerm.colID)) {
+            return Long.class;
         } else if (colName.equals(EnrichmentTerm.colTermID)) {
             return String.class;
         } else if (colName.equals(EnrichmentTerm.colGroupID)) {
@@ -138,7 +174,21 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return String.class;
         } else if (colName.equals(EnrichmentTerm.colIsSignificant)) {
             return Boolean.class;
-        } else {
+        } else if(colName.equals(EnrichmentTerm.colIntersectionSize)){
+            return (Integer.class);
+        }
+        else if(colName.equals(EnrichmentTerm.colEffectiveDomainSize)){
+            return Integer.class;
+
+        }
+        else if(colName.equals(EnrichmentTerm.colTermSize)){
+            return Integer.class;
+
+        }
+        else if(colName.equals(EnrichmentTerm.colPrecision)){
+            return Double.class;
+        }
+        else {
             return String.class;
         }
     }
@@ -146,8 +196,6 @@ public class EnrichmentTableModel extends AbstractTableModel {
     public boolean isCellEditable(int row, int col) {
             return false;
     }
-
-
 
     // filter by source and nodeSUID
     public void filterByNodeSUID(List<Long> nodesToFilterSUID, boolean annotateAllNodes,
@@ -163,7 +211,7 @@ public class EnrichmentTableModel extends AbstractTableModel {
         Long[] rowArray = new Long[rows.size()];
         int i = 0;
         for (CyRow row : rows) {
-            Long rowID = row.get(EnrichmentTerm.colTermID, Long.class);
+            Long rowID = row.get(EnrichmentTerm.colID, Long.class);
             if (!shownRows.contains(rowID)) {
                 continue;
             }
@@ -188,7 +236,7 @@ public class EnrichmentTableModel extends AbstractTableModel {
             // implement this again
             String termSource = row.get(EnrichmentTerm.colSource, String.class);
             if (sources.size() == 0 || inSource(sources, termSource)) {
-                rowArray[i] = row.get(EnrichmentTerm.colTermID, Long.class);
+                rowArray[i] = row.get(EnrichmentTerm.colID, Long.class);
                 i++;
             }
         }
@@ -211,13 +259,16 @@ public class EnrichmentTableModel extends AbstractTableModel {
         return Arrays.copyOf(rowArray, length);
     }
 
+    /**
+     * @description Initialize the data model
+     */
     private void initData() {
         List<CyRow> rows = cyTable.getAllRows();
         rowNames = new Long[rows.size()];
         int i = 0;
         System.out.println(rows.size());
         for (CyRow row : rows) {
-            rowNames[i] = row.get(EnrichmentTerm.colTermID, Long.class);
+            rowNames[i] = row.get(EnrichmentTerm.colID, Long.class);
             i++;
         }
     }

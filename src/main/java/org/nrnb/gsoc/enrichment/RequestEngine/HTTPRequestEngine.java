@@ -77,32 +77,20 @@ public class HTTPRequestEngine {
      * @return
      */
     public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
-        boolean runDetailedQuery = false;
 
         if(ModelUtils.getNetUserThreshold(network)!=null){
-            runDetailedQuery = true;
             parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
-            System.out.println(parameters.get("user_threshold"));
         }
-        if(ModelUtils.getNetUserThreshold(network)!=null){
-            runDetailedQuery = true;
+        if(ModelUtils.getNetAllResults(network)!=null){
             parameters.put("all_results",ModelUtils.getNetAllResults(network));
-            System.out.println(parameters.get("all_results"));
         }
         if(ModelUtils.getNetNoIEA(network)!=null){
-            runDetailedQuery = true;
             parameters.put("no_iea",ModelUtils.getNetNoIEA(network));
-        }
-        if(ModelUtils.getNetMeasureUnderrepresentation(network)!=null){
-            runDetailedQuery = true;
-            parameters.put("measure_underrepresentation",ModelUtils.getNetMeasureUnderrepresentation(network));
         }
 
 
         if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
-            runDetailedQuery = true;
             parameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
-            System.out.println(parameters.get("significance_threshold_method"));
         }
 
         StringBuffer backgroundNodes = new StringBuffer("");
@@ -128,14 +116,13 @@ public class HTTPRequestEngine {
                 }
             }
         }
-        parameters.put("background",backgroundNodes.toString());
+        if(!backgroundNodes.toString().isEmpty())
+            parameters.put("background",backgroundNodes.toString());
         if(backgroundNodes.toString().isEmpty()){
             parameters.put("domain_scope","annotated");
-            System.out.println(parameters.get("domain_scope"));
         } else{
             parameters.put("domain_scope","custom_annotated");
         }
-        System.out.println(backgroundNodes.toString());
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
         urlConverter.append(this.basicURL);

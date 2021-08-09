@@ -47,7 +47,6 @@ public class EnrichmentCytoPanel extends JPanel
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
     Map<String, JTable> enrichmentTables;
-    // TODO: Advanced settings panel option
     JPanel topPanel;
     JPanel mainPanel;
     JScrollPane scrollPane;
@@ -64,7 +63,6 @@ public class EnrichmentCytoPanel extends JPanel
     JMenuItem menuItemReset;
     JPopupMenu popupMenu;
     CyTable filteredEnrichmentTable = null;
-    boolean clearSelection = false;
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
 
@@ -77,16 +75,15 @@ public class EnrichmentCytoPanel extends JPanel
 
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butFilterName = "Filter enrichment table";
-    // final String butResetTableName = "Reset result table";
     final String butEnrichmentMapName = "Create EnrichmentMap";
-    // final String butAnalyzedNodesName = "Select all analyzed nodes";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Filter enrichment table";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
     CyTableManager tableManager;
-    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant,CyTable enrichmentTable, JSONObject result) {
+
+    public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
         this.registrar = registrar;
         this.result = result;
         this.setLayout(new BorderLayout());
@@ -95,7 +92,6 @@ public class EnrichmentCytoPanel extends JPanel
         this.iconFont = iconManager.getIconFont(22.0f);
         applicationManager = registrar.getService(CyApplicationManager.class);
         enrichmentTables = new HashMap<String, JTable>();
-        this.enrichmentTable = enrichmentTable;
         this.noSignificant = noSignificant;
         initPanel(this.noSignificant);
     }
@@ -130,10 +126,6 @@ public class EnrichmentCytoPanel extends JPanel
         return icon;
     }
 
-    // TODO: Rewrite a simpler implementation with less fancy stuff
-    /**
-     * @param e
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         CyNetwork network = applicationManager.getCurrentNetwork();
@@ -232,7 +224,6 @@ public class EnrichmentCytoPanel extends JPanel
          * JComboBox for setting the default value of the node to be chosen for performing the query
          */
 
-
         // Add enrichment map button here if EnrichmentMap is loaded
         butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
         butEnrichmentMap.addActionListener(this);
@@ -292,12 +283,16 @@ public class EnrichmentCytoPanel extends JPanel
      */
     public void initPanel(CyNetwork network, boolean noSignificant) {
         this.removeAll();
-
         availableTables = new ArrayList<String>();
+        Set<CyTable> currTables = ModelUtils.getEnrichmentTables(registrar, network);
+        for (CyTable currTable : currTables) {
+            enrichmentTable = currTable;
+            availableTables.add(enrichmentTable.getTitle());
+        }
         if(enrichmentTable==null){
             CyTableManager tableManager = registrar.getService(CyTableManager.class);
             tableFactory = registrar.getService(CyTableFactory.class);
-            enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colTermID,Long.class,false, true);
+            enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colID,Long.class,false, true);
             tableManager.addTable(enrichmentTable);
         }
         createJTable(enrichmentTable);
@@ -421,7 +416,7 @@ public class EnrichmentCytoPanel extends JPanel
      */
     private void createJTable(CyTable cyTable) {
         tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
-        System.out.println(tableModel.getColumnCount());
+        System.out.println("Table model: "+ tableModel.getColumnCount());
         JTable jTable = new JTable(tableModel);
         TableColumnModel tcm = jTable.getColumnModel();
         tcm.getColumn(EnrichmentTerm.pvalueColumn).setCellRenderer(new DecimalFormatRenderer());

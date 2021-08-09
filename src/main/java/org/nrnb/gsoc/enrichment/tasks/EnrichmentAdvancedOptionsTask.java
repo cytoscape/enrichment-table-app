@@ -24,8 +24,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyServiceRegistrar registrar;
     final CyApplicationManager applicationManager;
     final CyNetwork network;
-
-
     final CyTable nodeTable;
 
     @Tunable(description = "Adjusted p-value threshold",
@@ -42,7 +40,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             groups = {"Optional settings"},
             tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
     public boolean no_iea = true;
-
 
     @Tunable(description = "Type of testing correction method",
             tooltip = "Set the type of testing correction method",
@@ -79,7 +76,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             }
             organism = new ListSingleSelection<String>(speciesList);
             organism.setSelectedValue("Homo Sapiens");
-            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
+            ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
         }
         List<String> stringCol = new ArrayList<String>();
         for (CyColumn col : nodeTable.getColumns()) {
@@ -112,7 +109,11 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue().toString());
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
-            ModelUtils.setNetOrganism(network,organism.getSelectedValue());
+            if(scientificNametoID.containsKey(organism.getSelectedValue())){
+                ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
+            } else{
+                monitor.setStatusMessage("Could not find organism. Your entry is incorrect");
+            }
         }
         return;
     }
@@ -121,5 +122,4 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     public String getTitle() {
         return "Settings";
     }
-
 }

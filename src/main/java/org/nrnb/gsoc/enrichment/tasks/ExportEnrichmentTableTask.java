@@ -42,7 +42,6 @@ public class ExportEnrichmentTableTask extends AbstractTask {
     public void run(TaskMonitor taskMonitor) throws Exception {
         taskMonitor.setTitle("Export Enrichment table");
         ExportTableTaskFactory exportTF = registrar.getService(ExportTableTaskFactory.class);
-        System.out.println(selectedTable);
         if(network==null){
             return;
         }
@@ -50,10 +49,8 @@ public class ExportEnrichmentTableTask extends AbstractTask {
             File file = new File(prefix.getAbsolutePath()+selectedTable);
             taskMonitor.showMessage(TaskMonitor.Level.INFO,
                     "export table " + selectedTable + " to " + file.getAbsolutePath());
-            System.out.println("export table " + selectedTable + " to " + file.getAbsolutePath());
             TaskIterator ti = exportTF.createTaskIterator(selectedTable, file);
             insertTasksAfterCurrentTask(ti);
-            System.out.println("Export Enrichment table");
         }
     }
 
