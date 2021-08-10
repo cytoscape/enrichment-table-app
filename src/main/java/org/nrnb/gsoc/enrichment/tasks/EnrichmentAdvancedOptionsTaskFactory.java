@@ -5,7 +5,6 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.task.AbstractNetworkTaskFactory;
 import org.cytoscape.work.TaskIterator;
 
-import java.util.Map;
 
 /**
  * @author ighosh98

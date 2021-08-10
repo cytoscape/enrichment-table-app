@@ -94,6 +94,8 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 add("fdr");
             }
         });
+        //default value
+        significance_threshold_method.setSelectedValue("g_SCS");
     }
 
     //user sets the cycol -> update default -> the run the query
