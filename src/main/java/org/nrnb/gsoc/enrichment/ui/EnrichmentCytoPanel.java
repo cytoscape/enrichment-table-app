@@ -65,7 +65,8 @@ public class EnrichmentCytoPanel extends JPanel
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
     final Font iconFont;
     final CyServiceRegistrar registrar;
-    private static final Icon icon = new TextIcon(ENRICH_LAYERS, getIconFont(20.0f), PROFILER_COLORS, 14, 14);
+    private static final Icon icon = new ImageIcon(
+            EnrichmentCytoPanel.class.getResource("/images/dice20.png"));
     final CyApplicationManager applicationManager;
 
     final String butSettingsName = "Network-specific enrichment panel settings";
