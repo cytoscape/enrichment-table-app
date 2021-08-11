@@ -55,13 +55,8 @@ public class EnrichmentCytoPanel extends JPanel
     public final static String showTable = TermSource.ALL.getTable();
     JLabel labelRows;
     JButton butAdvancedOptions;
-    JButton butDrawCharts;
     JButton butExportTable;
-    JButton butFilter;
     JButton butRunProfiler;
-    JButton butEnrichmentMap;
-    JMenuItem menuItemReset;
-    JPopupMenu popupMenu;
     CyTable filteredEnrichmentTable = null;
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
@@ -74,10 +69,8 @@ public class EnrichmentCytoPanel extends JPanel
     final CyApplicationManager applicationManager;
 
     final String butSettingsName = "Network-specific enrichment panel settings";
-    final String butFilterName = "Filter enrichment table";
-    final String butEnrichmentMapName = "Create EnrichmentMap";
     final String butExportTableDescr = "Export enrichment table";
-    final String butRunProfilerName = "Filter enrichment table";
+    final String butRunProfilerName = "Perform Gene Enrichment";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
@@ -143,20 +136,6 @@ public class EnrichmentCytoPanel extends JPanel
             if (network != null) {
                 tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
             }
-        } else if (e.getSource().equals(menuItemReset)) {
-            // System.out.println("reset color now");
-            Component c = (Component) e.getSource();
-            JPopupMenu popup = (JPopupMenu) c.getParent();
-            JTable table = (JTable) popup.getInvoker();
-            // System.out.println("action listener: " + table.getSelectedRow() + " : " + table.getSelectedColumn());
-            if (table.getSelectedRow() > -1) {
-                resetColor(table.getSelectedRow());
-            } else if(e.getSource().equals(butExportTable)){
-                if (enrichmentTable!=null)
-                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
-            } else if (e.getSource().equals(butAdvancedOptions)) {
-                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
-            }
         }
     }
 
@@ -201,43 +180,14 @@ public class EnrichmentCytoPanel extends JPanel
         butRunProfiler.setFocusPainted(false);
         butRunProfiler.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
 
-        butFilter = new JButton(IconManager.ICON_FILTER);
-        butFilter.setFont(iconFont);
-        butFilter.addActionListener(this);
-        butFilter.setToolTipText(butFilterName);
-        butFilter.setBorderPainted(false);
-        butFilter.setContentAreaFilled(false);
-        butFilter.setFocusPainted(false);
-        butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
-        butFilter.setEnabled(false);
-
-        butDrawCharts = new JButton(chartIcon);
-        butDrawCharts.addActionListener(this);
-        butDrawCharts.setBorderPainted(false);
-        butDrawCharts.setContentAreaFilled(false);
-        butDrawCharts.setFocusPainted(false);
-        butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
-        butDrawCharts.setEnabled(false);
 
         /**
          * JComboBox for setting the default value of the node to be chosen for performing the query
          */
 
         // Add enrichment map button here if EnrichmentMap is loaded
-        butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
-        butEnrichmentMap.addActionListener(this);
-        butEnrichmentMap.setToolTipText(butEnrichmentMapName);
-        butEnrichmentMap.setBorderPainted(false);
-        butEnrichmentMap.setContentAreaFilled(false);
-        butEnrichmentMap.setFocusPainted(false);
-        butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
-        butEnrichmentMap.setEnabled(false);
 
         buttonsPanelLeft.add(butRunProfiler);
-        buttonsPanelLeft.add(butFilter);
-
-        buttonsPanelLeft.add(butDrawCharts);
-        buttonsPanelLeft.add(butEnrichmentMap);
 
         // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
         JPanel buttonsPanelRight = new JPanel();
@@ -305,35 +255,8 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelLeft = new JPanel();
         BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
         buttonsPanelLeft.setLayout(layoutLeft);
-        butFilter = new JButton(IconManager.ICON_FILTER);
-        butFilter.setFont(iconFont);
-        butFilter.addActionListener(this);
-        butFilter.setToolTipText(butFilterName);
-        butFilter.setBorderPainted(false);
-        butFilter.setContentAreaFilled(false);
-        butFilter.setFocusPainted(false);
-        butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
-        butFilter.setEnabled(false);
-
-        /**
-         * JComboBox for setting the default value of the node to be chosen for performing the query
-         */
-
-
-        // Add enrichment map button here if EnrichmentMap is loaded
-        butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
-        butEnrichmentMap.addActionListener(this);
-        butEnrichmentMap.setToolTipText(butEnrichmentMapName);
-        butEnrichmentMap.setBorderPainted(false);
-        butEnrichmentMap.setContentAreaFilled(false);
-        butEnrichmentMap.setFocusPainted(false);
-        butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
-        butEnrichmentMap.setEnabled(false);
 
         buttonsPanelLeft.add(butRunProfiler);
-        buttonsPanelLeft.add(butFilter);
-        buttonsPanelLeft.add(butDrawCharts);
-        buttonsPanelLeft.add(butEnrichmentMap);
 
         // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
         JPanel buttonsPanelRight = new JPanel();
@@ -379,11 +302,7 @@ public class EnrichmentCytoPanel extends JPanel
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
         } else {
-
-            butFilter.setEnabled(true);
-            butDrawCharts.setEnabled(true);
             butExportTable.setEnabled(true);
-            butEnrichmentMap.setEnabled(false);
 
             JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
 
@@ -427,11 +346,6 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.setDefaultRenderer(Color.class, new ColorRenderer(true));
         CyNetwork network = applicationManager.getCurrentNetwork();
         //jTable.setDefaultEditor(Color.class, new ColorEditor(registrar, this, colorChooserFactory, network));
-        popupMenu = new JPopupMenu();
-        menuItemReset = new JMenuItem("Remove color");
-        menuItemReset.addActionListener(this);
-        popupMenu.add(menuItemReset);
-        jTable.setComponentPopupMenu(popupMenu);
         jTable.addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
