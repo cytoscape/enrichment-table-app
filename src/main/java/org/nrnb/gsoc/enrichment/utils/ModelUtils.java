@@ -155,7 +155,9 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colPvalue) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colPvalue, Double.class, false);
         }
-
+        if (enrichmentTable.getColumn(EnrichmentTerm.colSource) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colSource, String.class, false);
+        }
         if (enrichmentTable.getColumn(EnrichmentTerm.colDescription) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colDescription, String.class, false);
         }
@@ -499,7 +501,6 @@ public class ModelUtils {
                 String content = enr.get("recall").toString();
                 double recall = Double.parseDouble(content);
                 currTerm.setRecall(recall);
-                System.out.println(recall);
             }
             if(enr.containsKey("native")){
                 String content = enr.get("native").toString();
@@ -525,7 +526,7 @@ public class ModelUtils {
             }
             if(enr.containsKey("source")){
                 String content = enr.get("source").toString();
-                if(content==null){
+                if(content==null || content.isEmpty()){
                     currTerm.setSource((String) "");
                 } else{
                     currTerm.setSource((String) content);
@@ -534,12 +535,10 @@ public class ModelUtils {
             if(enr.containsKey("name")){
                 currTerm.setName((String) enr.get("name"));
             } if(enr.containsKey("intersections")){
-                //System.out.println("Intersections");
                 List<String> currGeneList = new ArrayList<String>();
                 List<Long> currNodeList = new ArrayList<Long>();
                 JSONArray genes = (JSONArray)enr.get("intersections");
                 for(int i=0;i<genes.size();i++){
-                   // System.out.println(genes.get(i));
                     if((genes.get(i)).toString().length()>2){
                         String enrGeneEnsemblID = (String)nodeNameList.get(i);
                         String enrGeneNodeName = enrGeneEnsemblID;
@@ -634,7 +633,7 @@ public class ModelUtils {
      */
     public static void setNetSignificanceThresholdMethod(CyNetwork network, String significanceThresholdMethod) {
         if(network.getDefaultNetworkTable()==null){
-            System.out.println("No default netwrok table");
+            System.out.println("No default network table");
             return;
         }
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_SIGNIFICANCE_THRESHOLD_METHOD);
@@ -714,7 +713,6 @@ public class ModelUtils {
 
     public static void copyNodeAttributes(CyNetwork from, CyNetwork to,
                                           Map<String, CyNode> nodeMap, String column) {
-        // System.out.println("copyNodeAttributes");
         List<String> columnsCreated = copyColumns(from.getDefaultNodeTable(), to.getDefaultNodeTable());
         for (CyNode node: from.getNodeList()) {
             String nodeKey = from.getRow(node).get(column, String.class);

@@ -162,6 +162,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			return;
 		}
 		responseBuffer.append((result.get("result")).toString());
+		//System.out.println(responseBuffer.toString());
 		if((responseBuffer.toString()).length()==2){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
@@ -174,15 +175,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setProgress(1.0);
 			return;
 		}
-		System.out.println(responseBuffer.toString());
-		System.out.println("Tasks completed");
-		System.out.println("Task output");
-		System.out.println(nodeNameList.size());
-		for(String node : nodeNameList){
-			System.out.print(node+" ");
-		}
+
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
-		System.out.println(enrichmentTable.getColumns());;
 
 		List<String> nodeNames = new ArrayList<String> (nodeNameList);
 		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,stringNodesMap) ;
@@ -203,6 +197,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			// populate all other values that need to be entered into the table
 			EnrichmentTerm term = processTerms.get(i);
 			CyRow row = enrichmentTable.getRow((long) i);
+			row.set(EnrichmentTerm.colSource,term.getSource());
 			row.set(EnrichmentTerm.colTermID,term.getTermID());
 			row.set(EnrichmentTerm.colName, term.getName());
 			row.set(EnrichmentTerm.colDescription, term.getDescription());
@@ -215,14 +210,13 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colRecall,term.getRecall());
 			row.set(EnrichmentTerm.colGenes,term.getGenes());
 		}
-		System.out.println(enrichmentTable.getTitle());
+		// System.out.println(enrichmentTable.getTitle());
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		/**
 		 * Check if we already show the cytopanel or not
 		 */
 		if(show){
 			monitor.setStatusMessage("Show enrichment panel");
-			System.out.println("Show enrichment panel");
 			if(enrichmentPanel==null){
 				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
@@ -248,14 +242,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	 */
 	private Map<String, Object> generateQuery(String query) {
 		HashMap<String,Object> parameters = new HashMap<>();
-		System.out.println(query);
 		// TODO: add a box for taking this as an input
 		if(ModelUtils.getNetOrganism(network)!=null){
 			parameters.put("organism", scientificNametoID.get(ModelUtils.getNetOrganism(network)));
 		} else{
 			parameters.put("organism","hsapiens");
 		}
-		System.out.println(parameters.get("organism"));
 		if(query==null){
 			parameters.put("query","");
  		} else{

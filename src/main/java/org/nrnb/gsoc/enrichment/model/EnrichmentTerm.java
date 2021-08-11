@@ -131,20 +131,21 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colDescription = "description";
     public static final String colPvalue = "adjusted p-value";
     public static final String colGoshv = "goshv";
-    public static final String colIsSignificant = "Significant";
-    public static final String colEffectiveDomainSize = "Background Size";
-    public static final String colIntersectionSize = " Intersection Size";
-    public static final String colTermSize = "Term Size";
-    public static final String colQuerySize = "Query Size";
+    public static final String colIsSignificant = "significant";
+    public static final String colEffectiveDomainSize = "background size";
+    public static final String colIntersectionSize = "intersection size";
+    public static final String colTermSize = "term size";
+    public static final String colQuerySize = "query size";
     public static final String colPrecision = "precision";
     public static final String colRecall = "recall";
-    public static final String colGroupID = "Group ID";
-    public static final String colGenes = "genes"; // list of genes
+    public static final String colGroupID = "group id";
+    public static final String colGenes = "intersecting genes"; // list of genes
     public static final String colGenesSUID = "nodes.SUID";//session unique id
     public static final String colNetworkSUID = "network.SUID";// session unique id
 
 
-    public static final String[] swingColumnsEnrichment = new String[] {  colID, colTermID, colName, colDescription, colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall, colGenes};
+    // enrichment table master schema
+    public static final String[] swingColumnsEnrichment = new String[] {  colID, colSource, colTermID, colName, colDescription, colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall, colGenes};
 
     public static final int nameColumn = 2;
     public static final int pvalueColumn = 4;

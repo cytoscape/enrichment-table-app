@@ -143,7 +143,6 @@ public class EnrichmentCytoPanel extends JPanel
             if (network != null) {
                 tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
             }
-            System.out.println("Command executed");
         } else if (e.getSource().equals(menuItemReset)) {
             // System.out.println("reset color now");
             Component c = (Component) e.getSource();
@@ -296,9 +295,9 @@ public class EnrichmentCytoPanel extends JPanel
             tableManager.addTable(enrichmentTable);
         }
         createJTable(enrichmentTable);
+//        System.out.println("Table model: "+ tableModel.getColumnCount());
         // Check if values are git mbeing received correctly
         List<CyRow> rows = enrichmentTable.getAllRows();
-        System.out.println(rows.size());
         availableTables.add(enrichmentTable.getTitle());
         /**
          * Initialise the top panel design
@@ -416,7 +415,6 @@ public class EnrichmentCytoPanel extends JPanel
      */
     private void createJTable(CyTable cyTable) {
         tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
-        System.out.println("Table model: "+ tableModel.getColumnCount());
         JTable jTable = new JTable(tableModel);
         TableColumnModel tcm = jTable.getColumnModel();
         tcm.getColumn(EnrichmentTerm.pvalueColumn).setCellRenderer(new DecimalFormatRenderer());

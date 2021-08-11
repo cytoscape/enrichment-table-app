@@ -32,7 +32,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             longDescription = "float between 0 and 1, used to define custom significance threshold.",
             exampleStringValue = "0.05",
             groups = {"Optional settings"},
-            params="slider=true", gravity = 109.0)
+            params="slider=false", gravity = 109.0)
     public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.05, 1.0, false, false);
 
     @Tunable(description = "Decides if electronic annotations should be excluded or not",
