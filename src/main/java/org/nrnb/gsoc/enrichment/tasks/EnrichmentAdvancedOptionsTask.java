@@ -41,7 +41,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     public boolean no_iea = true;
 
     @Tunable(description = "Multiple testing correction",
-            tooltip = "Select the type of multiple testing correction method.",
+            tooltip = "Select the multiple testing correction method.",
             longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
             exampleStringValue = "g_SCS",
             groups = {"Optional settings"},
@@ -49,8 +49,9 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     public ListSingleSelection<String> significance_threshold_method;
 
     @Tunable(description="Organism",
-            longDescription="The organism associated with the query genes, e.g,. Homo sapiens.",
-            exampleStringValue = "Homo sapiens",
+    		tooltip = "The organism associated with the query genes.",
+    		longDescription="The organism associated with the query genes, e.g,. Homo sapiens.",
+    	    exampleStringValue = "Homo sapiens",
             params="lookup=begins", groups={"Required settings"}, gravity=10.0)
     public ListSingleSelection<String> organism;
 
@@ -75,7 +76,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 speciesList.add(it.getKey());
             }
             organism = new ListSingleSelection<String>(speciesList);
-            organism.setSelectedValue("Homo Sapiens");
+            organism.setSelectedValue("Homo sapiens");
             ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
         }
         List<String> stringCol = new ArrayList<String>();
@@ -114,7 +115,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             if(scientificNametoID.containsKey(organism.getSelectedValue())){
                 ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
             } else{
-                monitor.setStatusMessage("Could not find organism. Your entry is incorrect");
+                monitor.setStatusMessage("Could not find organism. Please select one of the supported organisms.");
             }
         }
         return;
@@ -122,6 +123,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
 
     @ProvidesTitle
     public String getTitle() {
-        return "Settings";
+        return "Enrichment Settings";
     }
 }
