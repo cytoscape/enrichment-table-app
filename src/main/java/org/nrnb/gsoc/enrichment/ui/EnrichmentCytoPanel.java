@@ -35,7 +35,6 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
 
-import static org.nrnb.gsoc.enrichment.utils.IconUtils.*;
 
 /**
  * @author ighosh98
