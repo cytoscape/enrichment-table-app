@@ -244,7 +244,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		HashMap<String,Object> parameters = new HashMap<>();
 		// TODO: add a box for taking this as an input
 		if(ModelUtils.getNetOrganism(network)!=null){
-			parameters.put("organism", scientificNametoID.get(ModelUtils.getNetOrganism(network)));
+			parameters.put("organism", ModelUtils.getNetOrganism(network));
 		} else{
 			parameters.put("organism","hsapiens");
 		}

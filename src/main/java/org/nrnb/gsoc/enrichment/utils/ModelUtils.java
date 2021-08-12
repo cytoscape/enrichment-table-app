@@ -41,7 +41,7 @@ public class ModelUtils {
 
     // Network information
     public static String NET_ENRICHMENT_SETTINGS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "enrichmentSettings";
-    public static String NET_ORGANISMS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "organisms";
+    public static String NET_ORGANISMS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "organism";
     public static String NET_GENE_ID_COLUMN = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "Gene ID Column";
     public static String NET_NO_IEA = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "No IEA";
     public static String NET_DOMAIN_SCOPE =ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "Domain Scope";
