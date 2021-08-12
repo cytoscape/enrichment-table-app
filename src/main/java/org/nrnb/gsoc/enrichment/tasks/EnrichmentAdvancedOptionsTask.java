@@ -27,36 +27,37 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyTable nodeTable;
 
     @Tunable(description = "Adjusted p-value threshold",
-            tooltip = "<html>This is the custom significance threshold.<br/>"+
-                    "Values below the threshold will be excluded.</html>",
-            longDescription = "float between 0 and 1, used to define custom significance threshold.",
+            tooltip = "<html>Values above this threshold will be excluded.</html>",
+            longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default value is 0.05.",
             exampleStringValue = "0.05",
             groups = {"Optional settings"},
             params="slider=false", gravity = 109.0)
     public BoundedDouble user_threshold = new BoundedDouble(0.0, 0.05, 1.0, false, false);
 
-    @Tunable(description = "Decides if electronic annotations should be excluded or not",
-            longDescription = "Unless this is set to true, we only show electronic annotations should be included.",
+    @Tunable(description = "Include inferred GO annotations (IEA)",
+            longDescription = "The default (true) is to include inferred electronic annotations from Gene Ontology.",
             groups = {"Optional settings"},
-            tooltip = "<html>Unless this is set to true, we only show results above the significance threshold.</html>")
+            tooltip = "<html>Uncheck to exclude inferred GO annotations.</html>")
     public boolean no_iea = true;
 
-    @Tunable(description = "Type of testing correction method",
-            tooltip = "Set the type of testing correction method",
-            longDescription = "Set the type of testing correction method",
+    @Tunable(description = "Multiple testing correction",
+            tooltip = "Select the multiple testing correction method.",
+            longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
             exampleStringValue = "g_SCS",
             groups = {"Optional settings"},
             gravity = 100.0)
     public ListSingleSelection<String> significance_threshold_method;
 
     @Tunable(description="Organism",
-            longDescription="Default species for network queries.",
-            exampleStringValue = "Homo Sapiens",
+    		tooltip = "The organism associated with the query genes.",
+    		longDescription="The organism associated with the query genes, e.g,. Homo sapiens.",
+    	    exampleStringValue = "Homo sapiens",
             params="lookup=begins", groups={"Required settings"}, gravity=10.0)
     public ListSingleSelection<String> organism;
 
     @Tunable(description="Gene ID Column",
-            longDescription="Column to choose for getting GeneIDs.",
+    		tooltip = "<html>Select the <b>Node Table</b> column with the query genes.</html>",
+            longDescription="The Node Table column containing the gene symbols or identifiers to be queried.",
             exampleStringValue = "LABEL",
             params="lookup=begins", groups={"Required settings"}, gravity=10.0)
     public ListSingleSelection<String> geneID;
@@ -114,7 +115,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             if(scientificNametoID.containsKey(organism.getSelectedValue())){
                 ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
             } else{
-                monitor.setStatusMessage("Could not find organism. Your entry is incorrect");
+                monitor.setStatusMessage("Could not find organism. Please select one of the supported organisms.");
             }
         }
         return;
@@ -122,6 +123,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
 
     @ProvidesTitle
     public String getTitle() {
-        return "Settings";
+        return "Enrichment Settings";
     }
 }
