@@ -76,7 +76,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 speciesList.add(it.getKey());
             }
             organism = new ListSingleSelection<String>(speciesList);
-            organism.setSelectedValue("Homo Sapiens");
+            organism.setSelectedValue("Homo sapiens");
             ModelUtils.setNetOrganism(network,"hsapiens");
         }
         List<String> stringCol = new ArrayList<String>();
