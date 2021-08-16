@@ -569,7 +569,7 @@ public class ModelUtils {
      */
     public static String getNetGeneIDColumn(CyNetwork network) {
         if (network.getDefaultNetworkTable().getColumn(NET_GENE_ID_COLUMN) == null){
-            network.getRow(network).set(NET_GENE_ID_COLUMN, ENRICHMENT_NAMESPACE+NAMESPACE_SEPARATOR+"name");
+            return null;
         }
         return network.getRow(network).get(NET_GENE_ID_COLUMN, String.class);
     }

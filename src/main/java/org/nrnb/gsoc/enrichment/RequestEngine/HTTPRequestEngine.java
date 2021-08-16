@@ -86,11 +86,16 @@ public class HTTPRequestEngine {
         }
         if(ModelUtils.getNetNoIEA(network)!=null){
             parameters.put("no_iea",ModelUtils.getNetNoIEA(network));
+        } else{
+            parameters.put("no_iea",true);
         }
 
 
         if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
             parameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
+        } else{
+            parameters.put("significance_threshold_method","g_SCS");
+
         }
 
         StringBuffer backgroundNodes = new StringBuffer("");
@@ -100,7 +105,7 @@ public class HTTPRequestEngine {
             for (CyNode node : nodeList) {
                 String canonicalName;
                 if (ModelUtils.getNetGeneIDColumn(network) == null) {
-                    canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+                    canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get("name", String.class);
                 } else {
                     canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
                 }
