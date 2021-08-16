@@ -97,6 +97,8 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         });
         //default value
         significance_threshold_method.setSelectedValue("g_SCS");
+        ModelUtils.setNetSignificanceThresholdMethod(network,"g_SCS");
+        ModelUtils.setNetUserThreshold(network,0.05);
     }
 
     //user sets the cycol -> update default -> the run the query
