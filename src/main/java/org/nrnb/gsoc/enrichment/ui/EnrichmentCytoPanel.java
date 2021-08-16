@@ -455,6 +455,9 @@ public class EnrichmentCytoPanel extends JPanel
             return;
         // TODO: clear table selection when switching
         JTable table = enrichmentTables.get(showTable);
+        if(table==null){
+            return;
+        }
         if (table.getSelectedColumnCount() == 1 && table.getSelectedRow() > -1) {
             if (table.getSelectedColumn() != EnrichmentTerm.chartColumnCol) {
                 for (int row: table.getSelectedRows()) {
