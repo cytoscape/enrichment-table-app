@@ -27,7 +27,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     String name;
     String description;
     String source;
-    double pvalue;
+    String pvalue;
     double goshv;
     boolean isSignificant;
     int effectiveDomainSize;
@@ -154,7 +154,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.name = "";
         this.description = "";
         this.source = "";
-        this.pvalue = -1.0;
+        this.pvalue = "0.0";
         this.goshv=-1.0;
         this.isSignificant = true;
         this.effectiveDomainSize=0;
@@ -168,33 +168,10 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.name = "";
         this.description = "";
         this.source = enrichmentSource;
-        this.pvalue = 0.0;
+        this.pvalue = "0.0";
     }
 
-    public EnrichmentTerm(String name, String description, String source,
-                          double pvalue) {
-        this.name = name;
-        this.description = description;
-        this.source = source;
-        this.pvalue = pvalue;
-    }
 
-    public EnrichmentTerm(String name, String description, String source,
-                          double pvalue, double goshv, boolean isSignificant,
-                          int effectiveDomainSize, int intersectionSize, int termSize,
-                          double precision, double recall) {
-        this.name = name;
-        this.description = description;
-        this.source = source;
-        this.pvalue = pvalue;
-        this.goshv = goshv;
-        this.isSignificant = isSignificant;
-        this.effectiveDomainSize = effectiveDomainSize;
-        this.intersectionSize = intersectionSize;
-        this.termSize = termSize;
-        this.precision = precision;
-        this.recall = recall;
-    }
 
     /**
      * All getters and setters of the API response fields
@@ -241,11 +218,11 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.source = source;
     }
 
-    public double getPValue() {
+    public String getPValue() {
         return pvalue;
     }
 
-    public void setPValue(double pvalue) {
+    public void setPValue(String pvalue) {
         this.pvalue = pvalue;
     }
 
@@ -326,12 +303,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     }
 
     public int compareTo(EnrichmentTerm et) {
-        if (this.pvalue < et.getPValue()) {
-            return -1;
-        } else if (this.pvalue == et.getPValue()) {
-            return 0;
-        }
-        return 1;
+        return this.pvalue.compareTo(et.getPValue());
     }
 
 }

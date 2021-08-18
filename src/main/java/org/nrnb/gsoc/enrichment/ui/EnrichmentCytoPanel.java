@@ -335,8 +335,6 @@ public class EnrichmentCytoPanel extends JPanel
     private void createJTable(CyTable cyTable) {
         tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
         JTable jTable = new JTable(tableModel);
-        TableColumnModel tcm = jTable.getColumnModel();
-        tcm.getColumn(EnrichmentTerm.pvalueColumn).setCellRenderer(new DecimalFormatRenderer());
         jTable.setFillsViewportHeight(true);
         jTable.setAutoCreateRowSorter(true);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -344,7 +342,6 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.getSelectionModel().addListSelectionListener(this);
         jTable.getModel().addTableModelListener(this);
         jTable.setDefaultRenderer(Color.class, new ColorRenderer(true));
-        CyNetwork network = applicationManager.getCurrentNetwork();
         //jTable.setDefaultEditor(Color.class, new ColorEditor(registrar, this, colorChooserFactory, network));
         jTable.addMouseListener(new MouseAdapter() {
 
