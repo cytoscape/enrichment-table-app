@@ -469,7 +469,7 @@ public class ModelUtils {
      * @param response JSON response received by making API call
      * @return structured list of data which can be used to populate result table
      */
-    public static List<EnrichmentTerm> getEnrichmentfromJSON(JSONObject response, CyNetwork network, List<String> nodeNameList,Map<String, Long> stringNodesMap){
+    public static List<EnrichmentTerm> getEnrichmentfromJSON(JSONObject response, CyNetwork network, List<String> nodeNameList,Map<String, Long> enrichmentNodesMap){
         JSONArray enrichmentArray = getResultsFromJSON(response, JSONArray.class);
         if (enrichmentArray == null) {
             return null;
@@ -541,7 +541,7 @@ public class ModelUtils {
                     if((genes.get(i)).toString().length()>2){
                         String enrGeneEnsemblID = (String)nodeNameList.get(i);
                         String enrGeneNodeName = enrGeneEnsemblID;
-                        final Long nodeSUID = stringNodesMap.get(enrGeneNodeName);
+                        final Long nodeSUID = enrichmentNodesMap.get(enrGeneNodeName);
                         currNodeList.add(nodeSUID);
                         currGeneList.add(nodeNameList.get(i));
                     }
