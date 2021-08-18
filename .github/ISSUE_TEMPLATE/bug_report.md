@@ -2,7 +2,7 @@
 name: Bug report
 about: A short description about the bug
 title: ''
-labels: ''
+labels: 'bug'
 assignees: ''
 
 ---
@@ -20,8 +20,10 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Build and Device Related Information (please complete the following information):**
- - OS: [e.g. Linux]
- - Cytoscape Version [e.g. Cytoscape 3.8.0]
+ - OS: [e.g. Windows]
+ - Java version: [type: java --version]
+ - Cytoscape Version: [e.g. Cytoscape 3.8.2]
+ - Cytoscape apps involved:
 
 **Additional context**
 Add any other context about the problem here.

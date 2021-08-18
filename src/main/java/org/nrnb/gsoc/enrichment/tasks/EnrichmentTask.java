@@ -1,5 +1,6 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
+import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.*;
 import org.cytoscape.model.*;
@@ -44,7 +45,9 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			gravity = 1.0)
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
-	final Map<String, Long> stringNodesMap;
+	final Map<String, String> colSourceMap;
+	final Map<String, Long> enrichmentNodesMap;
+
 	public EnrichmentTask(final CyServiceRegistrar registrar, CytoPanelComponent2 enrichmentPanel) {
 		super();
 		this.noSignificant = false;
@@ -55,8 +58,34 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		nodesToFilterBy = new ListMultipleSelection<CyNode>(network.getNodeList());
 		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
 		isLargeNetwork = false;
-		stringNodesMap = new HashMap<>();
+		enrichmentNodesMap = new HashMap<>();
 		this.enrichmentPanel = (EnrichmentCytoPanel) enrichmentPanel;
+		/**
+		 * GO:MF - Gene Ontology Molecular Function branch
+		 * GO:BP - Gene Ontology Biological Process branch
+		 * GO:CC - Gene Ontology Cellular Component branch
+		 * KEGG - KEGG pathways
+		 * REAC - Reactome pathways
+		 * WP - WikiPathways
+		 * TF - Transfac transcription factor binding site predictions
+		 * MIRNA - mirTarBase miRNA targets
+		 * HPA - Human Protein Atlas expression data
+		 * CORUM - Manually annotated protein complexes from mammalian organisms.
+		 * HP - Human Phenotype Ontology, a standardized vocabulary of phenotypic abnormalities encountered in human disease.
+		 */
+		colSourceMap = new HashMap<String, String>(){{
+			put("GO:MF","Gene Ontology Molecular Function");
+			put("GO:BP","Gene Ontology Biological Process");
+			put("GO:CC", "Gene Ontology Cellular Component branch");
+			put("KEGG", "KEGG");
+			put("WP","WikiPathways");
+			put("REAC" ,"Reactome pathways");
+			put("TF" ,"Transfac transcription factor binding site predictions");
+			put("MIRNA" ,"mirTarBase miRNA targets");
+			put("HPA" ,"Human Protein Atlas");
+			put("CORUM"," Manually annotated protein complexes from mammalian organisms");
+			put("HP","Human Phenotype Ontology");
+		}};
 	}
 
 	public EnrichmentTask(final CyServiceRegistrar registrar) {
@@ -69,7 +98,33 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		nodesToFilterBy = new ListMultipleSelection<CyNode>(network.getNodeList());
 		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
 		isLargeNetwork = false;
-		stringNodesMap = new HashMap<>();
+		enrichmentNodesMap = new HashMap<>();
+		/**
+		 * GO:MF - Gene Ontology Molecular Function branch
+		 * GO:BP - Gene Ontology Biological Process branch
+		 * GO:CC - Gene Ontology Cellular Component branch
+		 * KEGG - KEGG pathways
+		 * REAC - Reactome pathways
+		 * WP - WikiPathways
+		 * TF - Transfac transcription factor binding site predictions
+		 * MIRNA - mirTarBase miRNA targets
+		 * HPA - Human Protein Atlas expression data
+		 * CORUM - Manually annotated protein complexes from mammalian organisms.
+		 * HP - Human Phenotype Ontology, a standardized vocabulary of phenotypic abnormalities encountered in human disease.
+		 */
+		colSourceMap = new HashMap<String, String>(){{
+			put("GO:MF","Gene Ontology Molecular Function");
+			put("GO:BP","Gene Ontology Biological Process");
+			put("GO:CC", "Gene Ontology Cellular Component branch");
+			put("KEGG", "KEGG");
+			put("WP","WikiPathways");
+			put("REAC" ,"Reactome pathways");
+			put("TF" ,"Transfac transcription factor binding site predictions");
+			put("MIRNA" ,"mirTarBase miRNA targets");
+			put("HPA" ,"Human Protein Atlas");
+			put("CORUM"," Manually annotated protein complexes from mammalian organisms");
+			put("HP","Human Phenotype Ontology");
+		}};
 	}
 
 	public void run(TaskMonitor monitor) {
@@ -103,7 +158,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				}
 				if(canonicalName!=null && canonicalName.length()>0){
 					nodeNameList.add(canonicalName);
-					stringNodesMap.put(canonicalName, node.getSUID());
+					enrichmentNodesMap.put(canonicalName, node.getSUID());
 				}
 			}
 		}
@@ -179,7 +234,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
 
 		List<String> nodeNames = new ArrayList<String> (nodeNameList);
-		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,stringNodesMap) ;
+		List<EnrichmentTerm> processTerms = ModelUtils.getEnrichmentfromJSON(result,network,nodeNames,enrichmentNodesMap) ;
 
 		// populate table with data
 		if(processTerms==null){
@@ -197,7 +252,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			// populate all other values that need to be entered into the table
 			EnrichmentTerm term = processTerms.get(i);
 			CyRow row = enrichmentTable.getRow((long) i);
-			row.set(EnrichmentTerm.colSource,term.getSource());
+			if(colSourceMap.containsKey(term.getSource()))
+				row.set(EnrichmentTerm.colSource,colSourceMap.get(term.getSource()));
+			else
+				row.set(EnrichmentTerm.colSource,term.getSource());
 			row.set(EnrichmentTerm.colTermID,term.getTermID());
 			row.set(EnrichmentTerm.colName, term.getName());
 			row.set(EnrichmentTerm.colDescription, term.getDescription());
