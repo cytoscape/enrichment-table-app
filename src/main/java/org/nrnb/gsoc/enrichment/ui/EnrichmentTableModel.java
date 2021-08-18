@@ -76,11 +76,7 @@ public class EnrichmentTableModel extends AbstractTableModel {
         } else if (colName.equals(EnrichmentTerm.colID)) {
             return cyTable.getRow(rowName).get(colName, Long.class);
         } else if (colName.equals(EnrichmentTerm.colPvalue)) {
-            return cyTable.getRow(rowName).get(colName, Double.class);
-        }
-        else if(colName.equals(EnrichmentTerm.colTermSize)){
-            return cyTable.getRow(rowName).get(colName, Integer.class);
-
+            return cyTable.getRow(rowName).get(colName, String.class);
         }
         else if(colName.equals(EnrichmentTerm.colPrecision)){
             return cyTable.getRow(rowName).get(colName, Double.class);
@@ -238,13 +234,6 @@ public class EnrichmentTableModel extends AbstractTableModel {
         return false;
     }
 
-    /**
-     *
-     * @return Array sorted by pvalue
-     */
-    private Long[] pValueSort(Long[] rowArray, int length) {
-        return Arrays.copyOf(rowArray, length);
-    }
 
     /**
      * @description Initialize the data model
