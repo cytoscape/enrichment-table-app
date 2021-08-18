@@ -113,16 +113,16 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		 * HP - Human Phenotype Ontology, a standardized vocabulary of phenotypic abnormalities encountered in human disease.
 		 */
 		colSourceMap = new HashMap<String, String>(){{
-			put("GO:MF","Gene Ontology Molecular Function");
-			put("GO:BP","Gene Ontology Biological Process");
-			put("GO:CC", "Gene Ontology Cellular Component branch");
+			put("GO:MF","GO:Molecular Function");
+			put("GO:BP","GO:Biological Process");
+			put("GO:CC", "GO:Cellular Component");
 			put("KEGG", "KEGG");
 			put("WP","WikiPathways");
-			put("REAC" ,"Reactome pathways");
-			put("TF" ,"Transfac transcription factor binding site predictions");
-			put("MIRNA" ,"mirTarBase miRNA targets");
+			put("REAC" ,"Reactome");
+			put("TF" ,"Transfac");
+			put("MIRNA" ,"mirTarBase");
 			put("HPA" ,"Human Protein Atlas");
-			put("CORUM"," Manually annotated protein complexes from mammalian organisms");
+			put("CORUM","CORUM");
 			put("HP","Human Phenotype Ontology");
 		}};
 	}
