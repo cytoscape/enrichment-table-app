@@ -241,7 +241,7 @@ public class EnrichmentCytoPanel extends JPanel
         if(enrichmentTable==null){
             CyTableManager tableManager = registrar.getService(CyTableManager.class);
             tableFactory = registrar.getService(CyTableFactory.class);
-            enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colID,Long.class,false, true);
+            enrichmentTable = tableFactory.createTable(TermSource.ALL.getTable(),EnrichmentTerm.colID,Long.class,false, true);
             tableManager.addTable(enrichmentTable);
         }
         createJTable(enrichmentTable);
