@@ -41,7 +41,7 @@ import java.util.List;
  * @description Result Panel which stores the result of the gProfiler querying task and provides other tools to modify the querying tasks
  */
 public class EnrichmentCytoPanel extends JPanel
-        implements CytoPanelComponent2, ListSelectionListener, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
+        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
 
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
@@ -339,32 +339,61 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.setAutoCreateRowSorter(true);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTable.getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        jTable.getSelectionModel().addListSelectionListener(this);
+        jTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                int rows = jTable.getSelectedRow();
+                int columnCount = jTable.getSelectedColumnCount();
+
+                if (e.getValueIsAdjusting())
+                    return;
+
+                CyNetwork network = applicationManager.getCurrentNetwork();
+                if (network == null)
+                    return;
+
+                if(jTable==null){
+                    return;
+                }
+
+                if (columnCount == 1 && rows > -1) {
+                        for (int row: jTable.getSelectedRows()) {
+                            Object cellContent =
+                                    jTable.getModel().getValueAt(jTable.convertRowIndexToModel(row),
+                                            EnrichmentTerm.nodeSUIDColumn);
+                                            System.out.println(cellContent);
+                            if (cellContent instanceof java.util.List) {
+                                java.util.List<Long> nodeIDs = (List<Long>) cellContent;
+                                for (Long nodeID : nodeIDs) {
+                                    network.getDefaultNodeTable().getRow(nodeID).set(CyNetwork.SELECTED, true);
+                                }
+                            }
+                        }
+                }
+            }
+        });
         jTable.getModel().addTableModelListener(this);
         jTable.setDefaultRenderer(Color.class, new ColorRenderer(true));
         //jTable.setDefaultEditor(Color.class, new ColorEditor(registrar, this, colorChooserFactory, network));
         jTable.addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
-                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
                     JTable source = (JTable) e.getSource();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
                     if (!source.isRowSelected(row)) {
                         source.changeSelection(row, column, false, false);
                     }
-                }
+
             }
 
             public void mouseReleased(MouseEvent e) {
-                if (e.isPopupTrigger() || SwingUtilities.isRightMouseButton(e)) {
                     JTable source = (JTable) e.getSource();
                     int row = source.rowAtPoint(e.getPoint());
                     int column = source.columnAtPoint(e.getPoint());
                     if (!source.isRowSelected(row)) {
                         source.changeSelection(row, column, false, false);
                     }
-                }
+
             }
         });
         enrichmentTables.put(enrichmentTable.getTitle(), jTable);
@@ -442,35 +471,7 @@ public class EnrichmentCytoPanel extends JPanel
 
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting())
-            return;
 
-        CyNetwork network = applicationManager.getCurrentNetwork();
-        if (network == null)
-            return;
-        // TODO: clear table selection when switching
-        JTable table = enrichmentTables.get(showTable);
-        if(table==null){
-            return;
-        }
-        if (table.getSelectedColumnCount() == 1 && table.getSelectedRow() > -1) {
-            if (table.getSelectedColumn() != EnrichmentTerm.chartColumnCol) {
-                for (int row: table.getSelectedRows()) {
-                    Object cellContent =
-                            table.getModel().getValueAt(table.convertRowIndexToModel(row),
-                                    EnrichmentTerm.nodeSUIDColumn);
-                    if (cellContent instanceof java.util.List) {
-                        java.util.List<Long> nodeIDs = (List<Long>) cellContent;
-                        for (Long nodeID : nodeIDs) {
-                            network.getDefaultNodeTable().getRow(nodeID).set(CyNetwork.SELECTED, true);
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     public void updateLabelRows() {
         if (tableModel == null)
