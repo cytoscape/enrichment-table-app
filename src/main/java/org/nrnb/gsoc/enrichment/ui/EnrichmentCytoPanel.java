@@ -57,6 +57,7 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butExportTable;
     JButton butRunProfiler;
     CyTable filteredEnrichmentTable = null;
+    boolean clearSelection = false;
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
 
@@ -356,6 +357,8 @@ public class EnrichmentCytoPanel extends JPanel
                 }
 
                 if (columnCount == 1 && rows > -1) {
+                  if (jTable.getSelectedRowCount() == 1)
+                      clearNetworkSelection(network);
                         for (int row: jTable.getSelectedRows()) {
                             Object cellContent =
                                     jTable.getModel().getValueAt(jTable.convertRowIndexToModel(row),
@@ -399,22 +402,7 @@ public class EnrichmentCytoPanel extends JPanel
 
     }
 
-    static class DecimalFormatRenderer extends DefaultTableCellRenderer {
-        private static final DecimalFormat formatter = new DecimalFormat("0.#####E0");
 
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus, int row, int column) {
-            try {
-                if (value != null && (double) value < 0.001) {
-                    value = formatter.format((Number) value);
-                }
-            } catch (Exception ex) {
-                // ignore and return original value
-            }
-            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
-                    column);
-        }
-    }
 
     public void updateFilteredEnrichmentTable() {
         if (filteredEnrichmentTable == null)
@@ -497,6 +485,17 @@ public class EnrichmentCytoPanel extends JPanel
         currentTable.tableChanged(e);
     }
 
+    private void clearNetworkSelection(CyNetwork network) {
+  		List<CyNode> nodes = network.getNodeList();
+  		clearSelection = true;
+  		for (CyNode node : nodes) {
+  			if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
+  				network.getRow(node).set(CyNetwork.SELECTED, false);
+  			}
+  		}
+  		clearSelection = false;
+  	}
+
     @Override
     public void handleEvent(RowsSetEvent rse) {
         CyNetworkManager networkManager = registrar.getService(CyNetworkManager.class);
@@ -518,6 +517,17 @@ public class EnrichmentCytoPanel extends JPanel
             initPanel(selectedNetwork, false);
             return;
         }
+        CyNetwork network = applicationManager.getCurrentNetwork();
+		      JTable currentTable = enrichmentTables.get(showTable);
+		        if (!clearSelection && network != null && currentTable != null) {
+			           List<CyNode> nodes = network.getNodeList();
+			              for (CyNode node : nodes) {
+				                  if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
+					                       return;
+				                           }
+			                              }
+			                                 currentTable.clearSelection();
+		                                   }
     }
 
     @Override
