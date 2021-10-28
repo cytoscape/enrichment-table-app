@@ -121,7 +121,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         }
     }
 
-    public static final int nodeSUIDColumn = 8;
+    public static final int nodeSUIDColumn = 12;
     public static final int chartColumnCol = 1;
 
     public static final String colSource = "source";
@@ -145,7 +145,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
 
     // enrichment table master schema
-    public static final String[] swingColumnsEnrichment = new String[] {  colSource, colTermID, colName, colDescription, colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall, colGenes};
+    public static final String[] swingColumnsEnrichment = new String[] {  colSource, colTermID, colName, colDescription, colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall, colGenes, colGenesSUID};
 
     public static final int nameColumn = 2;
     public static final int pvalueColumn = 4;
