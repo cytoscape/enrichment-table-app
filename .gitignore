@@ -29,3 +29,5 @@ hs_err_pid*
 /bin
 /.metadata
 *.iml
+.DS_Store
+*/.DS_Store

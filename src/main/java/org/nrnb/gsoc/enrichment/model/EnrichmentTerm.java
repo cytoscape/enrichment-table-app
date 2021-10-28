@@ -140,7 +140,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colRecall = "recall";
     public static final String colGroupID = "group id";
     public static final String colGenes = "intersecting genes"; // list of genes
-    public static final String colGenesSUID = "nodes.SUID";//session unique id
+    public static final String colGenesSUID = "Nodes SUID";//session unique id
     public static final String colNetworkSUID = "network.SUID";// session unique id
 
 
