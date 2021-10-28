@@ -149,6 +149,9 @@ public class ModelUtils {
      * @param enrichmentTable
      */
     public static void setupEnrichmentTable(CyTable enrichmentTable) {
+        if (enrichmentTable.getColumn(EnrichmentTerm.colGenesSUID) == null) {
+          enrichmentTable.createListColumn(EnrichmentTerm.colGenesSUID, Long.class, false);
+        }
         if (enrichmentTable.getColumn(EnrichmentTerm.colName) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colName, String.class, false);
         }

@@ -360,7 +360,6 @@ public class EnrichmentCytoPanel extends JPanel
                             Object cellContent =
                                     jTable.getModel().getValueAt(jTable.convertRowIndexToModel(row),
                                             EnrichmentTerm.nodeSUIDColumn);
-                                            System.out.println(cellContent);
                             if (cellContent instanceof java.util.List) {
                                 java.util.List<Long> nodeIDs = (List<Long>) cellContent;
                                 for (Long nodeID : nodeIDs) {

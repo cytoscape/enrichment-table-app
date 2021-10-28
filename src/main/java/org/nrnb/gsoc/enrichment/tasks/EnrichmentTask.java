@@ -267,6 +267,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colPrecision,term.getPrecision());
 			row.set(EnrichmentTerm.colRecall,term.getRecall());
 			row.set(EnrichmentTerm.colGenes,term.getGenes());
+			row.set(EnrichmentTerm.colGenesSUID, term.getNodesSUID());
+
 		}
 		// System.out.println(enrichmentTable.getTitle());
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
