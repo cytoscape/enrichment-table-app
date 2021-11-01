@@ -336,6 +336,9 @@ public class EnrichmentCytoPanel extends JPanel
     private void createJTable(CyTable cyTable) {
         tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
         JTable jTable = new JTable(tableModel);
+        jTable.getColumnModel().getColumn(12).setMinWidth(0);
+        jTable.getColumnModel().getColumn(12).setMaxWidth(0);
+        jTable.getColumnModel().getColumn(12).setWidth(0);
         jTable.setFillsViewportHeight(true);
         jTable.setAutoCreateRowSorter(true);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
