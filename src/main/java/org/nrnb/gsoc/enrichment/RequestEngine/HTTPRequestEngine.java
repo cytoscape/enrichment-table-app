@@ -135,7 +135,7 @@ public class HTTPRequestEngine {
         String url = urlConverter.toString();
         HttpPost httpPost = new HttpPost(url);
         String jsonBody = JSONValue.toJSONString(parameters);
-        System.out.println(jsonBody);
+        //System.out.println(jsonBody);
         StringEntity entity = null;
         try {
             entity = new StringEntity(jsonBody);
