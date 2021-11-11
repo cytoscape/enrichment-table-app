@@ -56,6 +56,7 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butAdvancedOptions;
     JButton butExportTable;
     JButton butRunProfiler;
+    JButton butFilter;
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
 
@@ -69,6 +70,7 @@ public class EnrichmentCytoPanel extends JPanel
             EnrichmentCytoPanel.class.getResource("/images/enrichment-table14.png"));
     final CyApplicationManager applicationManager;
 
+    final String butFilterName = "Filter enrichment table";
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Perform Gene Enrichment";
@@ -181,6 +183,15 @@ public class EnrichmentCytoPanel extends JPanel
         butRunProfiler.setFocusPainted(false);
         butRunProfiler.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
 
+        butFilter = new JButton(IconManager.ICON_FILTER);
+        butFilter.setFont(iconFont);
+        butFilter.addActionListener(this);
+        butFilter.setToolTipText(butFilterName);
+        butFilter.setBorderPainted(false);
+        butFilter.setContentAreaFilled(false);
+        butFilter.setFocusPainted(false);
+        butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
+
 
         /**
          * JComboBox for setting the default value of the node to be chosen for performing the query
@@ -189,6 +200,7 @@ public class EnrichmentCytoPanel extends JPanel
         // Add enrichment map button here if EnrichmentMap is loaded
 
         buttonsPanelLeft.add(butRunProfiler);
+        buttonsPanelLeft.add(butFilter);
 
         // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
         JPanel buttonsPanelRight = new JPanel();
@@ -258,6 +270,7 @@ public class EnrichmentCytoPanel extends JPanel
         buttonsPanelLeft.setLayout(layoutLeft);
 
         buttonsPanelLeft.add(butRunProfiler);
+        buttonsPanelLeft.add(butFilter);
 
         // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
         JPanel buttonsPanelRight = new JPanel();
