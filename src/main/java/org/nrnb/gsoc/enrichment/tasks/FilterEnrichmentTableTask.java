@@ -36,7 +36,11 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
   private CyServiceRegistrar registrar;
 
 
-
+  @Tunable(description = "Select categories",
+	         tooltip = "Select the enrichment categories to show in the table",
+	         longDescription = "Select the enrichment categories to show in the table. Use \"All\" to remove the filtering.",
+	         exampleStringValue = "GO Process",
+	         gravity = 1.0)
 	public ListMultipleSelection<TermSource> categories = new ListMultipleSelection<>(TermSource.getValues());
 
 
@@ -65,6 +69,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 
 
         EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
+        System.out.println(categoryList);
 
 			//}
 		//});
