@@ -16,6 +16,7 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTask;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
+import org.nrnb.gsoc.enrichment.tasks.FilterEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import javax.swing.*;
@@ -122,12 +123,17 @@ public class EnrichmentCytoPanel extends JPanel
         return icon;
     }
 
+    public EnrichmentTableModel getTableModel() { return tableModel; }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         CyNetwork network = applicationManager.getCurrentNetwork();
         TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
         if (e.getSource().equals(butRunProfiler)) {
             tm.execute(new TaskIterator(new EnrichmentTask(registrar,this)));
+        }
+        else if (e.getSource().equals(butFilter)) {
+            tm.execute(new TaskIterator(new FilterEnrichmentTableTask(registrar,this)));
         }
         else if (e.getSource().equals(butExportTable)) {
             if (network != null) {
