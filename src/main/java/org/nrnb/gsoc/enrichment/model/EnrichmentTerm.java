@@ -46,20 +46,16 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static enum TermSource {
         ALL("All", "All", "Enrichment: All"),
         ALLFILTERED("AllFilt", "All Filtered", "Enrichment: All Filtered"),
-        //GO:BP -> Biological process [Default]
-        GOPROCESS("Process", "GO Process", "Enrichment: GO Biological Process"),
-        // GO:CC
-        GOCOMPONENT("Component", "GO Component", "Enrichment: GO Cellular Component"),
-        // GO::MF
-        GOFUNCTION("Function", "GO Function", "Enrichment: GO Molecular Function"),
-
-        KEGG("KEGG", "KEGG Pathways", "Enrichment: KEGG Pathways"),
-        REACTOME("RCTM", "Reactome Pathways", "Enrichment: Reactome Pathways"),
+        GOPROCESS("Process", "Gene Ontology Biological Process", "Enrichment: GO Biological Process"),
+        GOCOMPONENT("Component", "Gene Ontology Cellular Component branch", "Enrichment: GO Cellular Component"),
+        GOFUNCTION("Function", "Gene Ontology Molecular Function", "Enrichment: GO Molecular Function"),
+        KEGG("KEGG", "KEGG", "Enrichment: KEGG Pathways"),
+        REACTOME("RCTM", "Reactome pathways", "Enrichment: Reactome Pathways"),
         WIKIPATHWAYS("WikiPathways", "WikiPathways", "Enrichment: WikiPathways"),
-        TF("TF","TF","Enrichment: TF"),
-        MIRNA("MIRNA","MIRNA","MIRNA"),
-        HPA("HPA","HPA","Enrichment: HPA"),
-        CORUM("CORUM","CORUM","CORUM"),
+        TF("TF","Transfac transcription factor binding site predictions","Enrichment: TF"),
+        MIRNA("MIRNA","mirTarBase miRNA targets","MIRNA"),
+        HPA("HPA","Human Protein Atlas","Enrichment: HPA"),
+        CORUM("CORUM"," Manually annotated protein complexes from mammalian organisms","CORUM"),
         HP("HP","Human Phenotype Ontology", "Enrichment: Human Phenotype Ontology");
 
         String key, name, table;

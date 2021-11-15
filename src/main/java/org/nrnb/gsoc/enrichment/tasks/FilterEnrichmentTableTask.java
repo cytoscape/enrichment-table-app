@@ -2,6 +2,7 @@ package org.nrnb.gsoc.enrichment.tasks;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
@@ -34,6 +35,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 	private CyNetwork network;
 	private CyTable filteredEnrichmentTable;
   private CyServiceRegistrar registrar;
+  private List<TermSource> categoryFilter = TermSource.getValues();
 
 
   @Tunable(description = "Select categories",
@@ -43,36 +45,28 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 	         gravity = 1.0)
 	public ListMultipleSelection<TermSource> categories = new ListMultipleSelection<>(TermSource.getValues());
 
+	//public boolean removeOverlapping = false;
 
-	public boolean removeOverlapping = false;
-
-
-	public BoundedDouble overlapCutoff = new BoundedDouble(0.0, 0.5, 1.0, false, false);
+	//public BoundedDouble overlapCutoff = new BoundedDouble(0.0, 0.5, 1.0, false, false);
 
 	public FilterEnrichmentTableTask(final CyServiceRegistrar registrar, EnrichmentCytoPanel panel) {
     this.registrar = registrar;
 		applicationManager = registrar.getService(CyApplicationManager.class);
 		this.network = applicationManager.getCurrentNetwork();
 		this.enrichmentPanel = panel;
-
 	}
+
+
 
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
 		monitor.setTitle("Filter Enrichment table");
 
-		// Filter the current list
 		List<TermSource> categoryList = categories.getSelectedValues();
-		//SwingUtilities.invokeLater(new Runnable() {
-			//public void run() {
-				// when using commands, we need to get the enrichment panel again
-
 
         EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
-        System.out.println(categoryList);
+        tableModel.filter(categoryList);
 
-			//}
-		//});
 	}
 
 	@Override

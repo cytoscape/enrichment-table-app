@@ -233,6 +233,7 @@ public class EnrichmentTableModel extends AbstractTableModel {
                 i++;
             }
         }
+        rowNames = Arrays.copyOf(rowArray, i);
         fireTableDataChanged();
     }
 
