@@ -26,6 +26,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -58,8 +59,23 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butExportTable;
     JButton butRunProfiler;
     JButton butFilter;
+    TableColumnModel columnModel;
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
+    private String[] columnToolTips = {
+    "source",
+    "term id",
+    "term name",
+    "description",
+    "adjusted p-value",
+    "query size",
+    "background size",
+    "term size",
+    "intersection size",
+    "precision",
+    "recall",
+    "intersecting genes"
+  };
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
 
@@ -354,7 +370,21 @@ public class EnrichmentCytoPanel extends JPanel
      */
     private void createJTable(CyTable cyTable) {
         tableModel = new EnrichmentTableModel(enrichmentTable, EnrichmentTerm.swingColumnsEnrichment);
-        JTable jTable = new JTable(tableModel);
+        JTable jTable = new JTable(tableModel){
+          //Implement table header tool tips.
+          protected JTableHeader createDefaultTableHeader() {
+            return new JTableHeader(columnModel) {
+              public String getToolTipText(MouseEvent e) {
+                String tip = null;
+                java.awt.Point p = e.getPoint();
+                int index = columnModel.getColumnIndexAtX(p.x);
+                int realIndex =
+                  columnModel.getColumn(index).getModelIndex();
+                return columnToolTips[realIndex];
+              }
+            };
+          }
+        };
         jTable.getColumnModel().getColumn(12).setMinWidth(0);
         jTable.getColumnModel().getColumn(12).setMaxWidth(0);
         jTable.getColumnModel().getColumn(12).setWidth(0);
