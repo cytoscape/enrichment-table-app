@@ -160,6 +160,7 @@ public class EnrichmentCytoPanel extends JPanel
         } else if (e.getSource().equals(butAdvancedOptions)) {
             if (network != null) {
                 tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+                tm.execute(new TaskIterator(new EnrichmentTask(registrar,this)));
             }
         }
     }
