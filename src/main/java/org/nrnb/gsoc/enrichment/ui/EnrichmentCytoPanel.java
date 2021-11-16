@@ -63,18 +63,18 @@ public class EnrichmentCytoPanel extends JPanel
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
     private String[] columnToolTips = {
-    "source",
-    "term id",
+    "the full name of the datasource for the term",
+    "term ID in its native namespace. For non-GO terms, the ID is prefixed with the datasource abbreviation",
     "term name",
-    "description",
-    "adjusted p-value",
-    "query size",
-    "background size",
-    "term size",
-    "intersection size",
-    "precision",
-    "recall",
-    "intersecting genes"
+    "term description if available. If not available, repeats the term name",
+    "hypergeometric p-value after correction for multiple testing",
+    "the number of genes that were included in the query",
+    "the total number of genes 'in the universe' which is used as one of the four parameters for the hypergeometric probability function of statistical significance",
+    "the number of genes that are annotated to the term",
+    "the number of genes in the query that are annotated to the corresponding term",
+    "the proportion of genes in the input list that are annotated to the function, defined as intersection_size/query_size",
+    "the proportion of functionally annotated genes that the query recovers, defined as intersection_size/term_size",
+    "list of lists of strings, the elements in this list correspond to query genes and are in the same order as the genes in 'genes_metadata' -> 'query' -> 'query_name' -> 'ensgs'"
   };
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
