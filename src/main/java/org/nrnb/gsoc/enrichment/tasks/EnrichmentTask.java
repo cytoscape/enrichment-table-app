@@ -145,6 +145,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
 				}
 				nodeNameList.add(canonicalName);
+				enrichmentNodesMap.put(canonicalName, node.getSUID());
 			}
 		} else{
 			nodeList = network.getNodeList();
