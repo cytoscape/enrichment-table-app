@@ -40,9 +40,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	EnrichmentCytoPanel enrichmentPanel=null;
 	private boolean show = true;
 
-	@Tunable(description = "Select nodes",
-			context = "nogui",
-			gravity = 1.0)
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
 	final Map<String, String> colSourceMap;
