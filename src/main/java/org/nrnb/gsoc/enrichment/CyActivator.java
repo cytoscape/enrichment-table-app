@@ -15,6 +15,8 @@ import org.cytoscape.work.TaskFactory;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTaskFactory;
+
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
@@ -75,7 +77,7 @@ public class CyActivator extends AbstractCyActivator {
 			cytoPanel.setState(CytoPanelState.DOCK);
 		cytoPanel.setSelectedIndex(
 				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
+		TaskFactory myFactory = new EnrichmentAdvancedOptionsTaskFactory(registrar); // Implementation
 		registerService(context,
 				myFactory,
 				TaskFactory.class, // Interface

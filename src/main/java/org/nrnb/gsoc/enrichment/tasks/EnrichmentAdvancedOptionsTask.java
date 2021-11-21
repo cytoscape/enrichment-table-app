@@ -1,16 +1,24 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
 import org.cytoscape.application.CyApplicationManager;
-
+import org.cytoscape.application.swing.CytoPanel;
+import org.cytoscape.application.swing.CytoPanelName;
+import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.*;
+import org.cytoscape.application.swing.*;
+import org.cytoscape.model.*;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
+import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 
 import org.cytoscape.work.util.BoundedDouble;
 import org.cytoscape.work.util.ListSingleSelection;
+import org.cytoscape.work.TaskIterator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +33,9 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyApplicationManager applicationManager;
     final CyNetwork network;
     final CyTable nodeTable;
+    EnrichmentCytoPanel enrichmentPanel=null;
+    public CyTable enrichmentTable = null;
+
 
     @Tunable(description = "Adjusted p-value threshold",
             tooltip = "<html>Values above this threshold will be excluded.</html>",
@@ -71,6 +82,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         nodeTable = network.getDefaultNodeTable();
         this.scientificNametoID = ModelUtils.getOrganisms();
         List<String> speciesList = new ArrayList<>();
+        this.enrichmentPanel = (EnrichmentCytoPanel) enrichmentPanel;
         if(scientificNametoID!=null) {
             for (Map.Entry<String, String> it : scientificNametoID.entrySet()) {
                 speciesList.add(it.getKey());
@@ -104,10 +116,11 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     //user sets the cycol -> update default -> the run the query
     @Override
     public void run(TaskMonitor monitor) throws Exception {
-        monitor.setTitle("Enrichment settings");
-        /**
-         * The values must be stored and used
-         */
+        CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+        CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+        enrichmentPanel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
+      								cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+        TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
         if(network!=null) {
             // save values to network
             ModelUtils.setNetSignificanceThresholdMethod(network, significance_threshold_method.getSelectedValue());
@@ -116,6 +129,8 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
             if(scientificNametoID.containsKey(organism.getSelectedValue())){
                 ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
+                tm.execute(new TaskIterator(new EnrichmentTask(registrar, enrichmentPanel)));
+
             } else{
                 monitor.setStatusMessage("Could not find organism. Please select one of the supported organisms.");
             }
