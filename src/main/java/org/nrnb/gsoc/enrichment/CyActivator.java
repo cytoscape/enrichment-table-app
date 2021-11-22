@@ -61,8 +61,8 @@ public class CyActivator extends AbstractCyActivator {
 		// Configure the service properties first.
 		Properties properties = new Properties();
 		properties.put(ServiceProperties.PREFERRED_MENU,
-			"Tools.Perform enrichment");
-		properties.put(ServiceProperties.TITLE, "Go!");
+			"Tools.Enrichment Tool for Analysis");
+		properties.put(ServiceProperties.TITLE, "Perform Gene Enrichment");
 		properties.put(ServiceProperties.COMMAND_NAMESPACE, "enrichment");
 		properties.put(ServiceProperties.COMMAND, "analysis");
 
