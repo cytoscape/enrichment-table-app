@@ -63,7 +63,14 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 		monitor.setTitle("Filter Enrichment table");
 
 		List<TermSource> categoryList = categories.getSelectedValues();
-
+    if (enrichmentPanel == null) {
+      CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+      CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+      if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") != -1)
+        enrichmentPanel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
+            cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+      else return;
+    }
         EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
         tableModel.filter(categoryList);
 

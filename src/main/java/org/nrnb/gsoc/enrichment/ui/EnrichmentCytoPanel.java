@@ -394,6 +394,7 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
+                enrichmentTables.put(enrichmentTable.getTitle(), jTable);
                 int rows = jTable.getSelectedRow();
                 int columnCount = jTable.getSelectedColumnCount();
 
@@ -527,13 +528,13 @@ public class EnrichmentCytoPanel extends JPanel
 
     @Override
     public void tableChanged(TableModelEvent e) {
-        int column = e.getColumn();
         CyNetwork network = applicationManager.getCurrentNetwork();
         if (network == null)
             return;
 
         updateLabelRows();
-        JTable currentTable = enrichmentTables.get(showTable);
+        updateFilteredEnrichmentTable();
+        JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
         currentTable.tableChanged(e);
     }
 
