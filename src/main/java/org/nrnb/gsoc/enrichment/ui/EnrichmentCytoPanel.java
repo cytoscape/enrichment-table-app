@@ -74,7 +74,7 @@ public class EnrichmentCytoPanel extends JPanel
     "the number of genes in the query that are annotated to the corresponding term",
     "the proportion of genes in the input list that are annotated to the function, defined as intersection_size/query_size",
     "the proportion of functionally annotated genes that the query recovers, defined as intersection_size/term_size",
-    "list of lists of strings, the elements in this list correspond to query genes and are in the same order as the genes in 'genes_metadata' -> 'query' -> 'query_name' -> 'ensgs'"
+    "llist of query genes intersecting with terms"
   };
 
      // TODO: Quick settings options -> Drop down to select column and auto complete species
@@ -534,7 +534,10 @@ public class EnrichmentCytoPanel extends JPanel
 
         updateLabelRows();
         updateFilteredEnrichmentTable();
-        JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
+        JTable currentTable = enrichmentTables.get(showTable);
+        if (currentTable == null){
+          currentTable = enrichmentTables.get(enrichmentTable.getTitle());
+        }
         currentTable.tableChanged(e);
     }
 
