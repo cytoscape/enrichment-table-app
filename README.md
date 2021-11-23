@@ -1,5 +1,5 @@
-# Enrichment Tool for Analysis for Cytoscape
-Enrichment Tool for Analysis is a Cytoscape app. It provides the functionality to create a new table for performing, storing and viewing functional enrichment analysis.
+# Enrichment Table App for Cytoscape
+Enrichment Table App is a Cytoscape app. It provides the functionality to create a new table for performing, storing and viewing functional enrichment analysis.
 
 This app adds a menu option under ***Tools > Enrichment Tool for Analysis*** to ***Perform Gene Enrichment*** in the current network. 
 
