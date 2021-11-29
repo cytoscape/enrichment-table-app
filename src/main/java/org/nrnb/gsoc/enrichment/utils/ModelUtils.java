@@ -340,8 +340,8 @@ public class ModelUtils {
         Set<CyTable> currTables = tableManager.getAllTables(true);
 
         for (CyTable current : currTables) {
-            System.out.println(tableNames);
-            System.out.println(current.getTitle());
+            //System.out.println(tableNames);
+            //System.out.println(current.getTitle());
             if (tableNames.contains(current.getTitle())
                     && current.getColumn(EnrichmentTerm.colNetworkSUID) != null
                     && current.getAllRows().size() > 0) {

@@ -33,6 +33,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     final CyApplicationManager applicationManager;
     final CyNetwork network;
     final CyTable nodeTable;
+    String displayValue;
     EnrichmentCytoPanel enrichmentPanel=null;
     public CyTable enrichmentTable = null;
 
@@ -86,10 +87,17 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         if(scientificNametoID!=null) {
             for (Map.Entry<String, String> it : scientificNametoID.entrySet()) {
                 speciesList.add(it.getKey());
+                if(it.getValue().equals(ModelUtils.getNetOrganism(network))){
+                  displayValue = it.getKey();
+                }
             }
             organism = new ListSingleSelection<String>(speciesList);
-            organism.setSelectedValue("Homo sapiens");
-            ModelUtils.setNetOrganism(network,"hsapiens");
+            if(ModelUtils.getNetOrganism(network)!=null){
+              organism.setSelectedValue(displayValue);
+            } else{
+              organism.setSelectedValue("Homo sapiens");
+            }
+            //ModelUtils.setNetOrganism(network,"hsapiens");
         }
         List<String> stringCol = new ArrayList<String>();
         for (CyColumn col : nodeTable.getColumns()) {
@@ -98,8 +106,12 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             }
         }
         geneID = new ListSingleSelection<String>(stringCol);
-        geneID.setSelectedValue("name");
-        ModelUtils.setNetGeneIDColumn(network,"name");
+        if(ModelUtils.getNetGeneIDColumn(network)!=null){
+          geneID.setSelectedValue(ModelUtils.getNetGeneIDColumn(network));
+        } else{
+          geneID.setSelectedValue("name");
+        }
+        //ModelUtils.setNetGeneIDColumn(network,"name");
         significance_threshold_method = new ListSingleSelection<String>(new ArrayList<String>(){
             {
                 add("g_SCS");
@@ -128,6 +140,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
             if(scientificNametoID.containsKey(organism.getSelectedValue())){
+                //System.out.println(organism.getSelectedValue());
                 ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
                 tm.execute(new TaskIterator(new EnrichmentTask(registrar, enrichmentPanel)));
 
