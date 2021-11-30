@@ -341,7 +341,7 @@ public class ModelUtils {
 
         for (CyTable current : currTables) {
             //System.out.println(tableNames);
-            //System.out.println(current.getTitle());
+            System.out.println(current.getTitle());
             if (tableNames.contains(current.getTitle())
                     && current.getColumn(EnrichmentTerm.colNetworkSUID) != null
                     && current.getAllRows().size() > 0) {

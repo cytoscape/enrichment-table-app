@@ -19,6 +19,7 @@ import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import java.util.*;
 
@@ -198,7 +199,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
 		CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
 		CyTableManager tableManager = registrar.getService(CyTableManager.class);
-		enrichmentTable = tableFactory.createTable("Enrichment Results",EnrichmentTerm.colID,Long.class,false, true);
+		enrichmentTable = tableFactory.createTable(TermSource.ALL.getTable(),EnrichmentTerm.colID,Long.class,false, true);
 		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
 		tableManager.addTable(enrichmentTable);
 		if(result==null){
