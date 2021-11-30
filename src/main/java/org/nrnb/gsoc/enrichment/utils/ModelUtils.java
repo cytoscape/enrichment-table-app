@@ -152,6 +152,9 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenesSUID) == null) {
           enrichmentTable.createListColumn(EnrichmentTerm.colGenesSUID, Long.class, false);
         }
+        if (enrichmentTable.getColumn(EnrichmentTerm.colNetworkSUID) == null) {
+          enrichmentTable.createColumn(EnrichmentTerm.colNetworkSUID, Long.class, false);
+        }
         if (enrichmentTable.getColumn(EnrichmentTerm.colName) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colName, String.class, false);
         }
@@ -341,7 +344,7 @@ public class ModelUtils {
 
         for (CyTable current : currTables) {
             //System.out.println(tableNames);
-            System.out.println(current.getTitle());
+            //System.out.println(current.getTitle());
             if (tableNames.contains(current.getTitle())
                     && current.getColumn(EnrichmentTerm.colNetworkSUID) != null
                     && current.getAllRows().size() > 0) {
@@ -350,7 +353,7 @@ public class ModelUtils {
                         .get(EnrichmentTerm.colNetworkSUID, Long.class).equals(network.getSUID())) {
                     netTables.add(current);
                 }
-                //System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
+                System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
             }
         }
         return netTables;

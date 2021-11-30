@@ -178,7 +178,14 @@ public class EnrichmentCytoPanel extends JPanel
         if (currTable == null || currTable.getRowCount() == 0) {
             return null;
         }
-
+        CyTableFactory tableFactory = registrar.getService(CyTableFactory.class);
+    		CyTableManager tableManager = registrar.getService(CyTableManager.class);
+    		filteredEnrichmentTable = tableFactory.createTable(TermSource.ALLFILTERED.getTable(),
+    		                                                   EnrichmentTerm.colID, Long.class, false, true);
+    		filteredEnrichmentTable.setTitle("Enrichment: filtered");
+    		filteredEnrichmentTable.setSavePolicy(SavePolicy.DO_NOT_SAVE);
+    		tableManager.addTable(filteredEnrichmentTable);
+    		ModelUtils.setupEnrichmentTable(filteredEnrichmentTable);
         updateFilteredEnrichmentTable();
         return filteredEnrichmentTable;
     }
@@ -457,16 +464,16 @@ public class EnrichmentCytoPanel extends JPanel
 
 
 
-    public void updateFilteredEnrichmentTable() {
+    public CyTable updateFilteredEnrichmentTable() {
         if (filteredEnrichmentTable == null)
             getFilteredTable();
 
         CyNetwork network = applicationManager.getCurrentNetwork();
         if (network == null || tableModel == null)
-            return;
+            return null;
 
         CyTable currTable = ModelUtils.getEnrichmentTable(registrar, network, TermSource.ALL.getTable());
-        if (currTable == null) return;
+        if (currTable == null) return null;
 
         filteredEnrichmentTable.deleteRows(filteredEnrichmentTable.getPrimaryKey().getValues(Long.class));
 
@@ -476,11 +483,12 @@ public class EnrichmentCytoPanel extends JPanel
             CyRow filtRow = filteredEnrichmentTable.getRow(rowNames[i]);
             filtRow.set(EnrichmentTerm.colName, row.get(EnrichmentTerm.colName, String.class));
             filtRow.set(EnrichmentTerm.colDescription, row.get(EnrichmentTerm.colDescription, String.class));
-            filtRow.set(EnrichmentTerm.colPvalue, row.get(EnrichmentTerm.colPvalue, Double.class));
+            filtRow.set(EnrichmentTerm.colPvalue, row.get(EnrichmentTerm.colPvalue, String.class));
             filtRow.set(EnrichmentTerm.colGenes, row.getList(EnrichmentTerm.colGenes, String.class));
             filtRow.set(EnrichmentTerm.colGenesSUID, row.getList(EnrichmentTerm.colGenesSUID, Long.class));
             filtRow.set(EnrichmentTerm.colNetworkSUID, row.get(EnrichmentTerm.colNetworkSUID, Long.class));
         }
+        return filteredEnrichmentTable;
     }
 
     public void resetColor(int currentRow) {
@@ -533,7 +541,6 @@ public class EnrichmentCytoPanel extends JPanel
             return;
 
         updateLabelRows();
-        updateFilteredEnrichmentTable();
         JTable currentTable = enrichmentTables.get(showTable);
         if (currentTable == null){
           currentTable = enrichmentTables.get(enrichmentTable.getTitle());
