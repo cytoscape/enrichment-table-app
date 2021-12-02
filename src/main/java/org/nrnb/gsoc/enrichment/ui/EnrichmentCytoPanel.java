@@ -280,20 +280,6 @@ public class EnrichmentCytoPanel extends JPanel
             enrichmentTable = currTable;
             availableTables.add(enrichmentTable.getTitle());
         }
-        if(enrichmentTable==null){
-            CyTableManager tableManager = registrar.getService(CyTableManager.class);
-            tableFactory = registrar.getService(CyTableFactory.class);
-            enrichmentTable = tableFactory.createTable(TermSource.ALL.getTable(),EnrichmentTerm.colID,Long.class,false, true);
-            tableManager.addTable(enrichmentTable);
-        }
-        createJTable(enrichmentTable);
-//        System.out.println("Table model: "+ tableModel.getColumnCount());
-        // Check if values are git mbeing received correctly
-        List<CyRow> rows = enrichmentTable.getAllRows();
-        availableTables.add(enrichmentTable.getTitle());
-        /**
-         * Initialise the top panel design
-         */
         JPanel buttonsPanelLeft = new JPanel();
         BoxLayout layoutLeft = new BoxLayout(buttonsPanelLeft, BoxLayout.LINE_AXIS);
         buttonsPanelLeft.setLayout(layoutLeft);
@@ -327,11 +313,13 @@ public class EnrichmentCytoPanel extends JPanel
 
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butAdvancedOptions);
+        butExportTable.setEnabled(true);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
         // topPanel.add(boxTables, BorderLayout.EAST);
         this.add(topPanel, BorderLayout.NORTH);
+
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
             JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria.",
@@ -345,10 +333,23 @@ public class EnrichmentCytoPanel extends JPanel
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
         } else {
-            butExportTable.setEnabled(true);
 
+
+            if(enrichmentTable==null){
+                CyTableManager tableManager = registrar.getService(CyTableManager.class);
+                tableFactory = registrar.getService(CyTableFactory.class);
+                enrichmentTable = tableFactory.createTable(TermSource.ALL.getTable(),EnrichmentTerm.colID,Long.class,false, true);
+                tableManager.addTable(enrichmentTable);
+            }
+            createJTable(enrichmentTable);
+    //        System.out.println("Table model: "+ tableModel.getColumnCount());
+            // Check if values are git mbeing received correctly
+            List<CyRow> rows = enrichmentTable.getAllRows();
+            availableTables.add(enrichmentTable.getTitle());
+            /**
+             * Initialise the top panel design
+             */
             JTable currentTable = enrichmentTables.get(enrichmentTable.getTitle());
-
             if (tableModel != null) {
                 updateFilteredEnrichmentTable();
             }
@@ -358,15 +359,12 @@ public class EnrichmentCytoPanel extends JPanel
             Font labelFont = labelRows.getFont();
             labelRows.setFont(labelFont.deriveFont((float)(labelFont.getSize() * 0.8)));
 
-
-
             mainPanel = new JPanel(new BorderLayout());
             scrollPane = new JScrollPane(currentTable);
             mainPanel.setLayout(new GridLayout(1, 1));
             mainPanel.add(scrollPane, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
         }
-
         this.revalidate();
         this.repaint();
     }
