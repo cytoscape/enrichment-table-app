@@ -363,7 +363,7 @@ public class ModelUtils {
                         .get(EnrichmentTerm.colNetworkSUID, Long.class).equals(network.getSUID())) {
                     netTables.add(current);
                 }
-                System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
+                //System.out.println(current.getColumn(EnrichmentTerm.colNetworkSUID));
             }
         }
         return netTables;

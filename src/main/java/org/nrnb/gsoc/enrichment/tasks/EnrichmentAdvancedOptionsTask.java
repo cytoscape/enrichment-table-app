@@ -15,20 +15,21 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
+import org.cytoscape.work.ObservableTask;
+import org.cytoscape.work.json.JSONResult;
+
 
 import org.cytoscape.work.util.BoundedDouble;
 import org.cytoscape.work.util.ListSingleSelection;
 import org.cytoscape.work.TaskIterator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ighosh98
  * @description Creates the Advanced Options Panel for fine tuning the query parameters
  */
-public class EnrichmentAdvancedOptionsTask extends AbstractTask {
+public class EnrichmentAdvancedOptionsTask extends AbstractTask implements ObservableTask{
     final CyServiceRegistrar registrar;
     final CyApplicationManager applicationManager;
     final CyNetwork network;
@@ -123,6 +124,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
         significance_threshold_method.setSelectedValue("g_SCS");
         ModelUtils.setNetSignificanceThresholdMethod(network,"g_SCS");
         ModelUtils.setNetUserThreshold(network,0.05);
+
     }
 
     //user sets the cycol -> update default -> the run the query
@@ -143,7 +145,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
                 //System.out.println(organism.getSelectedValue());
                 ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
                 tm.execute(new TaskIterator(new EnrichmentTask(registrar, enrichmentPanel)));
-
             } else{
                 monitor.setStatusMessage("Could not find organism. Please select one of the supported organisms.");
             }
@@ -155,4 +156,16 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask {
     public String getTitle() {
         return "Enrichment Settings";
     }
-}
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Object getResults(Class type) {
+        String res = "Table Suid";
+        return res;
+    }
+
+    @Override
+    public List<Class<?>> getResultClasses() {
+      return Arrays.asList(JSONResult.class, String.class, Long.class, CyTable.class);
+    }
+  }
