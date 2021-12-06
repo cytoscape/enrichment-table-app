@@ -8,6 +8,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.event.CyEventHelper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
@@ -54,7 +55,6 @@ public class ModelUtils {
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
     // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
     public static int DEF_VIEW_THRESHOLD = 3000;
-
     /**
      *
      * @param network
@@ -143,6 +143,16 @@ public class ModelUtils {
         }
         return null;
     }
+
+    public static void deleteEnrichmentTables(CyServiceRegistrar registrar, CyNetwork network) {
+      CyEventHelper cyEventHelper = registrar.getService(CyEventHelper.class);
+  	  CyTableManager tableManager = registrar.getService(CyTableManager.class);
+  		Set<CyTable> oldTables = ModelUtils.getEnrichmentTables(registrar, network);
+  		for (CyTable table : oldTables) {
+  			tableManager.deleteTable(table.getSUID());
+  			cyEventHelper.flushPayloadEvents();
+  		}
+  	}
 
     /**
      * @description Initialize the Enrichment Table

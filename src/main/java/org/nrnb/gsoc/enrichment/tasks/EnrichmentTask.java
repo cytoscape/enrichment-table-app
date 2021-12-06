@@ -229,7 +229,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setProgress(1.0);
 			return;
 		}
-
+		ModelUtils.deleteEnrichmentTables(registrar, network);
 		ModelUtils.setupEnrichmentTable(enrichmentTable);
 
 		List<String> nodeNames = new ArrayList<String> (nodeNameList);
