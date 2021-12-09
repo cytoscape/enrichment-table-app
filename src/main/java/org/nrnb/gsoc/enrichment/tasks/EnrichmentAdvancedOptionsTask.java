@@ -15,6 +15,7 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.cytoscape.work.ObservableTask;
 import org.cytoscape.work.json.JSONResult;
 
@@ -36,7 +37,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     final CyTable nodeTable;
     String displayValue;
     EnrichmentCytoPanel enrichmentPanel=null;
-    public CyTable enrichmentTable = null;
+    public CyTable enrichmentTable;
 
 
     @Tunable(description = "Adjusted p-value threshold",
@@ -148,6 +149,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
             } else{
                 monitor.setStatusMessage("Could not find organism. Please select one of the supported organisms.");
             }
+            enrichmentTable = ModelUtils.getEnrichmentTable(registrar, network, TermSource.ALL.getTable());
         }
         return;
     }
@@ -160,7 +162,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     @Override
     @SuppressWarnings("unchecked")
     public Object getResults(Class type) {
-        String res = "Table Suid";
+        Long res = enrichmentTable.getSUID();
         return res;
     }
 
