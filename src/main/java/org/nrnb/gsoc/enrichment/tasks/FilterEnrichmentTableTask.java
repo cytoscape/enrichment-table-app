@@ -72,6 +72,9 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
       else return;
     }
         EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
+        if (tableModel == null){
+          monitor.showMessage(TaskMonitor.Level.ERROR,  "Unable to find enrichment table!");
+        }
         tableModel.filter(categoryList);
 
 	}
