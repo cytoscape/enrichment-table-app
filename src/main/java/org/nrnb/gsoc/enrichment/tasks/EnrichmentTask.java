@@ -40,6 +40,31 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public CyTable enrichmentTable = null;
 	EnrichmentCytoPanel enrichmentPanel=null;
 	private boolean show = true;
+	Long res;
+
+	@Tunable(description="Organism",context="nogui",
+			longDescription="The organism associated with the query genes, e.g,. hsapiens. List of possible ID-s can be seen at https://biit.cs.ut.ee/gprofiler/page/organism-list",
+				exampleStringValue = "hsapiens")
+	public String organism;
+
+	@Tunable(description="Gene ID Column",context="nogui",
+					longDescription="The Node Table column containing the gene symbols or identifiers to be queried.",
+					exampleStringValue = "LABEL")
+	public String geneID;
+
+	@Tunable(description = "Adjusted p-value threshold",context="nogui",
+					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default value is 0.05.",
+					exampleStringValue = "0.05")
+	public Double user_threshold;
+
+	@Tunable(description = "Include inferred GO annotations (IEA)",context="nogui",
+					longDescription = "The default (true) is to include inferred electronic annotations from Gene Ontology.")
+	public boolean no_iea = true;
+
+	@Tunable(description = "Multiple testing correction",context="nogui",
+					longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
+					exampleStringValue = "g_SCS")
+	public String significance_threshold_method;
 
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
@@ -56,6 +81,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		nodesToFilterBy = new ListMultipleSelection<CyNode>(network.getNodeList());
 		nodesToFilterBy.setSelectedValues(CyTableUtil.getNodesInState(network, CyNetwork.SELECTED, true));
 		isLargeNetwork = false;
+		Long res;
 		enrichmentNodesMap = new HashMap<>();
 		this.enrichmentPanel = (EnrichmentCytoPanel) enrichmentPanel;
 		/**
@@ -150,11 +176,15 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			for(CyNode  node:nodeList){
 				nodesToFilter.add(node.getSUID());
 				String canonicalName;
+				if (geneID != null){
+					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(geneID, String.class);
+			} else {
 				if(ModelUtils.getNetGeneIDColumn(network)==null){
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
 				} else{
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
 				}
+			}
 				if(canonicalName!=null && canonicalName.length()>0){
 					nodeNameList.add(canonicalName);
 					enrichmentNodesMap.put(canonicalName, node.getSUID());
@@ -203,6 +233,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		enrichmentTable.setSavePolicy(SavePolicy.SESSION_FILE);
 		tableManager.addTable(enrichmentTable);
 		if(result==null){
+			res = null;
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no results, possibly due to an error.");
 			monitor.setStatusMessage("Enrichment retrieval returned no results, due to invalid Query Parameters");
@@ -215,6 +246,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setProgress(1.0);
 			return;
 		}
+		res = enrichmentTable.getSUID();
 		responseBuffer.append((result.get("result")).toString());
 		//System.out.println(responseBuffer.toString());
 		if((responseBuffer.toString()).length()==2){
@@ -275,7 +307,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		 * Check if we already show the cytopanel or not
 		 */
 		if(show){
-			monitor.setStatusMessage("Show enrichment panel");
 			if(enrichmentPanel==null){
 				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
 			} else{
@@ -302,11 +333,15 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	private Map<String, Object> generateQuery(String query) {
 		HashMap<String,Object> parameters = new HashMap<>();
 		// TODO: add a box for taking this as an input
+		if (organism != null){
+			parameters.put("organism",organism);
+	} else {
 		if(ModelUtils.getNetOrganism(network)!=null){
 			parameters.put("organism", ModelUtils.getNetOrganism(network));
 		} else{
 			parameters.put("organism","hsapiens");
 		}
+	}
 		if(query==null){
 			parameters.put("query","");
  		} else{
@@ -321,16 +356,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <R> R getResults(Class<? extends R> clzz) {
-		if (clzz.equals(String.class)) {
-			return (R)"";
-		} else if (clzz.equals(JSONResult.class)) {
-			JSONResult res = () -> {
-				return "{}";
-			};
-			return (R)res;
-		}
-		return null;
+	public Object getResults(Class type) {
+			return res;
 	}
 
 	@Override

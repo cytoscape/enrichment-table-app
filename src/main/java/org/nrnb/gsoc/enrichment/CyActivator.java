@@ -77,7 +77,7 @@ public class CyActivator extends AbstractCyActivator {
 			cytoPanel.setState(CytoPanelState.DOCK);
 		cytoPanel.setSelectedIndex(
 				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-		TaskFactory myFactory = new EnrichmentAdvancedOptionsTaskFactory(registrar); // Implementation
+		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
 		registerService(context,
 				myFactory,
 				TaskFactory.class, // Interface
