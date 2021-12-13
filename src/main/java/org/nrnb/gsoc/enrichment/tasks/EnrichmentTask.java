@@ -55,7 +55,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	@Tunable(description = "Adjusted p-value threshold",context="nogui",
 					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default value is 0.05.",
 					exampleStringValue = "0.05")
-	public Double user_threshold;
+	public Double user_threshold = 0.05;
 
 	@Tunable(description = "Include inferred GO annotations (IEA)",context="nogui",
 					longDescription = "The default (true) is to include inferred electronic annotations from Gene Ontology.")
@@ -64,7 +64,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	@Tunable(description = "Multiple testing correction",context="nogui",
 					longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
 					exampleStringValue = "g_SCS")
-	public String significance_threshold_method;
+	public String significance_threshold_method = "g_SCS";
 
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
@@ -177,6 +177,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				nodesToFilter.add(node.getSUID());
 				String canonicalName;
 				if (geneID != null){
+					ModelUtils.setNetGeneIDColumn(network,geneID);
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(geneID, String.class);
 			} else {
 				if(ModelUtils.getNetGeneIDColumn(network)==null){
@@ -335,6 +336,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		// TODO: add a box for taking this as an input
 		if (organism != null){
 			parameters.put("organism",organism);
+			ModelUtils.setNetOrganism(network,organism);
 	} else {
 		if(ModelUtils.getNetOrganism(network)!=null){
 			parameters.put("organism", ModelUtils.getNetOrganism(network));
@@ -347,6 +349,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
  		} else{
 			parameters.put("query",query);
 		}
+		ModelUtils.setNetUserThreshold(network,user_threshold);
+		parameters.put("user_threshold",user_threshold);
+		ModelUtils.setNetNoIEA(network, no_iea);
+		parameters.put("no_iea",no_iea);
+		ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
+		parameters.put("significance_threshold_method",significance_threshold_method);
 		return parameters;
 	}
 
