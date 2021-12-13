@@ -245,6 +245,7 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setFocusPainted(false);
         butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
         butExportTable.setEnabled(false);
+        butFilter.setEnabled(false);
 
         butAdvancedOptions = new JButton(IconManager.ICON_COG);
         butAdvancedOptions.setFont(iconFont);
@@ -301,6 +302,8 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setFocusPainted(false);
         butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
         butExportTable.setEnabled(false);
+        butFilter.setEnabled(false);
+
 
         butAdvancedOptions = new JButton(IconManager.ICON_COG);
         butAdvancedOptions.setFont(iconFont);
@@ -314,6 +317,7 @@ public class EnrichmentCytoPanel extends JPanel
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butAdvancedOptions);
         butExportTable.setEnabled(true);
+        butFilter.setEnabled(true);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
