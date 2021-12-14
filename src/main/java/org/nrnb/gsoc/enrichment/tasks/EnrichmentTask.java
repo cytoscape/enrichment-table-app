@@ -42,29 +42,29 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	private boolean show = true;
 	Long res;
 
-	@Tunable(description="Organism",context="nogui",
+	@Tunable(description="Organism",context="nogui",required=true,
 			longDescription="The organism associated with the query genes, e.g,. hsapiens. List of possible ID-s can be seen at https://biit.cs.ut.ee/gprofiler/page/organism-list",
 				exampleStringValue = "hsapiens")
 	public String organism;
 
-	@Tunable(description="Gene ID Column",context="nogui",
+	@Tunable(description="Gene ID Column",context="nogui",required=true,
 					longDescription="The Node Table column containing the gene symbols or identifiers to be queried.",
-					exampleStringValue = "LABEL")
+					exampleStringValue = "name")
 	public String geneID;
 
 	@Tunable(description = "Adjusted p-value threshold",context="nogui",
-					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default value is 0.05.",
+					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results.",
 					exampleStringValue = "0.05")
-	public Double user_threshold = 0.05;
+	public Double user_threshold;
 
 	@Tunable(description = "Include inferred GO annotations (IEA)",context="nogui",
-					longDescription = "The default (true) is to include inferred electronic annotations from Gene Ontology.")
-	public boolean no_iea = true;
+					longDescription = "The default is false. If true, g:GOSt excludes electronic annotations from GO terms.")
+	public Boolean no_iea;
 
 	@Tunable(description = "Multiple testing correction",context="nogui",
 					longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
 					exampleStringValue = "g_SCS")
-	public String significance_threshold_method = "g_SCS";
+	public String significance_threshold_method;
 
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
 
@@ -193,6 +193,9 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			}
 		}
 
+		//ModelUtils.setNetUserThreshold(network,user_threshold);
+		//ModelUtils.setNetNoIEA(network, no_iea);
+		//ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
 		/**
 		 * @description Check if request query is empty
 		 */
@@ -349,14 +352,27 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
  		} else{
 			parameters.put("query",query);
 		}
+		if (ModelUtils.getNetUserThreshold(network)!=null && user_threshold == null){
+			ModelUtils.setNetUserThreshold(network,ModelUtils.getNetUserThreshold(network));
+		} else{
 		ModelUtils.setNetUserThreshold(network,user_threshold);
-		parameters.put("user_threshold",user_threshold);
-		ModelUtils.setNetNoIEA(network, no_iea);
-		parameters.put("no_iea",no_iea);
+		}
+
+		if (ModelUtils.getNetNoIEA(network)!=null && no_iea == null){
+			ModelUtils.setNetNoIEA(network,ModelUtils.getNetNoIEA(network));
+		} else{
+		ModelUtils.setNetNoIEA(network,no_iea);
+		}
+
+		if (ModelUtils.getNetSignificanceThresholdMethod(network)!=null && significance_threshold_method == null){
+			ModelUtils.setNetSignificanceThresholdMethod(network,ModelUtils.getNetSignificanceThresholdMethod(network));
+		} else{
 		ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
-		parameters.put("significance_threshold_method",significance_threshold_method);
+		}
+
 		return parameters;
 	}
+
 
 	public void cancel() {
 		this.cancelled = true;
