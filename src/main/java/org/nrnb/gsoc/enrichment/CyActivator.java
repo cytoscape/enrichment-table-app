@@ -78,8 +78,8 @@ public class CyActivator extends AbstractCyActivator {
 		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
-		//registrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
-		//registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
+		registrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
+		registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 		//registrar.registerService(enrichmentPanel, NetworkAddedListener.class, new Properties());
 
 		if (cytoPanel.getState() == CytoPanelState.HIDE)

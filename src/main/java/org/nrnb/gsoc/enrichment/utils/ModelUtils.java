@@ -14,6 +14,10 @@ import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.cytoscape.property.CyProperty;
+import org.cytoscape.property.CyProperty.SavePolicy;
+import org.cytoscape.property.SimpleCyProperty;
+import org.cytoscape.property.AbstractConfigDirPropsReader;
 
 import java.util.*;
 
@@ -739,5 +743,38 @@ public class ModelUtils {
             copyRow(from.getDefaultNodeTable(), to.getDefaultNodeTable(), node, newNode, columnsCreated);
         }
     }
+
+
+	public static CyProperty<Properties> getPropertyService(CyServiceRegistrar registrar,
+			SavePolicy policy) {
+			String name = "enrichment";
+			if (policy.equals(SavePolicy.SESSION_FILE)) {
+				CyProperty<Properties> service = registrar.getService(CyProperty.class, "(cyPropertyName="+name+")");
+				// Do we already have a session with our properties
+				if (service.getSavePolicy().equals(SavePolicy.SESSION_FILE))
+					return service;
+
+				// Either we have a null session or our properties aren't in this session
+				Properties props = new Properties();
+				service = new SimpleCyProperty(name, props, Properties.class, SavePolicy.SESSION_FILE);
+				Properties serviceProps = new Properties();
+				serviceProps.setProperty("cyPropertyName", service.getName());
+				registrar.registerAllServices(service, serviceProps);
+				return service;
+			} else if (policy.equals(SavePolicy.CONFIG_DIR) || policy.equals(SavePolicy.SESSION_FILE_AND_CONFIG_DIR)) {
+				CyProperty<Properties> service = new ConfigPropsReader(policy, name);
+				Properties serviceProps = new Properties();
+				serviceProps.setProperty("cyPropertyName", service.getName());
+				registrar.registerAllServices(service, serviceProps);
+				return service;
+		}
+		return null;
+	}
+
+  public static class ConfigPropsReader extends AbstractConfigDirPropsReader {
+		ConfigPropsReader(SavePolicy policy, String name) {
+			super(name, "enrichment.props", policy);
+		}
+	}
 
 }
