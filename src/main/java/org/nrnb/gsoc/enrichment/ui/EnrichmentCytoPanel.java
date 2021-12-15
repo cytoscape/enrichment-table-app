@@ -641,15 +641,13 @@ public class EnrichmentCytoPanel extends JPanel
           registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
         }
     }
-      CytoPanelComponent2 panel = new EnrichmentCytoPanel(registrar, noSignificant, null);
 
+      CytoPanelComponent2 panel = new EnrichmentCytoPanel(registrar, noSignificant, null);
 			registrar.registerService(panel, CytoPanelComponent.class, new Properties());
 			registrar.registerService(panel, RowsSetListener.class, new Properties());
 			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
-
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
 				cytoPanel.setState(CytoPanelState.DOCK);
-
 			cytoPanel.setSelectedIndex(
 					cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
 }
