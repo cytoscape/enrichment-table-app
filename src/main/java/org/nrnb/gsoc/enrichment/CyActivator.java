@@ -11,6 +11,7 @@ import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
+import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
 
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
@@ -73,6 +74,8 @@ public class CyActivator extends AbstractCyActivator {
 		registrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
 		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
+		registrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
+
 		if (cytoPanel.getState() == CytoPanelState.HIDE)
 			cytoPanel.setState(CytoPanelState.DOCK);
 		cytoPanel.setSelectedIndex(
@@ -82,5 +85,6 @@ public class CyActivator extends AbstractCyActivator {
 				myFactory,
 				TaskFactory.class, // Interface
 				properties); // Service properties
+
 	}
 }

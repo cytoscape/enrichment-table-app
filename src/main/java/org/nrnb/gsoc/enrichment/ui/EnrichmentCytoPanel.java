@@ -1,6 +1,9 @@
 package org.nrnb.gsoc.enrichment.ui;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.swing.CySwingApplication;
+import org.cytoscape.application.swing.CytoPanel;
+import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelComponent2;
 import org.cytoscape.application.swing.CytoPanelName;
 import org.cytoscape.model.*;
@@ -11,6 +14,8 @@ import org.cytoscape.util.swing.IconManager;
 import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
+import org.cytoscape.model.events.NetworkAboutToBeDestroyedEvent;
+import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
@@ -19,6 +24,7 @@ import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 import org.nrnb.gsoc.enrichment.tasks.FilterEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
+import org.cytoscape.application.swing.CytoPanelState;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -43,7 +49,7 @@ import java.util.List;
  * @description Result Panel which stores the result of the gProfiler querying task and provides other tools to modify the querying tasks
  */
 public class EnrichmentCytoPanel extends JPanel
-        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener {
+        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener {
 
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
@@ -612,4 +618,39 @@ public class EnrichmentCytoPanel extends JPanel
         }
         updateLabelRows();
     }
+
+    @Override
+    public void handleEvent(NetworkAboutToBeDestroyedEvent e) {
+      CyNetwork network = e.getNetwork();
+      // delete enrichment tables
+      CyTableManager tableManager = registrar.getService(CyTableManager.class);
+      Set<CyTable> oldTables = ModelUtils.getEnrichmentTables(registrar, network);
+      for (CyTable table : oldTables) {
+        tableManager.deleteTable(table.getSUID());
+      }
+
+      CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+      CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+
+      if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") >= 0) {
+        int compIndex = cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment");
+        Component panel = cytoPanel.getComponentAt(compIndex);
+        if (panel instanceof CytoPanelComponent2) {
+          registrar.unregisterService(panel, CytoPanelComponent.class);
+          registrar.unregisterService(panel, RowsSetListener.class);
+          registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
+        }
+    }
+      CytoPanelComponent2 panel = new EnrichmentCytoPanel(registrar, noSignificant, null);
+
+			registrar.registerService(panel, CytoPanelComponent.class, new Properties());
+			registrar.registerService(panel, RowsSetListener.class, new Properties());
+			registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+
+			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
+
+			cytoPanel.setSelectedIndex(
+					cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+}
 }
