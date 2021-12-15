@@ -18,10 +18,8 @@
     These are the key elements of a pom.xml file. All
     pom.xml files must have a "groupId", "artifactId", and "version".
     These three things uniquely identify a project in Maven.
-
     A "groupId" is the hierarchical name of the organization
     that is making this project.
-
     An "artifactId" is the name of the project.
     -->
     <groupId>org.nrnb.gsoc</groupId>

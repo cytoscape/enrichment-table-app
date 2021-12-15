@@ -53,13 +53,13 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public String geneID;
 
 	@Tunable(description = "Adjusted p-value threshold",context="nogui",
-					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results.",
-					exampleStringValue = "0.05")
-	public Double user_threshold;
+					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results.")
+	public String user_threshold;
 
 	@Tunable(description = "Include inferred GO annotations (IEA)",context="nogui",
-					longDescription = "The default is false. If true, g:GOSt excludes electronic annotations from GO terms.")
-	public Boolean no_iea;
+					longDescription = "The default is false. If true, g:GOSt excludes electronic annotations from GO terms.",
+					exampleStringValue = "false")
+	public String no_iea;
 
 	@Tunable(description = "Multiple testing correction",context="nogui",
 					longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
@@ -332,13 +332,13 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if (ModelUtils.getNetUserThreshold(network)!=null && user_threshold == null){
 			ModelUtils.setNetUserThreshold(network,ModelUtils.getNetUserThreshold(network));
 		} else{
-		ModelUtils.setNetUserThreshold(network,user_threshold);
+		ModelUtils.setNetUserThreshold(network,Double.parseDouble(user_threshold));
 		}
 
 		if (ModelUtils.getNetNoIEA(network)!=null && no_iea == null){
 			ModelUtils.setNetNoIEA(network,ModelUtils.getNetNoIEA(network));
 		} else{
-		ModelUtils.setNetNoIEA(network,no_iea);
+		ModelUtils.setNetNoIEA(network,Boolean.parseBoolean(no_iea));
 		}
 
 		if (ModelUtils.getNetSignificanceThresholdMethod(network)!=null && significance_threshold_method == null){

@@ -52,7 +52,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
             longDescription = "The default (true) is to include inferred electronic annotations from Gene Ontology.",
             groups = {"Optional settings"},
             tooltip = "<html>Uncheck to exclude inferred GO annotations.</html>")
-    public boolean no_iea = true;
+    public boolean no_iea = false;
 
     @Tunable(description = "Multiple testing correction",
             tooltip = "Select the multiple testing correction method.",
