@@ -329,19 +329,28 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
  		} else{
 			parameters.put("query",query);
 		}
-		if (ModelUtils.getNetUserThreshold(network)!=null && user_threshold == null){
+		if (ModelUtils.getNetUserThreshold(network)==null && user_threshold == null) {
+			ModelUtils.setNetUserThreshold(network,0.05);
+		}
+		 else if (ModelUtils.getNetUserThreshold(network)!=null && user_threshold == null){
 			ModelUtils.setNetUserThreshold(network,ModelUtils.getNetUserThreshold(network));
 		} else{
 		ModelUtils.setNetUserThreshold(network,Double.parseDouble(user_threshold));
 		}
 
-		if (ModelUtils.getNetNoIEA(network)!=null && no_iea == null){
+		if (ModelUtils.getNetNoIEA(network)==null && no_iea == null) {
+			ModelUtils.setNetNoIEA(network, false);
+		}
+		else if (ModelUtils.getNetNoIEA(network)!=null && no_iea == null){
 			ModelUtils.setNetNoIEA(network,ModelUtils.getNetNoIEA(network));
 		} else{
 		ModelUtils.setNetNoIEA(network,Boolean.parseBoolean(no_iea));
 		}
 
-		if (ModelUtils.getNetSignificanceThresholdMethod(network)!=null && significance_threshold_method == null){
+		if (ModelUtils.getNetSignificanceThresholdMethod(network)==null && significance_threshold_method == null) {
+			ModelUtils.setNetSignificanceThresholdMethod(network, "g_SCS");
+		}
+		 else if (ModelUtils.getNetSignificanceThresholdMethod(network)!=null && significance_threshold_method == null){
 			ModelUtils.setNetSignificanceThresholdMethod(network,ModelUtils.getNetSignificanceThresholdMethod(network));
 		} else{
 		ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
