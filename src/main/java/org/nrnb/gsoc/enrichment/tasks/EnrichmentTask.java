@@ -53,7 +53,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	public String geneID;
 
 	@Tunable(description = "Adjusted p-value threshold",context="nogui",
-					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results.")
+					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default is 0.05.",
+					exampleStringValue = "0.05")
 	public String user_threshold;
 
 	@Tunable(description = "Include inferred GO annotations (IEA)",context="nogui",
