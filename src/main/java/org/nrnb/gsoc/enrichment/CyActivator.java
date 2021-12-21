@@ -12,7 +12,6 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
-import org.cytoscape.model.events.NetworkAddedListener;
 import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.session.events.SessionLoadedListener;
 

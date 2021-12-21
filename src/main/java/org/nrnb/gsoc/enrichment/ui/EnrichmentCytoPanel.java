@@ -661,11 +661,33 @@ public class EnrichmentCytoPanel extends JPanel
         }
 
     public void handleEvent(SessionLoadedEvent arg0) {
-		// Get any properties we stored in the session
-		sessionProperties = ModelUtils.getPropertyService(registrar, SavePolicy.SESSION_FILE);
-		// Create string networks for any networks loaded by string
-		//reloadEnrichmentPanel();
+		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+    if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") >= 0) {
+      int compIndex = cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment");
+      Component panel = cytoPanel.getComponentAt(compIndex);
+      if (panel instanceof CytoPanelComponent2) {
+        registrar.unregisterService(panel, CytoPanelComponent.class);
+        registrar.unregisterService(panel, RowsSetListener.class);
+        registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
+        }
     }
+    //if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") < 0) {
+  			CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar, noSignificant, null);
+  			registrar.registerService(panel, CytoPanelComponent.class, new Properties());
+        registrar.registerService(panel, RowsSetListener.class, new Properties());
+        registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+  			if (cytoPanel.getState() == CytoPanelState.HIDE)
+  				cytoPanel.setState(CytoPanelState.DOCK);
+  		//} else {
+  			//int compIndex = cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment");
+  			//Component panel = cytoPanel.getComponentAt(compIndex);
+  			//if (panel instanceof CytoPanelComponent2) {
+  				//registrar.unregisterService(panel, CytoPanelComponent.class);
+  			//}
+  		//}
+		}
+
 
     public void handleEvent(SetCurrentNetworkEvent event) {
       CyNetwork network = event.getNetwork();
