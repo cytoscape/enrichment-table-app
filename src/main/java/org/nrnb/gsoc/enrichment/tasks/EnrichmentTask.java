@@ -310,21 +310,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 		// System.out.println(enrichmentTable.getTitle());
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		if(show){
-			if(enrichmentPanel==null){
-				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
-			} else{
-				enrichmentPanel.setEnrichmentTable(enrichmentTable);
-			}
-			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
-			registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
-			registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
-			if (cytoPanel.getState() == CytoPanelState.HIDE)
-				cytoPanel.setState(CytoPanelState.DOCK);
-			cytoPanel.setSelectedIndex(
-					cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+		enrichmentPanel.setEnrichmentTable(enrichmentTable);
 
-		}
 		monitor.setProgress(1.0);
 		return;
 	}
