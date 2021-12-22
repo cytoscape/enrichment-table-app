@@ -244,7 +244,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			monitor.setStatusMessage("Enrichment retrieval returned no results, due to invalid Query Parameters");
 			this.noSignificant = true;
 
-
+			if(enrichmentPanel==null){
+					enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
+				} else{
+					enrichmentPanel.initPanel(true);
+				}
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -256,7 +260,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
 			this.noSignificant = true;
 
-
+			if(enrichmentPanel==null){
+					enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
+				} else{
+					enrichmentPanel.initPanel(true);
+				}
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -302,7 +310,21 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 		// System.out.println(enrichmentTable.getTitle());
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		enrichmentPanel.setEnrichmentTable(enrichmentTable);
+		if(show){
+			if(enrichmentPanel==null){
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
+			} else{
+				enrichmentPanel.setEnrichmentTable(enrichmentTable);
+			}
+			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
+			registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
+			registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
+			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
+			cytoPanel.setSelectedIndex(
+					cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+
+		}
 		monitor.setProgress(1.0);
 		return;
 	}
