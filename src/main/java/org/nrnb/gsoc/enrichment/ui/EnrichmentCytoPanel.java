@@ -16,8 +16,6 @@ import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedEvent;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
-import org.cytoscape.application.events.SetCurrentNetworkEvent;
-import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.session.events.SessionLoadedEvent;
 import org.cytoscape.session.events.SessionLoadedListener;
 import org.json.simple.JSONObject;
@@ -55,7 +53,7 @@ import java.util.List;
  * @description Result Panel which stores the result of the gProfiler querying task and provides other tools to modify the querying tasks
  */
 public class EnrichmentCytoPanel extends JPanel
-        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SessionLoadedListener, SetCurrentNetworkListener {
+        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SessionLoadedListener {
 
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
@@ -679,10 +677,8 @@ public class EnrichmentCytoPanel extends JPanel
             registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
       			if (cytoPanel.getState() == CytoPanelState.HIDE)
       				cytoPanel.setState(CytoPanelState.DOCK);
+            cytoPanel.setSelectedIndex(
+              cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
 		}
 
-
-    public void handleEvent(SetCurrentNetworkEvent event) {
-      CyNetwork network = event.getNetwork();
-    }
 }

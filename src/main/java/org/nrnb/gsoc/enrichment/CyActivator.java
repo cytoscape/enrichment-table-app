@@ -12,7 +12,6 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
-import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.session.events.SessionLoadedListener;
 
 import org.json.simple.JSONObject;
@@ -78,7 +77,7 @@ public class CyActivator extends AbstractCyActivator {
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
-		registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
+		//registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 		//registrar.registerService(enrichmentPanel, NetworkAddedListener.class, new Properties());
 
 		if (cytoPanel.getState() == CytoPanelState.HIDE)

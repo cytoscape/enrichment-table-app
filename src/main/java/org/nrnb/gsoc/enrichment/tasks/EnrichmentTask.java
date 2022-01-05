@@ -20,8 +20,9 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
-
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import static org.nrnb.gsoc.enrichment.utils.ModelUtils.scientificNametoID;
 
@@ -310,7 +311,29 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 		// System.out.println(enrichmentTable.getTitle());
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+		if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") >= 0) {
+			int compIndex = cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment");
+			Component panel = cytoPanel.getComponentAt(compIndex);
+			if (panel instanceof CytoPanelComponent2) {
+				registrar.unregisterService(panel, CytoPanelComponent.class);
+				registrar.unregisterService(panel, RowsSetListener.class);
+				registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
+				}
+		}
+		if(show){
+
 		enrichmentPanel.setEnrichmentTable(enrichmentTable);
+	
+	registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
+	registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
+	registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
+	if (cytoPanel.getState() == CytoPanelState.HIDE)
+		cytoPanel.setState(CytoPanelState.DOCK);
+	cytoPanel.setSelectedIndex(
+			cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+enrichmentPanel.setEnrichmentTable(enrichmentTable);
+
+}
 
 		monitor.setProgress(1.0);
 		return;
