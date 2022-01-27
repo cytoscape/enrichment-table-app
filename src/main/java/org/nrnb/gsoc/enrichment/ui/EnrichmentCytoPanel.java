@@ -69,6 +69,8 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butExportTable;
     JButton butRunProfiler;
     JButton butFilter;
+    JLabel organismSelect;
+    JLabel geneIdSelect;
     TableColumnModel columnModel;
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
@@ -98,6 +100,8 @@ public class EnrichmentCytoPanel extends JPanel
     final CyApplicationManager applicationManager;
 
     final String butFilterName = "Filter enrichment table";
+    final String organismSelectTip = "Click gear icon to change organism";
+    final String geneIdSelectTip = "<html>Click gear icon to change <b>Node Table</b> column with gene identifiers</html>";
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Perform Gene Enrichment";
@@ -234,14 +238,25 @@ public class EnrichmentCytoPanel extends JPanel
         butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
 
 
-        /**
-         * JComboBox for setting the default value of the node to be chosen for performing the query
-         */
+        buttonsPanelLeft.add(butRunProfiler);
+        buttonsPanelLeft.add(butFilter);
 
         // Add enrichment map button here if EnrichmentMap is loaded
 
-        buttonsPanelLeft.add(butRunProfiler);
-        buttonsPanelLeft.add(butFilter);
+        /**
+         * JComboBox for setting the default value of the node to be chosen for performing the query
+         */
+        JPanel buttonsPanelCenter = new JPanel();
+        buttonsPanelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+
+        organismSelect = new JLabel("Organism: ...", JLabel.LEFT);
+        organismSelect.setToolTipText(organismSelectTip);
+        geneIdSelect = new JLabel("Gene ID column: ...", JLabel.LEFT);
+        geneIdSelect.setToolTipText(geneIdSelectTip);
+
+        buttonsPanelCenter.add(organismSelect);
+        buttonsPanelCenter.add(geneIdSelect);
+
 
         // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
         JPanel buttonsPanelRight = new JPanel();
@@ -272,6 +287,7 @@ public class EnrichmentCytoPanel extends JPanel
         buttonsPanelRight.add(butAdvancedOptions);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
+        topPanel.add(buttonsPanelCenter, BorderLayout.CENTER);
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
         // topPanel.add(boxTables, BorderLayout.EAST);
         this.add(topPanel, BorderLayout.NORTH);
@@ -299,6 +315,22 @@ public class EnrichmentCytoPanel extends JPanel
 
         buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
+
+        // Add enrichment map button here if EnrichmentMap is loaded
+
+        /**
+         * JComboBox for setting the default value of the node to be chosen for performing the query
+         */
+        JPanel buttonsPanelCenter = new JPanel();
+        buttonsPanelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+
+        organismSelect = new JLabel("Organism: ...", JLabel.LEFT);
+        organismSelect.setToolTipText(organismSelectTip);
+        geneIdSelect = new JLabel("Gene ID column: ...", JLabel.LEFT);
+        geneIdSelect.setToolTipText(geneIdSelectTip);
+
+        buttonsPanelCenter.add(organismSelect);
+        buttonsPanelCenter.add(geneIdSelect);
 
         // JPanel buttonsPanelRight = new JPanel(new GridLayout(1, 3));
         JPanel buttonsPanelRight = new JPanel();
@@ -332,19 +364,20 @@ public class EnrichmentCytoPanel extends JPanel
         butFilter.setEnabled(true);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
+        topPanel.add(buttonsPanelCenter, BorderLayout.CENTER);
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
         // topPanel.add(boxTables, BorderLayout.EAST);
         this.add(topPanel, BorderLayout.NORTH);
 
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
-            JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria. Click on the gear icon to check the settings.",
+            JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria. Click on the gear icon to check settings.",
                     SwingConstants.CENTER);
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
         } else if (availableTables.size() == 0) {
             mainPanel = new JPanel(new BorderLayout());
-            JLabel label = new JLabel("No enrichment has been retrieved for this network.",
+            JLabel label = new JLabel("No enrichment has been retrieved for this network. Click the cycle icon to perform an analysis.",
                     SwingConstants.CENTER);
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
