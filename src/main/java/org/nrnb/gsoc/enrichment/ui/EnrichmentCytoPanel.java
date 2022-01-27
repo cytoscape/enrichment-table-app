@@ -338,7 +338,7 @@ public class EnrichmentCytoPanel extends JPanel
 
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
-            JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria.",
+            JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria. Click on the gear icon to check the settings.",
                     SwingConstants.CENTER);
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
