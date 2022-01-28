@@ -249,9 +249,9 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelCenter = new JPanel();
         buttonsPanelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
-        organismSelect = new JLabel("Organism: ...", JLabel.LEFT);
+        organismSelect = new JLabel("Organism: " + ModelUtils.getNetOrganism(network), JLabel.LEFT);
         organismSelect.setToolTipText(organismSelectTip);
-        geneIdSelect = new JLabel("Gene ID column: ...", JLabel.LEFT);
+        geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
         geneIdSelect.setToolTipText(geneIdSelectTip);
 
         buttonsPanelCenter.add(organismSelect);
@@ -324,9 +324,9 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel buttonsPanelCenter = new JPanel();
         buttonsPanelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
-        organismSelect = new JLabel("Organism: ...", JLabel.LEFT);
+        organismSelect = new JLabel("Organism: " + ModelUtils.getNetOrganism(network), JLabel.LEFT);
         organismSelect.setToolTipText(organismSelectTip);
-        geneIdSelect = new JLabel("Gene ID column: ...", JLabel.LEFT);
+        geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
         geneIdSelect.setToolTipText(geneIdSelectTip);
 
         buttonsPanelCenter.add(organismSelect);
