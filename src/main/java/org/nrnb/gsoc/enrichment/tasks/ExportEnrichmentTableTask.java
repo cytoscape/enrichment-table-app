@@ -46,7 +46,7 @@ public class ExportEnrichmentTableTask extends AbstractTask {
             return;
         }
         if (selectedTable != null && prefix != null) {
-            File file = new File(prefix.getAbsolutePath()+selectedTable);
+            File file = new File(prefix.getAbsolutePath());
             taskMonitor.showMessage(TaskMonitor.Level.INFO,
                     "export table " + selectedTable + " to " + file.getAbsolutePath());
             TaskIterator ti = exportTF.createTaskIterator(selectedTable, file);
