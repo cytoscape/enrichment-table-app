@@ -20,7 +20,7 @@ import org.cytoscape.property.SimpleCyProperty;
 import org.cytoscape.property.AbstractConfigDirPropsReader;
 
 import java.util.*;
-
+import java.math.BigDecimal;
 /**
  * @author ighosh98
  * @description
@@ -511,7 +511,9 @@ public class ModelUtils {
             }
             if(enr.containsKey("p_value")){
                 String content = enr.get("p_value").toString();
-                currTerm.setPValue(content);
+                BigDecimal d = new BigDecimal(content);
+                String contentNoScientific = d.toPlainString();
+                currTerm.setPValue(contentNoScientific);
             }
             if(enr.containsKey("precision")){
                 String content = enr.get("precision").toString();
