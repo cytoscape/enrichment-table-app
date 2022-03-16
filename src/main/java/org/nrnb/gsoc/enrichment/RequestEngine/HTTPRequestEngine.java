@@ -148,10 +148,14 @@ public class HTTPRequestEngine {
         httpPost.setHeader("Content-type", "application/json");
         CloseableHttpResponse response = null;
         try {
-            response = httpclient.execute(httpPost);
+            response = ScheduledRequestEngine.sendPostRequestWithTimeLimit(httpclient, httpPost, 20);
         } catch (IOException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+            monitor.setStatusMessage("Task Cancelled. Returning back");
         }
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode!=200 && statusCode!=202){
@@ -163,10 +167,7 @@ public class HTTPRequestEngine {
         JSONObject jsonResponse=null;
         try {
             jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
