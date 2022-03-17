@@ -24,8 +24,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import static org.nrnb.gsoc.enrichment.utils.ModelUtils.scientificNametoID;
-
 /**
  * @author ighosh98
  * @description Runs the gProfiler task to fetch data and populate the table
@@ -392,7 +390,7 @@ enrichmentPanel.setEnrichmentTable(enrichmentTable);
 		return parameters;
 	}
 
-
+	@Override
     public void cancel() {
         ScheduledRequestEngine.stopPostRequest();
         this.cancelled = true;

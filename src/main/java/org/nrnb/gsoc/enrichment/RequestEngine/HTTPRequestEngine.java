@@ -15,6 +15,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.nrnb.gsoc.enrichment.constants.APP_CONSTANTS;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.io.IOException;
@@ -148,7 +149,7 @@ public class HTTPRequestEngine {
         httpPost.setHeader("Content-type", "application/json");
         CloseableHttpResponse response = null;
         try {
-            response = ScheduledRequestEngine.sendPostRequestWithTimeLimit(httpclient, httpPost, 20);
+            response = ScheduledRequestEngine.sendPostRequestWithTimeLimit(httpclient, httpPost, APP_CONSTANTS.TIMEOUT);
         } catch (IOException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
