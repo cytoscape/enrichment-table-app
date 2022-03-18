@@ -1,6 +1,5 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.*;
 import org.cytoscape.model.*;
@@ -16,6 +15,7 @@ import org.cytoscape.work.json.JSONResult;
 import org.cytoscape.work.util.ListMultipleSelection;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
+import org.nrnb.gsoc.enrichment.RequestEngine.ScheduledRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
@@ -23,8 +23,6 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
-import static org.nrnb.gsoc.enrichment.utils.ModelUtils.scientificNametoID;
 
 /**
  * @author ighosh98
@@ -323,7 +321,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		if(show){
 
 		enrichmentPanel.setEnrichmentTable(enrichmentTable);
-	
+
 	registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
 	registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 	registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
@@ -392,10 +390,11 @@ enrichmentPanel.setEnrichmentTable(enrichmentTable);
 		return parameters;
 	}
 
-
-	public void cancel() {
-		this.cancelled = true;
-	}
+	@Override
+    public void cancel() {
+        ScheduledRequestEngine.stopPostRequest();
+        this.cancelled = true;
+    }
 
 	@Override
 	@SuppressWarnings("unchecked")

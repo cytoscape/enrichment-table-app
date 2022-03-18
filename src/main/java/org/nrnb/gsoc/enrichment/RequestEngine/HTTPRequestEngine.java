@@ -15,6 +15,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.nrnb.gsoc.enrichment.constants.APP_CONSTANTS;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.io.IOException;
@@ -148,10 +149,14 @@ public class HTTPRequestEngine {
         httpPost.setHeader("Content-type", "application/json");
         CloseableHttpResponse response = null;
         try {
-            response = httpclient.execute(httpPost);
+            response = ScheduledRequestEngine.sendPostRequestWithTimeLimit(httpclient, httpPost, APP_CONSTANTS.TIMEOUT);
         } catch (IOException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+            monitor.setStatusMessage("Task Cancelled. Returning back");
         }
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode!=200 && statusCode!=202){
@@ -163,10 +168,7 @@ public class HTTPRequestEngine {
         JSONObject jsonResponse=null;
         try {
             jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            monitor.setStatusMessage("Could not fetch data. Check your internet connection");
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
         }
