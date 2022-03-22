@@ -1,4 +1,4 @@
-package org.nrnb.gsoc.enrichment.tasks;
+package org.nrnb.gsoc.enrichment.tasks.TasksFactories;
 
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
@@ -8,6 +8,7 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.task.AbstractNetworkTaskFactory;
 import org.cytoscape.work.TaskIterator;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 

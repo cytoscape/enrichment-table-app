@@ -60,9 +60,9 @@ public class ModelUtils {
     // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
     public static int DEF_VIEW_THRESHOLD = 3000;
     /**
-     *
+     * This function responsible for checking weather all nodes in specific network have QueryTerm
      * @param network
-     * @return
+     * @return boolean
      */
     public static boolean haveQueryTerms(CyNetwork network) {
         if (network == null) return false;
@@ -74,7 +74,7 @@ public class ModelUtils {
     }
 
     /**
-     *
+     * This function is responsible for selecting Query terms for network
      * @param network
      */
     public static void selectQueryTerms(CyNetwork network) {
@@ -87,9 +87,9 @@ public class ModelUtils {
     }
 
     /**
-     *
+     * Getting existing profilerId in the network
      * @param network
-     * @return
+     * @return String
      */
     public static String getExisting(CyNetwork network) {
         StringBuilder str = new StringBuilder();

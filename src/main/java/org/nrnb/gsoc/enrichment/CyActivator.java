@@ -1,7 +1,5 @@
 package org.nrnb.gsoc.enrichment;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.cytoscape.application.swing.*;
@@ -14,14 +12,11 @@ import org.cytoscape.work.TaskFactory;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
 import org.cytoscape.session.events.SessionLoadedListener;
 
-import org.json.simple.JSONObject;
-import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTaskFactory;
+import org.nrnb.gsoc.enrichment.tasks.TasksFactories.EnrichmentTaskFactory;
+import org.nrnb.gsoc.enrichment.tasks.TasksFactories.EnrichmentAdvancedOptionsTaskFactory;
 
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
-import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.osgi.framework.BundleContext;
 
 /**

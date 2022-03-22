@@ -1,9 +1,10 @@
-package org.nrnb.gsoc.enrichment.tasks;
+package org.nrnb.gsoc.enrichment.tasks.TasksFactories;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.AbstractTaskFactory;
 import org.cytoscape.work.TaskIterator;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTask;
 
 
 /**
