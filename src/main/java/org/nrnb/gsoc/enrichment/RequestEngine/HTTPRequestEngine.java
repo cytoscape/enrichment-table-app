@@ -83,7 +83,6 @@ public class HTTPRequestEngine {
      * @return
      */
     public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
-        logger.info("Sending request to GProfiler for enrichment");
         if(ModelUtils.getNetUserThreshold(network)!=null){
             parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
         }

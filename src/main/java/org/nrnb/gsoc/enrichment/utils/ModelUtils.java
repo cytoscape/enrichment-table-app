@@ -64,7 +64,6 @@ public class ModelUtils {
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
     // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
     public static int DEF_VIEW_THRESHOLD = 3000;
-
     /**
      *
      * @param network

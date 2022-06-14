@@ -155,7 +155,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	}
 
 	public void run(TaskMonitor monitor) {
-
 		// Get services from registrar if needed
 		List<CyNode> nodeList;
 		Set<String> nodeNameList = new HashSet<String>();
@@ -187,8 +186,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			} else {
 				if(ModelUtils.getNetGeneIDColumn(network)==null){
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+					logger.warn("No Gene ID selected. " + CyNetwork.NAME + " selected as default.");
 				} else{
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+					geneID = ModelUtils.getNetGeneIDColumn(network);
 				}
 			}
 				if(canonicalName!=null && canonicalName.length()>0){
@@ -233,6 +234,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
+		logger.info("Sending request to GProfiler for enrichment. Parameters set are: Organism: "
+				+ organism + ", Gene ID: " + geneID);
 		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
@@ -258,7 +261,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 		res = enrichmentTable.getSUID();
 		responseBuffer.append((result.get("result")).toString());
-		System.out.println("GProfiler Response: \n"  +responseBuffer);
+		// System.out.println("GProfiler Response: \n"  +responseBuffer);
 		if((responseBuffer.toString()).length()==2){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
@@ -356,8 +359,10 @@ enrichmentPanel.setEnrichmentTable(enrichmentTable);
 	} else {
 		if(ModelUtils.getNetOrganism(network)!=null){
 			parameters.put("organism", ModelUtils.getNetOrganism(network));
+			organism = ModelUtils.getNetOrganism(network);
 		} else{
 			parameters.put("organism","hsapiens");
+			logger.warn("No organism selected. hsapiens selected as default.");
 		}
 	}
 		if(query==null){
