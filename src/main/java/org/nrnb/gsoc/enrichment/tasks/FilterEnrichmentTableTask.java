@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
+import org.apache.log4j.Logger;
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelName;
@@ -36,6 +38,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 	private CyTable filteredEnrichmentTable;
   private CyServiceRegistrar registrar;
   private List<TermSource> categoryFilter = TermSource.getValues();
+	private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
 
   @Tunable(description = "Select categories",
@@ -61,6 +64,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
 		monitor.setTitle("Filter Enrichment table");
+		logger.info("Filtering results based on selected value: " + categories.getSelectedValues());
 
 		List<TermSource> categoryList = categories.getSelectedValues();
     if (enrichmentPanel == null) {
@@ -76,7 +80,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
           monitor.showMessage(TaskMonitor.Level.ERROR,  "Unable to find enrichment table!");
         }
         tableModel.filter(categoryList);
-
+		logger.info("Filtering results completed");
 	}
 
 	@Override
