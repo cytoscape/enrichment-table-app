@@ -3,6 +3,7 @@ package org.nrnb.gsoc.enrichment.tasks;
 
 import java.io.File;
 
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.service.util.CyServiceRegistrar;
@@ -15,6 +16,7 @@ import org.cytoscape.work.Tunable;
 
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
+import org.apache.log4j.Logger;
 
 /**
  * @author ighosh98
@@ -24,6 +26,7 @@ public class ExportEnrichmentTableTask extends AbstractTask {
 
     private EnrichmentCytoPanel enrichmentPanel;
     private CyTable selectedTable;
+    private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
     @Tunable(description = "Save Table as", params = "input=false",
             tooltip="<html>Note: for convenience spaces are replaced by underscores.</html>", gravity = 2.0)
@@ -46,12 +49,14 @@ public class ExportEnrichmentTableTask extends AbstractTask {
             return;
         }
         if (selectedTable != null && prefix != null) {
+            logger.info("Starting Exporting Table with File name: " + prefix.getName());
             File file = new File(prefix.getAbsolutePath());
             taskMonitor.showMessage(TaskMonitor.Level.INFO,
                     "export table " + selectedTable + " to " + file.getAbsolutePath());
             TaskIterator ti = exportTF.createTaskIterator(selectedTable, file);
             insertTasksAfterCurrentTask(ti);
         }
+        logger.info("Finished Exporting Table");
     }
 
     @ProvidesTitle

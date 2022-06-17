@@ -186,7 +186,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			} else {
 				if(ModelUtils.getNetGeneIDColumn(network)==null){
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
-					logger.warn("No Gene ID selected. " + CyNetwork.NAME + " selected as default.");
 				} else{
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
 					geneID = ModelUtils.getNetGeneIDColumn(network);
@@ -234,8 +233,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
+		if (geneID == null) {
+			logger.warn("No Gene ID selected. name selected as default.");
+		}
 		logger.info("Sending request to GProfiler for enrichment. Parameters set are: Organism: "
-				+ organism + ", Gene ID: " + geneID);
+				+ (organism == null ? "hsapiens" : organism) + ", Gene ID: " + (geneID == null ? CyNetwork.NAME : geneID));
 		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);

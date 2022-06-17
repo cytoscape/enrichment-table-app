@@ -52,7 +52,7 @@ public class HTTPRequestEngine {
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("Accept", "application/json");
         CloseableHttpResponse response = null;
-        logger.debug("GET Request details: \n" + httpGet);
+        System.out.println("GET Request details: \n" + httpGet);
         try {
             response = httpclient.execute(httpGet);
         } catch (IOException e) {
@@ -147,7 +147,7 @@ public class HTTPRequestEngine {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
-            logger.error("Error connecting to GProfiler");
+            logger.error("Error creating StringEntity");
         }
         httpPost.setEntity(entity);
         httpPost.setHeader("Accept", "application/json");
@@ -158,10 +158,12 @@ public class HTTPRequestEngine {
         } catch (IOException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+            logger.error("Error sending post request.");
         }
         catch (InterruptedException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Task Cancelled. Returning back");
+            logger.warn("Task Cancelled. Returning Back.");
         }
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode!=200 && statusCode!=202){
