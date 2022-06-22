@@ -3,6 +3,8 @@ package org.nrnb.gsoc.enrichment.RequestEngine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.log4j.Logger;
+import org.cytoscape.application.CyUserLog;
 
 import java.io.IOException;
 import java.util.concurrent.*;
@@ -10,6 +12,7 @@ import java.util.concurrent.*;
 public class ScheduledRequestEngine {
 
     private static FutureTask<CloseableHttpResponse> sentRequestTask = null;
+    private static final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
     /**
      * Sends a HttpPost request through HttpClient, throws exception if time limit exceeds,
@@ -33,7 +36,8 @@ public class ScheduledRequestEngine {
         try {
             return sentRequestTask.get(timeout, TimeUnit.SECONDS);
         } catch (TimeoutException | ExecutionException exception) {
-            throw new IOException();
+            logger.error("Request Timed Out. Check internet connectivity.");
+            throw new IOException("GProfiler Request timed out.");
         }
     }
 

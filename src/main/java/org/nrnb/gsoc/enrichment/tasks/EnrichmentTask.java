@@ -1,6 +1,8 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
+import org.apache.log4j.Logger;
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.application.swing.*;
 import org.cytoscape.model.*;
 import org.cytoscape.model.events.RowsSetListener;
@@ -40,6 +42,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 	EnrichmentCytoPanel enrichmentPanel=null;
 	private boolean show = true;
 	Long res;
+	private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
 	@Tunable(description="Organism",context="nogui",required=true,
 			longDescription="The organism associated with the query genes, e.g,. hsapiens. List of possible ID-s can be seen at https://biit.cs.ut.ee/gprofiler/page/organism-list",
@@ -158,6 +161,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		List<Long> nodesToFilter = new ArrayList<Long>();
 		nodeList = nodesToFilterBy.getSelectedValues();
 		monitor.setTitle("gProfiler Enrichment Analysis");
+		logger.info("Enrichment Task Started");
 
 		if(nodeList.size()>0){
 			for (CyNode node : nodeList) {
@@ -184,6 +188,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
 				} else{
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+					geneID = ModelUtils.getNetGeneIDColumn(network);
 				}
 			}
 				if(canonicalName!=null && canonicalName.length()>0){
@@ -228,6 +233,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
+		if (geneID == null) {
+			logger.warn("No Gene ID selected. name selected as default.");
+		}
+		logger.info("Sending request to GProfiler for enrichment. Parameters set are: Organism: "
+				+ (organism == null ? "hsapiens" : organism) + ", Gene ID: " + (geneID == null ? CyNetwork.NAME : geneID));
 		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
@@ -253,7 +263,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		}
 		res = enrichmentTable.getSUID();
 		responseBuffer.append((result.get("result")).toString());
-		//System.out.println(responseBuffer.toString());
+		// System.out.println("GProfiler Response: \n"  +responseBuffer);
 		if((responseBuffer.toString()).length()==2){
 			monitor.showMessage(TaskMonitor.Level.ERROR,
 					"Enrichment retrieval returned no valid results, possibly due to an invalid query request.");
@@ -307,7 +317,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colGenesSUID, term.getNodesSUID());
 			row.set(EnrichmentTerm.colNetworkSUID, network.getSUID());
 		}
-		// System.out.println(enrichmentTable.getTitle());
+		System.out.println("Enrichment Table Title: " + enrichmentTable.getTitle());
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") >= 0) {
 			int compIndex = cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment");
@@ -351,8 +361,10 @@ enrichmentPanel.setEnrichmentTable(enrichmentTable);
 	} else {
 		if(ModelUtils.getNetOrganism(network)!=null){
 			parameters.put("organism", ModelUtils.getNetOrganism(network));
+			organism = ModelUtils.getNetOrganism(network);
 		} else{
 			parameters.put("organism","hsapiens");
+			logger.warn("No organism selected. hsapiens selected as default.");
 		}
 	}
 		if(query==null){

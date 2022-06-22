@@ -23,6 +23,9 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import org.cytoscape.application.CyUserLog;
+import org.apache.log4j.Logger;
+
 /**
  * @author ighosh98
  * @description Handles all the API requests to gProfiler. The api firing request must be a task which is run on the task thread
@@ -30,6 +33,7 @@ import java.util.*;
 public class HTTPRequestEngine {
 
     private final String basicURL = "https://biit.cs.ut.ee/gprofiler/api/";
+    private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
     public HTTPRequestEngine(){
     }
@@ -48,6 +52,7 @@ public class HTTPRequestEngine {
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("Accept", "application/json");
         CloseableHttpResponse response = null;
+        System.out.println("GET Request details: \n" + httpGet);
         try {
             response = httpclient.execute(httpGet);
         } catch (IOException e) {
@@ -78,7 +83,6 @@ public class HTTPRequestEngine {
      * @return
      */
     public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
-
         if(ModelUtils.getNetUserThreshold(network)!=null){
             parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
         }
@@ -136,13 +140,14 @@ public class HTTPRequestEngine {
         String url = urlConverter.toString();
         HttpPost httpPost = new HttpPost(url);
         String jsonBody = JSONValue.toJSONString(parameters);
-        //System.out.println(jsonBody);
+        System.out.println("JSON Request Body: \n" + jsonBody);
         StringEntity entity = null;
         try {
             entity = new StringEntity(jsonBody);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+            logger.error("Error creating StringEntity");
         }
         httpPost.setEntity(entity);
         httpPost.setHeader("Accept", "application/json");
@@ -153,16 +158,19 @@ public class HTTPRequestEngine {
         } catch (IOException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+            logger.error("Error sending post request.");
         }
         catch (InterruptedException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Task Cancelled. Returning back");
+            logger.warn("Task Cancelled. Returning Back.");
         }
         int statusCode = response.getStatusLine().getStatusCode();
         if(statusCode!=200 && statusCode!=202){
             monitor.showMessage(TaskMonitor.Level.ERROR, "Got "+
                     response.getStatusLine().getStatusCode()+" code from server");
             monitor.setStatusMessage("Invalid Query Parameters");
+            logger.warn("Query parameters incorrect.");
             return null;
         }
         JSONObject jsonResponse=null;
@@ -171,7 +179,9 @@ public class HTTPRequestEngine {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
+            logger.error("Error connecting to GProfiler");
         }
+        logger.info("GProfiler Response received successfully");
         return jsonResponse;
     }
 };

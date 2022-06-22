@@ -1,5 +1,7 @@
 package org.nrnb.gsoc.enrichment.utils;
 
+import org.apache.log4j.Logger;
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.model.*;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.property.AbstractConfigDirPropsReader;
@@ -26,6 +28,9 @@ import java.math.BigDecimal;
  * @description
  */
 public class ModelUtils {
+
+    // Logger
+    private static final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
     // Namespaces
     public static String ENRICHMENT_NAMESPACE = "EnrichmentTable";
@@ -656,6 +661,7 @@ public class ModelUtils {
      */
     public static void setNetSignificanceThresholdMethod(CyNetwork network, String significanceThresholdMethod) {
         if(network.getDefaultNetworkTable()==null){
+            logger.warn("No default network table available");
             System.out.println("No default network table");
             return;
         }

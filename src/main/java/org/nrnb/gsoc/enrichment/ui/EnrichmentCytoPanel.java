@@ -415,7 +415,7 @@ public class EnrichmentCytoPanel extends JPanel
                 tableManager.addTable(enrichmentTable);
             }
             createJTable(enrichmentTable);
-    //        System.out.println("Table model: "+ tableModel.getColumnCount());
+            System.out.println("Table model: " + tableModel.getColumnCount());
             // Check if values are git mbeing received correctly
             List<CyRow> rows = enrichmentTable.getAllRows();
             availableTables.add(enrichmentTable.getTitle());

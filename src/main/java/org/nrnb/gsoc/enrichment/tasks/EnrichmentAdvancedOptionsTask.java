@@ -143,7 +143,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
             if(scientificNametoID.containsKey(organism.getSelectedValue())){
-                //System.out.println(organism.getSelectedValue());
+                System.out.println("Organism selected value: " + organism.getSelectedValue());
                 ModelUtils.setNetOrganism(network,scientificNametoID.get(organism.getSelectedValue()));
                 tm.execute(new TaskIterator(new EnrichmentTask(registrar, enrichmentPanel)));
             } else{
