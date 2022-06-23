@@ -245,8 +245,7 @@ public class EnrichmentTableModel extends AbstractTableModel {
             // implement this again
             String termSource = row.get(EnrichmentTerm.colTermID, String.class);
             if (evidenceCodes.size() == 0 || evidenceCodes.contains(termSource)) {
-                rowArray[i] = row.get(EnrichmentTerm.colTermID, Long.class);
-                i++;
+                rowArray[i++] = row.get(EnrichmentTerm.colID, Long.class);
             }
         }
         rowNames = Arrays.copyOf(rowArray, i);
