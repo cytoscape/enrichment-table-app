@@ -93,6 +93,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
                   displayValue = it.getKey();
                 }
             }
+            Collections.sort(speciesList);
             organism = new ListSingleSelection<String>(speciesList);
             if(ModelUtils.getNetOrganism(network)!=null){
               organism.setSelectedValue(displayValue);
