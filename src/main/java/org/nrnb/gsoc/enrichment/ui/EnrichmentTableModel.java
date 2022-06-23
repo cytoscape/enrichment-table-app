@@ -237,6 +237,22 @@ public class EnrichmentTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public void filterByEvidenceCode(Set<String> evidenceCodes) {
+        List<CyRow> rows = cyTable.getAllRows();
+        Long[] rowArray = new Long[rows.size()];
+        int i = 0;
+        for (CyRow row : rows) {
+            // implement this again
+            String termSource = row.get(EnrichmentTerm.colTermID, String.class);
+            if (evidenceCodes.size() == 0 || evidenceCodes.contains(termSource)) {
+                rowArray[i] = row.get(EnrichmentTerm.colTermID, Long.class);
+                i++;
+            }
+        }
+        rowNames = Arrays.copyOf(rowArray, i);
+        fireTableDataChanged();
+    }
+
     private boolean inSource(List<TermSource> sources, String termName) {
         for (TermSource ts: sources) {
             if (ts.getName().equals(termName))
