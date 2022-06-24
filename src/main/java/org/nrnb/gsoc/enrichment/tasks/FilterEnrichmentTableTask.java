@@ -1,6 +1,8 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
+import org.apache.log4j.Logger;
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelName;
@@ -51,6 +53,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
     private CyTable filteredEnrichmentTable;
     private CyServiceRegistrar registrar;
     private List<TermSource> categoryFilter = TermSource.getValues();
+    private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
     //public boolean removeOverlapping = false;
 
@@ -72,7 +75,9 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
     @Override
     public void run(TaskMonitor monitor) throws Exception {
         monitor.setTitle("Filter Enrichment table");
-
+        logger.info(("Filtering results based on selected value: categories: "
+                + categories.getSelectedValues()) + " , evidence code: "
+                + evidenceCodes.getSelectedValues());
         List<TermSource> categoryList = categories.getSelectedValues();
         HashSet<String> evidenceList = new HashSet<>(evidenceCodes.getSelectedValues());
         if (enrichmentPanel == null) {
@@ -86,9 +91,11 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
         EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
         if (tableModel == null) {
             monitor.showMessage(TaskMonitor.Level.ERROR, "Unable to find enrichment table!");
+            logger.error("Unable to find enrichment table!");
         }
         if (!categoryList.isEmpty()) tableModel.filter(categoryList);
         if (!evidenceList.isEmpty()) tableModel.filterByEvidenceCode(evidenceList);
+        logger.info("Filtering results completed");
     }
 
     @Override
