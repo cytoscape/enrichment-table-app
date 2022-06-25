@@ -58,17 +58,16 @@ import org.cytoscape.util.swing.CyColorPaletteChooserFactory;
  * TableDialogEditDemo.java.
  */
 
-public class ColorEditor extends AbstractCellEditor
-        implements TableCellEditor,
+public class ColorEditor extends AbstractCellEditor implements TableCellEditor,
         ActionListener {
-    Color currentColor;
-    Palette currentPalette;
-    JButton button;
+    private Color currentColor;
+    private Palette currentPalette;
+    private JButton button;
     // JColorChooser colorChooser;
-    CyColorPaletteChooserFactory chooserFactory;
-    final Component parent;
-    final CyServiceRegistrar registrar;
-    final CyNetwork network;
+    private CyColorPaletteChooserFactory chooserFactory;
+    private final Component parent;
+    private final CyServiceRegistrar registrar;
+    private final CyNetwork network;
     protected static final String EDIT = "edit";
 
     public ColorEditor(final CyServiceRegistrar registrar, final Component parent,

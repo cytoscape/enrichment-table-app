@@ -24,7 +24,7 @@ public class EnrichmentTaskFactory extends AbstractTaskFactory {
 
 	public TaskIterator createTaskIterator () {
 		return new TaskIterator(
-			new EnrichmentTask(registrar,this.enrichmentPanel));
+				new EnrichmentTask(registrar,this.enrichmentPanel));
 	}
 
 	public boolean isReady() {

@@ -1,30 +1,31 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.service.util.CyServiceRegistrar;
-import org.cytoscape.work.*;
-import org.cytoscape.application.swing.*;
-import org.cytoscape.model.*;
-import org.nrnb.gsoc.enrichment.utils.ModelUtils;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
-import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
-import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
-import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.ObservableTask;
+import org.cytoscape.work.ProvidesTitle;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskManager;
+import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.work.Tunable;
 import org.cytoscape.work.json.JSONResult;
-
-
 import org.cytoscape.work.util.BoundedDouble;
 import org.cytoscape.work.util.ListSingleSelection;
-import org.cytoscape.work.TaskIterator;
+import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
+import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ighosh98
@@ -63,14 +64,14 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     public ListSingleSelection<String> significance_threshold_method;
 
     @Tunable(description="Organism",
-    		tooltip = "The organism associated with the query genes.",
-    		longDescription="The organism associated with the query genes, e.g,. Homo sapiens.",
-    	    exampleStringValue = "Homo sapiens",
+            tooltip = "The organism associated with the query genes.",
+            longDescription="The organism associated with the query genes, e.g,. Homo sapiens.",
+            exampleStringValue = "Homo sapiens",
             params="lookup=begins", groups={"Required settings"}, gravity=10.0)
     public ListSingleSelection<String> organism;
 
     @Tunable(description="Gene ID Column",
-    		tooltip = "<html>Select the <b>Node Table</b> column with the query genes.</html>",
+            tooltip = "<html>Select the <b>Node Table</b> column with the query genes.</html>",
             longDescription="The Node Table column containing the gene symbols or identifiers to be queried.",
             exampleStringValue = "LABEL",
             params="lookup=begins", groups={"Required settings"}, gravity=10.0)
@@ -90,14 +91,14 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
             for (Map.Entry<String, String> it : scientificNametoID.entrySet()) {
                 speciesList.add(it.getKey());
                 if(it.getValue().equals(ModelUtils.getNetOrganism(network))){
-                  displayValue = it.getKey();
+                    displayValue = it.getKey();
                 }
             }
             organism = new ListSingleSelection<String>(speciesList);
             if(ModelUtils.getNetOrganism(network)!=null){
-              organism.setSelectedValue(displayValue);
+                organism.setSelectedValue(displayValue);
             } else{
-              organism.setSelectedValue("Homo sapiens");
+                organism.setSelectedValue("Homo sapiens");
             }
             //ModelUtils.setNetOrganism(network,"hsapiens");
         }
@@ -109,9 +110,9 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
         }
         geneID = new ListSingleSelection<String>(stringCol);
         if(ModelUtils.getNetGeneIDColumn(network)!=null){
-          geneID.setSelectedValue(ModelUtils.getNetGeneIDColumn(network));
+            geneID.setSelectedValue(ModelUtils.getNetGeneIDColumn(network));
         } else{
-          geneID.setSelectedValue("name");
+            geneID.setSelectedValue("name");
         }
         //ModelUtils.setNetGeneIDColumn(network,"name");
         significance_threshold_method = new ListSingleSelection<String>(new ArrayList<String>(){
@@ -134,7 +135,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
         CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
         CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
         enrichmentPanel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
-      								cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+                cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
         TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
         if(network!=null) {
             // save values to network
@@ -168,6 +169,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
 
     @Override
     public List<Class<?>> getResultClasses() {
-      return Arrays.asList(JSONResult.class, String.class, Long.class, CyTable.class);
+        return Arrays.asList(JSONResult.class, String.class, Long.class, CyTable.class);
     }
-  }
+}
