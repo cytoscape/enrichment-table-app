@@ -46,27 +46,27 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 	@Tunable(description="Organism",context="nogui",required=true,
 			longDescription="The organism associated with the query genes, e.g,. hsapiens. List of possible ID-s can be seen at https://biit.cs.ut.ee/gprofiler/page/organism-list",
-				exampleStringValue = "hsapiens")
+			exampleStringValue = "hsapiens")
 	public String organism;
 
 	@Tunable(description="Gene ID Column",context="nogui",required=true,
-					longDescription="The Node Table column containing the gene symbols or identifiers to be queried.",
-					exampleStringValue = "name")
+			longDescription="The Node Table column containing the gene symbols or identifiers to be queried.",
+			exampleStringValue = "name")
 	public String geneID;
 
 	@Tunable(description = "Adjusted p-value threshold",context="nogui",
-					longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default is 0.05.",
-					exampleStringValue = "0.05")
+			longDescription = "A float value between 0 and 1, used to define a significance threshold for filtering returned results. Default is 0.05.",
+			exampleStringValue = "0.05")
 	public String user_threshold;
 
 	@Tunable(description = "Include inferred GO annotations (IEA)",context="nogui",
-					longDescription = "The default is false. If true, g:GOSt excludes electronic annotations from GO terms.",
-					exampleStringValue = "false")
+			longDescription = "The default is false. If true, g:GOSt excludes electronic annotations from GO terms.",
+			exampleStringValue = "false")
 	public String no_iea;
 
 	@Tunable(description = "Multiple testing correction",context="nogui",
-					longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
-					exampleStringValue = "g_SCS")
+			longDescription = "The following multiple testing correction methods are supported: g_SCS (default), bonferroni and fdr.",
+			exampleStringValue = "g_SCS")
 	public String significance_threshold_method;
 
 	public ListMultipleSelection<CyNode> nodesToFilterBy;
@@ -183,14 +183,14 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				if (geneID != null){
 					ModelUtils.setNetGeneIDColumn(network,geneID);
 					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(geneID, String.class);
-			} else {
-				if(ModelUtils.getNetGeneIDColumn(network)==null){
-					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
-				} else{
-					canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
-					geneID = ModelUtils.getNetGeneIDColumn(network);
+				} else {
+					if(ModelUtils.getNetGeneIDColumn(network)==null){
+						canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+					} else{
+						canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
+						geneID = ModelUtils.getNetGeneIDColumn(network);
+					}
 				}
-			}
 				if(canonicalName!=null && canonicalName.length()>0){
 					nodeNameList.add(canonicalName);
 					enrichmentNodesMap.put(canonicalName, node.getSUID());
@@ -229,7 +229,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			}
 		}
 
-
 		Map<String,Object> parameters = generateQuery(query.toString());
 
 		HTTPRequestEngine requestEngine = new HTTPRequestEngine();
@@ -254,10 +253,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			this.noSignificant = true;
 
 			if(enrichmentPanel==null){
-					enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
-				} else{
-					enrichmentPanel.initPanel(true);
-				}
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
+			} else{
+				enrichmentPanel.initPanel(true);
+			}
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -270,10 +269,10 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			this.noSignificant = true;
 
 			if(enrichmentPanel==null){
-					enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
-				} else{
-					enrichmentPanel.initPanel(true);
-				}
+				enrichmentPanel =  new EnrichmentCytoPanel(registrar,noSignificant,result);
+			} else{
+				enrichmentPanel.initPanel(true);
+			}
 			monitor.setProgress(1.0);
 			return;
 		}
@@ -326,22 +325,22 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				registrar.unregisterService(panel, CytoPanelComponent.class);
 				registrar.unregisterService(panel, RowsSetListener.class);
 				registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
-				}
+			}
 		}
 		if(show){
 
-		enrichmentPanel.setEnrichmentTable(enrichmentTable);
+			enrichmentPanel.setEnrichmentTable(enrichmentTable);
 
-	registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
-	registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
-	registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
-	if (cytoPanel.getState() == CytoPanelState.HIDE)
-		cytoPanel.setState(CytoPanelState.DOCK);
-	cytoPanel.setSelectedIndex(
-			cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-enrichmentPanel.setEnrichmentTable(enrichmentTable);
+			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
+			registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
+			registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
+			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
+			cytoPanel.setSelectedIndex(
+					cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+			enrichmentPanel.setEnrichmentTable(enrichmentTable);
 
-}
+		}
 
 		monitor.setProgress(1.0);
 		return;
@@ -358,27 +357,27 @@ enrichmentPanel.setEnrichmentTable(enrichmentTable);
 		if (organism != null){
 			parameters.put("organism",organism);
 			ModelUtils.setNetOrganism(network,organism);
-	} else {
-		if(ModelUtils.getNetOrganism(network)!=null){
-			parameters.put("organism", ModelUtils.getNetOrganism(network));
-			organism = ModelUtils.getNetOrganism(network);
-		} else{
-			parameters.put("organism","hsapiens");
-			logger.warn("No organism selected. hsapiens selected as default.");
+		} else {
+			if(ModelUtils.getNetOrganism(network)!=null){
+				parameters.put("organism", ModelUtils.getNetOrganism(network));
+				organism = ModelUtils.getNetOrganism(network);
+			} else{
+				parameters.put("organism","hsapiens");
+				logger.warn("No organism selected. hsapiens selected as default.");
+			}
 		}
-	}
 		if(query==null){
 			parameters.put("query","");
- 		} else{
+		} else{
 			parameters.put("query",query);
 		}
 		if (ModelUtils.getNetUserThreshold(network)==null && user_threshold == null) {
 			ModelUtils.setNetUserThreshold(network,0.05);
 		}
-		 else if (ModelUtils.getNetUserThreshold(network)!=null && user_threshold == null){
+		else if (ModelUtils.getNetUserThreshold(network)!=null && user_threshold == null){
 			ModelUtils.setNetUserThreshold(network,ModelUtils.getNetUserThreshold(network));
 		} else{
-		ModelUtils.setNetUserThreshold(network,Double.parseDouble(user_threshold));
+			ModelUtils.setNetUserThreshold(network,Double.parseDouble(user_threshold));
 		}
 
 		if (ModelUtils.getNetNoIEA(network)==null && no_iea == null) {
@@ -387,31 +386,31 @@ enrichmentPanel.setEnrichmentTable(enrichmentTable);
 		else if (ModelUtils.getNetNoIEA(network)!=null && no_iea == null){
 			ModelUtils.setNetNoIEA(network,ModelUtils.getNetNoIEA(network));
 		} else{
-		ModelUtils.setNetNoIEA(network,Boolean.parseBoolean(no_iea));
+			ModelUtils.setNetNoIEA(network,Boolean.parseBoolean(no_iea));
 		}
 
 		if (ModelUtils.getNetSignificanceThresholdMethod(network)==null && significance_threshold_method == null) {
 			ModelUtils.setNetSignificanceThresholdMethod(network, "g_SCS");
 		}
-		 else if (ModelUtils.getNetSignificanceThresholdMethod(network)!=null && significance_threshold_method == null){
+		else if (ModelUtils.getNetSignificanceThresholdMethod(network)!=null && significance_threshold_method == null){
 			ModelUtils.setNetSignificanceThresholdMethod(network,ModelUtils.getNetSignificanceThresholdMethod(network));
 		} else{
-		ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
+			ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
 		}
 
 		return parameters;
 	}
 
 	@Override
-    public void cancel() {
-        ScheduledRequestEngine.stopPostRequest();
-        this.cancelled = true;
-    }
+	public void cancel() {
+		ScheduledRequestEngine.stopPostRequest();
+		this.cancelled = true;
+	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public Object getResults(Class type) {
-			return res;
+		return res;
 	}
 
 	@Override

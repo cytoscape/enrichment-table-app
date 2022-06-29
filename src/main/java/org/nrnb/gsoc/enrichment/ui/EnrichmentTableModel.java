@@ -85,8 +85,8 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return cyTable.getRow(rowName).getList(colName, Boolean.class);
         }
         else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
-       return cyTable.getRow(rowName).getList(colName, Long.class);
-     } else {
+            return cyTable.getRow(rowName).getList(colName, Long.class);
+        } else {
             return cyTable.getRow(rowName).get(colName, String.class);
         }
     }
@@ -133,10 +133,10 @@ public class EnrichmentTableModel extends AbstractTableModel {
         }
         else if(colName.equals(EnrichmentTerm.colPrecision)){
             return cyTable.getRow(rowName).get(colName, Double.class);
-         }
-         else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
-   			return cyTable.getRow(rowName).getList(colName, Long.class);
-   		}
+        }
+        else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
+            return cyTable.getRow(rowName).getList(colName, Long.class);
+        }
         else {
             return cyTable.getRow(rowName).get(colName, String.class);
         }
@@ -179,15 +179,15 @@ public class EnrichmentTableModel extends AbstractTableModel {
             return Double.class;
         }
         else if (colName.equals(EnrichmentTerm.colGenesSUID)) {
-		        return List.class;
-		}
+            return List.class;
+        }
         else {
             return String.class;
         }
     }
 
     public boolean isCellEditable(int row, int col) {
-            return false;
+        return false;
     }
 
     // filter by source and nodeSUID

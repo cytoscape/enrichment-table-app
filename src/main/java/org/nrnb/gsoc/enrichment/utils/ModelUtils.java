@@ -2,27 +2,25 @@ package org.nrnb.gsoc.enrichment.utils;
 
 import org.apache.log4j.Logger;
 import org.cytoscape.application.CyUserLog;
+import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.model.*;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.property.AbstractConfigDirPropsReader;
+import org.cytoscape.property.CyProperty;
+import org.cytoscape.property.CyProperty.SavePolicy;
+import org.cytoscape.property.SimpleCyProperty;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
-import org.cytoscape.work.TaskMonitor;
-import org.cytoscape.event.CyEventHelper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
-import org.cytoscape.property.CyProperty;
-import org.cytoscape.property.CyProperty.SavePolicy;
-import org.cytoscape.property.SimpleCyProperty;
-import org.cytoscape.property.AbstractConfigDirPropsReader;
 
-import java.util.*;
 import java.math.BigDecimal;
+import java.util.*;
 /**
  * @author ighosh98
  * @description
@@ -154,14 +152,14 @@ public class ModelUtils {
     }
 
     public static void deleteEnrichmentTables(CyServiceRegistrar registrar, CyNetwork network) {
-      CyEventHelper cyEventHelper = registrar.getService(CyEventHelper.class);
-  	  CyTableManager tableManager = registrar.getService(CyTableManager.class);
-  		Set<CyTable> oldTables = ModelUtils.getEnrichmentTables(registrar, network);
-  		for (CyTable table : oldTables) {
-  			tableManager.deleteTable(table.getSUID());
-  			cyEventHelper.flushPayloadEvents();
-  		}
-  	}
+        CyEventHelper cyEventHelper = registrar.getService(CyEventHelper.class);
+        CyTableManager tableManager = registrar.getService(CyTableManager.class);
+        Set<CyTable> oldTables = ModelUtils.getEnrichmentTables(registrar, network);
+        for (CyTable table : oldTables) {
+            tableManager.deleteTable(table.getSUID());
+            cyEventHelper.flushPayloadEvents();
+        }
+    }
 
     /**
      * @description Initialize the Enrichment Table
@@ -169,10 +167,10 @@ public class ModelUtils {
      */
     public static void setupEnrichmentTable(CyTable enrichmentTable) {
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenesSUID) == null) {
-          enrichmentTable.createListColumn(EnrichmentTerm.colGenesSUID, Long.class, false);
+            enrichmentTable.createListColumn(EnrichmentTerm.colGenesSUID, Long.class, false);
         }
         if (enrichmentTable.getColumn(EnrichmentTerm.colNetworkSUID) == null) {
-          enrichmentTable.createColumn(EnrichmentTerm.colNetworkSUID, Long.class, false);
+            enrichmentTable.createColumn(EnrichmentTerm.colNetworkSUID, Long.class, false);
         }
         if (enrichmentTable.getColumn(EnrichmentTerm.colName) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colName, String.class, false);
@@ -753,36 +751,36 @@ public class ModelUtils {
     }
 
 
-	public static CyProperty<Properties> getPropertyService(CyServiceRegistrar registrar,
-			SavePolicy policy) {
-			String name = "enrichment";
-			if (policy.equals(SavePolicy.SESSION_FILE)) {
-				CyProperty<Properties> service = registrar.getService(CyProperty.class, "(cyPropertyName="+name+")");
-				// Do we already have a session with our properties
-				if (service.getSavePolicy().equals(SavePolicy.SESSION_FILE))
-					return service;
+    public static CyProperty<Properties> getPropertyService(CyServiceRegistrar registrar,
+                                                            SavePolicy policy) {
+        String name = "enrichment";
+        if (policy.equals(SavePolicy.SESSION_FILE)) {
+            CyProperty<Properties> service = registrar.getService(CyProperty.class, "(cyPropertyName="+name+")");
+            // Do we already have a session with our properties
+            if (service.getSavePolicy().equals(SavePolicy.SESSION_FILE))
+                return service;
 
-				// Either we have a null session or our properties aren't in this session
-				Properties props = new Properties();
-				service = new SimpleCyProperty(name, props, Properties.class, SavePolicy.SESSION_FILE);
-				Properties serviceProps = new Properties();
-				serviceProps.setProperty("cyPropertyName", service.getName());
-				registrar.registerAllServices(service, serviceProps);
-				return service;
-			} else if (policy.equals(SavePolicy.CONFIG_DIR) || policy.equals(SavePolicy.SESSION_FILE_AND_CONFIG_DIR)) {
-				CyProperty<Properties> service = new ConfigPropsReader(policy, name);
-				Properties serviceProps = new Properties();
-				serviceProps.setProperty("cyPropertyName", service.getName());
-				registrar.registerAllServices(service, serviceProps);
-				return service;
-		}
-		return null;
-	}
+            // Either we have a null session or our properties aren't in this session
+            Properties props = new Properties();
+            service = new SimpleCyProperty(name, props, Properties.class, SavePolicy.SESSION_FILE);
+            Properties serviceProps = new Properties();
+            serviceProps.setProperty("cyPropertyName", service.getName());
+            registrar.registerAllServices(service, serviceProps);
+            return service;
+        } else if (policy.equals(SavePolicy.CONFIG_DIR) || policy.equals(SavePolicy.SESSION_FILE_AND_CONFIG_DIR)) {
+            CyProperty<Properties> service = new ConfigPropsReader(policy, name);
+            Properties serviceProps = new Properties();
+            serviceProps.setProperty("cyPropertyName", service.getName());
+            registrar.registerAllServices(service, serviceProps);
+            return service;
+        }
+        return null;
+    }
 
-  public static class ConfigPropsReader extends AbstractConfigDirPropsReader {
-		ConfigPropsReader(SavePolicy policy, String name) {
-			super(name, "enrichment.props", policy);
-		}
-	}
+    public static class ConfigPropsReader extends AbstractConfigDirPropsReader {
+        ConfigPropsReader(SavePolicy policy, String name) {
+            super(name, "enrichment.props", policy);
+        }
+    }
 
 }

@@ -1,28 +1,24 @@
 package org.nrnb.gsoc.enrichment;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import org.cytoscape.application.swing.*;
+import org.cytoscape.application.swing.CySwingApplication;
+import org.cytoscape.application.swing.CytoPanel;
+import org.cytoscape.application.swing.CytoPanelComponent;
+import org.cytoscape.application.swing.CytoPanelComponent2;
+import org.cytoscape.application.swing.CytoPanelName;
+import org.cytoscape.application.swing.CytoPanelState;
+import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
 import org.cytoscape.model.events.RowsSetListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.session.events.SessionLoadedListener;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
-import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
-import org.cytoscape.session.events.SessionLoadedListener;
-
-import org.json.simple.JSONObject;
-import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTaskFactory;
-
-
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
-import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.osgi.framework.BundleContext;
+
+import java.util.Properties;
 
 /**
  * @author ighosh98
@@ -62,8 +58,7 @@ public class CyActivator extends AbstractCyActivator {
 
 		// Configure the service properties first.
 		Properties properties = new Properties();
-		properties.put(ServiceProperties.PREFERRED_MENU,
-			"Tools.Enrichment Table");
+		properties.put(ServiceProperties.PREFERRED_MENU, "Tools.Enrichment Table");
 		properties.put(ServiceProperties.TITLE, "Perform Gene Enrichment");
 		properties.put(ServiceProperties.COMMAND_NAMESPACE, "enrichment");
 		properties.put(ServiceProperties.COMMAND, "analysis");
@@ -85,8 +80,7 @@ public class CyActivator extends AbstractCyActivator {
 		cytoPanel.setSelectedIndex(
 				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
 		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
-		registerService(context,
-				myFactory,
+		registerService(context, myFactory,
 				TaskFactory.class, // Interface
 				properties); // Service properties
 

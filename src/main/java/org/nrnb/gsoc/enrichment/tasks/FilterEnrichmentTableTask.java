@@ -1,51 +1,45 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
-import javax.swing.SwingUtilities;
-
 import org.apache.log4j.Logger;
+import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyUserLog;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelName;
-import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.ObservableTask;
 import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.json.JSONResult;
-import org.cytoscape.work.util.BoundedDouble;
 import org.cytoscape.work.util.ListMultipleSelection;
-import org.cytoscape.service.util.CyServiceRegistrar;
-
-
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentTableModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class FilterEnrichmentTableTask extends AbstractTask implements ObservableTask {
 
-  private CyApplicationManager applicationManager;
+	private CyApplicationManager applicationManager;
 	private EnrichmentCytoPanel enrichmentPanel;
 	private CyNetwork network;
 	private CyTable filteredEnrichmentTable;
-  private CyServiceRegistrar registrar;
-  private List<TermSource> categoryFilter = TermSource.getValues();
+    private CyServiceRegistrar registrar;
+    private List<TermSource> categoryFilter = TermSource.getValues();
 	private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
 
-  @Tunable(description = "Select categories",
-	         tooltip = "Select the enrichment categories to show in the table",
-	         longDescription = "Select the enrichment categories to show in the table. Use \"All\" to remove the filtering.",
-	         exampleStringValue = "GO Process",
-	         gravity = 1.0)
+	@Tunable(description = "Select categories",
+			tooltip = "Select the enrichment categories to show in the table",
+			longDescription = "Select the enrichment categories to show in the table. Use \"All\" to remove the filtering.",
+			exampleStringValue = "GO Process",
+			gravity = 1.0)
 	public ListMultipleSelection<TermSource> categories = new ListMultipleSelection<>(TermSource.getValues());
 
 	//public boolean removeOverlapping = false;
@@ -53,7 +47,7 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 	//public BoundedDouble overlapCutoff = new BoundedDouble(0.0, 0.5, 1.0, false, false);
 
 	public FilterEnrichmentTableTask(final CyServiceRegistrar registrar, EnrichmentCytoPanel panel) {
-    this.registrar = registrar;
+		this.registrar = registrar;
 		applicationManager = registrar.getService(CyApplicationManager.class);
 		this.network = applicationManager.getCurrentNetwork();
 		this.enrichmentPanel = panel;
@@ -67,19 +61,19 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
 		logger.info("Filtering results based on selected value: " + categories.getSelectedValues());
 
 		List<TermSource> categoryList = categories.getSelectedValues();
-    if (enrichmentPanel == null) {
-      CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
-      CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-      if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") != -1)
-        enrichmentPanel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
-            cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-      else return;
-    }
-        EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
-        if (tableModel == null){
-          monitor.showMessage(TaskMonitor.Level.ERROR,  "Unable to find enrichment table!");
-        }
-        tableModel.filter(categoryList);
+		if (enrichmentPanel == null) {
+			CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+			CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+			if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") != -1)
+				enrichmentPanel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
+						cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+			else return;
+		}
+		EnrichmentTableModel tableModel = enrichmentPanel.getTableModel();
+		if (tableModel == null){
+			monitor.showMessage(TaskMonitor.Level.ERROR,  "Unable to find enrichment table!");
+		}
+		tableModel.filter(categoryList);
 		logger.info("Filtering results completed");
 	}
 
