@@ -13,14 +13,18 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
+import org.cytoscape.work.util.BoundedDouble;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
+import org.nrnb.gsoc.enrichment.constants.EVIDENCE_CODES;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author ighosh98
  * @description
@@ -58,6 +62,7 @@ public class ModelUtils {
     public static String NET_USER_THRESHOLD = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "User Threshold";
     public static String  NET_ALL_RESULTS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "All Results";
     public static String  NET_MEASURE_UNDERREPRESENTATION = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "Measure Underrepresentation";
+
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
     // src/main/java/org/cytoscape/task/internal/loadnetwork/AbstractLoadNetworkTask.java
@@ -209,6 +214,10 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenes) == null) {
             enrichmentTable.createListColumn(EnrichmentTerm.colGenes, String.class, false);
         }
+
+        if (enrichmentTable.getColumn(EnrichmentTerm.colGenesEvidenceCode) == null) {
+            enrichmentTable.createListColumn(EnrichmentTerm.colGenesEvidenceCode, String.class, false);
+        }
     }
 
     /**
@@ -324,6 +333,11 @@ public class ModelUtils {
             return;
 
         table.createColumn(columnName, clazz, false);
+    }
+
+    public static void createListColumnIfNeeded(CyTable table, Class<?> clazz, String columnName) {
+        if (table.getColumn(columnName) != null) return;
+        table.createListColumn(columnName, clazz, false);
     }
 
     /**
@@ -560,14 +574,18 @@ public class ModelUtils {
             }
             if(enr.containsKey("name")){
                 currTerm.setName((String) enr.get("name"));
-            } if(enr.containsKey("intersections")){
+            }
+            HashSet<String> evidenceCodes = new HashSet<>();
+            if(enr.containsKey("intersections")){
+
                 List<String> currGeneList = new ArrayList<String>();
                 List<Long> currNodeList = new ArrayList<Long>();
-                JSONArray genes = (JSONArray)enr.get("intersections");
+                JSONArray genes = (JSONArray)enr.get("intersections");;
                 for(int i=0;i<genes.size();i++){
                     if((genes.get(i)).toString().length()>2){
-                        String enrGeneEnsemblID = (String)nodeNameList.get(i);
-                        String enrGeneNodeName = enrGeneEnsemblID;
+                        evidenceCodes.addAll(Arrays.stream(genes.get(i).toString().substring(1, genes.get(i).toString().length() - 1)
+                                .split(",")).collect(Collectors.toList()));
+                        String enrGeneNodeName = nodeNameList.get(i);
                         final Long nodeSUID = enrichmentNodesMap.get(enrGeneNodeName);
                         currNodeList.add(nodeSUID);
                         currGeneList.add(nodeNameList.get(i));
@@ -576,6 +594,7 @@ public class ModelUtils {
                 currTerm.setGenes(currGeneList);
                 currTerm.setNodesSUID(currNodeList);
             }
+            currTerm.setEvidenceCodes(evidenceCodes);
             results.add(currTerm);
             //System.out.println(currTerm.getDescription());
         }

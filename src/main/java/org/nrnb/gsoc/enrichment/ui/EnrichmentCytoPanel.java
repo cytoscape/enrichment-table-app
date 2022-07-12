@@ -86,7 +86,8 @@ public class EnrichmentCytoPanel extends JPanel
             "the number of genes in the query that are annotated to the corresponding term",
             "the proportion of genes in the input list that are annotated to the function, defined as intersection_size/query_size",
             "the proportion of functionally annotated genes that the query recovers, defined as intersection_size/term_size",
-            "llist of query genes intersecting with terms"
+            "llist of query genes intersecting with terms",
+            "Evidence codes in the term"
     };
 
     // TODO: Quick settings options -> Drop down to select column and auto complete species
@@ -384,12 +385,19 @@ public class EnrichmentCytoPanel extends JPanel
 
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butAdvancedOptions);
+
         butExportTable.setEnabled(true);
         butFilter.setEnabled(true);
+
+        JPanel labelPanel = new JPanel();
+        JPanel labelAndButtonPanelRight = new JPanel();
+        labelAndButtonPanelRight.add(labelPanel, BorderLayout.EAST);
+        labelAndButtonPanelRight.add(buttonsPanelRight, BorderLayout.WEST);
+
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
         topPanel.add(buttonsPanelCenter, BorderLayout.CENTER);
-        topPanel.add(buttonsPanelRight, BorderLayout.EAST);
+        topPanel.add(labelAndButtonPanelRight, BorderLayout.EAST);
         // topPanel.add(boxTables, BorderLayout.EAST);
         this.add(topPanel, BorderLayout.NORTH);
 
@@ -431,6 +439,7 @@ public class EnrichmentCytoPanel extends JPanel
             labelRows.setHorizontalAlignment(JLabel.RIGHT);
             Font labelFont = labelRows.getFont();
             labelRows.setFont(labelFont.deriveFont((float)(labelFont.getSize() * 0.8)));
+            labelPanel.add(labelRows);
 
             mainPanel = new JPanel(new BorderLayout());
             scrollPane = new JScrollPane(currentTable);
@@ -466,6 +475,9 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.getColumnModel().getColumn(12).setMinWidth(0);
         jTable.getColumnModel().getColumn(12).setMaxWidth(0);
         jTable.getColumnModel().getColumn(12).setWidth(0);
+        jTable.getColumnModel().getColumn(13).setMinWidth(0);
+        jTable.getColumnModel().getColumn(13).setMaxWidth(0);
+        jTable.getColumnModel().getColumn(13).setWidth(0);
         jTable.setFillsViewportHeight(true);
         jTable.setAutoCreateRowSorter(true);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -601,8 +613,9 @@ public class EnrichmentCytoPanel extends JPanel
         } else {
             labelTxt = tableModel.getAllRowCount() + " rows";
         }
-        if (labelRows != null)
+        if (labelRows != null) {
             labelRows.setText(labelTxt);
+        }
     }
 
     @Override
