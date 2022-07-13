@@ -24,6 +24,7 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +95,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
                     displayValue = it.getKey();
                 }
             }
+            Collections.sort(speciesList);
             organism = new ListSingleSelection<String>(speciesList);
             if(ModelUtils.getNetOrganism(network)!=null){
                 organism.setSelectedValue(displayValue);

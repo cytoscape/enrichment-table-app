@@ -1,7 +1,10 @@
 package org.nrnb.gsoc.enrichment.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author ighosh98
@@ -35,6 +38,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     int termSize;
     double precision;
     double recall;
+    HashSet<String> evidenceCodes;
 
 
     String termID;//same as native
@@ -115,6 +119,14 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
             }
             return null;
         }
+
+        public static TermSource getByKey(String key) {
+            for (TermSource ts: values()) {
+                if (ts.getKey().equals(key))
+                    return ts;
+            }
+            return null;
+        }
     }
 
     public static final int nodeSUIDColumn = 12;
@@ -138,10 +150,13 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colGenes = "intersecting genes"; // list of genes
     public static final String colGenesSUID = "nodes.SUID";//session unique id
     public static final String colNetworkSUID = "network.SUID";// session unique id
+    public static final String colGenesEvidenceCode = "Evidence codes";
 
 
     // enrichment table master schema
-    public static final String[] swingColumnsEnrichment = new String[] {  colSource, colTermID, colName, colDescription, colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall, colGenes, colGenesSUID};
+    public static final String[] swingColumnsEnrichment = new String[] {  colSource, colTermID, colName, colDescription,
+            colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall,
+            colGenes, colGenesSUID, colGenesEvidenceCode};
 
     public static final int nameColumn = 2;
     public static final int pvalueColumn = 4;
@@ -296,6 +311,14 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
 
     public String toString() {
         return name + "\t" + pvalue;
+    }
+
+    public List<String> getEvidenceCodes() {
+        return new ArrayList<>(evidenceCodes);
+    }
+
+    public void setEvidenceCodes(HashSet<String> evidenceCodes) {
+        this.evidenceCodes = evidenceCodes;
     }
 
     public int compareTo(EnrichmentTerm et) {
