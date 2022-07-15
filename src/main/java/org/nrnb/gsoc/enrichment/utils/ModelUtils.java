@@ -181,7 +181,7 @@ public class ModelUtils {
             enrichmentTable.createColumn(EnrichmentTerm.colName, String.class, false);
         }
         if (enrichmentTable.getColumn(EnrichmentTerm.colPvalue) == null) {
-            enrichmentTable.createColumn(EnrichmentTerm.colPvalue, String.class, false);
+            enrichmentTable.createColumn(EnrichmentTerm.colPvalue, Double.class, false);
         }
         if (enrichmentTable.getColumn(EnrichmentTerm.colSource) == null) {
             enrichmentTable.createColumn(EnrichmentTerm.colSource, String.class, false);
@@ -528,9 +528,8 @@ public class ModelUtils {
             }
             if(enr.containsKey("p_value")){
                 String content = enr.get("p_value").toString();
-                BigDecimal d = new BigDecimal(content);
-                String contentNoScientific = d.toPlainString();
-                currTerm.setPValue(contentNoScientific);
+                double d = Double.parseDouble(content);
+                currTerm.setPValue(d);
             }
             if(enr.containsKey("precision")){
                 String content = enr.get("precision").toString();

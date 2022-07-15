@@ -6,6 +6,7 @@ import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelComponent2;
 import org.cytoscape.application.swing.CytoPanelName;
+import org.cytoscape.command.AvailableCommands;
 import org.cytoscape.model.*;
 import org.cytoscape.model.events.*;
 import org.cytoscape.service.util.CyServiceRegistrar;
@@ -21,14 +22,12 @@ import org.cytoscape.session.events.SessionLoadedListener;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentAdvancedOptionsTask;
-import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
-import org.nrnb.gsoc.enrichment.tasks.FilterEnrichmentTableTask;
-import org.nrnb.gsoc.enrichment.tasks.ExportEnrichmentTableTask;
+import org.nrnb.gsoc.enrichment.tasks.*;
+import org.nrnb.gsoc.enrichment.utils.CommandTaskUtil;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.property.CyProperty;
-import org.cytoscape.property.CyProperty.SavePolicy;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -37,6 +36,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -53,7 +53,8 @@ import java.util.List;
  * @description Result Panel which stores the result of the gProfiler querying task and provides other tools to modify the querying tasks
  */
 public class EnrichmentCytoPanel extends JPanel
-        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener, SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SessionLoadedListener {
+        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener,
+        SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SessionLoadedListener {
 
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
@@ -69,6 +70,7 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butExportTable;
     JButton butRunProfiler;
     JButton butFilter;
+    JButton butEnrichmentMap;
     JLabel organismSelect;
     JLabel geneIdSelect;
     TableColumnModel columnModel;
@@ -106,11 +108,14 @@ public class EnrichmentCytoPanel extends JPanel
     final String butSettingsName = "Network-specific enrichment panel settings";
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Perform Gene Enrichment";
+    final String butEnrichmentMapName = "Create EnrichmentMap";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
     CyTableManager tableManager;
     private CyProperty<Properties> sessionProperties;
+    private final AvailableCommands availableCommands;
+    private final TaskManager<?, ?> taskManager;
 
 
     public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
@@ -118,6 +123,8 @@ public class EnrichmentCytoPanel extends JPanel
         this.result = result;
         this.setLayout(new BorderLayout());
         this.colorChooserFactory = registrar.getService(CyColorPaletteChooserFactory.class);
+        this.availableCommands = registrar.getService(AvailableCommands.class);
+        this.taskManager = registrar.getService(TaskManager.class);
         IconManager iconManager = registrar.getService(IconManager.class);
         this.iconFont = iconManager.getIconFont(22.0f);
         applicationManager = registrar.getService(CyApplicationManager.class);
@@ -161,22 +168,25 @@ public class EnrichmentCytoPanel extends JPanel
     @Override
     public void actionPerformed(ActionEvent e) {
         CyNetwork network = applicationManager.getCurrentNetwork();
-        TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
         if (e.getSource().equals(butRunProfiler)) {
-            tm.execute(new TaskIterator(new EnrichmentTask(registrar,this)));
+            taskManager.execute(new TaskIterator(new EnrichmentTask(registrar,this)));
         }
         else if (e.getSource().equals(butFilter)) {
-            tm.execute(new TaskIterator(new FilterEnrichmentTableTask(registrar,this)));
+            taskManager.execute(new TaskIterator(new FilterEnrichmentTableTask(registrar,this)));
         }
         else if (e.getSource().equals(butExportTable)) {
             if (network != null) {
                 if(enrichmentTable!=null) {
-                    tm.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
+                    taskManager.execute(new TaskIterator(new ExportEnrichmentTableTask(registrar, network, this, enrichmentTable)));
                 }
             }
         } else if (e.getSource().equals(butAdvancedOptions)) {
             if (network != null) {
-                tm.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+                taskManager.execute(new TaskIterator(new EnrichmentAdvancedOptionsTask(registrar)));
+            }
+        } else if (e.getSource().equals(butEnrichmentMap)) {
+            if (network != null) {
+                drawEnrichmentMap();
             }
         }
     }
@@ -200,7 +210,7 @@ public class EnrichmentCytoPanel extends JPanel
         filteredEnrichmentTable = tableFactory.createTable(TermSource.ALLFILTERED.getTable(),
                 EnrichmentTerm.colID, Long.class, false, true);
         filteredEnrichmentTable.setTitle("Enrichment: filtered");
-        //filteredEnrichmentTable.setSavePolicy(SavePolicy.DO_NOT_SAVE);
+        filteredEnrichmentTable.setSavePolicy(SavePolicy.DO_NOT_SAVE);
         tableManager.addTable(filteredEnrichmentTable);
         ModelUtils.setupEnrichmentTable(filteredEnrichmentTable);
         updateFilteredEnrichmentTable();
@@ -238,9 +248,17 @@ public class EnrichmentCytoPanel extends JPanel
         butFilter.setFocusPainted(false);
         butFilter.setBorder(BorderFactory.createEmptyBorder(2,10,2,10));
 
+        butEnrichmentMap = new JButton(new ImageIcon(getClass().getClassLoader().getResource("/images/em_logo.png")));
+        butEnrichmentMap.addActionListener(this);
+        butEnrichmentMap.setToolTipText(butEnrichmentMapName);
+        butEnrichmentMap.setBorderPainted(false);
+        butEnrichmentMap.setContentAreaFilled(false);
+        butEnrichmentMap.setFocusPainted(false);
+        butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
 
         buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
+        buttonsPanelLeft.add(butEnrichmentMap);
 
         // Add enrichment map button here if EnrichmentMap is loaded
 
@@ -286,6 +304,7 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
         butExportTable.setEnabled(false);
         butFilter.setEnabled(false);
+        butEnrichmentMap.setEnabled(false);
 
         butAdvancedOptions = new JButton(IconManager.ICON_COG);
         butAdvancedOptions.setFont(iconFont);
@@ -328,6 +347,7 @@ public class EnrichmentCytoPanel extends JPanel
 
         buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
+        buttonsPanelLeft.add(butEnrichmentMap);
 
         // Add enrichment map button here if EnrichmentMap is loaded
 
@@ -372,7 +392,7 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 10));
         butExportTable.setEnabled(false);
         butFilter.setEnabled(false);
-
+        butEnrichmentMap.setEnabled(false);
 
         butAdvancedOptions = new JButton(IconManager.ICON_COG);
         butAdvancedOptions.setFont(iconFont);
@@ -393,6 +413,9 @@ public class EnrichmentCytoPanel extends JPanel
         JPanel labelAndButtonPanelRight = new JPanel();
         labelAndButtonPanelRight.add(labelPanel, BorderLayout.EAST);
         labelAndButtonPanelRight.add(buttonsPanelRight, BorderLayout.WEST);
+
+        if (isEnrichmentMapInstalled()) butEnrichmentMap.setEnabled(true);
+        else butEnrichmentMap.setToolTipText("Install enrichment map to use functionality");
 
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
@@ -475,9 +498,14 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.getColumnModel().getColumn(12).setMinWidth(0);
         jTable.getColumnModel().getColumn(12).setMaxWidth(0);
         jTable.getColumnModel().getColumn(12).setWidth(0);
-        jTable.getColumnModel().getColumn(13).setMinWidth(0);
-        jTable.getColumnModel().getColumn(13).setMaxWidth(0);
-        jTable.getColumnModel().getColumn(13).setWidth(0);
+
+        // Hide evidence code column
+        jTable.getColumn(EnrichmentTerm.colGenesEvidenceCode).setMinWidth(0);
+        jTable.getColumn(EnrichmentTerm.colGenesEvidenceCode).setMaxWidth(0);
+        jTable.getColumn(EnrichmentTerm.colGenesEvidenceCode).setWidth(0);
+
+        jTable.getColumn(EnrichmentTerm.colPvalue).setCellRenderer(new DecimalFormatRenderer());
+
         jTable.setFillsViewportHeight(true);
         jTable.setAutoCreateRowSorter(true);
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -566,7 +594,7 @@ public class EnrichmentCytoPanel extends JPanel
             CyRow filtRow = filteredEnrichmentTable.getRow(rowNames[i]);
             filtRow.set(EnrichmentTerm.colName, row.get(EnrichmentTerm.colName, String.class));
             filtRow.set(EnrichmentTerm.colDescription, row.get(EnrichmentTerm.colDescription, String.class));
-            filtRow.set(EnrichmentTerm.colPvalue, row.get(EnrichmentTerm.colPvalue, String.class));
+            filtRow.set(EnrichmentTerm.colPvalue, row.get(EnrichmentTerm.colPvalue, Double.class));
             filtRow.set(EnrichmentTerm.colGenes, row.getList(EnrichmentTerm.colGenes, String.class));
             filtRow.set(EnrichmentTerm.colGenesSUID, row.getList(EnrichmentTerm.colGenesSUID, Long.class));
             filtRow.set(EnrichmentTerm.colNetworkSUID, row.get(EnrichmentTerm.colNetworkSUID, Long.class));
@@ -625,6 +653,7 @@ public class EnrichmentCytoPanel extends JPanel
             return;
 
         updateLabelRows();
+        updateFilteredEnrichmentTable();
         JTable currentTable = enrichmentTables.get(showTable);
         if (currentTable == null){
             currentTable = enrichmentTables.get(enrichmentTable.getTitle());
@@ -751,4 +780,37 @@ public class EnrichmentCytoPanel extends JPanel
                 cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
     }
 
+    private boolean isEnrichmentMapInstalled() {
+        return availableCommands.getNamespaces().contains("enrichmentmap");
+    }
+
+    private void drawEnrichmentMap() {
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        if (network == null)
+            return;
+        if (tableModel.getAllRowCount() != tableModel.getRowCount())
+            taskManager.execute(new TaskIterator(new EnrichmentMapAdvancedTask(network, getFilteredTable(),
+                    enrichmentTable, true, registrar)));
+        else
+            taskManager.execute(new TaskIterator(new EnrichmentMapAdvancedTask(network, getFilteredTable(),
+                    enrichmentTable, false, registrar)));
+    }
+
+
+    private static class DecimalFormatRenderer extends DefaultTableCellRenderer {
+        private static final DecimalFormat formatter = new DecimalFormat("#.#####E0");
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            try {
+                if (value != null) {
+                    value = formatter.format(value);
+                }
+            } catch (Exception ex) {
+                // ignore and return original value
+            }
+            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
+                    column);
+        }
+    }
 }

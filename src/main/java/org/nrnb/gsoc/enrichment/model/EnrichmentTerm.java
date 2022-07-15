@@ -30,7 +30,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     String name;
     String description;
     String source;
-    String pvalue;
+    Double pvalue;
     double goshv;
     boolean isSignificant;
     int effectiveDomainSize;
@@ -137,7 +137,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colTermID = "term id"; //native
     public static final String colName = "term name";
     public static final String colDescription = "description";
-    public static final String colPvalue = "adjusted p-value";
+    public static final String colPvalue = "p-value";
     public static final String colGoshv = "goshv";
     public static final String colIsSignificant = "significant";
     public static final String colEffectiveDomainSize = "background size";
@@ -165,7 +165,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.name = "";
         this.description = "";
         this.source = "";
-        this.pvalue = "0.0";
+        this.pvalue = 0.0;
         this.goshv=-1.0;
         this.isSignificant = true;
         this.effectiveDomainSize=0;
@@ -179,7 +179,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.name = "";
         this.description = "";
         this.source = enrichmentSource;
-        this.pvalue = "0.0";
+        this.pvalue = 0.0;
     }
 
 
@@ -229,11 +229,11 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.source = source;
     }
 
-    public String getPValue() {
+    public double getPValue() {
         return pvalue;
     }
 
-    public void setPValue(String pvalue) {
+    public void setPValue(double pvalue) {
         this.pvalue = pvalue;
     }
 
