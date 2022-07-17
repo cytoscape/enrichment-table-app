@@ -12,7 +12,6 @@ import org.cytoscape.model.events.*;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.util.swing.CyColorPaletteChooserFactory;
 import org.cytoscape.util.swing.IconManager;
-import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedEvent;
@@ -23,7 +22,6 @@ import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.tasks.*;
-import org.nrnb.gsoc.enrichment.utils.CommandTaskUtil;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.property.CyProperty;
@@ -36,7 +34,6 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -270,17 +267,17 @@ public class EnrichmentCytoPanel extends JPanel
 
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
-        } else if (ModelUtils.getNetOrganism(network) == null){
-            organismSelect = new JLabel("Organism: hsapiens", JLabel.LEFT);
         } else {
-            organismSelect = new JLabel("Organism: " + ModelUtils.getNetOrganism(network), JLabel.LEFT);
+            OrganismAndGeneIdAssertionTask.setOrganism(network);
+            final String currentOrganism = ModelUtils.getNetOrganism(network);
+            final String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
+            organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
         }
         organismSelect.setToolTipText(organismSelectTip);
         if(network == null){
             geneIdSelect = new JLabel("Gene ID column: null", JLabel.LEFT);
-        } else if (ModelUtils.getNetGeneIDColumn(network) == null){
-            geneIdSelect = new JLabel("Gene ID column: name", JLabel.LEFT);
         } else {
+            OrganismAndGeneIdAssertionTask.setGeneId(network, registrar);
             geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
         }
         geneIdSelect.setToolTipText(geneIdSelectTip);
@@ -359,17 +356,17 @@ public class EnrichmentCytoPanel extends JPanel
 
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
-        } else if (ModelUtils.getNetOrganism(network) == null){
-            organismSelect = new JLabel("Organism: hsapiens", JLabel.LEFT);
         } else {
-            organismSelect = new JLabel("Organism: " + ModelUtils.getNetOrganism(network), JLabel.LEFT);
+            OrganismAndGeneIdAssertionTask.setOrganism(network);
+            String currentOrganism = ModelUtils.getNetOrganism(network);
+            String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
+            organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
         }
         organismSelect.setToolTipText(organismSelectTip);
         if(network == null){
             geneIdSelect = new JLabel("Gene ID column: null", JLabel.LEFT);
-        } else if (ModelUtils.getNetGeneIDColumn(network) == null){
-            geneIdSelect = new JLabel("Gene ID column: name", JLabel.LEFT);
         } else {
+            OrganismAndGeneIdAssertionTask.setGeneId(network, registrar);
             geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
         }
         geneIdSelect.setToolTipText(geneIdSelectTip);
