@@ -22,11 +22,8 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author ighosh98
@@ -37,7 +34,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     final CyApplicationManager applicationManager;
     final CyNetwork network;
     final CyTable nodeTable;
-    String displayValue;
+    private String displayValue;
     EnrichmentCytoPanel enrichmentPanel=null;
     public CyTable enrichmentTable;
 
@@ -82,28 +79,10 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
 
     public EnrichmentAdvancedOptionsTask(CyServiceRegistrar registrar) {
         this.registrar = registrar;
-        applicationManager = registrar.getService(CyApplicationManager.class);
+        this.applicationManager = registrar.getService(CyApplicationManager.class);
         this.network = applicationManager.getCurrentNetwork();
-        nodeTable = network.getDefaultNodeTable();
-        this.scientificNametoID = ModelUtils.getOrganisms();
-        List<String> speciesList = new ArrayList<>();
-        this.enrichmentPanel = (EnrichmentCytoPanel) enrichmentPanel;
-        if(scientificNametoID!=null) {
-            for (Map.Entry<String, String> it : scientificNametoID.entrySet()) {
-                speciesList.add(it.getKey());
-                if(it.getValue().equals(ModelUtils.getNetOrganism(network))){
-                    displayValue = it.getKey();
-                }
-            }
-            Collections.sort(speciesList);
-            organism = new ListSingleSelection<String>(speciesList);
-            if(ModelUtils.getNetOrganism(network)!=null){
-                organism.setSelectedValue(displayValue);
-            } else{
-                organism.setSelectedValue("Homo sapiens");
-            }
-            //ModelUtils.setNetOrganism(network,"hsapiens");
-        }
+        this.nodeTable = network.getDefaultNodeTable();
+        this.setOrganism(network);
         List<String> stringCol = new ArrayList<String>();
         for (CyColumn col : nodeTable.getColumns()) {
             if (col.getType().equals(String.class)) {
@@ -155,6 +134,29 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
             enrichmentTable = ModelUtils.getEnrichmentTable(registrar, network, TermSource.ALL.getTable());
         }
         return;
+    }
+
+    private void setOrganism(final CyNetwork network) {
+        // Setting values to list selection
+        this.scientificNametoID = ModelUtils.getOrganisms();
+        List<String> speciesList = new ArrayList<>();
+        String currentOrganism = ModelUtils.getNetOrganism(network);
+        displayValue = currentOrganism;
+        System.out.println("Display Value: " + displayValue);
+
+        if (scientificNametoID != null) {
+            for (Map.Entry<String, String> it : scientificNametoID.entrySet()) {
+                speciesList.add(it.getKey());
+                if (it.getValue().equals(currentOrganism)) {
+                    displayValue = it.getKey();
+                }
+            }
+            Collections.sort(speciesList);
+            organism = new ListSingleSelection<>(speciesList);
+        }
+
+        // If the network table already has organism
+        if (speciesList.contains(displayValue)) organism.setSelectedValue(displayValue);
     }
 
     @ProvidesTitle

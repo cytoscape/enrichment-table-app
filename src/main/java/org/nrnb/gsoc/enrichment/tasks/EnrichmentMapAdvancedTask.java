@@ -44,6 +44,7 @@ public class EnrichmentMapAdvancedTask extends AbstractTask implements TaskObser
     // Network name
     @Tunable(description="Enrichment Map name")
     public String mapName = "Enrichment Map - String Network";
+
     // Similarity cutoff
     @Tunable(description="Connectivity cutoff (Jaccard similarity)",
             longDescription="The cutoff for the lowest Jaccard similarity between terms.  "+
@@ -86,7 +87,6 @@ public class EnrichmentMapAdvancedTask extends AbstractTask implements TaskObser
         args.put("coefficients", "JACCARD");
         args.put("similaritycutoff", String.valueOf(similarity.getValue()));
         args.put("pvalue",0.05);
-
         args.put("descriptionColumn", EnrichmentTerm.colName);
 
         // run task
