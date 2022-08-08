@@ -1,6 +1,5 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.log4j.Logger;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyUserLog;
