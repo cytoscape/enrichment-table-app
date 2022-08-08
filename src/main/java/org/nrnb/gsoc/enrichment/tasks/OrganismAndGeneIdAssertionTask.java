@@ -1,20 +1,18 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
+import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OrganismAndGeneIdAssertionTask {
@@ -37,16 +35,24 @@ public class OrganismAndGeneIdAssertionTask {
         for (OrganismNetworkEntry entry: otherNetworks) {
             otherNetworkParameters.addAll(getList(network, entry.toString()));
         }
-        for (String e: otherNetworkParameters) {
-            if(e != null) {
-                e = e.trim();
-                if (scientificNameToID.containsKey(e)) {
-                    initialOrganism = scientificNameToID.get(e);
+        for (String possibleOrganism: otherNetworkParameters) {
+            if(possibleOrganism != null) {
+                final String trimmedPossibleOrganism = possibleOrganism.trim().toLowerCase();
+                Optional<String> gProfilerOrganism = scientificNameToID.keySet().stream()
+                        .filter(gProfilerName -> trimmedPossibleOrganism.contains(gProfilerName.toLowerCase()))
+                        .findFirst();
+                if (gProfilerOrganism.isPresent()) {
+                    initialOrganism = scientificNameToID.get(gProfilerOrganism.get());
                     break;
                 }
-                else if (scientificNameToID.containsValue(e)) {
-                    initialOrganism = e;
-                    break; // Breaking loop to optimize
+                else {
+                    Optional<Map.Entry<String, String>> gProfilerScientificId = scientificNameToID
+                            .entrySet().stream().filter(keyValuePair -> trimmedPossibleOrganism.contains(
+                                    keyValuePair.getValue().toLowerCase())).findFirst();
+                    if (gProfilerScientificId.isPresent()) {
+                        initialOrganism = gProfilerScientificId.get().getValue();
+                        break; // Breaking loop to optimize
+                    }
                 }
             }
         }
@@ -69,13 +75,24 @@ public class OrganismAndGeneIdAssertionTask {
         if (geneId != null) ModelUtils.setNetGeneIDColumn(network, geneId);
         else {
             // Predict gene id from style
+            CyNetworkViewManager cyNetworkViewManager = registrar.getService(CyNetworkViewManager.class);
             final VisualMappingManager visualMappingManager = registrar.getService(VisualMappingManager.class);
-            final VisualStyle visualStyle = visualMappingManager.getCurrentVisualStyle();
-            final VisualMappingFunction<?, String> mappingFunction =
-                    visualStyle.getVisualMappingFunction(BasicVisualLexicon.NODE_LABEL);
-            if (mappingFunction != null)
-                ModelUtils.setNetGeneIDColumn(network, mappingFunction.getMappingColumnName());
-            else ModelUtils.setNetGeneIDColumn(network, "name");
+            Collection<CyNetworkView> views = cyNetworkViewManager.getNetworkViews(network);
+            boolean isGeneSetFromStyle = false;
+            for (CyNetworkView view: views) {
+                final VisualStyle visualStyle = visualMappingManager.getVisualStyle(view);
+                final VisualMappingFunction<?, String> mappingFunction =
+                        visualStyle.getVisualMappingFunction(BasicVisualLexicon.NODE_LABEL);
+                if (mappingFunction != null) {
+                    isGeneSetFromStyle = true;
+                    ModelUtils.setNetGeneIDColumn(network, mappingFunction.getMappingColumnName());
+                    break;
+                }
+            }
+
+            if (!isGeneSetFromStyle) {
+                ModelUtils.setNetGeneIDColumn(network, "name");
+            }
         }
 
     }
@@ -102,7 +119,6 @@ public class OrganismAndGeneIdAssertionTask {
     private enum OrganismNetworkEntry {
         STRINGAPP("species"),
         NDEX("organism"),
-        PSIQCUIC("Taxonomy ID"),
         IntAct("IntAct::species");
 
         private final String columnName;
