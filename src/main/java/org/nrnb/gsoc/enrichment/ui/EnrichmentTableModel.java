@@ -197,10 +197,11 @@ public class EnrichmentTableModel extends AbstractTableModel {
         return false;
     }
 
-    // filter by source and nodeSUID
+    // filter by category and nodeSUID
     public void filterByNodeSUID(List<Long> nodesToFilterSUID, boolean annotateAllNodes,
-                                 List<TermSource> sources) {
-//        filter(sources);
+                                 List<TermSource> categories, List<String> evidenceCodes,
+                                 boolean removeRedundancy, double cutoff) {
+        filter(categories, evidenceCodes, removeRedundancy, cutoff);
         filterByNodeSUID(nodesToFilterSUID, annotateAllNodes);
     }
 

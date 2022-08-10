@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class SessionUtils {
 
@@ -21,7 +22,9 @@ public class SessionUtils {
 
     public static List<String> getSelectedEvidenceCode(CyNetwork network, CyTable model) {
         try {
-            return (List<String>) sessionObjectMap.get("selectedEvidenceCodes" + generateHashMap(network, model));
+            List<String> result = (List<String>) sessionObjectMap.get("selectedEvidenceCodes" +
+                    generateHashMap(network, model));
+            return Objects.isNull(result) ? Collections.emptyList() : result;
         }
         catch (Exception e) {
             return Collections.emptyList();
@@ -36,8 +39,9 @@ public class SessionUtils {
 
     public static List<EnrichmentTerm.TermSource> getSelectedCategories(CyNetwork network, CyTable model) {
         try {
-            return (List<EnrichmentTerm.TermSource>)
+            List<EnrichmentTerm.TermSource> result = (List<EnrichmentTerm.TermSource>)
                     sessionObjectMap.get("selectedCategories" + generateHashMap(network, model));
+            return Objects.isNull(result) ? Collections.emptyList() : result;
         }
         catch (Exception e) {
             return Collections.emptyList();
@@ -65,7 +69,8 @@ public class SessionUtils {
 
     public static double getRemoveRedundantCutoff(CyNetwork network, CyTable model) {
         try {
-            return (double) sessionObjectMap.get("removeRedundantCutOff" + generateHashMap(network, model));
+            Double result = (Double) sessionObjectMap.get("removeRedundantCutOff" + generateHashMap(network, model));
+            return Objects.isNull(result) ? 0.5 : result;
         }
         catch (Exception e) {
             return 0.5;
