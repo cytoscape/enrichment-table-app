@@ -246,7 +246,7 @@ public class ModelUtils {
         }
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
         JSONArray result = requestEngine.makeGetRequest("util/organisms_list/");
-        if(result==null){
+        if(result == null){
             return scientificNametoID;
         }
         JSONArray jsonArrayScientificName = new JSONArray();

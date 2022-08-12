@@ -1,6 +1,8 @@
 package org.nrnb.gsoc.enrichment.tasks;
 
+import org.apache.log4j.Logger;
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelName;
@@ -23,7 +25,6 @@ import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author ighosh98
@@ -38,6 +39,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     EnrichmentCytoPanel enrichmentPanel=null;
     public CyTable enrichmentTable;
 
+    private static final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
     @Tunable(description = "Adjusted p-value threshold",
             tooltip = "<html>Values above this threshold will be excluded.</html>",
@@ -112,16 +114,40 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
 
     //user sets the cycol -> update default -> the run the query
     @Override
-    public void run(TaskMonitor monitor) throws Exception {
+    public void run(TaskMonitor monitor) {
         CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
         CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
         enrichmentPanel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
                 cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
         TaskManager<?, ?> tm = registrar.getService(TaskManager.class);
         if(network!=null) {
+            monitor.setTitle("Enrichment Advanced Options");
+            // Check if new values selected
+            if (!Objects.equals(ModelUtils.getNetOrganism(network), scientificNametoID.get(organism.getSelectedValue()))) {
+                logger.info("[Enrichment Map] Selected new organism is: [" + scientificNametoID.get(organism.getSelectedValue()) + "]");
+            }
+
+            if (!Objects.equals(ModelUtils.getNetGeneIDColumn(network), geneID.getSelectedValue())) {
+                logger.info("[Enrichment Map] Selected new gene is: [" + geneID.getSelectedValue() + "]");
+            }
+
+            if (!Objects.equals(ModelUtils.getNetUserThreshold(network), user_threshold.getValue())) {
+                logger.info("[Enrichment Map] Selected new user threshold is: [" + user_threshold.getValue() + "]");
+            }
+
+            if (!Objects.equals(ModelUtils.getNetNoIEA(network), no_iea)) {
+                logger.info("[Enrichment Map] Selected new IEA is: [" + no_iea + "]");
+            }
+
+            if (!Objects.equals(ModelUtils.getNetSignificanceThresholdMethod(network),
+                    significance_threshold_method.getSelectedValue())) {
+                logger.info("[Enrichment Map] Selected new significance threshold is: [" +
+                        significance_threshold_method.getSelectedValue() + "]");
+            }
+
             // save values to network
             ModelUtils.setNetSignificanceThresholdMethod(network, significance_threshold_method.getSelectedValue());
-            ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue().toString());
+            ModelUtils.setNetGeneIDColumn(network, geneID.getSelectedValue());
             ModelUtils.setNetNoIEA(network, no_iea);
             ModelUtils.setNetUserThreshold(network, user_threshold.getValue());
             if(scientificNametoID.containsKey(organism.getSelectedValue())){
@@ -133,7 +159,6 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
             }
             enrichmentTable = ModelUtils.getEnrichmentTable(registrar, network, TermSource.ALL.getTable());
         }
-        return;
     }
 
     private void setOrganism(final CyNetwork network) {
@@ -167,8 +192,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     @Override
     @SuppressWarnings("unchecked")
     public Object getResults(Class type) {
-        Long res = enrichmentTable.getSUID();
-        return res;
+        return enrichmentTable.getSUID();
     }
 
     @Override
