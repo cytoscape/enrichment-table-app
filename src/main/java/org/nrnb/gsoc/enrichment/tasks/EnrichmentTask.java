@@ -316,6 +316,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			row.set(EnrichmentTerm.colGenesSUID, term.getNodesSUID());
 			row.set(EnrichmentTerm.colNetworkSUID, network.getSUID());
 			row.set(EnrichmentTerm.colGenesEvidenceCode, term.getEvidenceCodes());
+			row.set(EnrichmentTerm.colChartColor, "");
 		}
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") >= 0) {

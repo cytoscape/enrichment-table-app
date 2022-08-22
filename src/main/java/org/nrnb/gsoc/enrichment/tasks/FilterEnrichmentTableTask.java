@@ -23,6 +23,7 @@ import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentTableModel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.nrnb.gsoc.enrichment.utils.SessionUtils;
+import org.nrnb.gsoc.enrichment.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -156,6 +157,10 @@ public class FilterEnrichmentTableTask extends AbstractTask implements Observabl
             return;
         }
         tableModel.filter(categoryList, evidenceList, removeOverlapping, overlapCutoff.getValue());
+        if (enrichmentPanel.getIsChartEnabled()) {
+            ViewUtils.resetCharts(applicationManager, registrar, tableModel);
+            enrichmentPanel.drawCharts();
+        }
         logger.info("Filtering results completed");
     }
 

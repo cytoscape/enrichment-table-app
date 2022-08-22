@@ -152,9 +152,13 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
     public static final String colNetworkSUID = "network.SUID";// session unique id
     public static final String colGenesEvidenceCode = "Evidence codes";
 
+    public static final String colChartColor = "chart color";
+    public static final String colEnrichmentTermsNames = "enrichmentTermsNames";
+    public static final String colEnrichmentTermsIntegers = "enrichmentTermsIntegers";
+    public static final String colEnrichmentPassthrough = "enrichmentPassthrough";
 
     // enrichment table master schema
-    public static final String[] swingColumnsEnrichment = new String[] {  colSource, colTermID, colName, colDescription,
+    public static final String[] swingColumnsEnrichment = new String[] {  colSource, colChartColor, colTermID, colName, colDescription,
             colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall,
             colGenes, colGenesSUID, colGenesEvidenceCode};
 
@@ -180,6 +184,15 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         this.description = "";
         this.source = enrichmentSource;
         this.pvalue = 0.0;
+    }
+
+    public <T> EnrichmentTerm(String name, String description, String source, double precision) {
+        this.name = name;
+        this.description = description;
+        this.source = source;
+        this.pvalue = precision;
+        this.genes = new ArrayList<String>();
+        this.nodes = new ArrayList<Long>();
     }
 
 

@@ -2,6 +2,8 @@ package org.nrnb.gsoc.enrichment.utils;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.util.color.Palette;
+import org.nrnb.gsoc.enrichment.model.ChartType;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 
 import java.util.Collections;
@@ -74,6 +76,47 @@ public class SessionUtils {
         }
         catch (Exception e) {
             return 0.5;
+        }
+    }
+
+    public static ChartType getChartType(CyNetwork network, CyTable model) {
+        try {
+            ChartType result = (ChartType) sessionObjectMap.get("chartType" + generateHashMap(network, model));
+            return Objects.isNull(result) ? ChartType.SPLIT : result;
+        }
+        catch (Exception e) {
+            return ChartType.SPLIT;
+        }
+    }
+
+    public static void setChartType(CyNetwork network, CyTable model, ChartType type) {
+         sessionObjectMap.put("chartType" + generateHashMap(network, model), type);
+    }
+
+    public static void setTopTerms(CyNetwork network, CyTable model, int topTerms) {
+        sessionObjectMap.put("topTerms" + generateHashMap(network, model), topTerms);
+    }
+
+    public static int getTopTerms(CyNetwork network, CyTable model) {
+        try {
+            return (int) sessionObjectMap.get("topTerms" + generateHashMap(network, model));
+        }
+        catch (Exception e) {
+            return 5;
+        }
+    }
+
+    public static void setEnrichmentPalette(CyNetwork network, CyTable model, Palette palette) {
+        sessionObjectMap.put("enrichmentPalette" + generateHashMap(network, model), palette);
+    }
+
+    public static Palette getEnrichmentPalette(CyNetwork network, CyTable model) {
+        try {
+            Palette palette = (Palette) sessionObjectMap.get("enrichmentPalette" + generateHashMap(network, model));
+            return Objects.isNull(palette) ? null : palette;
+        }
+        catch (Exception e) {
+            return null;
         }
     }
 

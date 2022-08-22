@@ -6,9 +6,9 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author ighosh98
@@ -55,7 +55,15 @@ public class EnrichmentTableModel extends AbstractTableModel {
         if (getRowCount() == 0) return null;
         final String colName = columnNames[col];
         final Long rowName = rowNames[row];
-        if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
+
+        if (colName.equals(EnrichmentTerm.colChartColor)) {
+            String hexColor = cyTable.getRow(rowName).get(colName, String.class);
+            if (hexColor != null && !hexColor.equals(""))
+                return Color.decode(hexColor);
+            else
+                return Color.WHITE;
+        }
+        else if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
             return cyTable.getRow(rowName).get(colName, Integer.class);
         } else if (colName.equals(EnrichmentTerm.colIntersectionSize)) {
             return cyTable.getRow(rowName).get(colName, Integer.class);
@@ -105,7 +113,14 @@ public class EnrichmentTableModel extends AbstractTableModel {
     public Object getValueAt(int row, String colName) {
         final Long rowName = rowNames[row];
 
-        if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
+        if (colName.equals(EnrichmentTerm.colChartColor)) {
+            String hexColor = cyTable.getRow(rowName).get(colName, String.class);
+            if (hexColor != null && !hexColor.equals(""))
+                return Color.decode(hexColor);
+            else
+                return Color.WHITE;
+        }
+        else if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
             return cyTable.getRow(rowName).get(colName, Integer.class);
         } else if (colName.equals(EnrichmentTerm.colIntersectionSize)) {
             return cyTable.getRow(rowName).get(colName, Integer.class);
@@ -149,7 +164,9 @@ public class EnrichmentTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int c) {
         final String colName = columnNames[c];
 
-        if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
+        if (colName.equals(EnrichmentTerm.colChartColor)) {
+            return Color.class;
+        } else if (colName.equals(EnrichmentTerm.colEffectiveDomainSize)) {
             return Integer.class;
         } else if (colName.equals(EnrichmentTerm.colIntersectionSize)) {
             return Integer.class;
@@ -194,7 +211,27 @@ public class EnrichmentTableModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int row, int col) {
-        return false;
+        return columnNames[col].equals(EnrichmentTerm.colChartColor);
+    }
+
+    public void setValueAt(Object value, int row, int col) {
+        final String colName = columnNames[col];
+        final Long rowName = rowNames[row];
+        if (colName.equals(EnrichmentTerm.colChartColor)) {
+            if (cyTable.getColumn(EnrichmentTerm.colChartColor) == null) {
+                cyTable.createColumn(EnrichmentTerm.colChartColor, String.class, false);
+            }
+            try {
+                Color color = (Color) value;
+                String hexColor = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(),
+                        color.getBlue());
+                cyTable.getRow(rowName).set(colName, hexColor);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        fireTableCellUpdated(row, col);
     }
 
     // filter by category and nodeSUID
