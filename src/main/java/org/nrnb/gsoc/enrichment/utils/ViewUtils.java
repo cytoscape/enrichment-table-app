@@ -32,18 +32,24 @@ public class ViewUtils {
     static String CIRCOS_CHART = "circoschart: firstarc=1.0 arcwidth=0.4 attributelist=\"enrichmentTermsIntegers\" showlabels=\"false\" colorlist=\"";
     static String CIRCOS_CHART2 = "circoschart: borderwidth=0 firstarc=1.0 arcwidth=0.4 attributelist=\"enrichmentTermsIntegers\" showlabels=\"false\" colorlist=\"";
 
-    public static void updatePieCharts(CyApplicationManager manager, CyServiceRegistrar registrar, VisualStyle stringStyle,
-                                       CyNetwork net, boolean show) {
+    /**
+     * Updates pie charts by changing or removing {@code NODE_CUSTOMGRAPHICS_4} component in style.
+     *
+     * @param registrar Service registrar to obtain required services
+     * @param stringStyle Style which is required to be modified to update charts
+     * @param show Boolean to turn on or off charts
+     */
+    public static void updatePieCharts(CyServiceRegistrar registrar, VisualStyle stringStyle, boolean show) {
 
-        VisualMappingFunctionFactory passthroughFactory = registrar
+        VisualMappingFunctionFactory passThroughFactory = registrar
                 .getService(VisualMappingFunctionFactory.class, "(mapping.type=passthrough)");
         VisualLexicon lex = registrar.getService(RenderingEngineManager.class)
                 .getDefaultVisualLexicon();
-        // Set up the passthrough mapping for the label
+        // Set up the pass through mapping for the label
         if (show) {
             {
-                VisualProperty customGraphics = lex.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_4");
-                PassthroughMapping pMapping = (PassthroughMapping) passthroughFactory
+                VisualProperty<CyNode> customGraphics = (VisualProperty<CyNode>) lex.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_4");
+                PassthroughMapping<String, CyNode> pMapping = (PassthroughMapping<String, CyNode>) passThroughFactory
                         .createVisualMappingFunction(EnrichmentTerm.colEnrichmentPassthrough, String.class,
                                 customGraphics);
                 stringStyle.addVisualMappingFunction(pMapping);
@@ -54,6 +60,16 @@ public class ViewUtils {
         }
     }
 
+    /**
+     * Fetches colors  from {@link #getColorList(Map)} and updates color in
+     * enrichment table and invokes {@link #updatePieCharts(CyServiceRegistrar, VisualStyle, boolean)}
+     * to update current chart if chart present and saves information to network.
+     * <p>
+     * NOTE: Data saved in network table like string app
+     * </p>
+     * @param manager Application manager to access network related prorperties
+     * @param registrar Service registrar to obtain required services
+     */
     public static void drawCharts(CyApplicationManager manager, CyServiceRegistrar registrar,
                                   Map<EnrichmentTerm, String> selectedTerms,
                                   ChartType type) {
@@ -79,7 +95,7 @@ public class ViewUtils {
         VisualMappingManager vmm = registrar.getService(VisualMappingManager.class);
         CyNetworkView netView = manager.getCurrentNetworkView();
         if (netView != null) {
-            ViewUtils.updatePieCharts(manager, registrar, vmm.getVisualStyle(netView), network, true);
+            ViewUtils.updatePieCharts(registrar, vmm.getVisualStyle(netView), true);
             netView.updateView();
         }
         // save in network table
@@ -91,6 +107,13 @@ public class ViewUtils {
         netTable.getRow(network.getSUID()).set(ModelUtils.NET_ENRICHMENT_VISCOLORS, colorList);
     }
 
+    /**
+     * Replaces column in table and removes colors from the enrichment table.
+     *
+     * @param manager Application manager to access network related properties
+     * @param registrar Service registrar to obtain required services
+     * @param model Enrichment Table model
+     */
     public static void resetCharts(CyApplicationManager manager, CyServiceRegistrar registrar, EnrichmentTableModel model) {
         CyNetwork network = manager.getCurrentNetwork();
         if (network == null || model == null)
@@ -122,6 +145,21 @@ public class ViewUtils {
         model.fireTableDataChanged();
     }
 
+    /**
+     * Provides default palette from {@link #getDefaultPalette(CyServiceRegistrar)} if palette not already
+     * present in session.
+     *
+     * @param network CyNetwork currently in use.
+     * @param table Current Enrichment Table,
+     * @param registrar Service registrar to obtain required services
+     * @return A {@link Palette} as per session state.
+     */
+    public static Palette getEnrichmentPalette(CyNetwork network, CyTable table, CyServiceRegistrar registrar) {
+        Palette palette = SessionUtils.getEnrichmentPalette(network, table);
+        if (Objects.isNull(palette)) return getDefaultPalette(registrar);
+        return palette;
+    }
+
     private static void createColumns(CyTable nodeTable) {
         // replace columns
         ModelUtils.replaceListColumnIfNeeded(nodeTable, String.class,
@@ -133,14 +171,10 @@ public class ViewUtils {
     }
 
     private static List<String> getColorList(Map<EnrichmentTerm, String> selectedTerms) {
-        List<String> colorList = new ArrayList<String>();
+        List<String> colorList = new ArrayList<>();
         for (EnrichmentTerm term : selectedTerms.keySet()) {
-            // Color color = selectedTerms.get(term);
             String color = selectedTerms.get(term);
             if (color != null) {
-                //String hex = String.format("#%02x%02x%02x", color.getRed(), color.getGreen(),
-                //		color.getBlue());
-                //colorList += hex + ",";
                 colorList.add(color);
             } else {
                 colorList.add("");
@@ -218,12 +252,6 @@ public class ViewUtils {
         if (type.equals(ChartType.TEETH))
             return CIRCOS_CHART2 + colorString.substring(0, colorString.length() - 1) + "\"";
         return CIRCOS_CHART + colorString.substring(0, colorString.length() - 1) + "\"";
-    }
-
-    public static Palette getEnrichmentPalette(CyNetwork network, CyTable table, CyServiceRegistrar registrar) {
-        Palette palette = SessionUtils.getEnrichmentPalette(network, table);
-        if (Objects.isNull(palette)) return getDefaultPalette(registrar);
-        return palette;
     }
 
     private static Palette getDefaultPalette(CyServiceRegistrar registrar) {

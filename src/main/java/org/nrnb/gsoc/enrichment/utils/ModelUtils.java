@@ -61,8 +61,8 @@ public class ModelUtils {
     public static String  NET_ALL_RESULTS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "All Results";
     public static String  NET_MEASURE_UNDERREPRESENTATION = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "Measure Underrepresentation";
     
-    public static String NET_ENRICHMENT_VISTEMRS = "visualizedTerms";
-    public static String NET_ENRICHMENT_VISCOLORS = "visualizedTermsColors";
+    public static String NET_ENRICHMENT_VISTEMRS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "visualizedTerms";
+    public static String NET_ENRICHMENT_VISCOLORS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "visualizedTermsColors";
 
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
