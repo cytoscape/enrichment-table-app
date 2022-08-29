@@ -11,6 +11,9 @@ import org.cytoscape.work.json.JSONResult;
 
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
+/**
+ * Task to execute chart creation asynchronously on the AWT.
+ */
 public class ShowChartsTask extends AbstractTask implements ObservableTask {
 
     private final EnrichmentCytoPanel cytoPanel;

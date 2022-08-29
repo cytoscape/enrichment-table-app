@@ -10,14 +10,17 @@ import org.cytoscape.work.AbstractTaskFactory;
 import org.cytoscape.work.TaskIterator;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 
+/**
+ * Task Factory to start show chart task.
+ *
+ * @author <a href="https://github.com/AkMo3">Akash Mondal</a>
+ */
 public class ShowChartsTaskFactory extends AbstractTaskFactory {
-    private final CyServiceRegistrar registrar;
     private final CyApplicationManager manager;
     private final CytoPanel cytoPanel;
-    EnrichmentCytoPanel panel;
+    private EnrichmentCytoPanel panel;
 
-    public ShowChartsTaskFactory(final CyServiceRegistrar registrar, CyApplicationManager manager) {
-        this.registrar = registrar;
+    public ShowChartsTaskFactory(final CyServiceRegistrar registrar, final CyApplicationManager manager) {
         this.manager = manager;
         CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
         cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
@@ -40,11 +43,8 @@ public class ShowChartsTaskFactory extends AbstractTaskFactory {
 
         panel = (EnrichmentCytoPanel) cytoPanel.getComponentAt(
                 cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-        // System.out.println("panel = "+panel);
 
-        if (panel == null) return false;
-
-        return true;
+        return panel != null;
     }
 }
 
