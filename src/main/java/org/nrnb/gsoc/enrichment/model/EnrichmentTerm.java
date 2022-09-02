@@ -129,7 +129,7 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
         }
     }
 
-    public static final int nodeSUIDColumn = 12;
+    public static final int nodeSUIDColumn = 13;
     public static final int chartColumnCol = 1;
 
     public static final String colSource = "source";
@@ -162,8 +162,8 @@ public class EnrichmentTerm implements Comparable<EnrichmentTerm> {
             colPvalue, colQuerySize, colEffectiveDomainSize,colTermSize,colIntersectionSize,colPrecision,colRecall,
             colGenes, colGenesSUID, colGenesEvidenceCode};
 
-    public static final int nameColumn = 2;
-    public static final int pvalueColumn = 4;
+    public static final int nameColumn = 3;
+    public static final int pvalueColumn = 5;
 
     public EnrichmentTerm() {
         this.name = "";
