@@ -13,10 +13,11 @@ The enrichment analysis is supported in automation use cases as well. The basic 
 2. The application on startup predicts gene id column by following ways:
    1. Retrieves `NODE_LABLE` from style for any generic network
    2. Selects `display name` for `stringapp` networks
-3. Enhanced filtration functionality with option to filter by
+3. Ring charts to better visualize top results. Chart settings can be used to customize chart type and number of terms.
+4. Enhanced filtration functionality with option to filter by
    1. Categories
    2. Evidence code
-4. Remove redundant terms in table by selecting appropriate redundancy (jaccard) cutoff, default is 0.5
-5. Enrichment Table shows results based on nodes selected in the UI. If no nodes are selected, all terms are shown. On multiple nodes selecting, terms consisting all the selected nodes are shown (AND type) 
-6. Ability to generate enrichment map
-7. User friendly logging mechanism to resolve issues with developers
+5. Remove redundant terms in table by selecting appropriate redundancy (jaccard) cutoff, default is 0.5
+6. Enrichment Table shows results based on nodes selected in the UI. If no nodes are selected, all terms are shown. On multiple nodes selecting, terms consisting all the selected nodes are shown (AND type)
+7. Ability to generate enrichment map
+8. User friendly logging mechanism to resolve issues with developers
