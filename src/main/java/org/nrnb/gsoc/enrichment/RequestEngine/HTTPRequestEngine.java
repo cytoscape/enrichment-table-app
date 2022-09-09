@@ -6,13 +6,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.log4j.Logger;
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.work.TaskMonitor;
-
 import org.json.simple.JSONArray;
-import org.json.simple.JSONValue;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.nrnb.gsoc.enrichment.constants.APP_CONSTANTS;
@@ -21,10 +22,11 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
-
-import org.cytoscape.application.CyUserLog;
-import org.apache.log4j.Logger;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author ighosh98
@@ -35,13 +37,13 @@ public class HTTPRequestEngine {
     private final String basicURL = "https://biit.cs.ut.ee/gprofiler/api/";
     private final Logger logger = Logger.getLogger(CyUserLog.NAME);
 
-    public HTTPRequestEngine(){
+    public HTTPRequestEngine() {
     }
 
     /**
-     * @description function fires GET Request
      * @param endpoint API endpoint
      * @return
+     * @description function fires GET Request
      */
     public JSONArray makeGetRequest(String endpoint) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -59,51 +61,54 @@ public class HTTPRequestEngine {
             e.printStackTrace();
         }
         int statusCode = response.getStatusLine().getStatusCode();
-        if(statusCode!=200 && statusCode!=202){
+        if (statusCode != 200 && statusCode != 202) {
+            logger.error("[Enrichment Table] GProfiler organisms could not be fetched. Check network connectivity.");
             return null;
         }
-        JSONArray jsonResponse=null;
+        JSONArray jsonResponse = null;
         try {
             jsonResponse = (JSONArray) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
         } catch (IOException e) {
+            logger.error("[Enrichment Table] Error occurred while trying to generate organism list from GProfiler");
             e.printStackTrace();
         } catch (ParseException e) {
+            logger.error("[Enrichment Table] GProfiler organisms response could not be parsed.");
             e.printStackTrace();
         }
         return jsonResponse;
     }
 
     /**
-     * @description function fires POST Request by filling in necessary parameters
-     * @param network Network being used for fetching data
-     * @param endpoint API endpoint
-     * @param parameters all parameters fetched from the network or set by the user
-     * @param monitor Task Monitor
+     * @param network            Network being used for fetching data
+     * @param endpoint           API endpoint
+     * @param parameters         all parameters fetched from the network or set by the user
+     * @param monitor            Task Monitor
      * @param isBackgroundNeeded decides if we need the background nodes or not
      * @return
+     * @description function fires POST Request by filling in necessary parameters
      */
-    public JSONObject makePostRequest(CyNetwork network,String endpoint , Map<String,Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
-        if(ModelUtils.getNetUserThreshold(network)!=null){
-            parameters.put("user_threshold",ModelUtils.getNetUserThreshold(network));
+    public JSONObject makePostRequest(CyNetwork network, String endpoint, Map<String, Object> parameters, TaskMonitor monitor, boolean isBackgroundNeeded) {
+        if (ModelUtils.getNetUserThreshold(network) != null) {
+            parameters.put("user_threshold", ModelUtils.getNetUserThreshold(network));
         }
-        if(ModelUtils.getNetAllResults(network)!=null){
-            parameters.put("all_results",ModelUtils.getNetAllResults(network));
+        if (ModelUtils.getNetAllResults(network) != null) {
+            parameters.put("all_results", ModelUtils.getNetAllResults(network));
         }
-        if(ModelUtils.getNetNoIEA(network)!=null){
-            parameters.put("no_iea",ModelUtils.getNetNoIEA(network));
-        } else{
-            parameters.put("no_iea",true);
+        if (ModelUtils.getNetNoIEA(network) != null) {
+            parameters.put("no_iea", ModelUtils.getNetNoIEA(network));
+        } else {
+            parameters.put("no_iea", true);
         }
 
-        if(ModelUtils.getNetSignificanceThresholdMethod(network)!=null){
-            parameters.put("significance_threshold_method",ModelUtils.getNetSignificanceThresholdMethod(network));
-        } else{
-            parameters.put("significance_threshold_method","g_SCS");
+        if (ModelUtils.getNetSignificanceThresholdMethod(network) != null) {
+            parameters.put("significance_threshold_method", ModelUtils.getNetSignificanceThresholdMethod(network));
+        } else {
+            parameters.put("significance_threshold_method", "g_SCS");
 
         }
 
         StringBuffer backgroundNodes = new StringBuffer("");
-        if(isBackgroundNeeded) {
+        if (isBackgroundNeeded) {
             List<CyNode> nodeList = network.getNodeList();
             Set<String> nodeNameList = new HashSet<>();
             for (CyNode node : nodeList) {
@@ -125,12 +130,12 @@ public class HTTPRequestEngine {
                 }
             }
         }
-        if(!backgroundNodes.toString().isEmpty())
-            parameters.put("background",backgroundNodes.toString());
-        if(backgroundNodes.toString().isEmpty()){
-            parameters.put("domain_scope","annotated");
-        } else{
-            parameters.put("domain_scope","custom_annotated");
+        if (!backgroundNodes.toString().isEmpty())
+            parameters.put("background", backgroundNodes.toString());
+        if (backgroundNodes.toString().isEmpty()) {
+            parameters.put("domain_scope", "annotated");
+        } else {
+            parameters.put("domain_scope", "custom_annotated");
         }
         CloseableHttpClient httpclient = HttpClients.createDefault();
         StringBuffer urlConverter = new StringBuffer();
@@ -139,7 +144,7 @@ public class HTTPRequestEngine {
         String url = urlConverter.toString();
         HttpPost httpPost = new HttpPost(url);
         String jsonBody = JSONValue.toJSONString(parameters);
-        System.out.println("JSON Request Body: \n" + jsonBody);
+//        System.out.println("JSON Request Body: \n" + jsonBody);
         StringEntity entity = null;
         try {
             entity = new StringEntity(jsonBody);
@@ -158,21 +163,22 @@ public class HTTPRequestEngine {
             e.printStackTrace();
             monitor.setStatusMessage("Could not fetch data. Check your internet connection");
             logger.error("Error sending post request.");
-        }
-        catch (InterruptedException e) {
+            return null;
+        } catch (InterruptedException e) {
             e.printStackTrace();
             monitor.setStatusMessage("Task Cancelled. Returning back");
             logger.warn("Task Cancelled. Returning Back.");
+            return null;
         }
         int statusCode = response.getStatusLine().getStatusCode();
-        if(statusCode!=200 && statusCode!=202){
-            monitor.showMessage(TaskMonitor.Level.ERROR, "Got "+
-                    response.getStatusLine().getStatusCode()+" code from server");
+        if (statusCode != 200 && statusCode != 202) {
+            monitor.showMessage(TaskMonitor.Level.ERROR, "Got " +
+                    response.getStatusLine().getStatusCode() + " code from server");
             monitor.setStatusMessage("Invalid Query Parameters");
             logger.warn("Query parameters incorrect.");
             return null;
         }
-        JSONObject jsonResponse=null;
+        JSONObject jsonResponse = null;
         try {
             jsonResponse = (JSONObject) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
         } catch (IOException | ParseException e) {

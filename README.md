@@ -7,3 +7,17 @@ By default, the enrichment analysis is performed on all nodes of the current net
 
 The enrichment analysis is supported in automation use cases as well. The basic command syntax is `enrichment analysis`.  You can optionally choose the organism associated with the query genes with the `organism` parameter. You can also optionally select the node table column containing the gene symbols with the `geneID` parameter. All parameters are listed
 [here](http://localhost:1234/v1/swaggerUI/swagger-ui/index.html?url=http%3A%2F%2Flocalhost%3A1234%2Fv1%2Fcommands%2Fswagger.json#!/enrichment/enrichment_analysis).
+
+## Features in version 2.0
+1. The application on startup predicts the possible organism by processing the data from network in columns [`species`,`organism`,`IntAct::species`]
+2. The application on startup predicts gene id column by following ways:
+   1. Retrieves `NODE_LABLE` from style for any generic network
+   2. Selects `display name` for `stringapp` networks
+3. Ring charts to better visualize top results. Chart settings can be used to customize chart type and number of terms.
+4. Enhanced filtration functionality with option to filter by
+   1. Categories
+   2. Evidence code
+5. Remove redundant terms in table by selecting appropriate redundancy (jaccard) cutoff, default is 0.5
+6. Enrichment Table shows results based on nodes selected in the UI. If no nodes are selected, all terms are shown. On multiple nodes selecting, terms consisting all the selected nodes are shown (AND type)
+7. Ability to generate enrichment map
+8. User friendly logging mechanism to resolve issues with developers

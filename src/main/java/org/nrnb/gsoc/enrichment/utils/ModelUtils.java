@@ -13,16 +13,14 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.model.View;
-import org.cytoscape.work.util.BoundedDouble;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.nrnb.gsoc.enrichment.RequestEngine.HTTPRequestEngine;
-import org.nrnb.gsoc.enrichment.constants.EVIDENCE_CODES;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
-import java.math.BigDecimal;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -62,6 +60,9 @@ public class ModelUtils {
     public static String NET_USER_THRESHOLD = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "User Threshold";
     public static String  NET_ALL_RESULTS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "All Results";
     public static String  NET_MEASURE_UNDERREPRESENTATION = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "Measure Underrepresentation";
+    
+    public static String NET_ENRICHMENT_VISTEMRS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "visualizedTerms";
+    public static String NET_ENRICHMENT_VISCOLORS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "visualizedTermsColors";
 
     // Create network view size threshold
     // See https://github.com/cytoscape/cytoscape-impl/blob/develop/core-task-impl/
@@ -218,6 +219,10 @@ public class ModelUtils {
         if (enrichmentTable.getColumn(EnrichmentTerm.colGenesEvidenceCode) == null) {
             enrichmentTable.createListColumn(EnrichmentTerm.colGenesEvidenceCode, String.class, false);
         }
+
+        if (enrichmentTable.getColumn(EnrichmentTerm.colChartColor) == null) {
+            enrichmentTable.createColumn(EnrichmentTerm.colChartColor, String.class, false);
+        }
     }
 
     /**
@@ -246,7 +251,7 @@ public class ModelUtils {
         }
         HTTPRequestEngine requestEngine = new HTTPRequestEngine();
         JSONArray result = requestEngine.makeGetRequest("util/organisms_list/");
-        if(result==null){
+        if(result == null){
             return scientificNametoID;
         }
         JSONArray jsonArrayScientificName = new JSONArray();

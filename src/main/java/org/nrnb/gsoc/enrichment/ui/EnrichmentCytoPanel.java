@@ -26,6 +26,7 @@ import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.property.CyProperty;
 import org.nrnb.gsoc.enrichment.utils.SessionUtils;
+import org.nrnb.gsoc.enrichment.utils.ViewUtils;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -69,6 +70,9 @@ public class EnrichmentCytoPanel extends JPanel
     JButton butRunProfiler;
     JButton butFilter;
     JButton butEnrichmentMap;
+    JButton butDrawCharts;
+    JButton butResetCharts;
+    JButton butChartSettings;
     JLabel organismSelect;
     JLabel geneIdSelect;
     TableColumnModel columnModel;
@@ -107,6 +111,9 @@ public class EnrichmentCytoPanel extends JPanel
     final String butExportTableDescr = "Export enrichment table";
     final String butRunProfilerName = "Perform Gene Enrichment";
     final String butEnrichmentMapName = "Create EnrichmentMap";
+    final String butDrawChartsName = "Draw charts using default color palette";
+    final String butResetChartsName = "Reset charts";
+    final String butChartSettingsName = "Network-specific chart settings";
     private boolean noSignificant;
     private JSONObject result;
     CyTableFactory tableFactory;
@@ -114,6 +121,7 @@ public class EnrichmentCytoPanel extends JPanel
     private CyProperty<Properties> sessionProperties;
     private final AvailableCommands availableCommands;
     private final TaskManager<?, ?> taskManager;
+    private boolean isChartEnabled = false;
 
 
     public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
@@ -186,6 +194,29 @@ public class EnrichmentCytoPanel extends JPanel
             if (network != null) {
                 drawEnrichmentMap();
             }
+        } else if (e.getSource().equals(butDrawCharts)) {
+            ViewUtils.resetCharts(applicationManager, registrar, tableModel);
+            Map<EnrichmentTerm, String> preselectedTerms = getUserSelectedTerms();
+            if (preselectedTerms.size() == 0) {
+                preselectedTerms = getAutoSelectedTopTerms(SessionUtils.getTopTerms(network, filteredEnrichmentTable));
+            }
+            AvailableCommands availableCommands = (AvailableCommands) registrar.getService(AvailableCommands.class);
+            if (!availableCommands.getNamespaces().contains("enhancedGraphics")) {
+                JOptionPane.showMessageDialog(null,
+                        "Charts will not be displayed. You need to install enhancedGraphics from the App Manager or Cytoscape App Store.",
+                        "No results", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            ViewUtils.drawCharts(applicationManager, registrar, preselectedTerms, SessionUtils.getChartType(network, enrichmentTable));
+            isChartEnabled = true;
+        }
+        else if (e.getSource().equals(butChartSettings)) {
+            taskManager.execute(new TaskIterator(new EnrichmentSettingsTask(registrar, applicationManager, filteredEnrichmentTable)));
+            isChartEnabled = true;
+        }
+        else if (e.getSource().equals(butResetCharts)) {
+            ViewUtils.resetCharts(applicationManager, registrar, tableModel);
+            isChartEnabled = false;
         }
     }
 
@@ -254,9 +285,29 @@ public class EnrichmentCytoPanel extends JPanel
         butEnrichmentMap.setFocusPainted(false);
         butEnrichmentMap.setBorder(BorderFactory.createEmptyBorder(2,4,2,20));
 
+        butDrawCharts = new JButton(chartIcon);
+        butDrawCharts.addActionListener(this);
+        butDrawCharts.setToolTipText(butDrawChartsName);
+        butDrawCharts.setBorderPainted(false);
+        butDrawCharts.setContentAreaFilled(false);
+        butDrawCharts.setFocusPainted(false);
+        butDrawCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+
+        butResetCharts = new JButton(IconManager.ICON_CIRCLE_O);
+        butResetCharts.setFont(iconFont);
+        butResetCharts.addActionListener(this);
+        butResetCharts.setToolTipText(butResetChartsName);
+        butResetCharts.setBorderPainted(false);
+        butResetCharts.setContentAreaFilled(false);
+        butResetCharts.setFocusPainted(false);
+        butResetCharts.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butResetCharts.setEnabled(true);
+
         buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
         buttonsPanelLeft.add(butEnrichmentMap);
+        buttonsPanelLeft.add(butDrawCharts);
+        buttonsPanelLeft.add(butResetCharts);
 
         // Add enrichment map button here if EnrichmentMap is loaded
 
@@ -265,6 +316,9 @@ public class EnrichmentCytoPanel extends JPanel
          */
         JPanel buttonsPanelCenter = new JPanel();
         buttonsPanelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+
+        if (network != null && (ModelUtils.getNetGeneIDColumn(network) == null || ModelUtils.getNetOrganism(network) == null))
+            taskManager.execute(new TaskIterator(new OrganismAndGeneIdAssertionTask()));
 
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
@@ -303,6 +357,7 @@ public class EnrichmentCytoPanel extends JPanel
         butExportTable.setEnabled(false);
         butFilter.setEnabled(false);
         butEnrichmentMap.setEnabled(false);
+        butDrawCharts.setEnabled(false);
 
         butAdvancedOptions = new JButton(IconManager.ICON_COG);
         butAdvancedOptions.setFont(iconFont);
@@ -313,8 +368,19 @@ public class EnrichmentCytoPanel extends JPanel
         butAdvancedOptions.setFocusPainted(false);
         butAdvancedOptions.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
+        butChartSettings = new JButton(IconManager.ICON_COG);
+        butChartSettings.setFont(iconFont);
+        butChartSettings.addActionListener(this);
+        butChartSettings.setToolTipText(butChartSettingsName);
+        butChartSettings.setBorderPainted(false);
+        butChartSettings.setContentAreaFilled(false);
+        butChartSettings.setFocusPainted(false);
+        butChartSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butChartSettings.setEnabled(true);
+
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butAdvancedOptions);
+        buttonsPanelRight.add(butChartSettings);
         topPanel = new JPanel(new BorderLayout());
         topPanel.add(buttonsPanelLeft, BorderLayout.WEST);
         topPanel.add(buttonsPanelCenter, BorderLayout.CENTER);
@@ -346,6 +412,8 @@ public class EnrichmentCytoPanel extends JPanel
         buttonsPanelLeft.add(butRunProfiler);
         buttonsPanelLeft.add(butFilter);
         buttonsPanelLeft.add(butEnrichmentMap);
+        buttonsPanelLeft.add(butDrawCharts);
+        buttonsPanelLeft.add(butResetCharts);
 
         // Add enrichment map button here if EnrichmentMap is loaded
 
@@ -354,6 +422,9 @@ public class EnrichmentCytoPanel extends JPanel
          */
         JPanel buttonsPanelCenter = new JPanel();
         buttonsPanelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+
+        if (network != null && (ModelUtils.getNetGeneIDColumn(network) == null || ModelUtils.getNetOrganism(network) == null))
+            taskManager.execute(new TaskIterator(new OrganismAndGeneIdAssertionTask()));
 
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
@@ -401,11 +472,24 @@ public class EnrichmentCytoPanel extends JPanel
         butAdvancedOptions.setFocusPainted(false);
         butAdvancedOptions.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
 
+        butChartSettings = new JButton(IconManager.ICON_PIE_CHART);
+        butChartSettings.setFont(iconFont);
+        butChartSettings.addActionListener(this);
+        butChartSettings.setToolTipText(butChartSettingsName);
+        butChartSettings.setBorderPainted(false);
+        butChartSettings.setContentAreaFilled(false);
+        butChartSettings.setFocusPainted(false);
+        butChartSettings.setBorder(BorderFactory.createEmptyBorder(2,4,2,10));
+        butChartSettings.setEnabled(true);
+
         buttonsPanelRight.add(butExportTable);
         buttonsPanelRight.add(butAdvancedOptions);
+        buttonsPanelRight.add(butChartSettings);
 
         butExportTable.setEnabled(true);
         butFilter.setEnabled(true);
+        butDrawCharts.setEnabled(true);
+        butResetCharts.setEnabled(true);
 
         JPanel labelPanel = new JPanel();
         JPanel labelAndButtonPanelRight = new JPanel();
@@ -444,7 +528,6 @@ public class EnrichmentCytoPanel extends JPanel
                 tableManager.addTable(enrichmentTable);
             }
             createJTable(enrichmentTable);
-            System.out.println("Table model: " + tableModel.getColumnCount());
             // Check if values are git mbeing received correctly
             List<CyRow> rows = enrichmentTable.getAllRows();
             availableTables.add(enrichmentTable.getTitle());
@@ -493,9 +576,9 @@ public class EnrichmentCytoPanel extends JPanel
                 };
             }
         };
-        jTable.getColumnModel().getColumn(12).setMinWidth(0);
-        jTable.getColumnModel().getColumn(12).setMaxWidth(0);
-        jTable.getColumnModel().getColumn(12).setWidth(0);
+        jTable.getColumnModel().getColumn(13).setMinWidth(0);
+        jTable.getColumnModel().getColumn(13).setMaxWidth(0);
+        jTable.getColumnModel().getColumn(13).setWidth(0);
 
         // Hide evidence code column
         jTable.getColumn(EnrichmentTerm.colGenesEvidenceCode).setMinWidth(0);
@@ -621,11 +704,10 @@ public class EnrichmentCytoPanel extends JPanel
             if (enrichmentTable.getColumn(EnrichmentTerm.colName) != null
                     && row.get(EnrichmentTerm.colName, String.class) != null
                     && row.get(EnrichmentTerm.colName, String.class).equals(termName)) {
-                //   row.set(EnrichmentTerm.colChartColor, "");
+                row.set(EnrichmentTerm.colChartColor, "");
             }
         }
         tableModel.fireTableDataChanged();
-
     }
 
 
@@ -783,6 +865,25 @@ public class EnrichmentCytoPanel extends JPanel
                 cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
     }
 
+    public void drawCharts() {
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        if (network == null)
+            return;
+
+        ViewUtils.resetCharts(applicationManager, registrar, tableModel);
+        Map<EnrichmentTerm, String> preselectedTerms = getUserSelectedTerms();
+        if (preselectedTerms.size() == 0) {
+            preselectedTerms = getAutoSelectedTopTerms(SessionUtils.getTopTerms(network, filteredEnrichmentTable));
+        }
+        ViewUtils.drawCharts(applicationManager, registrar, preselectedTerms, SessionUtils.getChartType(network,
+                filteredEnrichmentTable));
+        isChartEnabled = true;
+    }
+
+    public boolean getIsChartEnabled() {
+        return isChartEnabled;
+    }
+
     private boolean isEnrichmentMapInstalled() {
         return availableCommands.getNamespaces().contains("enrichmentmap");
     }
@@ -814,5 +915,70 @@ public class EnrichmentCytoPanel extends JPanel
             return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
                     column);
         }
+    }
+
+    private Map<EnrichmentTerm, String> getUserSelectedTerms() {
+        Map<EnrichmentTerm, String> selectedTerms = new LinkedHashMap<EnrichmentTerm, String>();
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        if (network == null)
+            return selectedTerms;
+
+        CyTable currTable = getFilteredTable();
+        if (currTable == null || currTable.getRowCount() == 0) {
+            return selectedTerms;
+        }
+        for (CyRow row : currTable.getAllRows()) {
+            if (currTable.getColumn(EnrichmentTerm.colChartColor) != null
+                    && row.get(EnrichmentTerm.colChartColor, String.class) != null
+                    && !row.get(EnrichmentTerm.colChartColor, String.class).equals("")
+                    && !row.get(EnrichmentTerm.colChartColor, String.class).equals("#ffffff")) {
+                System.out.println("Set color");
+                String selTerm = row.get(EnrichmentTerm.colName, String.class);
+                if (selTerm != null) {
+                    EnrichmentTerm enrTerm = new EnrichmentTerm(selTerm,
+                            row.get(EnrichmentTerm.colDescription, String.class),
+                            row.get(EnrichmentTerm.colSource, String.class),
+                            row.get(EnrichmentTerm.colPvalue, Double.class));
+                    enrTerm.setNodesSUID(row.getList(EnrichmentTerm.colGenesSUID, Long.class));
+                    selectedTerms.put(enrTerm, row.get(EnrichmentTerm.colChartColor, String.class));
+                }
+            }
+        }
+        return selectedTerms;
+    }
+
+    private Map<EnrichmentTerm, String> getAutoSelectedTopTerms(int termNumber) {
+        Map<EnrichmentTerm, String> selectedTerms = new LinkedHashMap<EnrichmentTerm, String>();
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        if (network == null || tableModel == null)
+            return selectedTerms;
+
+        CyTable currTable = ModelUtils.getEnrichmentTable(registrar, network,
+                TermSource.ALL.getTable());;
+        if (currTable == null || currTable.getRowCount() == 0) {
+            return selectedTerms;
+        }
+
+        Color[] colors = ViewUtils.getEnrichmentPalette(network, filteredEnrichmentTable, registrar).getColors(termNumber);
+        Long[] rowNames = tableModel.getRowNames();
+        for (int i = 0; i < termNumber; i++) {
+            if (i >= rowNames.length)
+                continue;
+            CyRow row = currTable.getRow(rowNames[i]);
+            String selTerm = row.get(EnrichmentTerm.colName, String.class);
+            if (selTerm != null) {
+                EnrichmentTerm enrTerm = new EnrichmentTerm(selTerm,
+                        row.get(EnrichmentTerm.colDescription, String.class),
+                        row.get(EnrichmentTerm.colSource, String.class),
+                        row.get(EnrichmentTerm.colPvalue, Double.class));
+                enrTerm.setNodesSUID(row.getList(EnrichmentTerm.colGenesSUID, Long.class));
+                String color = String.format("#%02x%02x%02x", colors[i].getRed(), colors[i].getGreen(),
+                        colors[i].getBlue());
+                row.set(EnrichmentTerm.colChartColor, color);
+                selectedTerms.put(enrTerm, color);
+            }
+        }
+        tableModel.fireTableDataChanged();
+        return selectedTerms;
     }
 }
