@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Github Action to update JAR
 
 on:
   push:
