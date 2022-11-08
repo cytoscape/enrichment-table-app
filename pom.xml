@@ -88,43 +88,44 @@
 
     <!-- Links to the Cytoscape Maven repositories. -->
     <repositories>
-        <repository>
-            <id>cytoscape_snapshots</id>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <name>Cytoscape Snapshots</name>
-            <url>https://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
-        </repository>
-        <repository>
-            <id>cytoscape_releases</id>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <name>Cytoscape Releases</name>
-            <url>https://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
-        </repository>
-        <repository>
-            <id>Maven Central</id>
-            <url>http://repo1.maven.org/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>apache-repo-releases</id>
-            <url>https://repository.apache.org/content/repositories/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
+		<repository>
+			<id>cytoscape_releases</id>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<name>Cytoscape Releases</name>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
+		</repository>
+		<repository>
+			<id>cytoscape_snapshots</id>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<name>Cytoscape Snapshots</name>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
+		</repository>
+
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>cytoscape_releases</id>
+			<name>Cytoscape Releases</name>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>cytoscape_snapshots</id>
+			<name>Cytoscape Snapshots</name>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+  
     <dependencies>
 
         <!-- Cytoscape stuff -->
