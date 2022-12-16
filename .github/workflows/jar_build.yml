@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build Package
-      run: mvn -B package --file pom.xml
+      run: mvn install
     - name: Replace JAR
       run: |
             rm ./*.jar
