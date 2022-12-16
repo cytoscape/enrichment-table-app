@@ -1,5 +1,9 @@
 package org.nrnb.gsoc.enrichment.ui;
 
+import static javax.swing.GroupLayout.DEFAULT_SIZE;
+import static javax.swing.GroupLayout.PREFERRED_SIZE;
+import static javax.swing.GroupLayout.Alignment.CENTER;
+
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
@@ -123,6 +127,11 @@ public class EnrichmentCytoPanel extends JPanel
     private final TaskManager<?, ?> taskManager;
     private boolean isChartEnabled = false;
 
+        private JPanel emptyPanel;
+        private final JLabel emptyLabel = new JLabel("Load a network");
+        private JPanel reloadPanel;
+        private final JLabel reloadIconLabel = new JLabel();
+        private final JLabel reloadLabel = new JLabel("Click reload icon");
 
     public EnrichmentCytoPanel(CyServiceRegistrar registrar, boolean noSignificant, JSONObject result) {
         this.registrar = registrar;
@@ -387,8 +396,11 @@ public class EnrichmentCytoPanel extends JPanel
         topPanel.add(buttonsPanelRight, BorderLayout.EAST);
         // topPanel.add(boxTables, BorderLayout.EAST);
         this.add(topPanel, BorderLayout.NORTH);
-        if (network == null)
+        if (network == null){
+	    mainPanel = getEmptyPanel();
+            this.add(mainPanel, BorderLayout.CENTER);
             return;
+	}
         initPanel(network, noSignificant);
     }
 
@@ -508,19 +520,14 @@ public class EnrichmentCytoPanel extends JPanel
 
         if (noSignificant) {
             mainPanel = new JPanel(new BorderLayout());
-            JLabel label = new JLabel("Enrichment retrieval returned no results that met the criteria. Click on the gear icon to check settings.",
+            JLabel label = new JLabel("Enrichment returned no results that met the criteria. Click on the gear icon to check settings.",
                     SwingConstants.CENTER);
             mainPanel.add(label, BorderLayout.CENTER);
             this.add(mainPanel, BorderLayout.CENTER);
         } else if (availableTables.size() == 0) {
-            mainPanel = new JPanel(new BorderLayout());
-            JLabel label = new JLabel("No enrichment has been retrieved for this network. Click the cycle icon to perform an analysis.",
-                    SwingConstants.CENTER);
-            mainPanel.add(label, BorderLayout.CENTER);
+	    mainPanel = getReloadPanel();
             this.add(mainPanel, BorderLayout.CENTER);
         } else {
-
-
             if(enrichmentTable==null){
                 CyTableManager tableManager = registrar.getService(CyTableManager.class);
                 tableFactory = registrar.getService(CyTableFactory.class);
@@ -528,7 +535,7 @@ public class EnrichmentCytoPanel extends JPanel
                 tableManager.addTable(enrichmentTable);
             }
             createJTable(enrichmentTable);
-            // Check if values are git mbeing received correctly
+            // Check if values are being received correctly
             List<CyRow> rows = enrichmentTable.getAllRows();
             availableTables.add(enrichmentTable.getTitle());
             /**
@@ -554,6 +561,86 @@ public class EnrichmentCytoPanel extends JPanel
         this.revalidate();
         this.repaint();
     }
+
+        private JPanel getEmptyPanel() {
+                if (emptyPanel == null) {
+                        emptyPanel = new JPanel();
+                        emptyPanel.setBackground(UIManager.getColor("Table.background"));
+
+                        var fg = UIManager.getColor("Label.disabledForeground");
+                        fg = new Color(fg.getRed(), fg.getGreen(), fg.getBlue(), 120);
+
+                        emptyPanel.setBorder(BorderFactory.createCompoundBorder(
+                                        BorderFactory.createEmptyBorder(3, 3, 3, 3),
+                                        BorderFactory.createDashedBorder(fg, 2, 2, 2, true)
+                        ));
+
+                        emptyLabel.setFont(emptyLabel.getFont().deriveFont(18.0f).deriveFont(Font.BOLD));
+                        emptyLabel.setForeground(fg);
+
+                        var layout = new GroupLayout(emptyPanel);
+                        emptyPanel.setLayout(layout);
+                        layout.setAutoCreateContainerGaps(false);
+                        layout.setAutoCreateGaps(false);
+
+                        layout.setHorizontalGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(CENTER, true)
+                                                        .addComponent(emptyLabel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+                                        )
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                        );
+                        layout.setVerticalGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(emptyLabel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                        );
+                }
+
+                return emptyPanel;
+        }
+
+        private JPanel getReloadPanel() {
+                if (reloadPanel == null) {
+                        reloadPanel = new JPanel();
+                        reloadPanel.setBackground(UIManager.getColor("Table.background"));
+
+                        var fg = UIManager.getColor("Label.disabledForeground");
+                        fg = new Color(fg.getRed(), fg.getGreen(), fg.getBlue(), 120);
+
+                        reloadPanel.setBorder(BorderFactory.createCompoundBorder(
+                                        BorderFactory.createEmptyBorder(3, 3, 3, 3),
+                                        BorderFactory.createDashedBorder(fg, 2, 2, 2, true)
+                        ));
+                        reloadIconLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("/images/reload-table-56.png")));
+                        reloadIconLabel.setForeground(fg);
+
+                        reloadLabel.setFont(reloadLabel.getFont().deriveFont(18.0f).deriveFont(Font.BOLD));
+                        reloadLabel.setForeground(fg);
+
+                        var layout = new GroupLayout(reloadPanel);
+                        reloadPanel.setLayout(layout);
+                        layout.setAutoCreateContainerGaps(false);
+                        layout.setAutoCreateGaps(false);
+
+                        layout.setHorizontalGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(CENTER, true)
+                                                        .addComponent(reloadIconLabel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+                                                        .addComponent(reloadLabel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+                                        )
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                        );
+                        layout.setVerticalGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(reloadIconLabel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+                                        .addComponent(reloadLabel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                        );
+                }
+
+                return reloadPanel;
+        }
 
     /**
      * @description Creates the settings table
