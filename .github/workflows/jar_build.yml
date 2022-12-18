@@ -31,12 +31,8 @@ jobs:
       run: mvn install
     - name: Replace JAR
       run: |
-            rm ./*.jar
-            APP_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-            echo APP_VERSION $APP_VERSION
-            APP_NAME=EnrichmentTable-v$APP_VERSION
-            echo APP_NAME $APP_NAME
-            cp ./target/EnrichmentTable-v* ./$APP_NAME.jar
+            rm -f ./*.jar
+            cp ./target/*.jar ./.
     - uses: stefanzweifel/git-auto-commit-action@v4  
       with:
         commit_message: Auto update JAR
