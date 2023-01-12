@@ -77,6 +77,8 @@ public class CyActivator extends AbstractCyActivator {
 
 		if (cytoPanel.getState() == CytoPanelState.HIDE)
 			cytoPanel.setState(CytoPanelState.DOCK);
+		cytoPanel.setSelectedIndex(
+				cytoPanel.indexOfComponent("org.cytoscape.NodeTables"));
 		TaskFactory myFactory = new EnrichmentTaskFactory(registrar,enrichmentPanel); // Implementation
 		registerService(context, myFactory,
 				TaskFactory.class, // Interface

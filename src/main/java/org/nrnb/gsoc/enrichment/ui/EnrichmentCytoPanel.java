@@ -926,7 +926,7 @@ public class EnrichmentCytoPanel extends JPanel
         if (cytoPanel.getState() == CytoPanelState.HIDE)
             cytoPanel.setState(CytoPanelState.DOCK);
         cytoPanel.setSelectedIndex(
-                cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+                cytoPanel.indexOfComponent("org.cytoscape.NodeTables"));
     }
 
     public void handleEvent(SessionLoadedEvent arg0) {
