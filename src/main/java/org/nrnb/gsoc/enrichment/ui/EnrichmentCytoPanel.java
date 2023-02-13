@@ -333,7 +333,7 @@ public class EnrichmentCytoPanel extends JPanel
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setOrganism(network);
-            final String currentOrganism = ModelUtils.getNetOrganism(network);
+            final String currentOrganism = OrganismAndGeneIdAssertionTask.getOrganismPrediction();
             final String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
             organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
         }
@@ -342,7 +342,7 @@ public class EnrichmentCytoPanel extends JPanel
             geneIdSelect = new JLabel("Gene ID column: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setGeneId(network, registrar);
-            geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
+            geneIdSelect = new JLabel("Gene ID column: " +  OrganismAndGeneIdAssertionTask.getGeneIdPrediction(), JLabel.LEFT);
         }
         geneIdSelect.setToolTipText(geneIdSelectTip);
 
@@ -441,17 +441,17 @@ public class EnrichmentCytoPanel extends JPanel
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
         } else {
-            OrganismAndGeneIdAssertionTask.setOrganism(network);
-            String currentOrganism = ModelUtils.getNetOrganism(network);
-            String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
-            organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
+          OrganismAndGeneIdAssertionTask.setOrganism(network);
+          final String currentOrganism = OrganismAndGeneIdAssertionTask.getOrganismPrediction();
+          final String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
+          organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
         }
         organismSelect.setToolTipText(organismSelectTip);
         if(network == null){
             geneIdSelect = new JLabel("Gene ID column: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setGeneId(network, registrar);
-            geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
+            geneIdSelect = new JLabel("Gene ID column: " + OrganismAndGeneIdAssertionTask.getGeneIdPrediction(), JLabel.LEFT);
         }
         geneIdSelect.setToolTipText(geneIdSelectTip);
 

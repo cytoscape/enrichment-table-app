@@ -60,7 +60,7 @@ public class ModelUtils {
     public static String NET_USER_THRESHOLD = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR +  "User Threshold";
     public static String  NET_ALL_RESULTS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "All Results";
     public static String  NET_MEASURE_UNDERREPRESENTATION = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "Measure Underrepresentation";
-    
+
     public static String NET_ENRICHMENT_VISTEMRS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "visualizedTerms";
     public static String NET_ENRICHMENT_VISCOLORS = ENRICHMENT_NAMESPACE + NAMESPACE_SEPARATOR + "visualizedTermsColors";
 
