@@ -25,9 +25,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
 
     private static final Logger logger = Logger.getLogger(CyUserLog.NAME);
     private static final Map<String,String> scientificNameToID = ModelUtils.getOrganisms();
-    private static String initialOrganism = "hsapiens";
-    private static String geneId = "";
-
+    private static String initialOrganism;
 
     public OrganismAndGeneIdAssertionTask() {
     }
@@ -43,12 +41,8 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
      */
 
     public static String getOrganismPrediction() {
-         return initialOrganism;
-     }
-
-     public static String getGeneIdPrediction() {
-          return geneId;
-      }
+       return initialOrganism;
+        }
 
     public static void setOrganism(final CyNetwork currentNetwork) {
         if (currentNetwork == null) {
@@ -63,6 +57,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
             return;
         }
 
+        initialOrganism = "hsapiens";
         // Getting information from other parameters in current network
         OrganismNetworkEntry[] otherNetworks = OrganismNetworkEntry.values();
         ArrayList<String> otherNetworkParameters = new ArrayList<>();
@@ -115,14 +110,14 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
         }
 
         // Get current geneID from network if present
-        geneId = ModelUtils.getNetGeneIDColumn(network);
+        String geneId = ModelUtils.getNetGeneIDColumn(network);
         if (geneId != null) return;
 
         // Predict gene id by network type
         geneId = getGeneIdFromNetworkName(network);
 
         if (geneId != null) {
-            //ModelUtils.setNetGeneIDColumn(network, geneId);
+            ModelUtils.setNetGeneIDColumn(network, geneId);
             logger.info("[Enrichment Table] Using column [" + geneId + "] for enrichment ");
         }
         else {
@@ -137,7 +132,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
                         visualStyle.getVisualMappingFunction(BasicVisualLexicon.NODE_LABEL);
                 if (mappingFunction != null) {
                     isGeneSetFromStyle = true;
-                    geneId = mappingFunction.getMappingColumnName();
+                    ModelUtils.setNetGeneIDColumn(network, mappingFunction.getMappingColumnName());
                     logger.info("[Enrichment Table] Using column [" + mappingFunction.getMappingColumnName()
                             + "] for enrichment ");
                     break;
@@ -145,7 +140,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
             }
 
             if (!isGeneSetFromStyle) {
-                geneId = "name";
+                ModelUtils.setNetGeneIDColumn(network, "name");
                 logger.info("[Enrichment Table] Using default column [name] for enrichment ");
             }
         }
