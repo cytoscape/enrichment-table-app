@@ -329,11 +329,17 @@ public class EnrichmentCytoPanel extends JPanel
         if (network != null && (ModelUtils.getNetGeneIDColumn(network) == null || ModelUtils.getNetOrganism(network) == null))
             taskManager.execute(new TaskIterator(new OrganismAndGeneIdAssertionTask()));
 
+       String currentOrganism;
+
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setOrganism(network);
-            String currentOrganism = OrganismAndGeneIdAssertionTask.getOrganismPrediction();
+            if (ModelUtils.getNetOrganism(network)==null){
+               currentOrganism =  OrganismAndGeneIdAssertionTask.getOrganismPrediction();
+            } else {
+               currentOrganism = ModelUtils.getNetOrganism(network);
+            }
             String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
             organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
         }
@@ -438,11 +444,17 @@ public class EnrichmentCytoPanel extends JPanel
         if (network != null && (ModelUtils.getNetGeneIDColumn(network) == null || ModelUtils.getNetOrganism(network) == null))
             taskManager.execute(new TaskIterator(new OrganismAndGeneIdAssertionTask()));
 
+        String currentOrganism;
+        
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setOrganism(network);
-            String currentOrganism = OrganismAndGeneIdAssertionTask.getOrganismPrediction();
+            if (ModelUtils.getNetOrganism(network)==null){
+               currentOrganism =  OrganismAndGeneIdAssertionTask.getOrganismPrediction();
+            } else {
+               currentOrganism = ModelUtils.getNetOrganism(network);
+            }
             String actualName = OrganismAndGeneIdAssertionTask.getActualNameFromCodeName(currentOrganism);
             organismSelect = new JLabel("Organism: " + actualName, JLabel.LEFT);
         }

@@ -398,6 +398,11 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		} else{
 			ModelUtils.setNetSignificanceThresholdMethod(network,significance_threshold_method);
 		}
+    if (ModelUtils.getNetOrganism(network)==null){
+		ModelUtils.setNetOrganism(network, OrganismAndGeneIdAssertionTask.getOrganismPrediction());
+		} else{
+		ModelUtils.setNetOrganism(network, ModelUtils.getNetOrganism(network));
+		}
 
 		return parameters;
 	}
