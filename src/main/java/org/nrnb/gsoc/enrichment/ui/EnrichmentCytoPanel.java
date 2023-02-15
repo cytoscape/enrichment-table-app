@@ -348,7 +348,7 @@ public class EnrichmentCytoPanel extends JPanel
             geneIdSelect = new JLabel("Gene ID column: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setGeneId(network, registrar);
-            geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
+            geneIdSelect = new JLabel("Gene ID column: " + OrganismAndGeneIdAssertionTask.getGeneIdPrediction(), JLabel.LEFT);
         }
         geneIdSelect.setToolTipText(geneIdSelectTip);
 
@@ -445,7 +445,7 @@ public class EnrichmentCytoPanel extends JPanel
             taskManager.execute(new TaskIterator(new OrganismAndGeneIdAssertionTask()));
 
         String currentOrganism;
-        
+
         if(network == null){
             organismSelect = new JLabel("Organism: null", JLabel.LEFT);
         } else {
@@ -463,7 +463,7 @@ public class EnrichmentCytoPanel extends JPanel
             geneIdSelect = new JLabel("Gene ID column: null", JLabel.LEFT);
         } else {
             OrganismAndGeneIdAssertionTask.setGeneId(network, registrar);
-            geneIdSelect = new JLabel("Gene ID column: " + ModelUtils.getNetGeneIDColumn(network), JLabel.LEFT);
+            geneIdSelect = new JLabel("Gene ID column: " + OrganismAndGeneIdAssertionTask.getGeneIdPrediction(), JLabel.LEFT);
         }
         geneIdSelect.setToolTipText(geneIdSelectTip);
 

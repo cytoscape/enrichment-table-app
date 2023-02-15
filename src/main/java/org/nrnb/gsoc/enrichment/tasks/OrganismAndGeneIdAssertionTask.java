@@ -26,6 +26,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
     private static final Logger logger = Logger.getLogger(CyUserLog.NAME);
     private static final Map<String,String> scientificNameToID = ModelUtils.getOrganisms();
     private static String initialOrganism;
+    private static String geneId;
 
     public OrganismAndGeneIdAssertionTask() {
     }
@@ -42,6 +43,10 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
 
     public static String getOrganismPrediction() {
        return initialOrganism;
+        }
+
+    public static String getGeneIdPrediction() {
+       return geneId;
         }
 
     public static void setOrganism(final CyNetwork currentNetwork) {
@@ -110,14 +115,14 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
         }
 
         // Get current geneID from network if present
-        String geneId = ModelUtils.getNetGeneIDColumn(network);
+        geneId = ModelUtils.getNetGeneIDColumn(network);
         if (geneId != null) return;
 
         // Predict gene id by network type
         geneId = getGeneIdFromNetworkName(network);
 
         if (geneId != null) {
-            ModelUtils.setNetGeneIDColumn(network, geneId);
+            //ModelUtils.setNetGeneIDColumn(network, geneId);
             logger.info("[Enrichment Table] Using column [" + geneId + "] for enrichment ");
         }
         else {
@@ -132,7 +137,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
                         visualStyle.getVisualMappingFunction(BasicVisualLexicon.NODE_LABEL);
                 if (mappingFunction != null) {
                     isGeneSetFromStyle = true;
-                    ModelUtils.setNetGeneIDColumn(network, mappingFunction.getMappingColumnName());
+                    geneId = mappingFunction.getMappingColumnName();
                     logger.info("[Enrichment Table] Using column [" + mappingFunction.getMappingColumnName()
                             + "] for enrichment ");
                     break;
@@ -140,7 +145,7 @@ public class OrganismAndGeneIdAssertionTask extends AbstractTask {
             }
 
             if (!isGeneSetFromStyle) {
-                ModelUtils.setNetGeneIDColumn(network, "name");
+                geneId = "name";
                 logger.info("[Enrichment Table] Using default column [name] for enrichment ");
             }
         }

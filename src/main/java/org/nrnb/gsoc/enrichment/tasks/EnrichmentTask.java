@@ -186,6 +186,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				} else {
 					if(ModelUtils.getNetGeneIDColumn(network)==null){
 						canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(CyNetwork.NAME, String.class);
+						geneID = OrganismAndGeneIdAssertionTask.getGeneIdPrediction();
 					} else{
 						canonicalName = network.getDefaultNodeTable().getRow(node.getSUID()).get(ModelUtils.getNetGeneIDColumn(network), String.class);
 						geneID = ModelUtils.getNetGeneIDColumn(network);
@@ -236,7 +237,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			logger.warn("No Gene ID selected. name selected as default.");
 		}
 		logger.info("Sending request to GProfiler for enrichment. Parameters set are: Organism: "
-				+ (organism == null ? "hsapiens" : organism) + ", Gene ID: " + (geneID == null ? CyNetwork.NAME : geneID));
+				+ (organism == null ? "hsapiens" : organism) + ", Gene ID: " + (geneID == null ? OrganismAndGeneIdAssertionTask.getGeneIdPrediction() : geneID));
 		JSONObject result = requestEngine.makePostRequest(network,"gost/profile/",parameters,monitor,nodeList.isEmpty());
 		StringBuffer responseBuffer = new StringBuffer("");
 		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
@@ -363,8 +364,8 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 				parameters.put("organism", ModelUtils.getNetOrganism(network));
 				organism = ModelUtils.getNetOrganism(network);
 			} else{
-				parameters.put("organism","hsapiens");
-				logger.warn("No organism selected. hsapiens selected as default.");
+				parameters.put("organism", OrganismAndGeneIdAssertionTask.getOrganismPrediction());
+				organism =  OrganismAndGeneIdAssertionTask.getOrganismPrediction();
 			}
 		}
 		if(query==null){
@@ -402,6 +403,12 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 		ModelUtils.setNetOrganism(network, OrganismAndGeneIdAssertionTask.getOrganismPrediction());
 		} else{
 		ModelUtils.setNetOrganism(network, ModelUtils.getNetOrganism(network));
+		}
+
+		if (ModelUtils.getNetGeneIDColumn(network)==null){
+		ModelUtils.setNetGeneIDColumn(network, OrganismAndGeneIdAssertionTask.getGeneIdPrediction());
+		} else{
+		ModelUtils.setNetGeneIDColumn(network, ModelUtils.getNetGeneIDColumn(network));
 		}
 
 		return parameters;
