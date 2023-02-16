@@ -95,7 +95,7 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
         if(ModelUtils.getNetGeneIDColumn(network)!=null){
             geneID.setSelectedValue(ModelUtils.getNetGeneIDColumn(network));
         } else{
-            geneID.setSelectedValue("name");
+            geneID.setSelectedValue(OrganismAndGeneIdAssertionTask.getGeneIdPrediction());
         }
         //ModelUtils.setNetGeneIDColumn(network,"name");
         significance_threshold_method = new ListSingleSelection<String>(new ArrayList<String>(){
@@ -164,8 +164,13 @@ public class EnrichmentAdvancedOptionsTask extends AbstractTask implements Obser
     private void setOrganism(final CyNetwork network) {
         // Setting values to list selection
         this.scientificNametoID = ModelUtils.getOrganisms();
+        String currentOrganism;
         List<String> speciesList = new ArrayList<>();
-        String currentOrganism = ModelUtils.getNetOrganism(network);
+        if (ModelUtils.getNetOrganism(network)!=null){
+            currentOrganism = ModelUtils.getNetOrganism(network);
+        } else {
+            currentOrganism = OrganismAndGeneIdAssertionTask.getOrganismPrediction();
+        }
         displayValue = currentOrganism;
         System.out.println("Display Value: " + displayValue);
 
