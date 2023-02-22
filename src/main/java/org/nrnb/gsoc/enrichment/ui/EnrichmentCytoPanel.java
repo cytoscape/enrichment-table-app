@@ -16,6 +16,7 @@ import org.cytoscape.model.events.*;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.util.swing.CyColorPaletteChooserFactory;
 import org.cytoscape.util.swing.IconManager;
+import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedEvent;
@@ -104,8 +105,7 @@ public class EnrichmentCytoPanel extends JPanel
             EnrichmentCytoPanel.class.getResource("/images/chart20.png"));
     final Font iconFont;
     final CyServiceRegistrar registrar;
-    private static final Icon icon = new ImageIcon(
-            EnrichmentCytoPanel.class.getResource("/images/enrichment-table14.png"));
+    private Icon icon;
     final CyApplicationManager applicationManager;
 
     final String butFilterName = "Filter enrichment table";
@@ -175,6 +175,11 @@ public class EnrichmentCytoPanel extends JPanel
 
     @Override
     public Icon getIcon() {
+    	if (icon == null) {
+			var font = registrar.getService(IconManager.class).getIconFont(14.0f);
+			icon = new TextIcon(IconManager.ICON_REFRESH, font, 16, 16);
+    	}
+    	
         return icon;
     }
 
