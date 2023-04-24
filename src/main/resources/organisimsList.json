@@ -1,0 +1,6134 @@
+[
+  {
+    "display_name": "Daucus carota",
+    "id": "dcarota",
+    "scientific_name": "Daucus carota subsp. sativus",
+    "taxonomy_id": "79200",
+    "version": "ASM162521v1"
+  },
+  {
+    "display_name": "Bombus terrestris",
+    "id": "bterrestris",
+    "scientific_name": "Bombus terrestris",
+    "taxonomy_id": "30195",
+    "version": "Bter_1.0"
+  },
+  {
+    "display_name": "Teladorsagia circumcincta (PRJNA72569)",
+    "id": "tecircprjna72569",
+    "scientific_name": "Teladorsagia circumcincta",
+    "taxonomy_id": "45464",
+    "version": "T_circumcincta.14.0.ec.cg.pg (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Ananas comosus",
+    "id": "acomosus",
+    "scientific_name": "Ananas comosus",
+    "taxonomy_id": "4615",
+    "version": "F153"
+  },
+  {
+    "display_name": "Triticum aestivum Weebill",
+    "id": "taweebil",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "EI_WeebilV1"
+  },
+  {
+    "display_name": "Juglans regia",
+    "id": "jregia",
+    "scientific_name": "Juglans regia",
+    "taxonomy_id": "51240",
+    "version": "Walnut_2.0"
+  },
+  {
+    "display_name": "Angiostrongylus cantonensis (PRJEB493)",
+    "id": "ancantprjeb493",
+    "scientific_name": "Angiostrongylus cantonensis",
+    "taxonomy_id": "6313",
+    "version": "A_cantonensis_Taipei_v1_5_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Bactrocera latifrons (Solanum fruit fly, USDA-ARS-PBARC rearing strain) - GCA_001853355.1",
+    "id": "blgca001853355v1",
+    "scientific_name": "Bactrocera latifrons",
+    "taxonomy_id": "174628",
+    "version": "GCA001853355v1"
+  },
+  {
+    "display_name": "Lamprey",
+    "id": "pmarinus",
+    "scientific_name": "Petromyzon marinus",
+    "taxonomy_id": "7757",
+    "version": "Pmarinus_7.0"
+  },
+  {
+    "display_name": "Trichinella murrelli (PRJNA257433)",
+    "id": "trmurrprjna257433",
+    "scientific_name": "Trichinella murrelli",
+    "taxonomy_id": "144512",
+    "version": "T5_ISS417_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Pyrenophora teres",
+    "id": "pteres",
+    "scientific_name": "Pyrenophora teres f. teres 0-1",
+    "taxonomy_id": "861557",
+    "version": "PyrTer_1.0"
+  },
+  {
+    "display_name": "Sailfin molly",
+    "id": "platipinna",
+    "scientific_name": "Poecilia latipinna",
+    "taxonomy_id": "48699",
+    "version": "P_latipinna-1.0"
+  },
+  {
+    "display_name": "Cajanus cajan (pigeon pea) - GCA_000340665.1",
+    "id": "ccajan",
+    "scientific_name": "Cajanus cajan",
+    "taxonomy_id": "3821",
+    "version": "C.cajan_V1.0"
+  },
+  {
+    "display_name": "C.intestinalis",
+    "id": "cintestinalis",
+    "scientific_name": "Ciona intestinalis",
+    "taxonomy_id": "7719",
+    "version": "KH"
+  },
+  {
+    "display_name": "Hermetia illucens (Black soldier fly) - GCA_905115235.1",
+    "id": "higca905115235v1",
+    "scientific_name": "Hermetia illucens",
+    "taxonomy_id": "343691",
+    "version": "GCA905115235v1"
+  },
+  {
+    "display_name": "Caenorhabditis nigoni (PRJNA384657)",
+    "id": "canigoprjna384657",
+    "scientific_name": "Caenorhabditis nigoni",
+    "taxonomy_id": "1611254",
+    "version": "nigoni.pc_2016.07.14 (2018-01-WormBase)"
+  },
+  {
+    "display_name": "Steinernema carpocapsae (PRJNA202318)",
+    "id": "stcarpprjna202318",
+    "scientific_name": "Steinernema carpocapsae",
+    "taxonomy_id": "34508",
+    "version": "ASM75764v3 (2020-04-WormBase)"
+  },
+  {
+    "display_name": "Atriophallophorus winterbourni (PRJNA636673)",
+    "id": "atwintprjna636673",
+    "scientific_name": "Atriophallophorus winterbourni",
+    "taxonomy_id": "2682772",
+    "version": "ASM1340708v1 (2021-03-WormBase)"
+  },
+  {
+    "display_name": "Golden Hamster",
+    "id": "mauratus",
+    "scientific_name": "Mesocricetus auratus",
+    "taxonomy_id": "10036",
+    "version": "MesAur1.0"
+  },
+  {
+    "display_name": "Nematostella vectensis",
+    "id": "nvectensis",
+    "scientific_name": "Nematostella vectensis",
+    "taxonomy_id": "45351",
+    "version": "ASM20922v1"
+  },
+  {
+    "display_name": "Parastrongyloides trichosuri (PRJEB515)",
+    "id": "patricprjeb515",
+    "scientific_name": "Parastrongyloides trichosuri",
+    "taxonomy_id": "131310",
+    "version": "P_trichosuri_KNP (2015-05-WormBase)"
+  },
+  {
+    "display_name": "Reedfish",
+    "id": "ecalabaricus",
+    "scientific_name": "Erpetoichthys calabaricus",
+    "taxonomy_id": "27687",
+    "version": "fErpCal1.1"
+  },
+  {
+    "display_name": "Anneissia japonica (Sea lily, Jap-2015-1) - GCA_011630105.1",
+    "id": "ajgca011630105v1",
+    "scientific_name": "Anneissia japonica",
+    "taxonomy_id": "1529436",
+    "version": "GCA011630105v1"
+  },
+  {
+    "display_name": "Vitis vinifera",
+    "id": "vvinifera",
+    "scientific_name": "Vitis vinifera",
+    "taxonomy_id": "29760",
+    "version": "PN40024.v4"
+  },
+  {
+    "display_name": "Lesser Egyptian jerboa",
+    "id": "jjaculus",
+    "scientific_name": "Jaculus jaculus",
+    "taxonomy_id": "51337",
+    "version": "JacJac1.0"
+  },
+  {
+    "display_name": "Anopheles atroparvus (EBRE) - GCA_914969975.1",
+    "id": "aagca914969975",
+    "scientific_name": "Anopheles atroparvus",
+    "taxonomy_id": "41427",
+    "version": "atroparvus_hifiasm_n225_277Mb"
+  },
+  {
+    "display_name": "Anopheles dirus",
+    "id": "adirus",
+    "scientific_name": "Anopheles dirus",
+    "taxonomy_id": "7168",
+    "version": "AdirW1"
+  },
+  {
+    "display_name": "Fusarium graminearum str. PH-1",
+    "id": "fgraminearum",
+    "scientific_name": "Fusarium graminearum",
+    "taxonomy_id": "5518",
+    "version": "RR1"
+  },
+  {
+    "display_name": "Blue-ringed sea krait",
+    "id": "llaticaudata",
+    "scientific_name": "Laticauda laticaudata",
+    "taxonomy_id": "8630",
+    "version": "latLat_1.0"
+  },
+  {
+    "display_name": "Thelazia callipaeda (PRJEB1205)",
+    "id": "thcallprjeb1205",
+    "scientific_name": "Thelazia callipaeda",
+    "taxonomy_id": "103827",
+    "version": "T_callipaeda_Ticino_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Zymoseptoria tritici",
+    "id": "ztritici",
+    "scientific_name": "Zymoseptoria tritici IPO323",
+    "taxonomy_id": "336722",
+    "version": "MG2"
+  },
+  {
+    "display_name": "Phytophthora lateralis",
+    "id": "plateralis",
+    "scientific_name": "Phytophthora lateralis MPF4",
+    "taxonomy_id": "1254522",
+    "version": "MPF4_v1.0"
+  },
+  {
+    "display_name": "Arabis alpina",
+    "id": "aalpina",
+    "scientific_name": "Arabis alpina",
+    "taxonomy_id": "50452",
+    "version": "A_alpina_V4"
+  },
+  {
+    "display_name": "Pig-tailed macaque",
+    "id": "mnemestrina",
+    "scientific_name": "Macaca nemestrina",
+    "taxonomy_id": "9545",
+    "version": "Mnem_1.0"
+  },
+  {
+    "display_name": "Lupinus angustifolius",
+    "id": "langustifolius",
+    "scientific_name": "Lupinus angustifolius",
+    "taxonomy_id": "3871",
+    "version": "LupAngTanjil_v1.0"
+  },
+  {
+    "display_name": "Solenopsis invicta (M01_SB)",
+    "id": "sinvicta",
+    "scientific_name": "Solenopsis invicta",
+    "taxonomy_id": "13686",
+    "version": "UNIL_Sinv_3.0"
+  },
+  {
+    "display_name": "Dimorphilus gyrociliatus (Segmented worms) - GCA_904063045.1",
+    "id": "dggca904063045v1",
+    "scientific_name": "Dimorphilus gyrociliatus",
+    "taxonomy_id": "2664684",
+    "version": "GCA904063045v1"
+  },
+  {
+    "display_name": "Lutzomyia longipalpis",
+    "id": "llongipalpis",
+    "scientific_name": "Lutzomyia longipalpis",
+    "taxonomy_id": "7200",
+    "version": "LlonJ1"
+  },
+  {
+    "display_name": "Elaeophora elaphi (PRJEB502)",
+    "id": "elelapprjeb502",
+    "scientific_name": "Elaeophora elaphi",
+    "taxonomy_id": "1147741",
+    "version": "E_elaphi_v1_0_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Bemisia tabaci (Uganda 1)",
+    "id": "btuganda1",
+    "scientific_name": "Bemisia tabaci",
+    "taxonomy_id": "7038",
+    "version": "Uganda1_n5713_630Mb"
+  },
+  {
+    "display_name": "Schistosoma haematobium (Urinary blood fluke) - GCA_000699445.2",
+    "id": "shgca000699445v2rs",
+    "scientific_name": "Schistosoma haematobium",
+    "taxonomy_id": "6185",
+    "version": "SchHae_2.0"
+  },
+  {
+    "display_name": "Alpine marmot",
+    "id": "mmmarmota",
+    "scientific_name": "Marmota marmota marmota",
+    "taxonomy_id": "9994",
+    "version": "marMar2.1"
+  },
+  {
+    "display_name": "Giant panda",
+    "id": "amelanoleuca",
+    "scientific_name": "Ailuropoda melanoleuca",
+    "taxonomy_id": "9646",
+    "version": "ASM200744v2"
+  },
+  {
+    "display_name": "Indian medaka",
+    "id": "omelastigma",
+    "scientific_name": "Oryzias melastigma",
+    "taxonomy_id": "30732",
+    "version": "Om_v0.7.RACA"
+  },
+  {
+    "display_name": "Globodera rostochiensis (PRJEB13504)",
+    "id": "glrostprjeb13504",
+    "scientific_name": "Globodera rostochiensis",
+    "taxonomy_id": "31243",
+    "version": "nGr (2016-09-WormBase)"
+  },
+  {
+    "display_name": "Mizuhopecten yessoensis (Yesso scallop, PY_sf001) - GCA_002113885.2",
+    "id": "mygca002113885v2",
+    "scientific_name": "Mizuhopecten yessoensis",
+    "taxonomy_id": "6573",
+    "version": "GCA002113885v2"
+  },
+  {
+    "display_name": "Echinococcus granulosus (PRJEB121)",
+    "id": "ecgranprjeb121",
+    "scientific_name": "Echinococcus granulosus",
+    "taxonomy_id": "6210",
+    "version": "EGRAN001 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Varroa destructor",
+    "id": "vdgca002443255",
+    "scientific_name": "Varroa destructor",
+    "taxonomy_id": "109461",
+    "version": "Vdes_3.0"
+  },
+  {
+    "display_name": "Oryza glaberrima",
+    "id": "oglaberrima",
+    "scientific_name": "Oryza glaberrima",
+    "taxonomy_id": "4538",
+    "version": "Oryza_glaberrima_V1"
+  },
+  {
+    "display_name": "Japanese medaka HdrR",
+    "id": "olatipes",
+    "scientific_name": "Oryzias latipes",
+    "taxonomy_id": "8090",
+    "version": "ASM223467v1"
+  },
+  {
+    "display_name": "Plasmodium vivax",
+    "id": "pvivax",
+    "scientific_name": "Plasmodium vivax",
+    "taxonomy_id": "5855",
+    "version": "ASM241v2"
+  },
+  {
+    "display_name": "Diploscapter pachys (PRJNA280107)",
+    "id": "dipachprjna280107",
+    "scientific_name": "Diploscapter pachys",
+    "taxonomy_id": "2018661",
+    "version": "DipSp1Ass11Ann3 (2018-01-WormBase)"
+  },
+  {
+    "display_name": "Lingula anatina (Lamp shell (Brachiopod), Amm_Jpn) - GCA_001039355.2",
+    "id": "lagca001039355v2",
+    "scientific_name": "Lingula anatina",
+    "taxonomy_id": "7574",
+    "version": "LinAna2.0"
+  },
+  {
+    "display_name": "Leopard",
+    "id": "ppardus",
+    "scientific_name": "Panthera pardus",
+    "taxonomy_id": "9691",
+    "version": "PanPar1.0"
+  },
+  {
+    "display_name": "Aspergillus terreus NIH2624",
+    "id": "aterreus",
+    "scientific_name": "Aspergillus terreus NIH2624",
+    "taxonomy_id": "341663",
+    "version": "ASM14961v1"
+  },
+  {
+    "display_name": "Vigna radiata",
+    "id": "vradiata",
+    "scientific_name": "Vigna radiata var. radiata",
+    "taxonomy_id": "3916",
+    "version": "Vradiata_ver6"
+  },
+  {
+    "display_name": "Pig - Tibetan",
+    "id": "sstibetan",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Tibetan_Pig_v2"
+  },
+  {
+    "display_name": "Caenorhabditis quiockensis (PRJEB11354)",
+    "id": "caquioprjeb11354",
+    "scientific_name": "Caenorhabditis sp. 38 MB-2015",
+    "taxonomy_id": "1729975",
+    "version": "CQUIO_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Mallard",
+    "id": "aplatyrhynchos",
+    "scientific_name": "Anas platyrhynchos",
+    "taxonomy_id": "8839",
+    "version": "ASM874695v1"
+  },
+  {
+    "display_name": "Caenorhabditis waitukubuli (PRJEB12602)",
+    "id": "cawaitprjeb12602",
+    "scientific_name": "Caenorhabditis sp. 39 LS-2015",
+    "taxonomy_id": "1737336",
+    "version": "CWAIT_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Anoplophora glabripennis (ALB-LARVAE)",
+    "id": "aglabripennis",
+    "scientific_name": "Anoplophora glabripennis",
+    "taxonomy_id": "217634",
+    "version": "Agla_2.0"
+  },
+  {
+    "display_name": "Tongue sole",
+    "id": "csemilaevis",
+    "scientific_name": "Cynoglossus semilaevis",
+    "taxonomy_id": "244447",
+    "version": "Cse_v1.0"
+  },
+  {
+    "display_name": "Steinernema carpocapsae (v1 PRJNA202318)",
+    "id": "stcav1prjna202318",
+    "scientific_name": "Steinernema carpocapsae",
+    "taxonomy_id": "34508",
+    "version": "S_carpo_v1_submitted (2014-12-WormBase)"
+  },
+  {
+    "display_name": "Steinernema feltiae (PRJNA353610)",
+    "id": "stfeltprjna353610",
+    "scientific_name": "Steinernema feltiae",
+    "taxonomy_id": "52066",
+    "version": "S_feltiae_NW_1.0 (2020-04-WormBase)"
+  },
+  {
+    "display_name": "Common wombat",
+    "id": "vursinus",
+    "scientific_name": "Vombatus ursinus",
+    "taxonomy_id": "29139",
+    "version": "bare-nosed_wombat_genome_assembly"
+  },
+  {
+    "display_name": "Fugu",
+    "id": "trubripes",
+    "scientific_name": "Takifugu rubripes",
+    "taxonomy_id": "31033",
+    "version": "fTakRub1.2"
+  },
+  {
+    "display_name": "Strongyloides papillosus (PRJEB525)",
+    "id": "stpapiprjeb525",
+    "scientific_name": "Strongyloides papillosus",
+    "taxonomy_id": "174720",
+    "version": "S_papillosus_LIN_v2_1_4 (2015-05-WormBase)"
+  },
+  {
+    "display_name": "Secale cereale",
+    "id": "scereale",
+    "scientific_name": "Secale cereale",
+    "taxonomy_id": "4550",
+    "version": "Rye_Lo7_2018_v1p1p1"
+  },
+  {
+    "display_name": "Cat",
+    "id": "fcatus",
+    "scientific_name": "Felis catus",
+    "taxonomy_id": "9685",
+    "version": "Felis_catus_9.0"
+  },
+  {
+    "display_name": "European seabass",
+    "id": "dlabrax",
+    "scientific_name": "Dicentrarchus labrax",
+    "taxonomy_id": "13489",
+    "version": "dlabrax2021"
+  },
+  {
+    "display_name": "Indian cobra",
+    "id": "nnaja",
+    "scientific_name": "Naja naja",
+    "taxonomy_id": "35670",
+    "version": "Nana_v5"
+  },
+  {
+    "display_name": "Rainbow trout",
+    "id": "omykiss",
+    "scientific_name": "Oncorhynchus mykiss",
+    "taxonomy_id": "8022",
+    "version": "USDA_OmykA_1.1"
+  },
+  {
+    "display_name": "Caenorhabditis tropicalis (PRJNA53597)",
+    "id": "catropprjna53597",
+    "scientific_name": "Caenorhabditis tropicalis",
+    "taxonomy_id": "1561998",
+    "version": "Caenorhabditis_sp11_JU1373-3.0.1 (2011-04-WormBase)"
+  },
+  {
+    "display_name": "Green anole",
+    "id": "acarolinensis",
+    "scientific_name": "Anolis carolinensis",
+    "taxonomy_id": "28377",
+    "version": "AnoCar2.0v2"
+  },
+  {
+    "display_name": "Galdieria sulphuraria",
+    "id": "gsulphuraria",
+    "scientific_name": "Galdieria sulphuraria",
+    "taxonomy_id": "130081",
+    "version": "ASM34128v1"
+  },
+  {
+    "display_name": "Arabidopsis thaliana",
+    "id": "athaliana",
+    "scientific_name": "Arabidopsis thaliana",
+    "taxonomy_id": "3702",
+    "version": "TAIR10"
+  },
+  {
+    "display_name": "Oryza longistaminata",
+    "id": "olongistaminata",
+    "scientific_name": "Oryza longistaminata",
+    "taxonomy_id": "4528",
+    "version": "O_longistaminata_v1.0"
+  },
+  {
+    "display_name": "Spirometra erinaceieuropaei (PRJEB1202)",
+    "id": "sperinprjeb1202",
+    "scientific_name": "Spirometra erinaceieuropaei",
+    "taxonomy_id": "99802",
+    "version": "S_erinaceieuropaei (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Trichuris suis (PRJNA208415 - male)",
+    "id": "trsuisprjna208415",
+    "scientific_name": "Trichuris suis",
+    "taxonomy_id": "68888",
+    "version": "Tsuis_adult_male_v1.0 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Alpaca",
+    "id": "vpacos",
+    "scientific_name": "Vicugna pacos",
+    "taxonomy_id": "30538",
+    "version": "vicPac1"
+  },
+  {
+    "display_name": "African ostrich",
+    "id": "scaustralis",
+    "scientific_name": "Struthio camelus australis",
+    "taxonomy_id": "441894",
+    "version": "ASM69896v1"
+  },
+  {
+    "display_name": "Lottia gigantea",
+    "id": "lgigantea",
+    "scientific_name": "Lottia gigantea",
+    "taxonomy_id": "225164",
+    "version": "Lotgi1"
+  },
+  {
+    "display_name": "Triticum aestivum",
+    "id": "taestivum",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "IWGSC"
+  },
+  {
+    "display_name": "Nile tilapia",
+    "id": "oniloticus",
+    "scientific_name": "Oreochromis niloticus",
+    "taxonomy_id": "8128",
+    "version": "O_niloticus_UMD_NMBU"
+  },
+  {
+    "display_name": "Ditylenchus destructor (PRJNA312427)",
+    "id": "didestprjna312427",
+    "scientific_name": "Ditylenchus destructor",
+    "taxonomy_id": "166010",
+    "version": "ASM157970v1 (2017-01-WormBase)"
+  },
+  {
+    "display_name": "Quercus lobata",
+    "id": "qlobata",
+    "scientific_name": "Quercus lobata",
+    "taxonomy_id": "97700",
+    "version": "ValleyOak3.0"
+  },
+  {
+    "display_name": "Propanagrolaimus ju765 (PRJEB32708)",
+    "id": "prju76prjeb32708",
+    "scientific_name": "Panagrolaimus sp. JU765",
+    "taxonomy_id": "591449",
+    "version": "JU765_v2 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Ashbya gossypii",
+    "id": "agossypii",
+    "scientific_name": "Eremothecium gossypii ATCC 10895",
+    "taxonomy_id": "284811",
+    "version": "ASM9102v1"
+  },
+  {
+    "display_name": "Drosophila mojavensis (TSC#15081-1352.22)",
+    "id": "dmojavensis",
+    "scientific_name": "Drosophila mojavensis",
+    "taxonomy_id": "7230",
+    "version": "dmoj_caf1"
+  },
+  {
+    "display_name": "Ditylenchus dipsaci (PRJNA498219)",
+    "id": "didipsprjna498219",
+    "scientific_name": "Ditylenchus dipsaci",
+    "taxonomy_id": "166011",
+    "version": "D.dipsaci.v1.0 (2019-05-WormBase)"
+  },
+  {
+    "display_name": "Pig - Hampshire",
+    "id": "sshampshire",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Hampshire_pig_v1"
+  },
+  {
+    "display_name": "Heligmosomoides polygyrus (PRJEB1203)",
+    "id": "hepolyprjeb1203",
+    "scientific_name": "Heligmosomoides polygyrus",
+    "taxonomy_id": "6339",
+    "version": "H_bakeri_Edinburgh_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Oryza sativa Indica Group",
+    "id": "oindica",
+    "scientific_name": "Oryza sativa Indica Group",
+    "taxonomy_id": "39946",
+    "version": "ASM465v1"
+  },
+  {
+    "display_name": "Lolium perenne",
+    "id": "lperenne",
+    "scientific_name": "Lolium perenne",
+    "taxonomy_id": "4522",
+    "version": "MPB_Lper_Kyuss_1697"
+  },
+  {
+    "display_name": "Golden eagle",
+    "id": "acchrysaetos",
+    "scientific_name": "Aquila chrysaetos chrysaetos",
+    "taxonomy_id": "223781",
+    "version": "bAquChr1.2"
+  },
+  {
+    "display_name": "Brassica napus",
+    "id": "bnapus",
+    "scientific_name": "Brassica napus",
+    "taxonomy_id": "3708",
+    "version": "AST_PRJEB5043_v1"
+  },
+  {
+    "display_name": "Angiostrongylus cantonensis (PRJNA350391)",
+    "id": "ancantprjna350391",
+    "scientific_name": "Angiostrongylus cantonensis",
+    "taxonomy_id": "6313",
+    "version": "ACgenome_NGS_v2 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Actinia tenebrosa (Australian red waratah sea anemone) - GCA_009602425.1",
+    "id": "atgca009602425v1",
+    "scientific_name": "Actinia tenebrosa",
+    "taxonomy_id": "6105",
+    "version": "GCA009602425v1"
+  },
+  {
+    "display_name": "Acyrthosiphon pisum (AL4f)",
+    "id": "apisum",
+    "scientific_name": "Acyrthosiphon pisum",
+    "taxonomy_id": "7029",
+    "version": "pea_aphid_22Mar2018_4r6ur"
+  },
+  {
+    "display_name": "Theobroma cacao Matina 1-6",
+    "id": "tcacao",
+    "scientific_name": "Theobroma cacao",
+    "taxonomy_id": "3641",
+    "version": "Theobroma_cacao_20110822"
+  },
+  {
+    "display_name": "Pediculus humanus",
+    "id": "phumanus",
+    "scientific_name": "Pediculus humanus corporis",
+    "taxonomy_id": "121224",
+    "version": "PhumU2"
+  },
+  {
+    "display_name": "Danaus plexippus plexippus (F-2)",
+    "id": "dplexippus",
+    "scientific_name": "Danaus plexippus plexippus",
+    "taxonomy_id": "278856",
+    "version": "Dplex_v4"
+  },
+  {
+    "display_name": "Globodera pallida (PRJEB123)",
+    "id": "glpallprjeb123",
+    "scientific_name": "Globodera pallida",
+    "taxonomy_id": "36090",
+    "version": "GPAL001 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Caenorhabditis zanzibari (PRJEB12596)",
+    "id": "cazanzprjeb12596",
+    "scientific_name": "Caenorhabditis sp. 26 LS-2015",
+    "taxonomy_id": "1737333",
+    "version": "CZANZ_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Tropical clawed frog",
+    "id": "xtropicalis",
+    "scientific_name": "Xenopus tropicalis",
+    "taxonomy_id": "8364",
+    "version": "UCB_Xtro_10.0"
+  },
+  {
+    "display_name": "Fusarium fujikuroi",
+    "id": "ffujikuroi",
+    "scientific_name": "Fusarium fujikuroi",
+    "taxonomy_id": "5127",
+    "version": "EF 1"
+  },
+  {
+    "display_name": "Hydra vulgaris (Swiftwater hydra, 105) - GCA_022113875.1",
+    "id": "hvgca022113875v1rs",
+    "scientific_name": "Hydra vulgaris",
+    "taxonomy_id": "6087",
+    "version": "Hydra_105_v3"
+  },
+  {
+    "display_name": "Goldfish",
+    "id": "cauratus",
+    "scientific_name": "Carassius auratus",
+    "taxonomy_id": "7957",
+    "version": "ASM336829v1"
+  },
+  {
+    "display_name": "Prairie vole",
+    "id": "mochrogaster",
+    "scientific_name": "Microtus ochrogaster",
+    "taxonomy_id": "79684",
+    "version": "MicOch1.0"
+  },
+  {
+    "display_name": "Stegodyphus mimosarum",
+    "id": "smimosarum",
+    "scientific_name": "Stegodyphus mimosarum",
+    "taxonomy_id": "407821",
+    "version": "Stegodyphus_mimosarum_v1"
+  },
+  {
+    "display_name": "Glossina brevipalpis",
+    "id": "gbrevipalpis",
+    "scientific_name": "Glossina brevipalpis",
+    "taxonomy_id": "37001",
+    "version": "GbreI1"
+  },
+  {
+    "display_name": "Drosophila persimilis (MSH-3)",
+    "id": "dpersimilis",
+    "scientific_name": "Drosophila persimilis",
+    "taxonomy_id": "7234",
+    "version": "dper_caf1"
+  },
+  {
+    "display_name": "Chimpanzee",
+    "id": "ptroglodytes",
+    "scientific_name": "Pan troglodytes",
+    "taxonomy_id": "9598",
+    "version": "Pan_tro_3.0"
+  },
+  {
+    "display_name": "Beauveria bassiana",
+    "id": "bbassiana",
+    "scientific_name": "Beauveria bassiana",
+    "taxonomy_id": "176275",
+    "version": "ASM168263v1"
+  },
+  {
+    "display_name": "Thalassiosira pseudonana",
+    "id": "tpseudonana",
+    "scientific_name": "Thalassiosira pseudonana CCMP1335",
+    "taxonomy_id": "296543",
+    "version": "ASM14940v2"
+  },
+  {
+    "display_name": "Schistosoma margrebowiei (PRJEB522)",
+    "id": "scmargprjeb522",
+    "scientific_name": "Schistosoma margrebowiei",
+    "taxonomy_id": "48269",
+    "version": "S_margrebowiei_Zambia_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Trichinella pseudospiralis (ISS588 PRJNA257433)",
+    "id": "iss588prjna257433",
+    "scientific_name": "Trichinella pseudospiralis",
+    "taxonomy_id": "6337",
+    "version": "T4_ISS588_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Brachypodium distachyon",
+    "id": "bdistachyon",
+    "scientific_name": "Brachypodium distachyon",
+    "taxonomy_id": "15368",
+    "version": "Brachypodium_distachyon_v3.0"
+  },
+  {
+    "display_name": "Naked mole-rat female",
+    "id": "hgfemale",
+    "scientific_name": "Heterocephalus glaber",
+    "taxonomy_id": "10181",
+    "version": "HetGla_female_1.0"
+  },
+  {
+    "display_name": "Caenorhabditis elegans (PRJNA13758) [WS282]",
+    "id": "caelegprjna13758",
+    "scientific_name": "Caenorhabditis elegans",
+    "taxonomy_id": "6239",
+    "version": "WBcel235 (WS282)"
+  },
+  {
+    "display_name": "Meloidogyne incognita (PRJNA340324)",
+    "id": "meincoprjna340324",
+    "scientific_name": "Meloidogyne incognita",
+    "taxonomy_id": "6306",
+    "version": "ASM369364v1 (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Bursaphelenchus xylophilus (PRJEB40022)",
+    "id": "buxyloprjeb40022",
+    "scientific_name": "Bursaphelenchus xylophilus",
+    "taxonomy_id": "6326",
+    "version": "BXYJ5 (2021-03-WormBase)"
+  },
+  {
+    "display_name": "Trichinella patagoniensis (PRJNA257433)",
+    "id": "trpataprjna257433",
+    "scientific_name": "Trichinella patagoniensis",
+    "taxonomy_id": "990121",
+    "version": "T12_ISS2496_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Paramecium tetraurelia",
+    "id": "ptetraurelia",
+    "scientific_name": "Paramecium tetraurelia",
+    "taxonomy_id": "5888",
+    "version": "ASM16542v1"
+  },
+  {
+    "display_name": "Setaria viridis",
+    "id": "sviridis",
+    "scientific_name": "Setaria viridis",
+    "taxonomy_id": "4556",
+    "version": "Setaria_viridis_v2.0"
+  },
+  {
+    "display_name": "Helianthus annuus",
+    "id": "hannuus",
+    "scientific_name": "Helianthus annuus",
+    "taxonomy_id": "4232",
+    "version": "HanXRQr2.0-SUNRISE"
+  },
+  {
+    "display_name": "Echinostoma caproni (PRJEB1207)",
+    "id": "eccaprprjeb1207",
+    "scientific_name": "Echinostoma caproni",
+    "taxonomy_id": "27848",
+    "version": "E_caproni_Egypt_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Amphimedon queenslandica",
+    "id": "aqueenslandica",
+    "scientific_name": "Amphimedon queenslandica",
+    "taxonomy_id": "400682",
+    "version": "Aqu1"
+  },
+  {
+    "display_name": "Corylus avellana",
+    "id": "cavellana",
+    "scientific_name": "Corylus avellana",
+    "taxonomy_id": "13451",
+    "version": "CavTom2PMs-1.0"
+  },
+  {
+    "display_name": "Bemisia tabaci (SSA1-SG1 UG)",
+    "id": "btssa1ug",
+    "scientific_name": "Bemisia tabaci",
+    "taxonomy_id": "7038",
+    "version": "SSA1_SG1_Uganda_n955_657Mb"
+  },
+  {
+    "display_name": "Dothistroma septosporum",
+    "id": "dseptosporum",
+    "scientific_name": "Dothistroma septosporum NZE10",
+    "taxonomy_id": "675120",
+    "version": "Dothistroma septosporum NZE10 v1.0"
+  },
+  {
+    "display_name": "Drosophila yakuba (Tai18E2)",
+    "id": "dyakuba",
+    "scientific_name": "Drosophila yakuba",
+    "taxonomy_id": "7245",
+    "version": "dyak_caf1"
+  },
+  {
+    "display_name": "Three-toed box turtle",
+    "id": "tctriunguis",
+    "scientific_name": "Terrapene carolina triunguis",
+    "taxonomy_id": "2587831",
+    "version": "T_m_triunguis-2.0"
+  },
+  {
+    "display_name": "Anopheles arabiensis",
+    "id": "aarabiensis",
+    "scientific_name": "Anopheles arabiensis",
+    "taxonomy_id": "7173",
+    "version": "AaraD1"
+  },
+  {
+    "display_name": "Sarcoptes scabiei (SSS_KF_BRIS2020)",
+    "id": "sscabiei",
+    "scientific_name": "Sarcoptes scabiei",
+    "taxonomy_id": "52283",
+    "version": "GCA014595675v1"
+  },
+  {
+    "display_name": "Caenorhabditis tribulationis (PRJEB12608)",
+    "id": "catribprjeb12608",
+    "scientific_name": "Caenorhabditis sp. 40 LS-2015",
+    "taxonomy_id": "1737337",
+    "version": "CTRIB_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Pollicipes pollicipes (Goose neck barnacle, AB1234) - GCA_011947565.2",
+    "id": "ppgca011947565v2",
+    "scientific_name": "Pollicipes pollicipes",
+    "taxonomy_id": "41117",
+    "version": "Ppol_2"
+  },
+  {
+    "display_name": "Dioscorea rotundata",
+    "id": "drotundata",
+    "scientific_name": "Dioscorea cayenensis subsp. rotundata",
+    "taxonomy_id": "55577",
+    "version": "TDr96_F1_v2_PseudoChromosome"
+  },
+  {
+    "display_name": "Amborella trichopoda",
+    "id": "atrichopoda",
+    "scientific_name": "Amborella trichopoda",
+    "taxonomy_id": "13333",
+    "version": "AMTR1.0"
+  },
+  {
+    "display_name": "American mink",
+    "id": "nvison",
+    "scientific_name": "Neogale vison",
+    "taxonomy_id": "452646",
+    "version": "NNQGG.v01"
+  },
+  {
+    "display_name": "Pig - Meishan",
+    "id": "ssmeishan",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Meishan_pig_v1"
+  },
+  {
+    "display_name": "Strongylocentrotus purpuratus (Spur 01)",
+    "id": "spurpuratus",
+    "scientific_name": "Strongylocentrotus purpuratus",
+    "taxonomy_id": "7668",
+    "version": "Spur_5.0"
+  },
+  {
+    "display_name": "Dog",
+    "id": "clfamiliaris",
+    "scientific_name": "Canis lupus familiaris",
+    "taxonomy_id": "9615",
+    "version": "ROS_Cfam_1.0"
+  },
+  {
+    "display_name": "Haliotis rufescens (Red abalone, VD_foot) - GCA_023055435.1",
+    "id": "hrgca023055435v1rs",
+    "scientific_name": "Haliotis rufescens",
+    "taxonomy_id": "6454",
+    "version": "xgHalRufe1.0.p"
+  },
+  {
+    "display_name": "Heligmosomoides polygyrus (PRJEB15396)",
+    "id": "hepolyprjeb15396",
+    "scientific_name": "Heligmosomoides polygyrus",
+    "taxonomy_id": "6339",
+    "version": "nHp_v2.0 (2016-09-WormBase)"
+  },
+  {
+    "display_name": "Centruroides sculpturatus (CEXI.00-Female) - GCA_000671375.2",
+    "id": "csgca000671375v2",
+    "scientific_name": "Centruroides sculpturatus",
+    "taxonomy_id": "218467",
+    "version": "Cexi_2.0"
+  },
+  {
+    "display_name": "Onchocerca ochengi (PRJEB1204)",
+    "id": "onocheprjeb1204",
+    "scientific_name": "Onchocerca ochengi",
+    "taxonomy_id": "42157",
+    "version": "O_ochengi_Ngaoundere (2016-04-WormBase)"
+  },
+  {
+    "display_name": "Chinook salmon",
+    "id": "otshawytscha",
+    "scientific_name": "Oncorhynchus tshawytscha",
+    "taxonomy_id": "74940",
+    "version": "Otsh_v1.0"
+  },
+  {
+    "display_name": "Oryza sativa Japonica Group",
+    "id": "osativa",
+    "scientific_name": "Oryza sativa Japonica Group",
+    "taxonomy_id": "39947",
+    "version": "IRGSP-1.0"
+  },
+  {
+    "display_name": "Phaseolus vulgaris",
+    "id": "pvulgaris",
+    "scientific_name": "Phaseolus vulgaris",
+    "taxonomy_id": "3885",
+    "version": "PhaVulg1_0"
+  },
+  {
+    "display_name": "Litomosoides sigmodontis (PRJEB3075)",
+    "id": "lisigmprjeb3075",
+    "scientific_name": "Litomosoides sigmodontis",
+    "taxonomy_id": "42156",
+    "version": "ASM90053727v1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Aspergillus nidulans",
+    "id": "anidulans",
+    "scientific_name": "Aspergillus nidulans FGSC A4",
+    "taxonomy_id": "227321",
+    "version": "ASM1142v1"
+  },
+  {
+    "display_name": "Syphacia muris (PRJEB524)",
+    "id": "symuriprjeb524",
+    "scientific_name": "Syphacia muris",
+    "taxonomy_id": "451379",
+    "version": "S_muris_Valencia_v1_0_4 (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Phanerochaete chrysosporium",
+    "id": "pchrysosporium",
+    "scientific_name": "Phanerochaete chrysosporium RP-78",
+    "taxonomy_id": "273507",
+    "version": "GCA000167175v1"
+  },
+  {
+    "display_name": "Ixodes scapularis (PalLabHiFi)",
+    "id": "isgca016920785v2",
+    "scientific_name": "Ixodes scapularis",
+    "taxonomy_id": "6945",
+    "version": "GCA016920785v2"
+  },
+  {
+    "display_name": "Bombyx mandarina (Wild silkworm, Bman2017) - GCA_003987935.1",
+    "id": "bmgca003987935v1rs",
+    "scientific_name": "Bombyx mandarina",
+    "taxonomy_id": "7092",
+    "version": "GCA003987935v1"
+  },
+  {
+    "display_name": "Taenia multiceps (PRJNA307624)",
+    "id": "tamultprjna307624",
+    "scientific_name": "Taenia multiceps",
+    "taxonomy_id": "94034",
+    "version": "ASM192302v3 (2018-09-WormBase)"
+  },
+  {
+    "display_name": "Strongylus vulgaris (PRJEB531)",
+    "id": "stvulgprjeb531",
+    "scientific_name": "Strongylus vulgaris",
+    "taxonomy_id": "40348",
+    "version": "S_vulgaris_Kentucky_0011_upd (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Brown trout",
+    "id": "strutta",
+    "scientific_name": "Salmo trutta",
+    "taxonomy_id": "8032",
+    "version": "fSalTru1.1"
+  },
+  {
+    "display_name": "Trichuris suis (PRJNA208416 - female)",
+    "id": "trsuisprjna208416",
+    "scientific_name": "Trichuris suis",
+    "taxonomy_id": "68888",
+    "version": "Tsuis_adult_female_1.0 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Glossina morsitans",
+    "id": "gmorsitans",
+    "scientific_name": "Glossina morsitans morsitans",
+    "taxonomy_id": "37546",
+    "version": "GmorY1"
+  },
+  {
+    "display_name": "Anopheles melas",
+    "id": "amelas",
+    "scientific_name": "Anopheles melas",
+    "taxonomy_id": "34690",
+    "version": "AmelC2"
+  },
+  {
+    "display_name": "Tetranychus urticae",
+    "id": "turticae",
+    "scientific_name": "Tetranychus urticae",
+    "taxonomy_id": "32264",
+    "version": "ASM23943v1"
+  },
+  {
+    "display_name": "Aphidius gifuensis (Parasitoid wasp, YNYX2018) - GCA_014905175.1",
+    "id": "aggca014905175v1",
+    "scientific_name": "Aphidius gifuensis",
+    "taxonomy_id": "684658",
+    "version": "GCA014905175v1"
+  },
+  {
+    "display_name": "Glossina palpalis",
+    "id": "gpalpalis",
+    "scientific_name": "Glossina palpalis gambiensis",
+    "taxonomy_id": "67801",
+    "version": "GpapI1"
+  },
+  {
+    "display_name": "Rhodnius prolixus",
+    "id": "rprolixus",
+    "scientific_name": "Rhodnius prolixus",
+    "taxonomy_id": "13249",
+    "version": "RproC3"
+  },
+  {
+    "display_name": "Guinea Pig",
+    "id": "cporcellus",
+    "scientific_name": "Cavia porcellus",
+    "taxonomy_id": "10141",
+    "version": "Cavpor3.0"
+  },
+  {
+    "display_name": "Acropora millepora (Stony coral, JS-1) - GCA_013753865.1",
+    "id": "amgca013753865v1",
+    "scientific_name": "Acropora millepora",
+    "taxonomy_id": "45264",
+    "version": "Amil_v2.1"
+  },
+  {
+    "display_name": "Eragrostis tef",
+    "id": "etef",
+    "scientific_name": "Eragrostis tef",
+    "taxonomy_id": "110835",
+    "version": "ASM97063v1"
+  },
+  {
+    "display_name": "Necator americanus (PRJNA72135)",
+    "id": "namericanus",
+    "scientific_name": "Necator americanus",
+    "taxonomy_id": "51031",
+    "version": "N_americanus_v1"
+  },
+  {
+    "display_name": "Schistosoma bovis (PRJNA451066)",
+    "id": "scboviprjna451066",
+    "scientific_name": "Schistosoma bovis",
+    "taxonomy_id": "6184",
+    "version": "ASM395894v1 (2019-05-WormBase)"
+  },
+  {
+    "display_name": "Pristionchus arcanus (PRJEB27334)",
+    "id": "prarcaprjeb27334",
+    "scientific_name": "Pristionchus arcanus",
+    "taxonomy_id": "1195655",
+    "version": "P. arcanus genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Algerian mouse",
+    "id": "mspretus",
+    "scientific_name": "Mus spretus",
+    "taxonomy_id": "10096",
+    "version": "SPRET_EiJ_v1"
+  },
+  {
+    "display_name": "Physcomitrium patens",
+    "id": "ppatens",
+    "scientific_name": "Physcomitrium patens",
+    "taxonomy_id": "3218",
+    "version": "Phypa V3"
+  },
+  {
+    "display_name": "Priapulus caudatus (Penis worm) - GCA_000485595.2",
+    "id": "pcgca000485595v2",
+    "scientific_name": "Priapulus caudatus",
+    "taxonomy_id": "37621",
+    "version": "Priapulus_caudatus-5.0.1"
+  },
+  {
+    "display_name": "Digitaria exilis",
+    "id": "dexilis",
+    "scientific_name": "Digitaria exilis",
+    "taxonomy_id": "1010633",
+    "version": "Fonio_CM05836"
+  },
+  {
+    "display_name": "Trichinella nativa (PRJNA179527)",
+    "id": "trnatiprjna179527",
+    "scientific_name": "Trichinella nativa",
+    "taxonomy_id": "6335",
+    "version": "T_nativa_rf_gd (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Chacoan peccary",
+    "id": "cwagneri",
+    "scientific_name": "Catagonus wagneri",
+    "taxonomy_id": "51154",
+    "version": "CatWag_v2_BIUU_UCD"
+  },
+  {
+    "display_name": "Angiostrongylus vasorum (PRJNA663250)",
+    "id": "anvasoprjna663250",
+    "scientific_name": "Angiostrongylus vasorum",
+    "taxonomy_id": "321387",
+    "version": "UZH_Avas_1.0 (2021-10-WormBase)"
+  },
+  {
+    "display_name": "Cercopithifilaria johnstoni (PRJEB47283)",
+    "id": "cejohnprjeb47283",
+    "scientific_name": "Cercopithifilaria johnstoni",
+    "taxonomy_id": "2874296",
+    "version": "SD210906 (2021-11-WormBase)"
+  },
+  {
+    "display_name": "Mercenaria mercenaria (Hard clam (quahog), YKG-2019) - GCA_014805675.2",
+    "id": "mmgca014805675v2",
+    "scientific_name": "Mercenaria mercenaria",
+    "taxonomy_id": "6596",
+    "version": "ASM1480567v1.1"
+  },
+  {
+    "display_name": "Cynara cardunculus",
+    "id": "ccardunculus",
+    "scientific_name": "Cynara cardunculus var. scolymus",
+    "taxonomy_id": "59895",
+    "version": "CcrdV1"
+  },
+  {
+    "display_name": "Cryptococcus neoformans var. neoformans JEC21",
+    "id": "cneoformans",
+    "scientific_name": "Cryptococcus neoformans var. neoformans JEC21",
+    "taxonomy_id": "214684",
+    "version": "ASM9104v1"
+  },
+  {
+    "display_name": "Tetrahymena thermophila",
+    "id": "tthermophila",
+    "scientific_name": "Tetrahymena thermophila SB210",
+    "taxonomy_id": "312017",
+    "version": "JCVI-TTA1-2.2"
+  },
+  {
+    "display_name": "Halicephalobus mephisto (PRJNA528747)",
+    "id": "hamephprjna528747",
+    "scientific_name": "Halicephalobus sp. WB-2010a",
+    "taxonomy_id": "703951",
+    "version": "SWDT01000000 (2019-05-WormBase)"
+  },
+  {
+    "display_name": "Cannabis sativa female",
+    "id": "csfemale",
+    "scientific_name": "Cannabis sativa",
+    "taxonomy_id": "3483",
+    "version": "cs10"
+  },
+  {
+    "display_name": "Greater horseshoe bat",
+    "id": "rferrumequinum",
+    "scientific_name": "Rhinolophus ferrumequinum",
+    "taxonomy_id": "59479",
+    "version": "mRhiFer1_v1.p"
+  },
+  {
+    "display_name": "Drosophila sechellia (Rob3c)",
+    "id": "dsechellia",
+    "scientific_name": "Drosophila sechellia",
+    "taxonomy_id": "7238",
+    "version": "dsec_caf1"
+  },
+  {
+    "display_name": "Athalia rosae (Coleseed sawfly, CS-ADULT) - GCA_000344095.2",
+    "id": "argca000344095v2",
+    "scientific_name": "Athalia rosae",
+    "taxonomy_id": "37344",
+    "version": "Aros_2.0"
+  },
+  {
+    "display_name": "Pristionchus mayeri (PRJEB27334)",
+    "id": "prmayeprjeb27334",
+    "scientific_name": "Pristionchus mayeri",
+    "taxonomy_id": "1317129",
+    "version": "Pristionchus mayeri genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Schistosoma rodhaini (PRJEB526)",
+    "id": "scrodhprjeb526",
+    "scientific_name": "Schistosoma rodhaini",
+    "taxonomy_id": "6188",
+    "version": "S_rodhaini_Burundi_v1_0_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Bushbaby",
+    "id": "ogarnettii",
+    "scientific_name": "Otolemur garnettii",
+    "taxonomy_id": "30611",
+    "version": "OtoGar3"
+  },
+  {
+    "display_name": "Verticillium dahliae",
+    "id": "vdahliae",
+    "scientific_name": "Verticillium dahliae VdLs.17",
+    "taxonomy_id": "498257",
+    "version": "ASM15067v2"
+  },
+  {
+    "display_name": "Panagrolaimus es5 (PRJEB32708)",
+    "id": "paes5prjeb32708",
+    "scientific_name": "Panagrolaimus sp. ES5",
+    "taxonomy_id": "591445",
+    "version": "ES5_v2 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Solanum tuberosum RH89-039-16",
+    "id": "strh8903916",
+    "scientific_name": "Solanum tuberosum",
+    "taxonomy_id": "4113",
+    "version": "ASM1418947v1"
+  },
+  {
+    "display_name": "Vaquita",
+    "id": "psinus",
+    "scientific_name": "Phocoena sinus",
+    "taxonomy_id": "42100",
+    "version": "mPhoSin1.pri"
+  },
+  {
+    "display_name": "Globodera rostochiensis (L19PRJNA695196)",
+    "id": "l19prjna695196",
+    "scientific_name": "Globodera rostochiensis",
+    "taxonomy_id": "31243",
+    "version": "WUR_GloGros_L19 (2021-11-WormBase)"
+  },
+  {
+    "display_name": "Pristionchus maxplancki (PRJEB27334)",
+    "id": "prmaxpprjeb27334",
+    "scientific_name": "Pristionchus maxplancki",
+    "taxonomy_id": "1317128",
+    "version": "Prisstionchus maxplancki genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Candida glabrata",
+    "id": "cglabrata",
+    "scientific_name": "Nakaseomyces glabratus CBS 138",
+    "taxonomy_id": "284593",
+    "version": "GCA000002545v2"
+  },
+  {
+    "display_name": "Sperm whale",
+    "id": "pcatodon",
+    "scientific_name": "Physeter catodon",
+    "taxonomy_id": "9755",
+    "version": "ASM283717v2"
+  },
+  {
+    "display_name": "Avena sativa OT3098",
+    "id": "asot3098",
+    "scientific_name": "Avena sativa",
+    "taxonomy_id": "4498",
+    "version": "Oat_OT3098_v2"
+  },
+  {
+    "display_name": "Caenorhabditis inopinata (PRJDB5687)",
+    "id": "cainopprjdb5687",
+    "scientific_name": "Caenorhabditis inopinata",
+    "taxonomy_id": "1978547",
+    "version": "Sp34_v7 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Duck",
+    "id": "applatyrhynchos",
+    "scientific_name": "Anas platyrhynchos platyrhynchos",
+    "taxonomy_id": "8840",
+    "version": "CAU_duck1.0"
+  },
+  {
+    "display_name": "Caenorhabditis uteleia (PRJEB12600)",
+    "id": "cautelprjeb12600",
+    "scientific_name": "Caenorhabditis sp. 31 LS-2015",
+    "taxonomy_id": "1737334",
+    "version": "CUTEL_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Triticum aestivum Stanley",
+    "id": "tastanley",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.2_Stanley"
+  },
+  {
+    "display_name": "Trichuris muris (PRJEB126) [WS282]",
+    "id": "trmuriprjeb126",
+    "scientific_name": "Trichuris muris",
+    "taxonomy_id": "70415",
+    "version": "TMUE3.0 (WS279)"
+  },
+  {
+    "display_name": "Tiger tail seahorse",
+    "id": "hcomes",
+    "scientific_name": "Hippocampus comes",
+    "taxonomy_id": "109280",
+    "version": "H_comes_QL1_v1"
+  },
+  {
+    "display_name": "Argentine black and white tegu",
+    "id": "smerianae",
+    "scientific_name": "Salvator merianae",
+    "taxonomy_id": "96440",
+    "version": "HLtupMer3"
+  },
+  {
+    "display_name": "Diuraphis noxia (RWA2) - GCA_001186385.1",
+    "id": "dngca001186385v1",
+    "scientific_name": "Diuraphis noxia",
+    "taxonomy_id": "143948",
+    "version": "Dnoxia_1.0"
+  },
+  {
+    "display_name": "Dingo",
+    "id": "cldingo",
+    "scientific_name": "Canis lupus dingo",
+    "taxonomy_id": "286419",
+    "version": "ASM325472v1"
+  },
+  {
+    "display_name": "Trichogramma pretiosum (Unisexual culture from Peru) - GCA_000599845.3",
+    "id": "tpgca000599845v3",
+    "scientific_name": "Trichogramma pretiosum",
+    "taxonomy_id": "7493",
+    "version": "Tpre_2.0"
+  },
+  {
+    "display_name": "Common carp",
+    "id": "cccarpio",
+    "scientific_name": "Cyprinus carpio carpio",
+    "taxonomy_id": "630221",
+    "version": "Cypcar_WagV4.0"
+  },
+  {
+    "display_name": "Acanthaster planci (Crown-of-thorns starfish) - GCA_001949145.1",
+    "id": "apgca001949145v1",
+    "scientific_name": "Acanthaster planci",
+    "taxonomy_id": "133434",
+    "version": "OKI_Apl_1.0"
+  },
+  {
+    "display_name": "Macrostomum lignano (PRJNA284736)",
+    "id": "malignprjna284736",
+    "scientific_name": "Macrostomum lignano",
+    "taxonomy_id": "282301",
+    "version": "ML2 (2016-02-WormBase)"
+  },
+  {
+    "display_name": "Phytophthora sojae",
+    "id": "psojae",
+    "scientific_name": "Phytophthora sojae",
+    "taxonomy_id": "67593",
+    "version": "P.sojae V3.0"
+  },
+  {
+    "display_name": "Phaeosphaeria nodorum",
+    "id": "pnodorum",
+    "scientific_name": "Parastagonospora nodorum SN15",
+    "taxonomy_id": "321614",
+    "version": "ASM14691v1"
+  },
+  {
+    "display_name": "Saccharomyces cerevisiae",
+    "id": "scerevisiae",
+    "scientific_name": "Saccharomyces cerevisiae S288C",
+    "taxonomy_id": "559292",
+    "version": "R64-1-1"
+  },
+  {
+    "display_name": "Schistosoma japonicum (PRJEA34885)",
+    "id": "scjapoprjea34885",
+    "scientific_name": "Schistosoma japonicum",
+    "taxonomy_id": "6182",
+    "version": "ASM15177v1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Greater amberjack",
+    "id": "sdumerili",
+    "scientific_name": "Seriola dumerili",
+    "taxonomy_id": "41447",
+    "version": "Sdu_1.0"
+  },
+  {
+    "display_name": "Dolphin",
+    "id": "ttruncatus",
+    "scientific_name": "Tursiops truncatus",
+    "taxonomy_id": "9739",
+    "version": "turTru1"
+  },
+  {
+    "display_name": "Strongyloides ratti (PRJEB125)",
+    "id": "sratti",
+    "scientific_name": "Strongyloides ratti",
+    "taxonomy_id": "34506",
+    "version": "S_ratti_ED321_v5_0_4"
+  },
+  {
+    "display_name": "Sheepshead minnow",
+    "id": "cvariegatus",
+    "scientific_name": "Cyprinodon variegatus",
+    "taxonomy_id": "28743",
+    "version": "C_variegatus-1.0"
+  },
+  {
+    "display_name": "Hordeum vulgare GoldenPromise",
+    "id": "hvgoldenpromise",
+    "scientific_name": "Hordeum vulgare subsp. vulgare",
+    "taxonomy_id": "112509",
+    "version": "GPv1"
+  },
+  {
+    "display_name": "Burton's mouthbrooder",
+    "id": "hburtoni",
+    "scientific_name": "Haplochromis burtoni",
+    "taxonomy_id": "8153",
+    "version": "AstBur1.0"
+  },
+  {
+    "display_name": "Fasciola hepatica (PRJEB25283)",
+    "id": "fahepaprjeb25283",
+    "scientific_name": "Fasciola hepatica",
+    "taxonomy_id": "6192",
+    "version": "Fasciola_10x_pilon (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Dictyocaulus viviparus (PRJNA72587)",
+    "id": "diviviprjna72587",
+    "scientific_name": "Dictyocaulus viviparus",
+    "taxonomy_id": "29172",
+    "version": "D_viviparus_9.2.1.ec.pg (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Hyalella azteca (Amphipod, HAZT.00-mixed) - GCA_000764305.2",
+    "id": "hagca000764305v2",
+    "scientific_name": "Hyalella azteca",
+    "taxonomy_id": "294128",
+    "version": "Hazt_2.0"
+  },
+  {
+    "display_name": "Crab-eating macaque",
+    "id": "mfascicularis",
+    "scientific_name": "Macaca fascicularis",
+    "taxonomy_id": "9541",
+    "version": "Macaca_fascicularis_6.0"
+  },
+  {
+    "display_name": "Heterodera schachtii (PRJNA722882)",
+    "id": "heschaprjna722882",
+    "scientific_name": "Heterodera schachtii",
+    "taxonomy_id": "97005",
+    "version": "Hsch_Bonn_V1.0 (2021-10-WormBase)"
+  },
+  {
+    "display_name": "Marchantia polymorpha",
+    "id": "mpolymorpha",
+    "scientific_name": "Marchantia polymorpha",
+    "taxonomy_id": "3197",
+    "version": "Marchanta_polymorpha_v1"
+  },
+  {
+    "display_name": "Octopus bimaculoides (Octopus, UCB-OBI-ISO-001) - GCA_001194135.1",
+    "id": "obgca001194135v1",
+    "scientific_name": "Octopus bimaculoides",
+    "taxonomy_id": "37653",
+    "version": "Octopus_bimaculoides_v2_0"
+  },
+  {
+    "display_name": "Entamoeba histolytica",
+    "id": "ehistolytica",
+    "scientific_name": "Entamoeba histolytica HM-1:IMSS",
+    "taxonomy_id": "294381",
+    "version": "JCVI-ESG2-1.0"
+  },
+  {
+    "display_name": "Tetraodon",
+    "id": "tnigroviridis",
+    "scientific_name": "Tetraodon nigroviridis",
+    "taxonomy_id": "99883",
+    "version": "TETRAODON 8.0"
+  },
+  {
+    "display_name": "Spotted gar",
+    "id": "loculatus",
+    "scientific_name": "Lepisosteus oculatus",
+    "taxonomy_id": "7918",
+    "version": "LepOcu1"
+  },
+  {
+    "display_name": "Lepeophtheirus salmonis (Salmon louse, Lsal2020) - GCA_016086655.3",
+    "id": "lsgca016086655v3rs",
+    "scientific_name": "Lepeophtheirus salmonis",
+    "taxonomy_id": "72036",
+    "version": "UVic_Lsal_1.0"
+  },
+  {
+    "display_name": "Dendronephthya gigantea (DGI-Jeju-01) - GCA_004324835.1",
+    "id": "dggca004324835v1",
+    "scientific_name": "Dendronephthya gigantea",
+    "taxonomy_id": "151771",
+    "version": "DenGig_1.0"
+  },
+  {
+    "display_name": "Mayetiola destructor",
+    "id": "mdestructor",
+    "scientific_name": "Mayetiola destructor",
+    "taxonomy_id": "39758",
+    "version": "Mdes_1.0"
+  },
+  {
+    "display_name": "Plasmodium chabaudi",
+    "id": "pchabaudi",
+    "scientific_name": "Plasmodium chabaudi chabaudi",
+    "taxonomy_id": "31271",
+    "version": "PCHAS01"
+  },
+  {
+    "display_name": "Mesorhabditis belari (PRJEB30104)",
+    "id": "mebelaprjeb30104",
+    "scientific_name": "Mesorhabditis belari",
+    "taxonomy_id": "2138241",
+    "version": "M.Belari Hybrid genome (2019-05-WormBase)"
+  },
+  {
+    "display_name": "Trichinella nelsoni (PRJNA257433)",
+    "id": "trnelsprjna257433",
+    "scientific_name": "Trichinella nelsoni",
+    "taxonomy_id": "6336",
+    "version": "T7_ISS37_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Teleopsis dalmanni (2A)",
+    "id": "tdalmanni",
+    "scientific_name": "Teleopsis dalmanni",
+    "taxonomy_id": "139649",
+    "version": "GCA002237135v2"
+  },
+  {
+    "display_name": "Bursaphelenchus xylophilus (PRJEA64437)",
+    "id": "buxyloprjea64437",
+    "scientific_name": "Bursaphelenchus xylophilus",
+    "taxonomy_id": "6326",
+    "version": "ASM23113v1_submitted (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Gossypium raimondii",
+    "id": "graimondii",
+    "scientific_name": "Gossypium raimondii",
+    "taxonomy_id": "29730",
+    "version": "Graimondii2_0_v6"
+  },
+  {
+    "display_name": "Loa loa (PRJNA37757)",
+    "id": "loloaprjna37757",
+    "scientific_name": "Loa loa",
+    "taxonomy_id": "7209",
+    "version": "Loa_loa_V3 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Nasonia vitripennis (AsymCx)",
+    "id": "nvitripennis",
+    "scientific_name": "Nasonia vitripennis",
+    "taxonomy_id": "7425",
+    "version": "Nvit_psr_1.1"
+  },
+  {
+    "display_name": "Caenorhabditis parvicauda (PRJEB12595)",
+    "id": "caparvprjeb12595",
+    "scientific_name": "Caenorhabditis sp. 21 LS-2015",
+    "taxonomy_id": "1737332",
+    "version": "CPARV_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Schmidtea mediterranea (PRJNA379262)",
+    "id": "scmediprjna379262",
+    "scientific_name": "Schmidtea mediterranea",
+    "taxonomy_id": "79327",
+    "version": "ASM260089v1 (2019-05-WormBase)"
+  },
+  {
+    "display_name": "Taenia asiatica (PRJNA299871)",
+    "id": "taasiaprjna299871",
+    "scientific_name": "Taenia asiatica",
+    "taxonomy_id": "60517",
+    "version": "Taenia_asiatica_TASYD01_v1 (2016-10-WormBase)"
+  },
+  {
+    "display_name": "Eutrema salsugineum",
+    "id": "esalsugineum",
+    "scientific_name": "Eutrema salsugineum",
+    "taxonomy_id": "72664",
+    "version": "Eutsalg1_0"
+  },
+  {
+    "display_name": "Large yellow croaker",
+    "id": "lcrocea",
+    "scientific_name": "Larimichthys crocea",
+    "taxonomy_id": "215358",
+    "version": "L_crocea_2.0"
+  },
+  {
+    "display_name": "Rhopalosiphum maidis (BTI-1) - GCA_003676215.3",
+    "id": "rmgca003676215v3",
+    "scientific_name": "Rhopalosiphum maidis",
+    "taxonomy_id": "43146",
+    "version": "GCA003676215v3"
+  },
+  {
+    "display_name": "Candida duobushaemulonis",
+    "id": "cduobushaemulonis",
+    "scientific_name": "[Candida] duobushaemulonis",
+    "taxonomy_id": "1231522",
+    "version": "GCA002926085v1"
+  },
+  {
+    "display_name": "Sorghum bicolor",
+    "id": "sbicolor",
+    "scientific_name": "Sorghum bicolor",
+    "taxonomy_id": "4558",
+    "version": "Sorghum_bicolor_NCBIv3"
+  },
+  {
+    "display_name": "Schistosoma curassoni (PRJEB519)",
+    "id": "sccuraprjeb519",
+    "scientific_name": "Schistosoma curassoni",
+    "taxonomy_id": "6186",
+    "version": "S_curassoni_Dakar_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Apis mellifera (DH4)",
+    "id": "amellifera",
+    "scientific_name": "Apis mellifera",
+    "taxonomy_id": "7460",
+    "version": "Amel_HAv3.1"
+  },
+  {
+    "display_name": "Owenia fusiformis (Segmented worms) - GCA_903813345.1",
+    "id": "ofgca903813345v1",
+    "scientific_name": "Owenia fusiformis",
+    "taxonomy_id": "6347",
+    "version": "GCA903813345v1"
+  },
+  {
+    "display_name": "Octopus bimaculoides",
+    "id": "obimaculoides",
+    "scientific_name": "Octopus bimaculoides",
+    "taxonomy_id": "37653",
+    "version": "PRJNA270931"
+  },
+  {
+    "display_name": "Agrilus planipennis (Emerald ash borer, EAB-ADULT) - GCA_000699045.2",
+    "id": "apgca000699045v2",
+    "scientific_name": "Agrilus planipennis",
+    "taxonomy_id": "224129",
+    "version": "Apla_2.0"
+  },
+  {
+    "display_name": "Beta vulgaris",
+    "id": "bvulgaris",
+    "scientific_name": "Beta vulgaris subsp. vulgaris",
+    "taxonomy_id": "3555",
+    "version": "RefBeet-1.2.2"
+  },
+  {
+    "display_name": "Meloidogyne graminicola (PRJNA411966)",
+    "id": "megramprjna411966",
+    "scientific_name": "Meloidogyne graminicola",
+    "taxonomy_id": "189291",
+    "version": "Mgraminicola_V1 (2018-09-WormBase)"
+  },
+  {
+    "display_name": "Ascaris lumbricoides (PRJEB4950)",
+    "id": "aslumbprjeb4950",
+    "scientific_name": "Ascaris lumbricoides",
+    "taxonomy_id": "6252",
+    "version": "A_lumbricoides_Ecuador_v1_5_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Prunus dulcis",
+    "id": "pdulcis",
+    "scientific_name": "Prunus dulcis",
+    "taxonomy_id": "3755",
+    "version": "ALMONDv2"
+  },
+  {
+    "display_name": "Dictyocaulus viviparus (PRJEB5116)",
+    "id": "diviviprjeb5116",
+    "scientific_name": "Dictyocaulus viviparus",
+    "taxonomy_id": "29172",
+    "version": "nDv.1.0 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Pomacea canaliculata (SZHN2017) - GCA_003073045.1",
+    "id": "pcgca003073045v1",
+    "scientific_name": "Pomacea canaliculata",
+    "taxonomy_id": "400727",
+    "version": "GCA003073045v1"
+  },
+  {
+    "display_name": "Meloidogyne enterolobii (PRJNA340324)",
+    "id": "meenteprjna340324",
+    "scientific_name": "Meloidogyne enterolobii",
+    "taxonomy_id": "390850",
+    "version": "ASM369367v1 (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Halicephalobus nkz332 (PRJNA555616)",
+    "id": "hankz3prjna555616",
+    "scientific_name": "Halicephalobus sp. NKZ332",
+    "taxonomy_id": "2598192",
+    "version": "ASM976126v1 (2021-12-WormBase)"
+  },
+  {
+    "display_name": "Albugo laibachii",
+    "id": "alaibachii",
+    "scientific_name": "Albugo laibachii Nc14",
+    "taxonomy_id": "890382",
+    "version": "ENA 1"
+  },
+  {
+    "display_name": "Fasciola hepatica (PRJNA179522)",
+    "id": "fahepaprjna179522",
+    "scientific_name": "Fasciola hepatica",
+    "taxonomy_id": "6192",
+    "version": "F_hepatica_1.0.allpaths.pg (2021-12-WormBase)"
+  },
+  {
+    "display_name": "Adineta vaga",
+    "id": "avaga",
+    "scientific_name": "Adineta vaga",
+    "taxonomy_id": "104782",
+    "version": "AMS_PRJEB1171_v1"
+  },
+  {
+    "display_name": "Saccharum spontaneum",
+    "id": "sspontaneum",
+    "scientific_name": "Saccharum spontaneum",
+    "taxonomy_id": "62335",
+    "version": "Sspon.HiC_chr_asm"
+  },
+  {
+    "display_name": "Opisthorchis felineus (PRJNA413383)",
+    "id": "opfeliprjna413383",
+    "scientific_name": "Opisthorchis felineus",
+    "taxonomy_id": "147828",
+    "version": "ICG_Ofel_1.0 (2019-05-WormBase)"
+  },
+  {
+    "display_name": "Meloidogyne arenaria (PRJNA438575)",
+    "id": "mearenprjna438575",
+    "scientific_name": "Meloidogyne arenaria",
+    "taxonomy_id": "6304",
+    "version": "ASM313380v1 (2018-08-WormBase)"
+  },
+  {
+    "display_name": "Lactuca sativa",
+    "id": "lsativa",
+    "scientific_name": "Lactuca sativa",
+    "taxonomy_id": "4236",
+    "version": "Lsat_Salinas_v7"
+  },
+  {
+    "display_name": "Aspergillus flavus NRRL3357",
+    "id": "aflavus",
+    "scientific_name": "Aspergillus flavus NRRL3357",
+    "taxonomy_id": "332952",
+    "version": "JCVI-afl1-v2.0"
+  },
+  {
+    "display_name": "Glossina pallidipes",
+    "id": "gpallidipes",
+    "scientific_name": "Glossina pallidipes",
+    "taxonomy_id": "7398",
+    "version": "GpalI1"
+  },
+  {
+    "display_name": "Chondrus crispus",
+    "id": "ccrispus",
+    "scientific_name": "Chondrus crispus",
+    "taxonomy_id": "2769",
+    "version": "ASM35022v2"
+  },
+  {
+    "display_name": "Triticum aestivum Norin61",
+    "id": "tanorin61",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Norin61"
+  },
+  {
+    "display_name": "Saccoglossus kowalevskii (Acorn worm) - GCA_000003605.1",
+    "id": "skgca000003605v1",
+    "scientific_name": "Saccoglossus kowalevskii",
+    "taxonomy_id": "10224",
+    "version": "GCA000003605v1"
+  },
+  {
+    "display_name": "Shrew",
+    "id": "saraneus",
+    "scientific_name": "Sorex araneus",
+    "taxonomy_id": "42254",
+    "version": "sorAra1"
+  },
+  {
+    "display_name": "Magnaporthe oryzae",
+    "id": "moryzae",
+    "scientific_name": "Pyricularia oryzae 70-15",
+    "taxonomy_id": "242507",
+    "version": "MG8"
+  },
+  {
+    "display_name": "[Candida] haemuloni",
+    "id": "chaemuloni",
+    "scientific_name": "[Candida] haemuloni",
+    "taxonomy_id": "45357",
+    "version": "GCA002926055v1"
+  },
+  {
+    "display_name": "Anopheles funestus",
+    "id": "afunestus",
+    "scientific_name": "Anopheles funestus",
+    "taxonomy_id": "62324",
+    "version": "AfunF3"
+  },
+  {
+    "display_name": "Pig - Rongchang",
+    "id": "ssrongchang",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Rongchang_pig_v1"
+  },
+  {
+    "display_name": "Rhagoletis pomonella (Grant_MI) - GCA_013731165.1",
+    "id": "rpgca013731165v1",
+    "scientific_name": "Rhagoletis pomonella",
+    "taxonomy_id": "28610",
+    "version": "Rhpom_1.0"
+  },
+  {
+    "display_name": "Trialeurodes vaporariorum (IVF)",
+    "id": "tvgca011764245",
+    "scientific_name": "Trialeurodes vaporariorum",
+    "taxonomy_id": "88556",
+    "version": "GCA011764245v1"
+  },
+  {
+    "display_name": "Ixodes scapularis (ISE6)",
+    "id": "isise6",
+    "scientific_name": "Ixodes scapularis",
+    "taxonomy_id": "6945",
+    "version": "IscaI1"
+  },
+  {
+    "display_name": "Clown anemonefish",
+    "id": "aocellaris",
+    "scientific_name": "Amphiprion ocellaris",
+    "taxonomy_id": "80972",
+    "version": "AmpOce1.0"
+  },
+  {
+    "display_name": "Strongyloides ratti (PRJEB125) [WS282]",
+    "id": "strattprjeb125",
+    "scientific_name": "Strongyloides ratti",
+    "taxonomy_id": "34506",
+    "version": "S_ratti_ED321_v5_0_4 (WS279)"
+  },
+  {
+    "display_name": "Ixodes persulcatus (Iper-2018)",
+    "id": "ipgca013358835v1",
+    "scientific_name": "Ixodes persulcatus",
+    "taxonomy_id": "34615",
+    "version": "BIME_Iper_1.3"
+  },
+  {
+    "display_name": "Caenorhabditis panamensis (PRJEB28259)",
+    "id": "capanaprjeb28259",
+    "scientific_name": "Caenorhabditis panamensis",
+    "taxonomy_id": "2301259",
+    "version": "CPANA_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Atlantic salmon",
+    "id": "ssalar",
+    "scientific_name": "Salmo salar",
+    "taxonomy_id": "8030",
+    "version": "Ssal_v3.1"
+  },
+  {
+    "display_name": "Leishmania major",
+    "id": "lmajor",
+    "scientific_name": "Leishmania major strain Friedlin",
+    "taxonomy_id": "347515",
+    "version": "ASM272v2"
+  },
+  {
+    "display_name": "Actinia equina (AE1) - GCA_011057435.1",
+    "id": "aegca011057435",
+    "scientific_name": "Actinia equina",
+    "taxonomy_id": "6106",
+    "version": "equina_smartden.arrow4.noredun"
+  },
+  {
+    "display_name": "Panagrellus redivivus (PRJNA186477)",
+    "id": "parediprjna186477",
+    "scientific_name": "Panagrellus redivivus",
+    "taxonomy_id": "6233",
+    "version": "Pred3 (2013-09-Caltech)"
+  },
+  {
+    "display_name": "Steinernema glaseri (PRJNA204943)",
+    "id": "stglasprjna204943",
+    "scientific_name": "Steinernema glaseri",
+    "taxonomy_id": "37863",
+    "version": "S_glas_v1_submitted (2014-12-WormBase)"
+  },
+  {
+    "display_name": "Manihot esculenta",
+    "id": "mesculenta",
+    "scientific_name": "Manihot esculenta",
+    "taxonomy_id": "3983",
+    "version": "Manihot esculenta v6"
+  },
+  {
+    "display_name": "Leersia perrieri",
+    "id": "lperrieri",
+    "scientific_name": "Leersia perrieri",
+    "taxonomy_id": "77586",
+    "version": "Lperr_V1.4"
+  },
+  {
+    "display_name": "Eurasian red squirrel",
+    "id": "svulgaris",
+    "scientific_name": "Sciurus vulgaris",
+    "taxonomy_id": "55149",
+    "version": "mSciVul1.1"
+  },
+  {
+    "display_name": "Nymphaea colorata",
+    "id": "ncolorata",
+    "scientific_name": "Nymphaea colorata",
+    "taxonomy_id": "210225",
+    "version": "ASM883128v1"
+  },
+  {
+    "display_name": "Heterodera glycines (PRJNA381081)",
+    "id": "heglycprjna381081",
+    "scientific_name": "Heterodera glycines",
+    "taxonomy_id": "51029",
+    "version": "ASM414822v2 (2021-12-WormBase)"
+  },
+  {
+    "display_name": "Toxocara canis (PRJNA248777)",
+    "id": "tocaniprjna248777",
+    "scientific_name": "Toxocara canis",
+    "taxonomy_id": "6265",
+    "version": "Toxocara_canis_adult_r1.0 (2016-04-WormBase)"
+  },
+  {
+    "display_name": "Necator americanus (PRJNA72135)",
+    "id": "neamerprjna72135",
+    "scientific_name": "Necator americanus",
+    "taxonomy_id": "51031",
+    "version": "N__americanus_v1 (2021-11-WormBase)"
+  },
+  {
+    "display_name": "Candida parapsilosis",
+    "id": "cparapsilosis",
+    "scientific_name": "Candida parapsilosis CDC317",
+    "taxonomy_id": "578454",
+    "version": "GCA000182765v2"
+  },
+  {
+    "display_name": "Solanum lycopersicum",
+    "id": "slycopersicum",
+    "scientific_name": "Solanum lycopersicum",
+    "taxonomy_id": "4081",
+    "version": "SL3.0"
+  },
+  {
+    "display_name": "Bactrocera dorsalis (Oriental fruit fly, Punador) - GCA_000789215.2",
+    "id": "bdgca000789215v2",
+    "scientific_name": "Bactrocera dorsalis",
+    "taxonomy_id": "27457",
+    "version": "GCA000789215v2"
+  },
+  {
+    "display_name": "Prunus avium",
+    "id": "pavium",
+    "scientific_name": "Prunus avium",
+    "taxonomy_id": "42229",
+    "version": "PAV_r1.0"
+  },
+  {
+    "display_name": "Trichinella sp. T9 (PRJNA257433)",
+    "id": "trt9prjna257433",
+    "scientific_name": "Trichinella sp. T9",
+    "taxonomy_id": "181606",
+    "version": "T9_ISS409_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Hydra vulgaris (Swiftwater hydra, 105) - GCA_000004095.1",
+    "id": "hvgca000004095v1",
+    "scientific_name": "Hydra vulgaris",
+    "taxonomy_id": "6087",
+    "version": "GCA000004095v1"
+  },
+  {
+    "display_name": "Theobroma cacao Belizian Criollo B97-61/B2",
+    "id": "tccriollo",
+    "scientific_name": "Theobroma cacao",
+    "taxonomy_id": "3641",
+    "version": "Criollo_cocoa_genome_V2"
+  },
+  {
+    "display_name": "Wuchereria bancrofti (PRJEB536)",
+    "id": "wubancprjeb536",
+    "scientific_name": "Wuchereria bancrofti",
+    "taxonomy_id": "6293",
+    "version": "W_bancrofti_Jakarta_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "American bison",
+    "id": "bbbison",
+    "scientific_name": "Bison bison bison",
+    "taxonomy_id": "43346",
+    "version": "Bison_UMD1.0"
+  },
+  {
+    "display_name": "Aspergillus fischeri NRRL 181",
+    "id": "nfischeri",
+    "scientific_name": "Aspergillus fischeri NRRL 181",
+    "taxonomy_id": "331117",
+    "version": "ASM14964v1"
+  },
+  {
+    "display_name": "Micoletzkya japonica (PRJEB27334)",
+    "id": "mijapoprjeb27334",
+    "scientific_name": "Micoletzkya japonica",
+    "taxonomy_id": "1250332",
+    "version": "Micoletzkya japonica genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Puccinia striiformis f. sp. tritici PST-130 str. Race 130",
+    "id": "pstriiformis",
+    "scientific_name": "Puccinia striiformis f. sp. tritici PST-130",
+    "taxonomy_id": "875184",
+    "version": "PST-130_1.0"
+  },
+  {
+    "display_name": "Trypanosoma brucei",
+    "id": "tbrucei",
+    "scientific_name": "Trypanosoma brucei",
+    "taxonomy_id": "5691",
+    "version": "TryBru_Apr2005_chr11"
+  },
+  {
+    "display_name": "Hedgehog",
+    "id": "eeuropaeus",
+    "scientific_name": "Erinaceus europaeus",
+    "taxonomy_id": "9365",
+    "version": "eriEur1"
+  },
+  {
+    "display_name": "Plasmodium falciparum 3D7",
+    "id": "pfalciparum",
+    "scientific_name": "Plasmodium falciparum 3D7",
+    "taxonomy_id": "36329",
+    "version": "ASM276v2"
+  },
+  {
+    "display_name": "Trichinella spiralis (PRJNA257433)",
+    "id": "trspirprjna257433",
+    "scientific_name": "Trichinella spiralis",
+    "taxonomy_id": "6334",
+    "version": "T1_ISS3_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Wild yak",
+    "id": "bmutus",
+    "scientific_name": "Bos mutus",
+    "taxonomy_id": "72004",
+    "version": "BosGru_v2.0"
+  },
+  {
+    "display_name": "Aspergillus clavatus NRRL 1",
+    "id": "aclavatus",
+    "scientific_name": "Aspergillus clavatus NRRL 1",
+    "taxonomy_id": "344612",
+    "version": "ASM271v1"
+  },
+  {
+    "display_name": "Clonorchis sinensis (PRJNA386618)",
+    "id": "clsineprjna386618",
+    "scientific_name": "Clonorchis sinensis",
+    "taxonomy_id": "79923",
+    "version": "CSKR.v2 (2021-04-WormBase)"
+  },
+  {
+    "display_name": "Anopheles christyi",
+    "id": "achristyi",
+    "scientific_name": "Anopheles christyi",
+    "taxonomy_id": "43041",
+    "version": "AchrA1"
+  },
+  {
+    "display_name": "Oryza glumipatula",
+    "id": "oglumipatula",
+    "scientific_name": "Oryza glumipatula",
+    "taxonomy_id": "40148",
+    "version": "Oryza_glumaepatula_v1.5"
+  },
+  {
+    "display_name": "Pig - Pietrain",
+    "id": "sspietrain",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Pietrain_pig_v1"
+  },
+  {
+    "display_name": "Rhabditophanes sp. KR3021 (PRJEB1297)",
+    "id": "rhkr30prjeb1297",
+    "scientific_name": "Rhabditophanes sp. KR3021",
+    "taxonomy_id": "114890",
+    "version": "Rhabditophanes_sp_KR3021 (2015-05-WormBase)"
+  },
+  {
+    "display_name": "Denticle herring",
+    "id": "dclupeoides",
+    "scientific_name": "Denticeps clupeoides",
+    "taxonomy_id": "299321",
+    "version": "fDenClu1.1"
+  },
+  {
+    "display_name": "Meloidogyne incognita (PRJEB8714)",
+    "id": "meincoprjeb8714",
+    "scientific_name": "Meloidogyne incognita",
+    "taxonomy_id": "6306",
+    "version": "Meloidogyne_incognita_V3 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Galendromus occidentalis (Western predatory mite) - GCA_000255335.2",
+    "id": "gogca000255335v2rs",
+    "scientific_name": "Galendromus occidentalis",
+    "taxonomy_id": "34638",
+    "version": "Mocc_1.0"
+  },
+  {
+    "display_name": "Capsicum annuum",
+    "id": "cannuum",
+    "scientific_name": "Capsicum annuum",
+    "taxonomy_id": "4072",
+    "version": "ASM51225v2"
+  },
+  {
+    "display_name": "Triticum aestivum Kariega",
+    "id": "takariega",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "Tae_Kariega_v1"
+  },
+  {
+    "display_name": "Phlebotomus papatasi",
+    "id": "ppapatasi",
+    "scientific_name": "Phlebotomus papatasi",
+    "taxonomy_id": "29031",
+    "version": "PpapI1"
+  },
+  {
+    "display_name": "Medium ground-finch",
+    "id": "gfortis",
+    "scientific_name": "Geospiza fortis",
+    "taxonomy_id": "48883",
+    "version": "GeoFor_1.0"
+  },
+  {
+    "display_name": "Brugia malayi (PRJNA10729) [WS282]",
+    "id": "brmalaprjna10729",
+    "scientific_name": "Brugia malayi",
+    "taxonomy_id": "6279",
+    "version": "Bmal-4.0 (WS282)"
+  },
+  {
+    "display_name": "Mexican tetra",
+    "id": "amexicanus",
+    "scientific_name": "Astyanax mexicanus",
+    "taxonomy_id": "7994",
+    "version": "Astyanax_mexicanus-2.0"
+  },
+  {
+    "display_name": "Dinothrombium tinctorium",
+    "id": "dtinctorium",
+    "scientific_name": "Dinothrombium tinctorium",
+    "taxonomy_id": "1965070",
+    "version": "DtinU1"
+  },
+  {
+    "display_name": "Selaginella moellendorffii",
+    "id": "smoellendorffii",
+    "scientific_name": "Selaginella moellendorffii",
+    "taxonomy_id": "88036",
+    "version": "v1.0"
+  },
+  {
+    "display_name": "Hyaloperonospora arabidopsidis",
+    "id": "harabidopsidis",
+    "scientific_name": "Hyaloperonospora arabidopsidis Emoy2",
+    "taxonomy_id": "559515",
+    "version": "HyaAraEmoy2_2.0"
+  },
+  {
+    "display_name": "Gigantopelta aegis (Deep sea snail, Gae_Host) - GCA_016097555.1",
+    "id": "gagca016097555v1",
+    "scientific_name": "Gigantopelta aegis",
+    "taxonomy_id": "1735272",
+    "version": "Gae_host_genome"
+  },
+  {
+    "display_name": "Pythium ultimum",
+    "id": "pultimum",
+    "scientific_name": "Globisporangium ultimum DAOM BR144",
+    "taxonomy_id": "431595",
+    "version": "pug"
+  },
+  {
+    "display_name": "Pseudo-nitzschia multistriata",
+    "id": "pmultistriata",
+    "scientific_name": "Pseudo-nitzschia multistriata",
+    "taxonomy_id": "183589",
+    "version": "ASM90066040v1"
+  },
+  {
+    "display_name": "Ancylostoma ceylanicum (PRJNA231479)",
+    "id": "anceylprjna231479",
+    "scientific_name": "Ancylostoma ceylanicum",
+    "taxonomy_id": "53326",
+    "version": "Acey_2013.11.30.genDNA (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Pinecone soldierfish",
+    "id": "mmurdjan",
+    "scientific_name": "Myripristis murdjan",
+    "taxonomy_id": "586833",
+    "version": "fMyrMur1.1"
+  },
+  {
+    "display_name": "Golden-line barbel",
+    "id": "sgrahami",
+    "scientific_name": "Sinocyclocheilus grahami",
+    "taxonomy_id": "75366",
+    "version": "SAMN03320097.WGS_v1.1"
+  },
+  {
+    "display_name": "Trichinella spiralis (PRJNA12603)",
+    "id": "trspirprjna12603",
+    "scientific_name": "Trichinella spiralis",
+    "taxonomy_id": "6334",
+    "version": "Trichinella_spiralis-3.7.1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Common canary",
+    "id": "scanaria",
+    "scientific_name": "Serinus canaria",
+    "taxonomy_id": "9135",
+    "version": "SCA1"
+  },
+  {
+    "display_name": "Atlantic cod",
+    "id": "gmorhua",
+    "scientific_name": "Gadus morhua",
+    "taxonomy_id": "8049",
+    "version": "gadMor3.0"
+  },
+  {
+    "display_name": "Citrullus lanatus",
+    "id": "clanatus",
+    "scientific_name": "Citrullus lanatus",
+    "taxonomy_id": "3654",
+    "version": "Cla97_v1"
+  },
+  {
+    "display_name": "Opisthorchis viverrini (PRJNA222628)",
+    "id": "opviveprjna222628",
+    "scientific_name": "Opisthorchis viverrini",
+    "taxonomy_id": "6198",
+    "version": "OpiViv1.0 (2019-02-WormBase)"
+  },
+  {
+    "display_name": "Dermacentor silvarum (Dsil-2018)",
+    "id": "dsgca013339745v1",
+    "scientific_name": "Dermacentor silvarum",
+    "taxonomy_id": "543639",
+    "version": "GCA013339745v1"
+  },
+  {
+    "display_name": "Squirrel",
+    "id": "itridecemlineatus",
+    "scientific_name": "Ictidomys tridecemlineatus",
+    "taxonomy_id": "43179",
+    "version": "SpeTri2.0"
+  },
+  {
+    "display_name": "Lumpfish",
+    "id": "clumpus",
+    "scientific_name": "Cyclopterus lumpus",
+    "taxonomy_id": "8103",
+    "version": "fCycLum1.pri"
+  },
+  {
+    "display_name": "Electric eel",
+    "id": "eelectricus",
+    "scientific_name": "Electrophorus electricus",
+    "taxonomy_id": "8005",
+    "version": "Ee_SOAP_WITH_SSPACE"
+  },
+  {
+    "display_name": "Rhipicephalus sanguineus (Rsan-2018)",
+    "id": "rsgca013339695v1",
+    "scientific_name": "Rhipicephalus sanguineus",
+    "taxonomy_id": "34632",
+    "version": "GCA013339695v1"
+  },
+  {
+    "display_name": "Atlantic herring",
+    "id": "charengus",
+    "scientific_name": "Clupea harengus",
+    "taxonomy_id": "7950",
+    "version": "Ch_v2.0.2"
+  },
+  {
+    "display_name": "Populus trichocarpa",
+    "id": "ptrichocarpa",
+    "scientific_name": "Populus trichocarpa",
+    "taxonomy_id": "3694",
+    "version": "Pop_tri_v3"
+  },
+  {
+    "display_name": "Plasmodium knowlesi",
+    "id": "pknowlesi",
+    "scientific_name": "Plasmodium knowlesi strain H",
+    "taxonomy_id": "5851",
+    "version": "ASM635v1"
+  },
+  {
+    "display_name": "Guillardia theta CCMP2712",
+    "id": "gtheta",
+    "scientific_name": "Guillardia theta CCMP2712",
+    "taxonomy_id": "905079",
+    "version": "Guith1"
+  },
+  {
+    "display_name": "Heliconius melpomene",
+    "id": "hmelpomene",
+    "scientific_name": "Heliconius melpomene",
+    "taxonomy_id": "34740",
+    "version": "Hmel1"
+  },
+  {
+    "display_name": "Dibothriocephalus latus (PRJEB1206)",
+    "id": "dilatuprjeb1206",
+    "scientific_name": "Dibothriocephalus latus",
+    "taxonomy_id": "60516",
+    "version": "D_latum_Geneva_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Huchen",
+    "id": "hhucho",
+    "scientific_name": "Hucho hucho",
+    "taxonomy_id": "62062",
+    "version": "ASM331708v1"
+  },
+  {
+    "display_name": "Acrobeloides nanus (PRJEB26554)",
+    "id": "acnanuprjeb26554",
+    "scientific_name": "Acrobeloides nanus",
+    "taxonomy_id": "290746",
+    "version": "v1 (2018-08-WormBase)"
+  },
+  {
+    "display_name": "Ferret",
+    "id": "mpfuro",
+    "scientific_name": "Mustela putorius furo",
+    "taxonomy_id": "9669",
+    "version": "MusPutFur1.0"
+  },
+  {
+    "display_name": "Gibbon",
+    "id": "nleucogenys",
+    "scientific_name": "Nomascus leucogenys",
+    "taxonomy_id": "61853",
+    "version": "Nleu_3.0"
+  },
+  {
+    "display_name": "Ustilago maydis",
+    "id": "umaydis",
+    "scientific_name": "Ustilago maydis 521",
+    "taxonomy_id": "237631",
+    "version": "Umaydis521_2.0"
+  },
+  {
+    "display_name": "Prunus persica",
+    "id": "ppersica",
+    "scientific_name": "Prunus persica",
+    "taxonomy_id": "3760",
+    "version": "Prunus_persica_NCBIv2"
+  },
+  {
+    "display_name": "Paragonimus westermani (PRJNA454344)",
+    "id": "pawestprjna454344",
+    "scientific_name": "Paragonimus westermani",
+    "taxonomy_id": "34504",
+    "version": "ASM850834v1 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Chinese medaka",
+    "id": "osinensis",
+    "scientific_name": "Oryzias sinensis",
+    "taxonomy_id": "183150",
+    "version": "ASM858656v1"
+  },
+  {
+    "display_name": "Ooceraea biroi (Clonal raider ant, clonal line C1) - GCA_003672135.1",
+    "id": "obgca003672135v1",
+    "scientific_name": "Ooceraea biroi",
+    "taxonomy_id": "2015173",
+    "version": "Obir_v5.4"
+  },
+  {
+    "display_name": "Caenorhabditis remanei (PRJNA248909)",
+    "id": "caremaprjna248909",
+    "scientific_name": "Caenorhabditis remanei",
+    "taxonomy_id": "31234",
+    "version": "ASM164373v2 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Meloidogyne floridensis (PRJNA340324)",
+    "id": "meflorprjna340324",
+    "scientific_name": "Meloidogyne floridensis",
+    "taxonomy_id": "298350",
+    "version": "ASM369360v1 (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Harpegnathos saltator (Indian jumping ant, DR-91) - GCA_003227715.2",
+    "id": "hsgca003227715v2rs",
+    "scientific_name": "Harpegnathos saltator",
+    "taxonomy_id": "610380",
+    "version": "Hsal_v8.5"
+  },
+  {
+    "display_name": "Ascaris suum (PRJNA80881)",
+    "id": "assuumprjna80881",
+    "scientific_name": "Ascaris suum",
+    "taxonomy_id": "6253",
+    "version": "AscSuum_1.0_submitted (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Sheep",
+    "id": "oarambouillet",
+    "scientific_name": "Ovis aries",
+    "taxonomy_id": "9940",
+    "version": "Oar_rambouillet_v1.0"
+  },
+  {
+    "display_name": "Drosophila virilis (TSC#15010-1051.87)",
+    "id": "dvirilis",
+    "scientific_name": "Drosophila virilis",
+    "taxonomy_id": "7244",
+    "version": "dvir_caf1"
+  },
+  {
+    "display_name": "Orbicella faveolata (Mountainous star coral, FL) - GCA_002042975.1",
+    "id": "ofgca002042975v1",
+    "scientific_name": "Orbicella faveolata",
+    "taxonomy_id": "48498",
+    "version": "ofav_dov_v1"
+  },
+  {
+    "display_name": "Pythium irregulare",
+    "id": "pirregulare",
+    "scientific_name": "Globisporangium irregulare DAOM BR486",
+    "taxonomy_id": "1223557",
+    "version": "pir_scaffolds_v1"
+  },
+  {
+    "display_name": "Hybrid - Bos Indicus",
+    "id": "bihybrid",
+    "scientific_name": "Bos indicus x Bos taurus",
+    "taxonomy_id": "30522",
+    "version": "UOA_Brahman_1"
+  },
+  {
+    "display_name": "Panicum hallii FIL2",
+    "id": "phfil2",
+    "scientific_name": "Panicum hallii",
+    "taxonomy_id": "206008",
+    "version": "PHallii_v3.1"
+  },
+  {
+    "display_name": "Pristionchus entomophagus (PRJEB27334)",
+    "id": "prentoprjeb27334",
+    "scientific_name": "Pristionchus entomophagus",
+    "taxonomy_id": "358040",
+    "version": "P. entomophagus genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Pythium vexans",
+    "id": "pvexans",
+    "scientific_name": "Phytopythium vexans DAOM BR484",
+    "taxonomy_id": "1223560",
+    "version": "pve_scaffolds_v1"
+  },
+  {
+    "display_name": "Dendroctonus ponderosae (Mountain pine beetle) - GCA_000355655.1",
+    "id": "dpgca000355655v1",
+    "scientific_name": "Dendroctonus ponderosae",
+    "taxonomy_id": "77166",
+    "version": "DendPond_male_1.0"
+  },
+  {
+    "display_name": "Stickleback",
+    "id": "gaculeatus",
+    "scientific_name": "Gasterosteus aculeatus",
+    "taxonomy_id": "69293",
+    "version": "BROAD S1"
+  },
+  {
+    "display_name": "Schizosaccharomyces japonicus",
+    "id": "sjaponicus",
+    "scientific_name": "Schizosaccharomyces japonicus yFS275",
+    "taxonomy_id": "402676",
+    "version": "SJ5"
+  },
+  {
+    "display_name": "Patiria miniata (Bat star starfish, m_02_andy) - GCA_015706575.1",
+    "id": "pmgca015706575v1",
+    "scientific_name": "Patiria miniata",
+    "taxonomy_id": "46514",
+    "version": "GCA015706575v1"
+  },
+  {
+    "display_name": "Biomphalaria glabrata",
+    "id": "bglabrata",
+    "scientific_name": "Biomphalaria glabrata",
+    "taxonomy_id": "6526",
+    "version": "BglaB1"
+  },
+  {
+    "display_name": "Oryza rufipogon",
+    "id": "orufipogon",
+    "scientific_name": "Oryza rufipogon",
+    "taxonomy_id": "4529",
+    "version": "OR_W1943"
+  },
+  {
+    "display_name": "Aedes albopictus",
+    "id": "aalbopictus",
+    "scientific_name": "Aedes albopictus",
+    "taxonomy_id": "7160",
+    "version": "AaloF1"
+  },
+  {
+    "display_name": "Dracunculus medinensis (PRJEB500)",
+    "id": "drmediprjeb500",
+    "scientific_name": "Dracunculus medinensis",
+    "taxonomy_id": "318479",
+    "version": "D_medinensis_Ghana_v2_0_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Gyrodactylus bullatarudis (PRJNA532341)",
+    "id": "gybullprjna532341",
+    "scientific_name": "Gyrodactylus bullatarudis",
+    "taxonomy_id": "82660",
+    "version": "ASM1206441v1 (2022-02-WormBase)"
+  },
+  {
+    "display_name": "Wuchereria bancrofti (PRJNA275548)",
+    "id": "wubancprjna275548",
+    "scientific_name": "Wuchereria bancrofti",
+    "taxonomy_id": "6293",
+    "version": "Wb_PNG_Genome_assembly_pt22 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Medicago truncatula",
+    "id": "mtruncatula",
+    "scientific_name": "Medicago truncatula",
+    "taxonomy_id": "3880",
+    "version": "MedtrA17_4.0"
+  },
+  {
+    "display_name": "Zebrafish",
+    "id": "drerio",
+    "scientific_name": "Danio rerio",
+    "taxonomy_id": "7955",
+    "version": "GRCz11"
+  },
+  {
+    "display_name": "Tarsier",
+    "id": "csyrichta",
+    "scientific_name": "Carlito syrichta",
+    "taxonomy_id": "1868482",
+    "version": "Tarsius_syrichta-2.0.1"
+  },
+  {
+    "display_name": "Triticum aestivum Paragon",
+    "id": "taparagon",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "EI_paragon"
+  },
+  {
+    "display_name": "Bolivian squirrel monkey",
+    "id": "sbboliviensis",
+    "scientific_name": "Saimiri boliviensis boliviensis",
+    "taxonomy_id": "39432",
+    "version": "SaiBol1.0"
+  },
+  {
+    "display_name": "Panagrolaimus davidi (PRJEB32708)",
+    "id": "padaviprjeb32708",
+    "scientific_name": "Panagrolaimus davidi",
+    "taxonomy_id": "227884",
+    "version": "PDA_v2 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Musa acuminata",
+    "id": "macuminata",
+    "scientific_name": "Musa acuminata subsp. malaccensis",
+    "taxonomy_id": "214687",
+    "version": "Musa_acuminata_v2"
+  },
+  {
+    "display_name": "Leptotrombidium deliense",
+    "id": "ldeliense",
+    "scientific_name": "Leptotrombidium deliense",
+    "taxonomy_id": "299467",
+    "version": "LdelU1"
+  },
+  {
+    "display_name": "Domestic yak",
+    "id": "bgrunniens",
+    "scientific_name": "Bos grunniens",
+    "taxonomy_id": "30521",
+    "version": "LU_Bosgru_v3.0"
+  },
+  {
+    "display_name": "Brassica juncea",
+    "id": "bjuncea",
+    "scientific_name": "Brassica juncea",
+    "taxonomy_id": "3707",
+    "version": "ASM1870372v1"
+  },
+  {
+    "display_name": "Sesamum indicum",
+    "id": "sindicum",
+    "scientific_name": "Sesamum indicum",
+    "taxonomy_id": "4182",
+    "version": "S_indicum_v1.0"
+  },
+  {
+    "display_name": "Anopheles quadriannulatus",
+    "id": "aquadriannulatus",
+    "scientific_name": "Anopheles quadriannulatus",
+    "taxonomy_id": "34691",
+    "version": "AquaS1"
+  },
+  {
+    "display_name": "Lucilia cuprina",
+    "id": "lcuprina",
+    "scientific_name": "Lucilia cuprina",
+    "taxonomy_id": "7375",
+    "version": "ASM118794v1"
+  },
+  {
+    "display_name": "Oesophagostomum dentatum (PRJNA72579)",
+    "id": "oedentprjna72579",
+    "scientific_name": "Oesophagostomum dentatum",
+    "taxonomy_id": "61180",
+    "version": "O_dentatum_10.0.ec.cg.pg (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Onchocerca flexuosa (PRJNA230512)",
+    "id": "onflexprjna230512",
+    "scientific_name": "Onchocerca flexuosa",
+    "taxonomy_id": "387005",
+    "version": "O_flexuosa_1.0.allpaths.pg.lrna (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Collared flycatcher",
+    "id": "falbicollis",
+    "scientific_name": "Ficedula albicollis",
+    "taxonomy_id": "59894",
+    "version": "FicAlb1.5"
+  },
+  {
+    "display_name": "Lytechinus variegatus (Green sea urchin, NC3) - GCA_018143015.1",
+    "id": "lvgca018143015v1",
+    "scientific_name": "Lytechinus variegatus",
+    "taxonomy_id": "7654",
+    "version": "Lvar_3.0"
+  },
+  {
+    "display_name": "Donkey",
+    "id": "easinus",
+    "scientific_name": "Equus asinus",
+    "taxonomy_id": "9793",
+    "version": "ASM1607732v2"
+  },
+  {
+    "display_name": "Aspergillus fumigatus A1163",
+    "id": "afumigatusa1163",
+    "scientific_name": "Aspergillus fumigatus A1163",
+    "taxonomy_id": "451804",
+    "version": "ASM15014v1"
+  },
+  {
+    "display_name": "Triticum aestivum Claire",
+    "id": "taclaire",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "TGAC_paragon"
+  },
+  {
+    "display_name": "Pythium iwayamai",
+    "id": "piwayamai",
+    "scientific_name": "Globisporangium iwayamae DAOM BR242034",
+    "taxonomy_id": "1223558",
+    "version": "piw_scaffolds_v1"
+  },
+  {
+    "display_name": "Ancylostoma duodenale (PRJNA72581)",
+    "id": "anduodprjna72581",
+    "scientific_name": "Ancylostoma duodenale",
+    "taxonomy_id": "51022",
+    "version": "A_duodenale_2.2.ec.cg.pg (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Phytophthora kernoviae",
+    "id": "pkernoviae",
+    "scientific_name": "Phytophthora kernoviae 00238/432",
+    "taxonomy_id": "1284355",
+    "version": "PhyKer238/432v1"
+  },
+  {
+    "display_name": "Horse",
+    "id": "ecaballus",
+    "scientific_name": "Equus caballus",
+    "taxonomy_id": "9796",
+    "version": "EquCab3.0"
+  },
+  {
+    "display_name": "Microbotryum violaceum",
+    "id": "mviolaceum",
+    "scientific_name": "Microbotryum lychnidis-dioicae p1A1 Lamole",
+    "taxonomy_id": "683840",
+    "version": "M_violaceum_V1"
+  },
+  {
+    "display_name": "Zea mays",
+    "id": "zmays",
+    "scientific_name": "Zea mays",
+    "taxonomy_id": "4577",
+    "version": "Zm-B73-REFERENCE-NAM-5.0"
+  },
+  {
+    "display_name": "Phytophthora infestans",
+    "id": "pinfestans",
+    "scientific_name": "Phytophthora infestans T30-4",
+    "taxonomy_id": "403677",
+    "version": "ASM14294v1"
+  },
+  {
+    "display_name": "Phytophthora ramorum",
+    "id": "pramorum",
+    "scientific_name": "Phytophthora ramorum",
+    "taxonomy_id": "164328",
+    "version": "ASM14973v1"
+  },
+  {
+    "display_name": "Botrytis cinerea B05.10",
+    "id": "bcinerea",
+    "scientific_name": "Botrytis cinerea B05.10",
+    "taxonomy_id": "332648",
+    "version": "ASM83294v1"
+  },
+  {
+    "display_name": "Haemonchus contortus (PRJNA205202)",
+    "id": "hacontprjna205202",
+    "scientific_name": "Haemonchus contortus",
+    "taxonomy_id": "6289",
+    "version": "Hco_v4_coding_submitted (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Gyrodactylus salaris (PRJNA244375)",
+    "id": "gysalaprjna244375",
+    "scientific_name": "Gyrodactylus salaris",
+    "taxonomy_id": "37629",
+    "version": "Gsalaris_v1 (2016-09-WormBase)"
+  },
+  {
+    "display_name": "Panagrolaimus ps1159 (PRJEB32708)",
+    "id": "paps11prjeb32708",
+    "scientific_name": "Panagrolaimus sp. PS1159",
+    "taxonomy_id": "55785",
+    "version": "PS1159_v2 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Mainland tiger snake",
+    "id": "nscutatus",
+    "scientific_name": "Notechis scutatus",
+    "taxonomy_id": "8663",
+    "version": "TS10Xv2-PRI"
+  },
+  {
+    "display_name": "Upper Galilee mountains blind mole rat",
+    "id": "ngalili",
+    "scientific_name": "Nannospalax galili",
+    "taxonomy_id": "1026970",
+    "version": "S.galili_v1.0"
+  },
+  {
+    "display_name": "Steinernema feltiae (PRJNA204661)",
+    "id": "stfeltprjna204661",
+    "scientific_name": "Steinernema feltiae",
+    "taxonomy_id": "52066",
+    "version": "S_felt_v1_submitted (2014-12-WormBase)"
+  },
+  {
+    "display_name": "Australian saltwater crocodile",
+    "id": "cporosus",
+    "scientific_name": "Crocodylus porosus",
+    "taxonomy_id": "8502",
+    "version": "CroPor_comp1"
+  },
+  {
+    "display_name": "Dermatophagoides pteronyssinus (airmid) - GCA_001901225.2",
+    "id": "dpgca001901225v2",
+    "scientific_name": "Dermatophagoides pteronyssinus",
+    "taxonomy_id": "6956",
+    "version": "GCA001901225v2"
+  },
+  {
+    "display_name": "Brugia pahangi (PRJEB497)",
+    "id": "brpahaprjeb497",
+    "scientific_name": "Brugia pahangi",
+    "taxonomy_id": "6280",
+    "version": "B_pahangi_Glasgow_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Japanese quail",
+    "id": "cjaponica",
+    "scientific_name": "Coturnix japonica",
+    "taxonomy_id": "93934",
+    "version": "Coturnix_japonica_2.0"
+  },
+  {
+    "display_name": "Ancylostoma caninum (PRJNA72585)",
+    "id": "ancaniprjna72585",
+    "scientific_name": "Ancylostoma caninum",
+    "taxonomy_id": "29170",
+    "version": "A_caninum_9.3.2.ec.cg.pg (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Polar bear",
+    "id": "umaritimus",
+    "scientific_name": "Ursus maritimus",
+    "taxonomy_id": "29073",
+    "version": "UrsMar_1.0"
+  },
+  {
+    "display_name": "Panicum hallii HAL2",
+    "id": "phallii",
+    "scientific_name": "Panicum hallii var. hallii",
+    "taxonomy_id": "1504633",
+    "version": "PhalliiHAL_v2.1"
+  },
+  {
+    "display_name": "Schizosaccharomyces octosporus",
+    "id": "soctosporus",
+    "scientific_name": "Schizosaccharomyces octosporus yFS286",
+    "taxonomy_id": "483514",
+    "version": "SO6"
+  },
+  {
+    "display_name": "Penaeus vannamei (Pacific white shrimp) - GCA_003789085.1",
+    "id": "pvgca003789085v1",
+    "scientific_name": "Penaeus vannamei",
+    "taxonomy_id": "6689",
+    "version": "GCA003789085v1"
+  },
+  {
+    "display_name": "Caenorhabditis remanei (PRJNA53967) [WS282]",
+    "id": "caremaprjna53967",
+    "scientific_name": "Caenorhabditis remanei",
+    "taxonomy_id": "31234",
+    "version": "C_remanei-15.0.1 (WS279)"
+  },
+  {
+    "display_name": "Great Tit",
+    "id": "pmajor",
+    "scientific_name": "Parus major",
+    "taxonomy_id": "9157",
+    "version": "Parus_major1.1"
+  },
+  {
+    "display_name": "Dictyostelium discoideum",
+    "id": "ddiscoideum",
+    "scientific_name": "Dictyostelium discoideum AX4",
+    "taxonomy_id": "352472",
+    "version": "dicty_2.7"
+  },
+  {
+    "display_name": "Macaque",
+    "id": "mmulatta",
+    "scientific_name": "Macaca mulatta",
+    "taxonomy_id": "9544",
+    "version": "Mmul_10"
+  },
+  {
+    "display_name": "Nicotiana attenuata",
+    "id": "nattenuata",
+    "scientific_name": "Nicotiana attenuata",
+    "taxonomy_id": "49451",
+    "version": "NIATTr2"
+  },
+  {
+    "display_name": "Arabidopsis lyrata",
+    "id": "alyrata",
+    "scientific_name": "Arabidopsis lyrata subsp. lyrata",
+    "taxonomy_id": "81972",
+    "version": "v.1.0"
+  },
+  {
+    "display_name": "Heterorhabditis bacteriophora (PRJNA13977)",
+    "id": "hebactprjna13977",
+    "scientific_name": "Heterorhabditis bacteriophora",
+    "taxonomy_id": "37862",
+    "version": "Heterorhabditis_bacteriophora-7.0 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Quercus suber",
+    "id": "qsuber",
+    "scientific_name": "Quercus suber",
+    "taxonomy_id": "58331",
+    "version": "CorkOak1.0"
+  },
+  {
+    "display_name": "Exaiptasia diaphana (Sea anemone, CC7) - GCA_001417965.1",
+    "id": "edgca001417965v1",
+    "scientific_name": "Exaiptasia diaphana",
+    "taxonomy_id": "2652724",
+    "version": "Aiptasia_genome_1.1"
+  },
+  {
+    "display_name": "Stylophora pistillata (CSM Monaco) - GCA_002571385.1",
+    "id": "spgca002571385v1",
+    "scientific_name": "Stylophora pistillata",
+    "taxonomy_id": "50429",
+    "version": "Stylophora_pistillata_v1"
+  },
+  {
+    "display_name": "Fusarium verticillioides",
+    "id": "fverticillioides",
+    "scientific_name": "Fusarium verticillioides 7600",
+    "taxonomy_id": "334819",
+    "version": "ASM14955v1"
+  },
+  {
+    "display_name": "Kangaroo rat",
+    "id": "dordii",
+    "scientific_name": "Dipodomys ordii",
+    "taxonomy_id": "10020",
+    "version": "Dord_2.0"
+  },
+  {
+    "display_name": "Portunus trituberculatus (Swimming crab, SZX2019) - GCA_017591435.1",
+    "id": "ptgca017591435v1",
+    "scientific_name": "Portunus trituberculatus",
+    "taxonomy_id": "210409",
+    "version": "GCA017591435v1"
+  },
+  {
+    "display_name": "Melampsora larici-populina",
+    "id": "mlaricipopulina",
+    "scientific_name": "Melampsora larici-populina 98AG31",
+    "taxonomy_id": "747676",
+    "version": "v1.0"
+  },
+  {
+    "display_name": "Trichinella sp. T8 (PRJNA257433)",
+    "id": "trt8prjna257433",
+    "scientific_name": "Trichinella sp. T8",
+    "taxonomy_id": "92180",
+    "version": "T8_ISS272_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Habropoda laboriosa (Southeastern blueberry bee, 0110345459) - GCA_001263275.1",
+    "id": "hlgca001263275v1rs",
+    "scientific_name": "Habropoda laboriosa",
+    "taxonomy_id": "597456",
+    "version": "GCA001263275v1"
+  },
+  {
+    "display_name": "Camelina sativa",
+    "id": "csativa",
+    "scientific_name": "Camelina sativa",
+    "taxonomy_id": "90675",
+    "version": "Cs"
+  },
+  {
+    "display_name": "Megabat",
+    "id": "pvampyrus",
+    "scientific_name": "Pteropus vampyrus",
+    "taxonomy_id": "132908",
+    "version": "pteVam1"
+  },
+  {
+    "display_name": "Anopheles gambiae",
+    "id": "agambiae",
+    "scientific_name": "Anopheles gambiae",
+    "taxonomy_id": "7165",
+    "version": "AgamP4"
+  },
+  {
+    "display_name": "Malus domestica Golden",
+    "id": "mdgolden",
+    "scientific_name": "Malus domestica",
+    "taxonomy_id": "3750",
+    "version": "ASM211411v1"
+  },
+  {
+    "display_name": "Globodera rostochiensis (L22 PRJNA695196)",
+    "id": "l22prjna695196",
+    "scientific_name": "Globodera rostochiensis",
+    "taxonomy_id": "31243",
+    "version": "WUR_GloGros_L22 (2021-11-WormBase)"
+  },
+  {
+    "display_name": "Channel bull blenny",
+    "id": "cgobio",
+    "scientific_name": "Cottoperca gobio",
+    "taxonomy_id": "56716",
+    "version": "fCotGob3.1"
+  },
+  {
+    "display_name": "Triticum aestivum Mace",
+    "id": "tamace",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Mace"
+  },
+  {
+    "display_name": "Leptinotarsa decemlineata (Colorado potato beetle, Imidocloprid resistant) - GCA_000500325.2",
+    "id": "ldgca000500325v2",
+    "scientific_name": "Leptinotarsa decemlineata",
+    "taxonomy_id": "7539",
+    "version": "Ldec_2.0"
+  },
+  {
+    "display_name": "Toxocara canis (PRJEB533)",
+    "id": "tocaniprjeb533",
+    "scientific_name": "Toxocara canis",
+    "taxonomy_id": "6265",
+    "version": "T_canis_Equador_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Cimex lectularius (Harlan)",
+    "id": "clectularius",
+    "scientific_name": "Cimex lectularius",
+    "taxonomy_id": "79782",
+    "version": "Clec_2.0"
+  },
+  {
+    "display_name": "Camponotus floridanus (Florida carpenter ant, SB8) - GCA_003227725.1",
+    "id": "cfgca003227725v1rs",
+    "scientific_name": "Camponotus floridanus",
+    "taxonomy_id": "104421",
+    "version": "Cflo_v7.5"
+  },
+  {
+    "display_name": "Anopheles sinensis",
+    "id": "asinensis",
+    "scientific_name": "Anopheles sinensis",
+    "taxonomy_id": "74873",
+    "version": "AsinS2"
+  },
+  {
+    "display_name": "Hymenolepis nana (PRJEB508)",
+    "id": "hynanaprjeb508",
+    "scientific_name": "Rodentolepis nana",
+    "taxonomy_id": "102285",
+    "version": "H_nana_Japan_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Caenorhabditis remanei (PRJNA577507)",
+    "id": "caremaprjna577507",
+    "scientific_name": "Caenorhabditis remanei",
+    "taxonomy_id": "31234",
+    "version": "CRPX506 (2021-04-WormBase)"
+  },
+  {
+    "display_name": "Triticum aestivum Julius",
+    "id": "tajulius",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Julius"
+  },
+  {
+    "display_name": "Turbot",
+    "id": "smaximus",
+    "scientific_name": "Scophthalmus maximus",
+    "taxonomy_id": "52904",
+    "version": "ASM1334776v1"
+  },
+  {
+    "display_name": "Abingdon island giant tortoise",
+    "id": "cabingdonii",
+    "scientific_name": "Chelonoidis abingdonii",
+    "taxonomy_id": "106734",
+    "version": "ASM359739v1"
+  },
+  {
+    "display_name": "Magnaporthe oryzae",
+    "id": "poryzae",
+    "scientific_name": "Pyricularia oryzae",
+    "taxonomy_id": "318829",
+    "version": "GCA900474545v2"
+  },
+  {
+    "display_name": "Elephant shark",
+    "id": "cmilii",
+    "scientific_name": "Callorhinchus milii",
+    "taxonomy_id": "7868",
+    "version": "Callorhinchus_milii-6.1.3"
+  },
+  {
+    "display_name": "Kalanchoe fedtschenkoi",
+    "id": "kfedtschenkoi",
+    "scientific_name": "Kalanchoe fedtschenkoi",
+    "taxonomy_id": "63787",
+    "version": "K_fedtschenkoi_M2_v1"
+  },
+  {
+    "display_name": "Trichoderma virens",
+    "id": "tvirens",
+    "scientific_name": "Trichoderma virens Gv29-8",
+    "taxonomy_id": "413071",
+    "version": "ASM17099v1"
+  },
+  {
+    "display_name": "Helobdella robusta",
+    "id": "hrobusta",
+    "scientific_name": "Helobdella robusta",
+    "taxonomy_id": "6412",
+    "version": "Helro1"
+  },
+  {
+    "display_name": "Puccinia graminis Ug99",
+    "id": "pgraminisug99",
+    "scientific_name": "Puccinia graminis f. sp. tritici 04KEN156/4",
+    "taxonomy_id": "1040990",
+    "version": "v1"
+  },
+  {
+    "display_name": "Fusarium oxysporum",
+    "id": "foxysporum",
+    "scientific_name": "Fusarium oxysporum f. sp. lycopersici 4287",
+    "taxonomy_id": "426428",
+    "version": "FO2"
+  },
+  {
+    "display_name": "Olive baboon",
+    "id": "panubis",
+    "scientific_name": "Papio anubis",
+    "taxonomy_id": "9555",
+    "version": "Panubis1.0"
+  },
+  {
+    "display_name": "Microbat",
+    "id": "mlucifugus",
+    "scientific_name": "Myotis lucifugus",
+    "taxonomy_id": "59463",
+    "version": "Myoluc2.0"
+  },
+  {
+    "display_name": "Setaria italica",
+    "id": "sitalica",
+    "scientific_name": "Setaria italica",
+    "taxonomy_id": "4555",
+    "version": "Setaria_italica_v2.0"
+  },
+  {
+    "display_name": "Olea europaea",
+    "id": "oeuropaea",
+    "scientific_name": "Olea europaea subsp. europaea",
+    "taxonomy_id": "158383",
+    "version": "OLEA9"
+  },
+  {
+    "display_name": "Gaeumannomyces tritici R3-111a-1",
+    "id": "ggraminis",
+    "scientific_name": "Gaeumannomyces tritici R3-111a-1",
+    "taxonomy_id": "644352",
+    "version": "Gae_graminis_V2"
+  },
+  {
+    "display_name": "Fusarium pseudograminearum",
+    "id": "fpseudograminearum",
+    "scientific_name": "Fusarium pseudograminearum CS3096",
+    "taxonomy_id": "1028729",
+    "version": "FP7"
+  },
+  {
+    "display_name": "Tree Shrew",
+    "id": "tbelangeri",
+    "scientific_name": "Tupaia belangeri",
+    "taxonomy_id": "37347",
+    "version": "tupBel1"
+  },
+  {
+    "display_name": "Pythium arrhenomanes",
+    "id": "parrhenomanes",
+    "scientific_name": "Pythium arrhenomanes ATCC 12531",
+    "taxonomy_id": "1223556",
+    "version": "par_scaffolds_v1"
+  },
+  {
+    "display_name": "Pocillopora damicornis (RSMAS) - GCA_003704095.1",
+    "id": "pdgca003704095v1",
+    "scientific_name": "Pocillopora damicornis",
+    "taxonomy_id": "46731",
+    "version": "GCA003704095v1"
+  },
+  {
+    "display_name": "Haemaphysalis longicornis (HaeL-2018)",
+    "id": "hlgca013339765v1",
+    "scientific_name": "Haemaphysalis longicornis",
+    "taxonomy_id": "44386",
+    "version": "GCA013339765v1"
+  },
+  {
+    "display_name": "Apis dorsata (Giant honeybee) - GCA_000469605.1",
+    "id": "adgca000469605v1rs",
+    "scientific_name": "Apis dorsata",
+    "taxonomy_id": "7462",
+    "version": "Apis_dorsata_1.3"
+  },
+  {
+    "display_name": "Haliotis rubra (Blacklip abalone, DU_JTF1) - GCA_003918875.1",
+    "id": "hrgca003918875v1rs",
+    "scientific_name": "Haliotis rubra",
+    "taxonomy_id": "36100",
+    "version": "GCA003918875v1"
+  },
+  {
+    "display_name": "Kakapo",
+    "id": "shabroptila",
+    "scientific_name": "Strigops habroptila",
+    "taxonomy_id": "2489341",
+    "version": "bStrHab1_v1.p"
+  },
+  {
+    "display_name": "Stegodyphus dumicola (Social spider, AA2019) - GCA_010614865.2",
+    "id": "sdgca010614865v2rs",
+    "scientific_name": "Stegodyphus dumicola",
+    "taxonomy_id": "202533",
+    "version": "GCA010614865v2"
+  },
+  {
+    "display_name": "Protopolystoma xenopodis (PRJEB1201)",
+    "id": "prxenoprjeb1201",
+    "scientific_name": "Protopolystoma xenopodis",
+    "taxonomy_id": "117903",
+    "version": "P_xenopodis_South_Africa_v1_0_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Anopheles culicifacies",
+    "id": "aculicifacies",
+    "scientific_name": "Anopheles culicifacies",
+    "taxonomy_id": "139723",
+    "version": "AculA1"
+  },
+  {
+    "display_name": "Armadillo",
+    "id": "dnovemcinctus",
+    "scientific_name": "Dasypus novemcinctus",
+    "taxonomy_id": "9361",
+    "version": "Dasnov3.0"
+  },
+  {
+    "display_name": "Zebra mbuna",
+    "id": "mzebra",
+    "scientific_name": "Maylandia zebra",
+    "taxonomy_id": "106582",
+    "version": "M_zebra_UMD2a"
+  },
+  {
+    "display_name": "Strongyloides venezuelensis (PRJEB530)",
+    "id": "stveneprjeb530",
+    "scientific_name": "Strongyloides venezuelensis",
+    "taxonomy_id": "75913",
+    "version": "S_venezuelensis_HH1 (2015-05-WormBase)"
+  },
+  {
+    "display_name": "Brugia timori (PRJEB4663)",
+    "id": "brtimoprjeb4663",
+    "scientific_name": "Brugia timori",
+    "taxonomy_id": "42155",
+    "version": "B_timori_Indonesia_v1_0_4_001_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Goodes thornscrub tortoise",
+    "id": "gevgoodei",
+    "scientific_name": "Gopherus evgoodei",
+    "taxonomy_id": "1825980",
+    "version": "rGopEvg1_v1.p"
+  },
+  {
+    "display_name": "Caenorhabditis remanei (PRJNA53967)",
+    "id": "cremanei",
+    "scientific_name": "Caenorhabditis remanei",
+    "taxonomy_id": "31234",
+    "version": "C_remanei-15.0.1"
+  },
+  {
+    "display_name": "[Candida] pseudohaemulonii",
+    "id": "cpseudohaemulonis",
+    "scientific_name": "[Candida] pseudohaemulonii",
+    "taxonomy_id": "418784",
+    "version": "GCA003013735v1"
+  },
+  {
+    "display_name": "Brassica rapa",
+    "id": "brapa",
+    "scientific_name": "Brassica rapa",
+    "taxonomy_id": "3711",
+    "version": "Brapa_1.0"
+  },
+  {
+    "display_name": "Triticum dicoccoides",
+    "id": "tdicoccoides",
+    "scientific_name": "Triticum dicoccoides",
+    "taxonomy_id": "85692",
+    "version": "WEWSeq v.1.0"
+  },
+  {
+    "display_name": "Spiny chromis",
+    "id": "apolyacanthus",
+    "scientific_name": "Acanthochromis polyacanthus",
+    "taxonomy_id": "80966",
+    "version": "ASM210954v1"
+  },
+  {
+    "display_name": "Pig - Bamei",
+    "id": "ssbamei",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Bamei_pig_v1"
+  },
+  {
+    "display_name": "Pogonomyrmex barbatus (Red harvester ant) - GCA_000187915.1",
+    "id": "pbgca000187915v1rs",
+    "scientific_name": "Pogonomyrmex barbatus",
+    "taxonomy_id": "144034",
+    "version": "Pbar_UMD_V03"
+  },
+  {
+    "display_name": "Parascaris univalens (PRJNA386823)",
+    "id": "paunivprjna386823",
+    "scientific_name": "Parascaris univalens",
+    "taxonomy_id": "6257",
+    "version": "ASM225920v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Pristionchus pacificus (PRJNA12644)",
+    "id": "ppacificus",
+    "scientific_name": "Pristionchus pacificus",
+    "taxonomy_id": "54126",
+    "version": "El_Paco"
+  },
+  {
+    "display_name": "Bursaphelenchus okinawaensis (PRJEB40023)",
+    "id": "buokinprjeb40023",
+    "scientific_name": "Bursaphelenchus okinawaensis",
+    "taxonomy_id": "465554",
+    "version": "BOKI2 (2021-03-WormBase)"
+  },
+  {
+    "display_name": "Zig-zag eel",
+    "id": "marmatus",
+    "scientific_name": "Mastacembelus armatus",
+    "taxonomy_id": "205130",
+    "version": "fMasArm1.2"
+  },
+  {
+    "display_name": "Arabidopsis halleri",
+    "id": "ahalleri",
+    "scientific_name": "Arabidopsis halleri subsp. gemmifera",
+    "taxonomy_id": "63677",
+    "version": "Ahal2.2"
+  },
+  {
+    "display_name": "Common wall lizard",
+    "id": "pmuralis",
+    "scientific_name": "Podarcis muralis",
+    "taxonomy_id": "64176",
+    "version": "PodMur_1.0"
+  },
+  {
+    "display_name": "Plectus sambesii (PRJNA390260)",
+    "id": "plsambprjna390260",
+    "scientific_name": "Plectus sambesii",
+    "taxonomy_id": "2011161",
+    "version": "Psam_v1.0 (2018-09-WormBase)"
+  },
+  {
+    "display_name": "Chicken",
+    "id": "ggallus",
+    "scientific_name": "Gallus gallus",
+    "taxonomy_id": "9031",
+    "version": "bGalGal1.mat.broiler.GRCg7b"
+  },
+  {
+    "display_name": "Ryukyu mouse",
+    "id": "mcaroli",
+    "scientific_name": "Mus caroli",
+    "taxonomy_id": "10089",
+    "version": "CAROLI_EIJ_v1.1"
+  },
+  {
+    "display_name": "Eucalyptus grandis",
+    "id": "egrandis",
+    "scientific_name": "Eucalyptus grandis",
+    "taxonomy_id": "71139",
+    "version": "Egrandis1_0"
+  },
+  {
+    "display_name": "Procambarus clarkii (Red swamp crayfish, Jiangsu) - GCA_020424385.2",
+    "id": "pcgca020424385v2",
+    "scientific_name": "Procambarus clarkii",
+    "taxonomy_id": "6728",
+    "version": "GCA020424385v2"
+  },
+  {
+    "display_name": "Trichobilharzia regenti (PRJEB4662)",
+    "id": "trregeprjeb4662",
+    "scientific_name": "Trichobilharzia regenti",
+    "taxonomy_id": "157069",
+    "version": "T_regenti_v1_0_4_001_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Wallaby",
+    "id": "neugenii",
+    "scientific_name": "Notamacropus eugenii",
+    "taxonomy_id": "9315",
+    "version": "Meug_1.0"
+  },
+  {
+    "display_name": "Pink-footed goose",
+    "id": "abrachyrhynchus",
+    "scientific_name": "Anser brachyrhynchus",
+    "taxonomy_id": "132585",
+    "version": "ASM259213v1"
+  },
+  {
+    "display_name": "Zootermopsis nevadensis",
+    "id": "znevadensis",
+    "scientific_name": "Zootermopsis nevadensis",
+    "taxonomy_id": "136037",
+    "version": "ZooNev1.0"
+  },
+  {
+    "display_name": "Trichinella pseudospiralis (ISS176 PRJNA257433)",
+    "id": "iss176prjna257433",
+    "scientific_name": "Trichinella pseudospiralis",
+    "taxonomy_id": "6337",
+    "version": "T4_ISS176_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Ascaris suum (PRJNA62057)",
+    "id": "assuumprjna62057",
+    "scientific_name": "Ascaris suum",
+    "taxonomy_id": "6253",
+    "version": "ASM18702v3 (2018-04-WormBase)"
+  },
+  {
+    "display_name": "Greater bamboo lemur",
+    "id": "psimus",
+    "scientific_name": "Prolemur simus",
+    "taxonomy_id": "1328070",
+    "version": "Prosim_1.0"
+  },
+  {
+    "display_name": "Echinococcus multilocularis (PRJEB122)",
+    "id": "ecmultprjeb122",
+    "scientific_name": "Echinococcus multilocularis",
+    "taxonomy_id": "6211",
+    "version": "EMULTI002 (2015-12-WormBase)"
+  },
+  {
+    "display_name": "Orange clownfish",
+    "id": "apercula",
+    "scientific_name": "Amphiprion percula",
+    "taxonomy_id": "161767",
+    "version": "Nemo_v1"
+  },
+  {
+    "display_name": "Octopus sinensis (East Asian common octopus) - GCA_006345805.1",
+    "id": "osgca006345805v1",
+    "scientific_name": "Octopus sinensis",
+    "taxonomy_id": "2607531",
+    "version": "GCA006345805v1"
+  },
+  {
+    "display_name": "Trichinella pseudospiralis (ISS470 PRJNA257433)",
+    "id": "iss470prjna257433",
+    "scientific_name": "Trichinella pseudospiralis",
+    "taxonomy_id": "6337",
+    "version": "T4_ISS470_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Sooty mangabey",
+    "id": "catys",
+    "scientific_name": "Cercocebus atys",
+    "taxonomy_id": "9531",
+    "version": "Caty_1.0"
+  },
+  {
+    "display_name": "Clytia hemisphaerica (Z4C2)",
+    "id": "chgca902728285",
+    "scientific_name": "Clytia hemisphaerica",
+    "taxonomy_id": "252671",
+    "version": "GCA902728285v1"
+  },
+  {
+    "display_name": "Trichinella nativa (PRJNA257433)",
+    "id": "trnatiprjna257433",
+    "scientific_name": "Trichinella nativa",
+    "taxonomy_id": "6335",
+    "version": "T2_ISS10_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Aspergillus oryzae RIB40",
+    "id": "aoryzae",
+    "scientific_name": "Aspergillus oryzae RIB40",
+    "taxonomy_id": "510516",
+    "version": "ASM18445v3"
+  },
+  {
+    "display_name": "Golden snub-nosed monkey",
+    "id": "rroxellana",
+    "scientific_name": "Rhinopithecus roxellana",
+    "taxonomy_id": "61622",
+    "version": "Rrox_v1"
+  },
+  {
+    "display_name": "Aphanomyces invadans",
+    "id": "ainvadans",
+    "scientific_name": "Aphanomyces invadans",
+    "taxonomy_id": "157072",
+    "version": "GCA000520115v1"
+  },
+  {
+    "display_name": "Ascaris suum (PRJNA62057)",
+    "id": "asuum",
+    "scientific_name": "Ascaris suum",
+    "taxonomy_id": "6253",
+    "version": "ASM18702v3"
+  },
+  {
+    "display_name": "Amazon molly",
+    "id": "pformosa",
+    "scientific_name": "Poecilia formosa",
+    "taxonomy_id": "48698",
+    "version": "Poecilia_formosa-5.1.2"
+  },
+  {
+    "display_name": "Human",
+    "id": "hsapiens",
+    "scientific_name": "Homo sapiens",
+    "taxonomy_id": "9606",
+    "version": "GRCh38.p13"
+  },
+  {
+    "display_name": "Fusarium culmorum UK99",
+    "id": "fculmorum",
+    "scientific_name": "Fusarium culmorum CS7071",
+    "taxonomy_id": "1318462",
+    "version": "EF 1"
+  },
+  {
+    "display_name": "Aphanomyces astaci",
+    "id": "aastaci",
+    "scientific_name": "Aphanomyces astaci",
+    "taxonomy_id": "112090",
+    "version": "GCA000520075v1"
+  },
+  {
+    "display_name": "Panagrolaimus superbus (PRJEB32708)",
+    "id": "pasupeprjeb32708",
+    "scientific_name": "Panagrolaimus superbus",
+    "taxonomy_id": "310955",
+    "version": "PSU_v2 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Hordeum vulgare",
+    "id": "hvulgare",
+    "scientific_name": "Hordeum vulgare subsp. vulgare",
+    "taxonomy_id": "112509",
+    "version": "MorexV3_pseudomolecules_assembly"
+  },
+  {
+    "display_name": "Pristionchus pacificus (PRJNA12644) [WS282]",
+    "id": "prpaciprjna12644",
+    "scientific_name": "Pristionchus pacificus",
+    "taxonomy_id": "54126",
+    "version": "El_Paco (WS279)"
+  },
+  {
+    "display_name": "Chinese softshell turtle",
+    "id": "psinensis",
+    "scientific_name": "Pelodiscus sinensis",
+    "taxonomy_id": "13735",
+    "version": "PelSin_1.0"
+  },
+  {
+    "display_name": "Blumeria graminis",
+    "id": "bgraminis",
+    "scientific_name": "Blumeria hordei DH14",
+    "taxonomy_id": "546991",
+    "version": "EF2"
+  },
+  {
+    "display_name": "Siamese fighting fish",
+    "id": "bsplendens",
+    "scientific_name": "Betta splendens",
+    "taxonomy_id": "158456",
+    "version": "fBetSpl5.2"
+  },
+  {
+    "display_name": "Daphnia pulicaria (Water flea, SC F1-1A) - GCA_021234035.2",
+    "id": "dpgca021234035v2rs",
+    "scientific_name": "Daphnia pulicaria",
+    "taxonomy_id": "35523",
+    "version": "SC_F0_13B"
+  },
+  {
+    "display_name": "Pike-perch",
+    "id": "slucioperca",
+    "scientific_name": "Sander lucioperca",
+    "taxonomy_id": "283035",
+    "version": "SLUC_FBN_1"
+  },
+  {
+    "display_name": "Glossina fuscipes (IAEA_lab_2018)",
+    "id": "gfuscipes",
+    "scientific_name": "Glossina fuscipes",
+    "taxonomy_id": "7396",
+    "version": "Yale_Gfus_2"
+  },
+  {
+    "display_name": "Anopheles farauti",
+    "id": "afarauti",
+    "scientific_name": "Anopheles farauti",
+    "taxonomy_id": "69004",
+    "version": "AfarF2"
+  },
+  {
+    "display_name": "Asparagus officinalis",
+    "id": "aofficinalis",
+    "scientific_name": "Asparagus officinalis",
+    "taxonomy_id": "4686",
+    "version": "Aspof.V1"
+  },
+  {
+    "display_name": "Chinese hamster CHOK1GS",
+    "id": "cgchok1gshd",
+    "scientific_name": "Cricetulus griseus",
+    "taxonomy_id": "10029",
+    "version": "CHOK1GS_HDv1"
+  },
+  {
+    "display_name": "Acanthocheilonema viteae (PRJEB1697)",
+    "id": "acviteprjeb1697",
+    "scientific_name": "Acanthocheilonema viteae",
+    "taxonomy_id": "6277",
+    "version": "ASM90053725v1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Candida auris",
+    "id": "cauris",
+    "scientific_name": "[Candida] auris",
+    "taxonomy_id": "498019",
+    "version": "GCA002759435v2"
+  },
+  {
+    "display_name": "Penaeus japonicus (Kuruma shrimp, Ginoza2017) - GCA_017312705.1",
+    "id": "pjgca017312705v1",
+    "scientific_name": "Penaeus japonicus",
+    "taxonomy_id": "27405",
+    "version": "Mj_TUMSAT_v1.0"
+  },
+  {
+    "display_name": "Brassica oleracea",
+    "id": "boleracea",
+    "scientific_name": "Brassica oleracea var. oleracea",
+    "taxonomy_id": "109376",
+    "version": "BOL"
+  },
+  {
+    "display_name": "Coquerel's sifaka",
+    "id": "pcoquereli",
+    "scientific_name": "Propithecus coquereli",
+    "taxonomy_id": "379532",
+    "version": "Pcoq_1.0"
+  },
+  {
+    "display_name": "Hyalomma asiaticum (Hyas-2018)",
+    "id": "hagca013339685v1",
+    "scientific_name": "Hyalomma asiaticum",
+    "taxonomy_id": "266040",
+    "version": "GCA013339685v1"
+  },
+  {
+    "display_name": "Arctic ground squirrel",
+    "id": "uparryii",
+    "scientific_name": "Urocitellus parryii",
+    "taxonomy_id": "9999",
+    "version": "ASM342692v1"
+  },
+  {
+    "display_name": "Aspergillus fumigatus Af293",
+    "id": "afumigatus",
+    "scientific_name": "Aspergillus fumigatus Af293",
+    "taxonomy_id": "330879",
+    "version": "ASM265v1"
+  },
+  {
+    "display_name": "Giardia lamblia",
+    "id": "glamblia",
+    "scientific_name": "Giardia lamblia ATCC 50803",
+    "taxonomy_id": "184922",
+    "version": "GL2"
+  },
+  {
+    "display_name": "Anopheles maculatus",
+    "id": "amaculatus",
+    "scientific_name": "Anopheles maculatus",
+    "taxonomy_id": "74869",
+    "version": "AmacM1"
+  },
+  {
+    "display_name": "Echinococcus granulosus (Dog tapeworm) - GCA_000524195.1",
+    "id": "eggca000524195v1rs",
+    "scientific_name": "Echinococcus granulosus",
+    "taxonomy_id": "6210",
+    "version": "GCA000524195v1"
+  },
+  {
+    "display_name": "Diabrotica virgifera virgifera (Ped12-6-A-3) - GCA_003013835.2",
+    "id": "dvgca003013835v2",
+    "scientific_name": "Diabrotica virgifera virgifera",
+    "taxonomy_id": "50390",
+    "version": "Dvir_v2.0"
+  },
+  {
+    "display_name": "Triticum turgidum",
+    "id": "tturgidum",
+    "scientific_name": "Triticum turgidum subsp. durum",
+    "taxonomy_id": "4567",
+    "version": "svevo"
+  },
+  {
+    "display_name": "Chara braunii",
+    "id": "cbraunii",
+    "scientific_name": "Chara braunii",
+    "taxonomy_id": "69332",
+    "version": "Cbr_1.0"
+  },
+  {
+    "display_name": "Parascaris equorum (PRJEB514)",
+    "id": "paequoprjeb514",
+    "scientific_name": "Parascaris equorum",
+    "taxonomy_id": "6256",
+    "version": "P_equorum_v1_0_4 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Coffea canephora",
+    "id": "ccanephora",
+    "scientific_name": "Coffea canephora",
+    "taxonomy_id": "49390",
+    "version": "AUK_PRJEB4211_v1"
+  },
+  {
+    "display_name": "Ficus carica",
+    "id": "fcarica",
+    "scientific_name": "Ficus carica",
+    "taxonomy_id": "3494",
+    "version": "UNIPI_FiCari_1.0"
+  },
+  {
+    "display_name": "Pristionchus exspectatus (PRJEB24288)",
+    "id": "prexspprjeb24288",
+    "scientific_name": "Pristionchus exspectatus",
+    "taxonomy_id": "1195656",
+    "version": "Pristionchus_exspectatus_de_novo_assembly (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Red fox",
+    "id": "vvulpes",
+    "scientific_name": "Vulpes vulpes",
+    "taxonomy_id": "9627",
+    "version": "VulVul2.2"
+  },
+  {
+    "display_name": "Clonorchis sinensis (PRJDA72781)",
+    "id": "clsineprjda72781",
+    "scientific_name": "Clonorchis sinensis",
+    "taxonomy_id": "79923",
+    "version": "C_sinensis-2.0 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Anopheles stephensi",
+    "id": "astephensi",
+    "scientific_name": "Anopheles stephensi",
+    "taxonomy_id": "30069",
+    "version": "AsteS1"
+  },
+  {
+    "display_name": "Anisakis simplex (PRJEB496)",
+    "id": "ansimpprjeb496",
+    "scientific_name": "Anisakis simplex",
+    "taxonomy_id": "6269",
+    "version": "A_simplex_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Rhipicephalus microplus (Rmic-2018)",
+    "id": "rmgca013339725v1",
+    "scientific_name": "Rhipicephalus microplus",
+    "taxonomy_id": "6941",
+    "version": "GCA013339725v1"
+  },
+  {
+    "display_name": "Macrostomum lignano (PRJNA371498)",
+    "id": "malignprjna371498",
+    "scientific_name": "Macrostomum lignano",
+    "taxonomy_id": "282301",
+    "version": "Mlig_3_7 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Histoplasma capsulatum",
+    "id": "hcapsulatum",
+    "scientific_name": "Histoplasma ohiense (nom. inval.)",
+    "taxonomy_id": "2902605",
+    "version": "GCA000170615v1"
+  },
+  {
+    "display_name": "Hypsibius exemplaris (Water bear tardigrade, Z151) - GCA_002082055.1",
+    "id": "hegca002082055v1",
+    "scientific_name": "Hypsibius exemplaris",
+    "taxonomy_id": "2072580",
+    "version": "nHd_3.1"
+  },
+  {
+    "display_name": "Verticillium dahliae JR2",
+    "id": "vdahliaejr2",
+    "scientific_name": "Verticillium dahliae JR2",
+    "taxonomy_id": "1202531",
+    "version": "VDAG_JR2v.4.0"
+  },
+  {
+    "display_name": "Puccinia triticina",
+    "id": "ptriticina",
+    "scientific_name": "Puccinia triticina 1-1 BBBD Race 1",
+    "taxonomy_id": "630390",
+    "version": "ASM15152v1"
+  },
+  {
+    "display_name": "Koala",
+    "id": "pcinereus",
+    "scientific_name": "Phascolarctos cinereus",
+    "taxonomy_id": "38626",
+    "version": "phaCin_unsw_v4.1"
+  },
+  {
+    "display_name": "Northern pike",
+    "id": "elucius",
+    "scientific_name": "Esox lucius",
+    "taxonomy_id": "8010",
+    "version": "Eluc_v4"
+  },
+  {
+    "display_name": "Schistosoma haematobium (PRJNA78265)",
+    "id": "schaemprjna78265",
+    "scientific_name": "Schistosoma haematobium",
+    "taxonomy_id": "6185",
+    "version": "SchHae_2.0 (2020-04-WormBase)"
+  },
+  {
+    "display_name": "Trichinella pseudospiralis (ISS141 PRJNA257433)",
+    "id": "iss141prjna257433",
+    "scientific_name": "Trichinella pseudospiralis",
+    "taxonomy_id": "6337",
+    "version": "T4_ISS141_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Hordeum vulgare TRITEX",
+    "id": "hvtritex",
+    "scientific_name": "Hordeum vulgare subsp. vulgare",
+    "taxonomy_id": "112509",
+    "version": "Morex_V2_scaf"
+  },
+  {
+    "display_name": "Haemonchus contortus (PRJEB506)",
+    "id": "hacontprjeb506",
+    "scientific_name": "Haemonchus contortus",
+    "taxonomy_id": "6289",
+    "version": "haemonchus_contortus_MHCO3ISE_4.0 (2021-04-WormBase)"
+  },
+  {
+    "display_name": "Magnaporthe poae",
+    "id": "mpoae",
+    "scientific_name": "Magnaporthiopsis poae ATCC 64411",
+    "taxonomy_id": "644358",
+    "version": "Mag_poae_ATCC_64411_V1"
+  },
+  {
+    "display_name": "Leishan spiny toad",
+    "id": "lleishanense",
+    "scientific_name": "Leptobrachium leishanense",
+    "taxonomy_id": "445787",
+    "version": "ASM966780v1"
+  },
+  {
+    "display_name": "Siberian musk deer",
+    "id": "mmoschiferus",
+    "scientific_name": "Moschus moschiferus",
+    "taxonomy_id": "68415",
+    "version": "MosMos_v2_BIUU_UCD"
+  },
+  {
+    "display_name": "Pomphorhynchus laevis (P. laevis sensulato, Thorny-headed worm, GPI110) - GCA_012934845.2",
+    "id": "plgca012934845v2gb",
+    "scientific_name": "Pomphorhynchus laevis",
+    "taxonomy_id": "141832",
+    "version": "GCA012934845v2"
+  },
+  {
+    "display_name": "Meloidogyne arenaria (PRJNA340324)",
+    "id": "mearenprjna340324",
+    "scientific_name": "Meloidogyne arenaria",
+    "taxonomy_id": "6304",
+    "version": "ASM369356v1 (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Caenorhabditis briggsae (PRJNA10731) [WS282]",
+    "id": "cabrigprjna10731",
+    "scientific_name": "Caenorhabditis briggsae",
+    "taxonomy_id": "6238",
+    "version": "CB4 (WS282)"
+  },
+  {
+    "display_name": "Yarkand deer",
+    "id": "chyarkandensis",
+    "scientific_name": "Cervus hanglu yarkandensis",
+    "taxonomy_id": "84702",
+    "version": "CEY_v1"
+  },
+  {
+    "display_name": "American black bear",
+    "id": "uamericanus",
+    "scientific_name": "Ursus americanus",
+    "taxonomy_id": "9643",
+    "version": "ASM334442v1"
+  },
+  {
+    "display_name": "Drosophila pseudoobscura pseudoobscura (MV2-25)",
+    "id": "dpseudoobscura",
+    "scientific_name": "Drosophila pseudoobscura pseudoobscura",
+    "taxonomy_id": "46245",
+    "version": "Dpse_3.0"
+  },
+  {
+    "display_name": "Aedes aegypti (LVP_AGWG)",
+    "id": "aalvpagwg",
+    "scientific_name": "Aedes aegypti",
+    "taxonomy_id": "7159",
+    "version": "AaegL5"
+  },
+  {
+    "display_name": "Bemisia tabaci (SSA3 NG)",
+    "id": "btssa3nig",
+    "scientific_name": "Bemisia tabaci",
+    "taxonomy_id": "7038",
+    "version": "SSA3_Nigeria_2278n_648mb"
+  },
+  {
+    "display_name": "Amphibalanus amphitrite (Acorn barnacle, SeventyFive) - GCA_019059575.1",
+    "id": "aagca019059575v1",
+    "scientific_name": "Amphibalanus amphitrite",
+    "taxonomy_id": "1232801",
+    "version": "NRLGWU_Aamphi_draft"
+  },
+  {
+    "display_name": "Brassica rapa R-o-18",
+    "id": "brro18",
+    "scientific_name": "Brassica rapa subsp. trilocularis",
+    "taxonomy_id": "1813537",
+    "version": "SCU_BraROA_2.3"
+  },
+  {
+    "display_name": "Rosa chinensis",
+    "id": "rchinensis",
+    "scientific_name": "Rosa chinensis",
+    "taxonomy_id": "74649",
+    "version": "RchiOBHm-V2"
+  },
+  {
+    "display_name": "Emiliania huxleyi",
+    "id": "ehuxleyi",
+    "scientific_name": "Emiliania huxleyi CCMP1516",
+    "taxonomy_id": "280463",
+    "version": "Emiliana huxleyi CCMP1516 main genome assembly v1.0"
+  },
+  {
+    "display_name": "Trichoplax adhaerens",
+    "id": "tadhaerens",
+    "scientific_name": "Trichoplax adhaerens",
+    "taxonomy_id": "10228",
+    "version": "ASM15027v1"
+  },
+  {
+    "display_name": "Anopheles coluzzii (Ngousso)",
+    "id": "acngousso",
+    "scientific_name": "Anopheles coluzzii",
+    "taxonomy_id": "1518534",
+    "version": "AcolN1"
+  },
+  {
+    "display_name": "Olea europaea var. sylvestris",
+    "id": "oesylvestris",
+    "scientific_name": "Olea europaea var. sylvestris",
+    "taxonomy_id": "158386",
+    "version": "O_europaea_v1"
+  },
+  {
+    "display_name": "Caenorhabditis elegans (PRJNA13758)",
+    "id": "celegans",
+    "scientific_name": "Caenorhabditis elegans",
+    "taxonomy_id": "6239",
+    "version": "WBcel235"
+  },
+  {
+    "display_name": "C.savignyi",
+    "id": "csavignyi",
+    "scientific_name": "Ciona savignyi",
+    "taxonomy_id": "51511",
+    "version": "CSAV 2.0"
+  },
+  {
+    "display_name": "Trichuris suis (PRJNA179528)",
+    "id": "trsuisprjna179528",
+    "scientific_name": "Trichuris suis",
+    "taxonomy_id": "68888",
+    "version": "T_suis_1.0.allpaths (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Bicolor damselfish",
+    "id": "spartitus",
+    "scientific_name": "Stegastes partitus",
+    "taxonomy_id": "144197",
+    "version": "Stegastes_partitus-1.0.2"
+  },
+  {
+    "display_name": "Paramormyrops kingsleyae",
+    "id": "pkingsleyae",
+    "scientific_name": "Paramormyrops kingsleyae",
+    "taxonomy_id": "1676925",
+    "version": "PKINGS_0.1"
+  },
+  {
+    "display_name": "Mnemiopsis leidyi",
+    "id": "mleidyi",
+    "scientific_name": "Mnemiopsis leidyi",
+    "taxonomy_id": "27923",
+    "version": "MneLei_Aug2011"
+  },
+  {
+    "display_name": "Rabbit",
+    "id": "ocuniculus",
+    "scientific_name": "Oryctolagus cuniculus",
+    "taxonomy_id": "9986",
+    "version": "OryCun2.0"
+  },
+  {
+    "display_name": "Taenia saginata (PRJNA71493)",
+    "id": "tasagiprjna71493",
+    "scientific_name": "Taenia saginata",
+    "taxonomy_id": "6206",
+    "version": "ASM169307v2 (2016-10-WormBase)"
+  },
+  {
+    "display_name": "Komagataella pastoris",
+    "id": "kpastoris",
+    "scientific_name": "Komagataella phaffii GS115",
+    "taxonomy_id": "644223",
+    "version": "ASM2700v1"
+  },
+  {
+    "display_name": "Corchorus capsularis",
+    "id": "ccapsularis",
+    "scientific_name": "Corchorus capsularis",
+    "taxonomy_id": "210143",
+    "version": "CCACVL1_1.0"
+  },
+  {
+    "display_name": "Tribolium castaneum",
+    "id": "tcastaneum",
+    "scientific_name": "Tribolium castaneum",
+    "taxonomy_id": "7070",
+    "version": "Tcas5.2"
+  },
+  {
+    "display_name": "Anopheles merus",
+    "id": "amerus",
+    "scientific_name": "Anopheles merus",
+    "taxonomy_id": "30066",
+    "version": "AmerM2"
+  },
+  {
+    "display_name": "Sclerotinia sclerotiorum",
+    "id": "ssclerotiorum",
+    "scientific_name": "Sclerotinia sclerotiorum 1980 UF-70",
+    "taxonomy_id": "665079",
+    "version": "ASM14694v1"
+  },
+  {
+    "display_name": "Stomoxys calcitrans",
+    "id": "scalcitrans",
+    "scientific_name": "Stomoxys calcitrans",
+    "taxonomy_id": "35570",
+    "version": "ScalU1"
+  },
+  {
+    "display_name": "Mangrove rivulus",
+    "id": "kmarmoratus",
+    "scientific_name": "Kryptolebias marmoratus",
+    "taxonomy_id": "37003",
+    "version": "ASM164957v1"
+  },
+  {
+    "display_name": "Caenorhabditis sinica (PRJNA194557)",
+    "id": "casiniprjna194557",
+    "scientific_name": "Caenorhabditis sinica",
+    "taxonomy_id": "1550068",
+    "version": "1.0 (2011-12-Edinburgh)"
+  },
+  {
+    "display_name": "White-tufted-ear marmoset",
+    "id": "cjacchus",
+    "scientific_name": "Callithrix jacchus",
+    "taxonomy_id": "9483",
+    "version": "mCalJac1.pat.X"
+  },
+  {
+    "display_name": "Schistosoma mattheei (PRJEB523)",
+    "id": "scmattprjeb523",
+    "scientific_name": "Schistosoma mattheei",
+    "taxonomy_id": "31246",
+    "version": "S_mattheei_Denwood_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Plasmodium berghei",
+    "id": "pberghei",
+    "scientific_name": "Plasmodium berghei ANKA",
+    "taxonomy_id": "5823",
+    "version": "PBANKA01"
+  },
+  {
+    "display_name": "Colletotrichum gloeosporioides",
+    "id": "cgloeosporioides",
+    "scientific_name": "Colletotrichum fructicola Nara gc5",
+    "taxonomy_id": "1213859",
+    "version": "Colletotrichum gloeosporioides Nara gc-5"
+  },
+  {
+    "display_name": "Melitaea cinxia",
+    "id": "mcinxia",
+    "scientific_name": "Melitaea cinxia",
+    "taxonomy_id": "113334",
+    "version": "MelCinx1.0"
+  },
+  {
+    "display_name": "Trichinella sp. T6 (PRJNA257433)",
+    "id": "trt6prjna257433",
+    "scientific_name": "Trichinella sp. T6",
+    "taxonomy_id": "92179",
+    "version": "T6_ISS34_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Caenorhabditis brenneri (PRJNA20035)",
+    "id": "cbrenneri",
+    "scientific_name": "Caenorhabditis brenneri",
+    "taxonomy_id": "135651",
+    "version": "C_brenneri-6.0.1b"
+  },
+  {
+    "display_name": "Lion",
+    "id": "pleo",
+    "scientific_name": "Panthera leo",
+    "taxonomy_id": "9689",
+    "version": "PanLeo1.0"
+  },
+  {
+    "display_name": "Caenorhabditis latens (PRJNA248912)",
+    "id": "calateprjna248912",
+    "scientific_name": "Caenorhabditis latens",
+    "taxonomy_id": "1503980",
+    "version": "CaeLat1.0 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Solanum tuberosum",
+    "id": "stuberosum",
+    "scientific_name": "Solanum tuberosum",
+    "taxonomy_id": "4113",
+    "version": "SolTub_3.0"
+  },
+  {
+    "display_name": "Bemisia tabaci (SSA1-SG1 NG)",
+    "id": "btssa1nig",
+    "scientific_name": "Bemisia tabaci",
+    "taxonomy_id": "7038",
+    "version": "SSA1SG1_Nigeria_n4493_656Mb"
+  },
+  {
+    "display_name": "Sloth",
+    "id": "choffmanni",
+    "scientific_name": "Choloepus hoffmanni",
+    "taxonomy_id": "9358",
+    "version": "choHof1"
+  },
+  {
+    "display_name": "Ballan wrasse",
+    "id": "lbergylta",
+    "scientific_name": "Labrus bergylta",
+    "taxonomy_id": "56723",
+    "version": "BallGen_V1"
+  },
+  {
+    "display_name": "Ixodes scapularis",
+    "id": "iscapularis",
+    "scientific_name": "Ixodes scapularis",
+    "taxonomy_id": "6945",
+    "version": "IscaW1"
+  },
+  {
+    "display_name": "Leptosphaeria maculans",
+    "id": "lmaculans",
+    "scientific_name": "Plenodomus lingam JN3",
+    "taxonomy_id": "985895",
+    "version": "ASM23037v1"
+  },
+  {
+    "display_name": "Corymbia citriodora",
+    "id": "ccitriodora",
+    "scientific_name": "Corymbia citriodora subsp. variegata",
+    "taxonomy_id": "360336",
+    "version": "Ccitriodora_v2_1"
+  },
+  {
+    "display_name": "Sipha flava (LNK) - GCA_003268045.1",
+    "id": "sfgca003268045v1",
+    "scientific_name": "Sipha flava",
+    "taxonomy_id": "143950",
+    "version": "YSA_version1"
+  },
+  {
+    "display_name": "Papaver somniferum",
+    "id": "psomniferum",
+    "scientific_name": "Papaver somniferum",
+    "taxonomy_id": "3469",
+    "version": "ASM357369v1"
+  },
+  {
+    "display_name": "Gilthead seabream",
+    "id": "saurata",
+    "scientific_name": "Sparus aurata",
+    "taxonomy_id": "8175",
+    "version": "fSpaAur1.1"
+  },
+  {
+    "display_name": "Oryza brachyantha",
+    "id": "obrachyantha",
+    "scientific_name": "Oryza brachyantha",
+    "taxonomy_id": "4533",
+    "version": "Oryza_brachyantha.v1.4b"
+  },
+  {
+    "display_name": "Hyrax",
+    "id": "pcapensis",
+    "scientific_name": "Procavia capensis",
+    "taxonomy_id": "9813",
+    "version": "proCap1"
+  },
+  {
+    "display_name": "Pristionchus fissidentatus (PRJEB27334)",
+    "id": "prfissprjeb27334",
+    "scientific_name": "Pristionchus fissidentatus",
+    "taxonomy_id": "1538716",
+    "version": "Pristionchus fissidentatus genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Drosophila melanogaster",
+    "id": "dmelanogaster",
+    "scientific_name": "Drosophila melanogaster",
+    "taxonomy_id": "7227",
+    "version": "BDGP6.32"
+  },
+  {
+    "display_name": "Opossum",
+    "id": "mdomestica",
+    "scientific_name": "Monodelphis domestica",
+    "taxonomy_id": "13616",
+    "version": "ASM229v1"
+  },
+  {
+    "display_name": "Ipomoea triloba",
+    "id": "itriloba",
+    "scientific_name": "Ipomoea triloba",
+    "taxonomy_id": "35885",
+    "version": "ASM357664v1"
+  },
+  {
+    "display_name": "Red-bellied piranha",
+    "id": "pnattereri",
+    "scientific_name": "Pygocentrus nattereri",
+    "taxonomy_id": "42514",
+    "version": "Pygocentrus_nattereri-1.0.2"
+  },
+  {
+    "display_name": "Meloidogyne hapla (PRJNA29083)",
+    "id": "mehaplprjna29083",
+    "scientific_name": "Meloidogyne hapla",
+    "taxonomy_id": "6305",
+    "version": "Freeze_1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Triticum aestivum Arinalrfor",
+    "id": "taarinalrfor",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Arinalrfor"
+  },
+  {
+    "display_name": "Triticum urartu",
+    "id": "turartu",
+    "scientific_name": "Triticum urartu",
+    "taxonomy_id": "4572",
+    "version": "Tu2.0"
+  },
+  {
+    "display_name": "Platypus",
+    "id": "oanatinus",
+    "scientific_name": "Ornithorhynchus anatinus",
+    "taxonomy_id": "9258",
+    "version": "mOrnAna1.p.v1"
+  },
+  {
+    "display_name": "Schmidtea mediterranea (PRJNA12585)",
+    "id": "scmediprjna12585",
+    "scientific_name": "Schmidtea mediterranea",
+    "taxonomy_id": "79327",
+    "version": "SmedGD_c1.3 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Toxoplasma gondii ME49",
+    "id": "tgondii",
+    "scientific_name": "Toxoplasma gondii ME49",
+    "taxonomy_id": "508771",
+    "version": "TGA4"
+  },
+  {
+    "display_name": "Mouse Lemur",
+    "id": "mmurinus",
+    "scientific_name": "Microcebus murinus",
+    "taxonomy_id": "30608",
+    "version": "Mmur_3.0"
+  },
+  {
+    "display_name": "Meloidogyne javanica (PRJEB8714)",
+    "id": "mejavaprjeb8714",
+    "scientific_name": "Meloidogyne javanica",
+    "taxonomy_id": "6303",
+    "version": "ASM90000394v1 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Phlebotomus perniciosus (Murcia) - GCA_918844115.1",
+    "id": "ppgca918844115",
+    "scientific_name": "Phlebotomus perniciosus",
+    "taxonomy_id": "13204",
+    "version": "pperniciosus_illum_n82538_165Mb"
+  },
+  {
+    "display_name": "Aplysia californica (California sea hare, F4 #8) - GCA_000002075.2",
+    "id": "acgca000002075v2",
+    "scientific_name": "Aplysia californica",
+    "taxonomy_id": "6500",
+    "version": "AplCal3.0"
+  },
+  {
+    "display_name": "Glycine max",
+    "id": "gmax",
+    "scientific_name": "Glycine max",
+    "taxonomy_id": "3847",
+    "version": "Glycine_max_v2.1"
+  },
+  {
+    "display_name": "Long-tailed chinchilla",
+    "id": "clanigera",
+    "scientific_name": "Chinchilla lanigera",
+    "taxonomy_id": "34839",
+    "version": "ChiLan1.0"
+  },
+  {
+    "display_name": "Phaeodactylum tricornutum",
+    "id": "ptricornutum",
+    "scientific_name": "Phaeodactylum tricornutum CCAP 1055/1",
+    "taxonomy_id": "556484",
+    "version": "ASM15095v2"
+  },
+  {
+    "display_name": "Penaeus monodon (SGIC_2016) - GCA_015228065.1",
+    "id": "pmgca015228065v1",
+    "scientific_name": "Penaeus monodon",
+    "taxonomy_id": "6687",
+    "version": "NSTDA_Pmon_1"
+  },
+  {
+    "display_name": "Drosophila erecta (TSC#14021-0224.01)",
+    "id": "derecta",
+    "scientific_name": "Drosophila erecta",
+    "taxonomy_id": "7220",
+    "version": "dere_caf1"
+  },
+  {
+    "display_name": "Tasmanian devil",
+    "id": "sharrisii",
+    "scientific_name": "Sarcophilus harrisii",
+    "taxonomy_id": "9305",
+    "version": "mSarHar1.11"
+  },
+  {
+    "display_name": "Caenorhabditis angaria (PRJNA51225)",
+    "id": "caangaprjna51225",
+    "scientific_name": "Caenorhabditis angaria",
+    "taxonomy_id": "860376",
+    "version": "13mar2012 (2012-12-Caltech)"
+  },
+  {
+    "display_name": "Gongylonema pulchrum (PRJEB505)",
+    "id": "gopulcprjeb505",
+    "scientific_name": "Gongylonema pulchrum",
+    "taxonomy_id": "637853",
+    "version": "G_pulchrum_Hokkaido_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Meloidogyne floridensis (PRJEB6016)",
+    "id": "meflorprjeb6016",
+    "scientific_name": "Meloidogyne floridensis",
+    "taxonomy_id": "298350",
+    "version": "nMf_1_1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Pristionchus japonicus (PRJEB27334)",
+    "id": "prjapoprjeb27334",
+    "scientific_name": "Pristionchus japonicus",
+    "taxonomy_id": "1195657",
+    "version": "Pristionchus japonicus genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Hymenolepis diminuta (PRJEB30942)",
+    "id": "hydimiprjeb30942",
+    "scientific_name": "Hymenolepis diminuta",
+    "taxonomy_id": "6216",
+    "version": "H.diminuta_WMSil1 (2020-04-WormBase)"
+  },
+  {
+    "display_name": "Globisporangium ultimum",
+    "id": "gultimum",
+    "scientific_name": "Globisporangium ultimum DAOM BR144",
+    "taxonomy_id": "431595",
+    "version": "GCA000143045v1"
+  },
+  {
+    "display_name": "Pika",
+    "id": "oprinceps",
+    "scientific_name": "Ochotona princeps",
+    "taxonomy_id": "9978",
+    "version": "OchPri2.0-Ens"
+  },
+  {
+    "display_name": "Angiostrongylus costaricensis (PRJEB494)",
+    "id": "ancostprjeb494",
+    "scientific_name": "Angiostrongylus costaricensis",
+    "taxonomy_id": "334426",
+    "version": "A_costaricensis_Costa_Rica_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Schizosaccharomyces cryophilus",
+    "id": "scryophilus",
+    "scientific_name": "Schizosaccharomyces cryophilus OY26",
+    "taxonomy_id": "653667",
+    "version": "SCY4"
+  },
+  {
+    "display_name": "Haemonchus placei (PRJEB509)",
+    "id": "haplacprjeb509",
+    "scientific_name": "Haemonchus placei",
+    "taxonomy_id": "6290",
+    "version": "H_placei_MHpl1_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Loa loa",
+    "id": "lloa",
+    "scientific_name": "Loa loa",
+    "taxonomy_id": "7209",
+    "version": "Loa_loa_V3"
+  },
+  {
+    "display_name": "Atta cephalotes",
+    "id": "acephalotes",
+    "scientific_name": "Atta cephalotes",
+    "taxonomy_id": "12957",
+    "version": "Attacep1.0"
+  },
+  {
+    "display_name": "Black snub-nosed monkey",
+    "id": "rbieti",
+    "scientific_name": "Rhinopithecus bieti",
+    "taxonomy_id": "61621",
+    "version": "ASM169854v1"
+  },
+  {
+    "display_name": "Beluga whale",
+    "id": "dleucas",
+    "scientific_name": "Delphinapterus leucas",
+    "taxonomy_id": "9749",
+    "version": "ASM228892v3"
+  },
+  {
+    "display_name": "Monomorium pharaonis (Pharaoh ant, MP-MQ-018) - GCA_013373865.2",
+    "id": "mpgca013373865v2",
+    "scientific_name": "Monomorium pharaonis",
+    "taxonomy_id": "307658",
+    "version": "GCA013373865v2"
+  },
+  {
+    "display_name": "Candida albicans",
+    "id": "calbicans",
+    "scientific_name": "Candida albicans SC5314",
+    "taxonomy_id": "237561",
+    "version": "GCA000182965v3"
+  },
+  {
+    "display_name": "Oryza barthii",
+    "id": "obarthii",
+    "scientific_name": "Oryza barthii",
+    "taxonomy_id": "65489",
+    "version": "O.barthii_v1"
+  },
+  {
+    "display_name": "Belgica antarctica",
+    "id": "bantarctica",
+    "scientific_name": "Belgica antarctica",
+    "taxonomy_id": "315563",
+    "version": "ASM77530v1"
+  },
+  {
+    "display_name": "Mouse",
+    "id": "mmusculus",
+    "scientific_name": "Mus musculus",
+    "taxonomy_id": "10090",
+    "version": "GRCm39"
+  },
+  {
+    "display_name": "Zebra finch",
+    "id": "tguttata",
+    "scientific_name": "Taeniopygia guttata",
+    "taxonomy_id": "59729",
+    "version": "bTaeGut1_v1.p"
+  },
+  {
+    "display_name": "Trichoderma reesei",
+    "id": "treesei",
+    "scientific_name": "Trichoderma reesei QM6a",
+    "taxonomy_id": "431241",
+    "version": "v2.0"
+  },
+  {
+    "display_name": "Crassostrea gigas (Pacific oyster) - GCA_902806645.1",
+    "id": "cgigas",
+    "scientific_name": "Crassostrea gigas",
+    "taxonomy_id": "29159",
+    "version": "GCA902806645v1"
+  },
+  {
+    "display_name": "Blue whale",
+    "id": "bmusculus",
+    "scientific_name": "Balaenoptera musculus",
+    "taxonomy_id": "9771",
+    "version": "mBalMus1.v2"
+  },
+  {
+    "display_name": "Ma's night monkey",
+    "id": "anancymaae",
+    "scientific_name": "Aotus nancymaae",
+    "taxonomy_id": "37293",
+    "version": "Anan_2.0"
+  },
+  {
+    "display_name": "Pig - Berkshire",
+    "id": "ssberkshire",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Berkshire_pig_v1"
+  },
+  {
+    "display_name": "Barramundi perch",
+    "id": "lcalcarifer",
+    "scientific_name": "Lates calcarifer",
+    "taxonomy_id": "8187",
+    "version": "ASB_HGAPassembly_v1"
+  },
+  {
+    "display_name": "Pig",
+    "id": "sscrofa",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Sscrofa11.1"
+  },
+  {
+    "display_name": "Anopheles sinensis (China)",
+    "id": "aschina",
+    "scientific_name": "Anopheles sinensis",
+    "taxonomy_id": "74873",
+    "version": "AsinC2"
+  },
+  {
+    "display_name": "Triticum aestivum Cadenza",
+    "id": "tacadenza",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "TGAC_cadenza"
+  },
+  {
+    "display_name": "Turquoise killifish",
+    "id": "nfurzeri",
+    "scientific_name": "Nothobranchius furzeri",
+    "taxonomy_id": "105023",
+    "version": "Nfu_20140520"
+  },
+  {
+    "display_name": "Daphnia pulex (Common water flea, KAP4) - GCA_021134715.1",
+    "id": "dpgca021134715v1rs",
+    "scientific_name": "Daphnia pulex",
+    "taxonomy_id": "6669",
+    "version": "GCA021134715v1"
+  },
+  {
+    "display_name": "Hymenolepis microstoma (PRJEB124)",
+    "id": "hymicrprjeb124",
+    "scientific_name": "Hymenolepis microstoma",
+    "taxonomy_id": "85433",
+    "version": "HMN_v3 (2018-10-WormBase)"
+  },
+  {
+    "display_name": "Pistacia vera",
+    "id": "pvera",
+    "scientific_name": "Pistacia vera",
+    "taxonomy_id": "55513",
+    "version": "PisVer_v2"
+  },
+  {
+    "display_name": "Loa loa (PRJNA24608)",
+    "id": "loloaprjna246086",
+    "scientific_name": "Loa loa",
+    "taxonomy_id": "7209",
+    "version": "LLoa-hgap-1 (2015-06-WormBase)"
+  },
+  {
+    "display_name": "Oryza punctata",
+    "id": "opunctata",
+    "scientific_name": "Oryza punctata",
+    "taxonomy_id": "4537",
+    "version": "Oryza_punctata_v1.2"
+  },
+  {
+    "display_name": "Cyanidioschyzon merolae",
+    "id": "cmerolae",
+    "scientific_name": "Cyanidioschyzon merolae strain 10D",
+    "taxonomy_id": "280699",
+    "version": "ASM9120v1"
+  },
+  {
+    "display_name": "Trichinella spiralis",
+    "id": "tspiralis",
+    "scientific_name": "Trichinella spiralis",
+    "taxonomy_id": "6334",
+    "version": "Tspiralis1"
+  },
+  {
+    "display_name": "Trichinella pseudospiralis (ISS13 PRJNA257433)",
+    "id": "iss13prjna257433",
+    "scientific_name": "Trichinella pseudospiralis",
+    "taxonomy_id": "6337",
+    "version": "T4_ISS13_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Meloidogyne javanica (PRJNA340324)",
+    "id": "mejavaprjna340324",
+    "scientific_name": "Meloidogyne javanica",
+    "taxonomy_id": "6303",
+    "version": "ASM369362v1 (2019-01-WormBase)"
+  },
+  {
+    "display_name": "Drill",
+    "id": "mleucophaeus",
+    "scientific_name": "Mandrillus leucophaeus",
+    "taxonomy_id": "9568",
+    "version": "Mleu.le_1.0"
+  },
+  {
+    "display_name": "Drosophila ananassae (TSC#14024-0371.13)",
+    "id": "dananassae",
+    "scientific_name": "Drosophila ananassae",
+    "taxonomy_id": "7217",
+    "version": "dana_caf1"
+  },
+  {
+    "display_name": "Caenorhabditis briggsae (PRJNA10731)",
+    "id": "cbriggsae",
+    "scientific_name": "Caenorhabditis briggsae",
+    "taxonomy_id": "6238",
+    "version": "CB4"
+  },
+  {
+    "display_name": "Trichinella britovi (PRJNA257433)",
+    "id": "trbritprjna257433",
+    "scientific_name": "Trichinella britovi",
+    "taxonomy_id": "45882",
+    "version": "T3_ISS120_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Bombus impatiens",
+    "id": "bimpatiens",
+    "scientific_name": "Bombus impatiens",
+    "taxonomy_id": "132113",
+    "version": "BIMP_2.2"
+  },
+  {
+    "display_name": "Colletotrichum graminicola",
+    "id": "cgraminicola",
+    "scientific_name": "Colletotrichum graminicola M1.001",
+    "taxonomy_id": "645133",
+    "version": "C_graminicola_M1_001_V1"
+  },
+  {
+    "display_name": "Echinochloa crus-galli",
+    "id": "ecrusgalli",
+    "scientific_name": "Echinochloa crus-galli",
+    "taxonomy_id": "90397",
+    "version": "ec_v3"
+  },
+  {
+    "display_name": "Steinernema monticolum (PRJNA205067)",
+    "id": "stmontprjna205067",
+    "scientific_name": "Steinernema monticolum",
+    "taxonomy_id": "90984",
+    "version": "S_monti_v1_submitted (2014-12-WormBase)"
+  },
+  {
+    "display_name": "Anopheles stephensi (Indian)",
+    "id": "asindian",
+    "scientific_name": "Anopheles stephensi",
+    "taxonomy_id": "30069",
+    "version": "AsteI2"
+  },
+  {
+    "display_name": "Anopheles albimanus",
+    "id": "aalbimanus",
+    "scientific_name": "Anopheles albimanus",
+    "taxonomy_id": "7167",
+    "version": "AalbS2"
+  },
+  {
+    "display_name": "Climbing perch",
+    "id": "atestudineus",
+    "scientific_name": "Anabas testudineus",
+    "taxonomy_id": "64144",
+    "version": "fAnaTes1.2"
+  },
+  {
+    "display_name": "Colletotrichum orbiculare",
+    "id": "corbiculare",
+    "scientific_name": "Colletotrichum orbiculare MAFF 240422",
+    "taxonomy_id": "1213857",
+    "version": "Corbiculare240422v01"
+  },
+  {
+    "display_name": "Trifolium pratense",
+    "id": "tpratense",
+    "scientific_name": "Trifolium pratense",
+    "taxonomy_id": "57577",
+    "version": "Trpr"
+  },
+  {
+    "display_name": "Goat",
+    "id": "chircus",
+    "scientific_name": "Capra hircus",
+    "taxonomy_id": "9925",
+    "version": "ARS1"
+  },
+  {
+    "display_name": "Capitella teleta",
+    "id": "cteleta",
+    "scientific_name": "Capitella teleta",
+    "taxonomy_id": "283909",
+    "version": "Capitella teleta v1.0"
+  },
+  {
+    "display_name": "Oscheius tipulae (PRJNA644888)",
+    "id": "ostipuprjna644888",
+    "scientific_name": "Oscheius tipulae",
+    "taxonomy_id": "141969",
+    "version": "ASM1342590v1 (2021-03-WormBase)"
+  },
+  {
+    "display_name": "Diploscapter coronatus (PRJDB3143)",
+    "id": "dicoroprjdb3143",
+    "scientific_name": "Diploscapter coronatus",
+    "taxonomy_id": "288516",
+    "version": "ASM220778v1 (2018-02-WormBase)"
+  },
+  {
+    "display_name": "Elephant",
+    "id": "lafricana",
+    "scientific_name": "Loxodonta africana",
+    "taxonomy_id": "9785",
+    "version": "Loxafr3.0"
+  },
+  {
+    "display_name": "Crassostrea virginica (RU13XGHG1-28) - GCA_002022765.4",
+    "id": "cvgca002022765v4",
+    "scientific_name": "Crassostrea virginica",
+    "taxonomy_id": "6565",
+    "version": "C_virginica_3.0"
+  },
+  {
+    "display_name": "Tiger",
+    "id": "ptaltaica",
+    "scientific_name": "Panthera tigris altaica",
+    "taxonomy_id": "74533",
+    "version": "PanTig1.0"
+  },
+  {
+    "display_name": "Trichuris trichiura (PRJEB535)",
+    "id": "trtricprjeb535",
+    "scientific_name": "Trichuris trichiura",
+    "taxonomy_id": "36087",
+    "version": "TTRE2.1 (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Platyfish",
+    "id": "xmaculatus",
+    "scientific_name": "Xiphophorus maculatus",
+    "taxonomy_id": "8083",
+    "version": "X_maculatus-5.0-male"
+  },
+  {
+    "display_name": "Hofstenia miamia",
+    "id": "hmiamia",
+    "scientific_name": "Hofstenia miamia",
+    "taxonomy_id": "442651",
+    "version": "HmiaM1"
+  },
+  {
+    "display_name": "Degu",
+    "id": "odegus",
+    "scientific_name": "Octodon degus",
+    "taxonomy_id": "10160",
+    "version": "OctDeg1.0"
+  },
+  {
+    "display_name": "Schistosoma mansoni (PRJEA36577)",
+    "id": "scmansprjea36577",
+    "scientific_name": "Schistosoma mansoni",
+    "taxonomy_id": "6183",
+    "version": "SM_V9 (2022-01-WormBase)"
+  },
+  {
+    "display_name": "Megaselia scalaris",
+    "id": "mscalaris",
+    "scientific_name": "Megaselia scalaris",
+    "taxonomy_id": "36166",
+    "version": "Msca1"
+  },
+  {
+    "display_name": "Turkey",
+    "id": "mgallopavo",
+    "scientific_name": "Meleagris gallopavo",
+    "taxonomy_id": "9103",
+    "version": "Turkey_5.1"
+  },
+  {
+    "display_name": "Eragrostis curvula",
+    "id": "ecurvula",
+    "scientific_name": "Eragrostis curvula",
+    "taxonomy_id": "38414",
+    "version": "CERZOS_E.curvula1.0"
+  },
+  {
+    "display_name": "Arabian camel",
+    "id": "cdromedarius",
+    "scientific_name": "Camelus dromedarius",
+    "taxonomy_id": "9838",
+    "version": "CamDro2"
+  },
+  {
+    "display_name": "Bactrocera tryoni (Queensland fruitfly, S06) - GCA_016617805.2",
+    "id": "btgca016617805v2",
+    "scientific_name": "Bactrocera tryoni",
+    "taxonomy_id": "59916",
+    "version": "CSIRO_BtryS06_freeze1"
+  },
+  {
+    "display_name": "Narwhal",
+    "id": "mmonoceros",
+    "scientific_name": "Monodon monoceros",
+    "taxonomy_id": "40151",
+    "version": "NGI_Narwhal_1"
+  },
+  {
+    "display_name": "Actinidia chinensis",
+    "id": "achinensis",
+    "scientific_name": "Actinidia chinensis var. chinensis",
+    "taxonomy_id": "1590841",
+    "version": "Red5_PS1_1.69.0"
+  },
+  {
+    "display_name": "Megachile rotundata (Alfalfa leafcutting bee) - GCA_000220905.1",
+    "id": "mrgca000220905v1rs",
+    "scientific_name": "Megachile rotundata",
+    "taxonomy_id": "143995",
+    "version": "MROT_1.0"
+  },
+  {
+    "display_name": "Caenorhabditis sulstoni (PRJEB12601)",
+    "id": "casulsprjeb12601",
+    "scientific_name": "Caenorhabditis sp. 32 LS-2015",
+    "taxonomy_id": "1737335",
+    "version": "CSULS_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Candida tropicalis",
+    "id": "ctropicalis",
+    "scientific_name": "Candida tropicalis MYA-3404",
+    "taxonomy_id": "294747",
+    "version": "GCA000006335v3"
+  },
+  {
+    "display_name": "Citrus clementina",
+    "id": "cclementina",
+    "scientific_name": "Citrus clementina",
+    "taxonomy_id": "85681",
+    "version": "Citrus_clementina_v1.0"
+  },
+  {
+    "display_name": "Onchocerca ochengi (PRJEB1465)",
+    "id": "onocheprjeb1465",
+    "scientific_name": "Onchocerca ochengi",
+    "taxonomy_id": "42157",
+    "version": "ASM90053720v1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Orchesella cincta",
+    "id": "ocincta",
+    "scientific_name": "Orchesella cincta",
+    "taxonomy_id": "48709",
+    "version": "ASM171814v1"
+  },
+  {
+    "display_name": "Steppe mouse",
+    "id": "mspicilegus",
+    "scientific_name": "Mus spicilegus",
+    "taxonomy_id": "10103",
+    "version": "MUSP714"
+  },
+  {
+    "display_name": "Sheep (texel)",
+    "id": "oaries",
+    "scientific_name": "Ovis aries",
+    "taxonomy_id": "9940",
+    "version": "Oar_v3.1"
+  },
+  {
+    "display_name": "Limulus polyphemus (Atlantic horseshoe crab) - GCA_000517525.1",
+    "id": "lpgca000517525v1",
+    "scientific_name": "Limulus polyphemus",
+    "taxonomy_id": "6850",
+    "version": "Limulus_polyphemus_2.1.2"
+  },
+  {
+    "display_name": "Tuatara",
+    "id": "spunctatus",
+    "scientific_name": "Sphenodon punctatus",
+    "taxonomy_id": "8508",
+    "version": "ASM311381v1"
+  },
+  {
+    "display_name": "Folsomia candida str. VU population",
+    "id": "fcandida",
+    "scientific_name": "Folsomia candida",
+    "taxonomy_id": "158441",
+    "version": "ASM221717v1"
+  },
+  {
+    "display_name": "Triticum aestivum Sy Mattis",
+    "id": "tamattis",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Mattis"
+  },
+  {
+    "display_name": "Cucumis sativus",
+    "id": "csativus",
+    "scientific_name": "Cucumis sativus",
+    "taxonomy_id": "3659",
+    "version": "ASM407v2"
+  },
+  {
+    "display_name": "Colletotrichum higginsianum",
+    "id": "chigginsianum",
+    "scientific_name": "Colletotrichum higginsianum",
+    "taxonomy_id": "80884",
+    "version": "ASM31379v2"
+  },
+  {
+    "display_name": "Strigamia maritima",
+    "id": "smaritima",
+    "scientific_name": "Strigamia maritima",
+    "taxonomy_id": "126957",
+    "version": "Smar1"
+  },
+  {
+    "display_name": "Channel catfish",
+    "id": "ipunctatus",
+    "scientific_name": "Ictalurus punctatus",
+    "taxonomy_id": "7998",
+    "version": "IpCoco_1.2"
+  },
+  {
+    "display_name": "Asian bonytongue",
+    "id": "sformosus",
+    "scientific_name": "Scleropages formosus",
+    "taxonomy_id": "113540",
+    "version": "fSclFor1.1"
+  },
+  {
+    "display_name": "Oscheius tipulae (PRJEB15512)",
+    "id": "ostipuprjeb15512",
+    "scientific_name": "Oscheius tipulae",
+    "taxonomy_id": "141969",
+    "version": "Oscheius_tipulae_assembly_v2 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Brugia malayi (PRJNA10729)",
+    "id": "bmalayi",
+    "scientific_name": "Brugia malayi",
+    "taxonomy_id": "6279",
+    "version": "Bmal-4.0"
+  },
+  {
+    "display_name": "Culex quinquefasciatus (JHB)",
+    "id": "cqgca015732765v1",
+    "scientific_name": "Culex quinquefasciatus",
+    "taxonomy_id": "7176",
+    "version": "VPISU_Cqui_1.0_pri_paternal"
+  },
+  {
+    "display_name": "Painted turtle",
+    "id": "cpbellii",
+    "scientific_name": "Chrysemys picta bellii",
+    "taxonomy_id": "8478",
+    "version": "Chrysemys_picta_bellii-3.0.3"
+  },
+  {
+    "display_name": "Asterias rubens (European starfish) - GCA_902459465.3",
+    "id": "argca902459465v3",
+    "scientific_name": "Asterias rubens",
+    "taxonomy_id": "7604",
+    "version": "eAstRub1.3"
+  },
+  {
+    "display_name": "Taenia asiatica (PRJEB532)",
+    "id": "taasiaprjeb532",
+    "scientific_name": "Taenia asiatica",
+    "taxonomy_id": "60517",
+    "version": "T_asiatica_South_Korea_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Pig - Wuzhishan",
+    "id": "sswuzhishan",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "minipig_v1.0"
+  },
+  {
+    "display_name": "Oryza meridionalis",
+    "id": "omeridionalis",
+    "scientific_name": "Oryza meridionalis",
+    "taxonomy_id": "40149",
+    "version": "Oryza_meridionalis_v1.3"
+  },
+  {
+    "display_name": "Anopheles coluzzii",
+    "id": "acoluzzii",
+    "scientific_name": "Anopheles coluzzii",
+    "taxonomy_id": "1518534",
+    "version": "AcolM1"
+  },
+  {
+    "display_name": "Ceratitis capitata (Mediterranean fruit fly) - GCA_000347755.4",
+    "id": "ccgca000347755v4",
+    "scientific_name": "Ceratitis capitata",
+    "taxonomy_id": "7213",
+    "version": "Ccap_2.0"
+  },
+  {
+    "display_name": "Sumatran orangutan",
+    "id": "pabelii",
+    "scientific_name": "Pongo abelii",
+    "taxonomy_id": "9601",
+    "version": "Susie_PABv2"
+  },
+  {
+    "display_name": "Guppy",
+    "id": "preticulata",
+    "scientific_name": "Poecilia reticulata",
+    "taxonomy_id": "8081",
+    "version": "Guppy_female_1.0_MT"
+  },
+  {
+    "display_name": "Neurospora crassa",
+    "id": "ncrassa",
+    "scientific_name": "Neurospora crassa OR74A",
+    "taxonomy_id": "367110",
+    "version": "NC12"
+  },
+  {
+    "display_name": "Orussus abietinus (Parasitic wood wasp, OABI.00-Male) - GCA_000612105.2",
+    "id": "oagca000612105v2",
+    "scientific_name": "Orussus abietinus",
+    "taxonomy_id": "222816",
+    "version": "Oabi_2.0"
+  },
+  {
+    "display_name": "Triticum aestivum Jagger",
+    "id": "tajagger",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Jagger"
+  },
+  {
+    "display_name": "Lingula anatina",
+    "id": "lanatina",
+    "scientific_name": "Lingula anatina",
+    "taxonomy_id": "7574",
+    "version": "LinAna1.0"
+  },
+  {
+    "display_name": "Enterobius vermicularis (PRJEB503)",
+    "id": "envermprjeb503",
+    "scientific_name": "Enterobius vermicularis",
+    "taxonomy_id": "51028",
+    "version": "E_vermicularis_Canary_Islands_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Lyretail cichlid",
+    "id": "nbrichardi",
+    "scientific_name": "Neolamprologus brichardi",
+    "taxonomy_id": "32507",
+    "version": "NeoBri1.0"
+  },
+  {
+    "display_name": "Setaria digitata (PRJNA479729)",
+    "id": "sedigiprjna479729",
+    "scientific_name": "Setaria digitata",
+    "taxonomy_id": "48799",
+    "version": "ASM364038v1 (2020-04-WormBase)"
+  },
+  {
+    "display_name": "Trichinella zimbabwensis (PRJNA257433)",
+    "id": "trzimbprjna257433",
+    "scientific_name": "Trichinella zimbabwensis",
+    "taxonomy_id": "268475",
+    "version": "T11_ISS1029_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Cucumis melo",
+    "id": "cmelo",
+    "scientific_name": "Cucumis melo",
+    "taxonomy_id": "3656",
+    "version": "Melonv4"
+  },
+  {
+    "display_name": "Apis florea (Dwarf honeybee) - GCA_000184785.2",
+    "id": "afgca000184785v2rs",
+    "scientific_name": "Apis florea",
+    "taxonomy_id": "7463",
+    "version": "Aflo_1.0"
+  },
+  {
+    "display_name": "Thelohanellus kitauei",
+    "id": "tkitauei",
+    "scientific_name": "Thelohanellus kitauei",
+    "taxonomy_id": "669202",
+    "version": "ASM82789v1"
+  },
+  {
+    "display_name": "Schistocephalus solidus (PRJEB527)",
+    "id": "scsoliprjeb527",
+    "scientific_name": "Schistocephalus solidus",
+    "taxonomy_id": "70667",
+    "version": "S_solidus_NST_G2_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Eastern brown snake",
+    "id": "ptextilis",
+    "scientific_name": "Pseudonaja textilis",
+    "taxonomy_id": "8673",
+    "version": "EBS10Xv2-PRI"
+  },
+  {
+    "display_name": "Dirofilaria immitis (PRJEB1797)",
+    "id": "diimmiprjeb1797",
+    "scientific_name": "Dirofilaria immitis",
+    "taxonomy_id": "6287",
+    "version": "nDi.2.2 (2021-04-WormBase)"
+  },
+  {
+    "display_name": "Bonobo",
+    "id": "ppaniscus",
+    "scientific_name": "Pan paniscus",
+    "taxonomy_id": "9597",
+    "version": "panpan1.1"
+  },
+  {
+    "display_name": "Onchocerca flexuosa (PRJEB512)",
+    "id": "onflexprjeb512",
+    "scientific_name": "Onchocerca flexuosa",
+    "taxonomy_id": "387005",
+    "version": "O_flexuosa_Cordoba_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Vervet-AGM",
+    "id": "csabaeus",
+    "scientific_name": "Chlorocebus sabaeus",
+    "taxonomy_id": "60711",
+    "version": "ChlSab1.1"
+  },
+  {
+    "display_name": "Mummichog",
+    "id": "fheteroclitus",
+    "scientific_name": "Fundulus heteroclitus",
+    "taxonomy_id": "8078",
+    "version": "Fundulus_heteroclitus-3.0.2"
+  },
+  {
+    "display_name": "Phytophthora parasitica",
+    "id": "pparasitica",
+    "scientific_name": "Phytophthora parasitica P1569",
+    "taxonomy_id": "1317065",
+    "version": "Phyt_para_P1569_V1"
+  },
+  {
+    "display_name": "Branchiostoma lanceolatum",
+    "id": "blanceolatum",
+    "scientific_name": "Branchiostoma lanceolatum",
+    "taxonomy_id": "7740",
+    "version": "BraLan2"
+  },
+  {
+    "display_name": "Mesocestoides corti (PRJEB510)",
+    "id": "mecortprjeb510",
+    "scientific_name": "Mesocestoides corti",
+    "taxonomy_id": "53468",
+    "version": "M_corti_Specht_Voge_0011_upd (2019-06-WormBase)"
+  },
+  {
+    "display_name": "Pyrenophora tritici-repentis Pt-1C-BFP",
+    "id": "ptriticirepentis",
+    "scientific_name": "Pyrenophora tritici-repentis Pt-1C-BFP",
+    "taxonomy_id": "426418",
+    "version": "ASM14998v1"
+  },
+  {
+    "display_name": "Northern American deer mouse",
+    "id": "pmbairdii",
+    "scientific_name": "Peromyscus maniculatus bairdii",
+    "taxonomy_id": "230844",
+    "version": "HU_Pman_2.1"
+  },
+  {
+    "display_name": "Dufourea novaeangliae (Bee, 0120121106) - GCA_001272555.1",
+    "id": "dngca001272555v1rs",
+    "scientific_name": "Dufourea novaeangliae",
+    "taxonomy_id": "178035",
+    "version": "GCA001272555v1"
+  },
+  {
+    "display_name": "Yarrowia lipolytica",
+    "id": "ylipolytica",
+    "scientific_name": "Yarrowia lipolytica CLIB122",
+    "taxonomy_id": "284591",
+    "version": "ASM252v1"
+  },
+  {
+    "display_name": "Culex quinquefasciatus",
+    "id": "cquinquefasciatus",
+    "scientific_name": "Culex quinquefasciatus",
+    "taxonomy_id": "7176",
+    "version": "CpipJ2"
+  },
+  {
+    "display_name": "Fasciola gigantica (PRJNA230515)",
+    "id": "fagigaprjna230515",
+    "scientific_name": "Fasciola gigantica",
+    "taxonomy_id": "46835",
+    "version": "F_gigantica_1.0.allpaths (2020-02-WormBase)"
+  },
+  {
+    "display_name": "Vigna angularis",
+    "id": "vangularis",
+    "scientific_name": "Vigna angularis",
+    "taxonomy_id": "3914",
+    "version": "Vigan1.1"
+  },
+  {
+    "display_name": "Trichinella papuae (PRJNA257433)",
+    "id": "trpapuprjna257433",
+    "scientific_name": "Trichinella papuae",
+    "taxonomy_id": "268474",
+    "version": "T10_ISS1980_r1.0 (2016-05-WormBase)"
+  },
+  {
+    "display_name": "Schistosoma japonicum (PRJNA520774)",
+    "id": "scjapoprjna520774",
+    "scientific_name": "Schistosoma japonicum",
+    "taxonomy_id": "6182",
+    "version": "ASM636876v1 (2020-03-WormBase)"
+  },
+  {
+    "display_name": "Soboliphyme baturini (PRJEB516)",
+    "id": "sobatuprjeb516",
+    "scientific_name": "Soboliphyme baturini",
+    "taxonomy_id": "241478",
+    "version": "S_baturini_Dall_Island_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Cotesia glomerata (CgM1) - GCA_020080835.1",
+    "id": "cggca020080835v1",
+    "scientific_name": "Cotesia glomerata",
+    "taxonomy_id": "32391",
+    "version": "MPM_Cglom_v2.3"
+  },
+  {
+    "display_name": "Triticum aestivum Robigus",
+    "id": "tarobigus",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "TGAC_robigus"
+  },
+  {
+    "display_name": "Daphnia pulex",
+    "id": "dpulex",
+    "scientific_name": "Daphnia pulex",
+    "taxonomy_id": "6669",
+    "version": "V1.0"
+  },
+  {
+    "display_name": "Aegilops tauschii",
+    "id": "atauschii",
+    "scientific_name": "Aegilops tauschii subsp. strangulata",
+    "taxonomy_id": "200361",
+    "version": "Aet v4.0"
+  },
+  {
+    "display_name": "Linepithema humile (Argentine ant) - GCA_000217595.1",
+    "id": "lhgca000217595v1rs",
+    "scientific_name": "Linepithema humile",
+    "taxonomy_id": "83485",
+    "version": "Lhum_UMD_V04"
+  },
+  {
+    "display_name": "Yellowtail amberjack",
+    "id": "sldorsalis",
+    "scientific_name": "Seriola lalandi dorsalis",
+    "taxonomy_id": "1841481",
+    "version": "Sedor1"
+  },
+  {
+    "display_name": "Homarus americanus (American lobster, GMGI-L3) - GCA_018991925.1",
+    "id": "hagca018991925v1",
+    "scientific_name": "Homarus americanus",
+    "taxonomy_id": "6706",
+    "version": "GMGI_Hamer_2.0"
+  },
+  {
+    "display_name": "Schizosaccharomyces pombe",
+    "id": "spombe",
+    "scientific_name": "Schizosaccharomyces pombe 972h-",
+    "taxonomy_id": "284812",
+    "version": "ASM294v2"
+  },
+  {
+    "display_name": "Midas cichlid",
+    "id": "acitrinellus",
+    "scientific_name": "Amphilophus citrinellus",
+    "taxonomy_id": "61819",
+    "version": "Midas_v5"
+  },
+  {
+    "display_name": "Javanese ricefish",
+    "id": "ojavanicus",
+    "scientific_name": "Oryzias javanicus",
+    "taxonomy_id": "123683",
+    "version": "OJAV_1.1"
+  },
+  {
+    "display_name": "Pig - Largewhite",
+    "id": "sslargewhite",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Large_White_v1"
+  },
+  {
+    "display_name": "Avena sativa Sang",
+    "id": "assang",
+    "scientific_name": "Avena sativa",
+    "taxonomy_id": "4498",
+    "version": "Asativa_sang.v1.1"
+  },
+  {
+    "display_name": "Pisum sativum",
+    "id": "psativum",
+    "scientific_name": "Pisum sativum",
+    "taxonomy_id": "3888",
+    "version": "Pisum_sativum_v1a"
+  },
+  {
+    "display_name": "Strongyloides stercoralis (PRJEB528)",
+    "id": "ststerprjeb528",
+    "scientific_name": "Strongyloides stercoralis",
+    "taxonomy_id": "6248",
+    "version": "S_stercoralis_PV0001_v2_0_4 (2022-01-WormBase)"
+  },
+  {
+    "display_name": "Eastern happy",
+    "id": "acalliptera",
+    "scientific_name": "Astatotilapia calliptera",
+    "taxonomy_id": "8154",
+    "version": "fAstCal1.2"
+  },
+  {
+    "display_name": "Glossina austeni",
+    "id": "gausteni",
+    "scientific_name": "Glossina austeni",
+    "taxonomy_id": "7395",
+    "version": "GausT1"
+  },
+  {
+    "display_name": "Gorilla",
+    "id": "ggorilla",
+    "scientific_name": "Gorilla gorilla gorilla",
+    "taxonomy_id": "9595",
+    "version": "gorGor4"
+  },
+  {
+    "display_name": "Echinococcus granulosus (PRJNA182977)",
+    "id": "ecgranprjna182977",
+    "scientific_name": "Echinococcus granulosus",
+    "taxonomy_id": "6210",
+    "version": "ASM52419v1 (2016-04-WormBase)"
+  },
+  {
+    "display_name": "Nippostrongylus brasiliensis (PRJEB511)",
+    "id": "nibrasprjeb511",
+    "scientific_name": "Nippostrongylus brasiliensis",
+    "taxonomy_id": "27835",
+    "version": "N_brasiliensis_RM07_v1_5_4_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Hydatigera taeniaeformis (PRJEB534)",
+    "id": "hytaenprjeb534",
+    "scientific_name": "Hydatigera taeniaeformis",
+    "taxonomy_id": "6205",
+    "version": "H_taeniaeformis_Canary_Islands_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Anopheles minimus",
+    "id": "aminimus",
+    "scientific_name": "Anopheles minimus",
+    "taxonomy_id": "112268",
+    "version": "AminM1"
+  },
+  {
+    "display_name": "Lepeophtheirus salmonis",
+    "id": "lsalmonis",
+    "scientific_name": "Lepeophtheirus salmonis",
+    "taxonomy_id": "72036",
+    "version": "LSalAtl2s"
+  },
+  {
+    "display_name": "Fraxinus excelsior",
+    "id": "fexcelsior",
+    "scientific_name": "Fraxinus excelsior",
+    "taxonomy_id": "38873",
+    "version": "BATG-0.5"
+  },
+  {
+    "display_name": "Caenorhabditis japonica (PRJNA12591) [WS282]",
+    "id": "cajapoprjna12591",
+    "scientific_name": "Caenorhabditis japonica",
+    "taxonomy_id": "281687",
+    "version": "C_japonica-7.0.1 (WS279)"
+  },
+  {
+    "display_name": "Pig USMARC",
+    "id": "ssusmarc",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "USMARCv1.0"
+  },
+  {
+    "display_name": "Cylicostephanus goldi (PRJEB498)",
+    "id": "cygoldprjeb498",
+    "scientific_name": "Cylicostephanus goldi",
+    "taxonomy_id": "71465",
+    "version": "C_goldi_Cheshire_0011 (2014-06-WormBase)"
+  },
+  {
+    "display_name": "Steinernema scapterisci (PRJNA204942)",
+    "id": "stscapprjna204942",
+    "scientific_name": "Steinernema scapterisci",
+    "taxonomy_id": "90986",
+    "version": "S_scapt_v1_submitted (2014-12-WormBase)"
+  },
+  {
+    "display_name": "Anopheles darlingi",
+    "id": "adarlingi",
+    "scientific_name": "Anopheles darlingi",
+    "taxonomy_id": "43151",
+    "version": "AdarC3"
+  },
+  {
+    "display_name": "Drosophila willistoni (TSC#14030-0811.24)",
+    "id": "dwillistoni",
+    "scientific_name": "Drosophila willistoni",
+    "taxonomy_id": "7260",
+    "version": "dwil_caf1"
+  },
+  {
+    "display_name": "Caenorhabditis becei (PRJEB28243)",
+    "id": "cabeceprjeb28243",
+    "scientific_name": "Caenorhabditis becei",
+    "taxonomy_id": "2301260",
+    "version": "CBECE_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Penaeus chinensis (Fleshy prawn) - GCA_019202785.2",
+    "id": "pcgca019202785v2rs",
+    "scientific_name": "Penaeus chinensis",
+    "taxonomy_id": "139456",
+    "version": "GCA019202785v2"
+  },
+  {
+    "display_name": "Makobe Island cichlid",
+    "id": "pnyererei",
+    "scientific_name": "Pundamilia nyererei",
+    "taxonomy_id": "303518",
+    "version": "PunNye1.0"
+  },
+  {
+    "display_name": "Puccinia graminis",
+    "id": "pgraminis",
+    "scientific_name": "Puccinia graminis f. sp. tritici CRL 75-36-700-3",
+    "taxonomy_id": "418459",
+    "version": "ASM14992v1"
+  },
+  {
+    "display_name": "Coelacanth",
+    "id": "lchalumnae",
+    "scientific_name": "Latimeria chalumnae",
+    "taxonomy_id": "7897",
+    "version": "LatCha1"
+  },
+  {
+    "display_name": "Anopheles epiroticus",
+    "id": "aepiroticus",
+    "scientific_name": "Anopheles epiroticus",
+    "taxonomy_id": "199890",
+    "version": "AepiE1"
+  },
+  {
+    "display_name": "Parasteatoda tepidariorum (Goettingen) - GCA_000365465.3",
+    "id": "ptgca000365465v3",
+    "scientific_name": "Parasteatoda tepidariorum",
+    "taxonomy_id": "114398",
+    "version": "Ptep_3.0"
+  },
+  {
+    "display_name": "Culicoides sonorensis",
+    "id": "csonorensis",
+    "scientific_name": "Culicoides sonorensis",
+    "taxonomy_id": "179676",
+    "version": "Cson1"
+  },
+  {
+    "display_name": "Ancylostoma ceylanicum (PRJNA72583)",
+    "id": "anceylprjna72583",
+    "scientific_name": "Ancylostoma ceylanicum",
+    "taxonomy_id": "53326",
+    "version": "A_ceylanicum1.3.ec.cg.pg (2020-04-WormBase)"
+  },
+  {
+    "display_name": "Fusarium solani",
+    "id": "fsolani",
+    "scientific_name": "Fusarium vanettenii 77-13-4",
+    "taxonomy_id": "660122",
+    "version": "v2.0"
+  },
+  {
+    "display_name": "Chlamydomonas reinhardtii",
+    "id": "creinhardtii",
+    "scientific_name": "Chlamydomonas reinhardtii",
+    "taxonomy_id": "3055",
+    "version": "Chlamydomonas_reinhardtii_v5.5"
+  },
+  {
+    "display_name": "Triticum aestivum Landmark",
+    "id": "talandmark",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Landmark"
+  },
+  {
+    "display_name": "Schistosoma mansoni (PRJEA36577)",
+    "id": "smansoni",
+    "scientific_name": "Schistosoma mansoni",
+    "taxonomy_id": "6183",
+    "version": "Smansoni_v7"
+  },
+  {
+    "display_name": "Echinococcus canadensis (PRJEB8992)",
+    "id": "eccanaprjeb8992",
+    "scientific_name": "Echinococcus canadensis",
+    "taxonomy_id": "519352",
+    "version": "ECANG7 (2017-05-WormBase)"
+  },
+  {
+    "display_name": "Taenia solium (PRJNA170813)",
+    "id": "tasoliprjna170813",
+    "scientific_name": "Taenia solium",
+    "taxonomy_id": "6204",
+    "version": "Tsolium_Mexico_v1 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Chenopodium quinoa",
+    "id": "cquinoa",
+    "scientific_name": "Chenopodium quinoa",
+    "taxonomy_id": "63459",
+    "version": "ASM168347v1"
+  },
+  {
+    "display_name": "Oryza nivara",
+    "id": "onivara",
+    "scientific_name": "Oryza nivara",
+    "taxonomy_id": "4536",
+    "version": "Oryza_nivara_v1.0"
+  },
+  {
+    "display_name": "Caenorhabditis remanei (PRJNA248911)",
+    "id": "caremaprjna248911",
+    "scientific_name": "Caenorhabditis remanei",
+    "taxonomy_id": "31234",
+    "version": "CaeRem1.0 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Pig - Landrace",
+    "id": "sslandrace",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Landrace_pig_v1"
+  },
+  {
+    "display_name": "Shrew mouse",
+    "id": "mpahari",
+    "scientific_name": "Mus pahari",
+    "taxonomy_id": "10093",
+    "version": "PAHARI_EIJ_v1.1"
+  },
+  {
+    "display_name": "Tuber melanosporum",
+    "id": "tmelanosporum",
+    "scientific_name": "Tuber melanosporum Mel28",
+    "taxonomy_id": "656061",
+    "version": "ASM15164v1"
+  },
+  {
+    "display_name": "Daphnia magna (Fresh water planktonic, NIES) - GCA_020631705.2",
+    "id": "dmgca020631705v2",
+    "scientific_name": "Daphnia magna",
+    "taxonomy_id": "35525",
+    "version": "GCA020631705v2"
+  },
+  {
+    "display_name": "Cow",
+    "id": "btaurus",
+    "scientific_name": "Bos taurus",
+    "taxonomy_id": "9913",
+    "version": "ARS-UCD1.2"
+  },
+  {
+    "display_name": "Bigelowiella natans",
+    "id": "bnatans",
+    "scientific_name": "Bigelowiella natans CCMP2755",
+    "taxonomy_id": "753081",
+    "version": "Bigna1"
+  },
+  {
+    "display_name": "Eufriesea mexicana (Bee, 0111107269) - GCA_001483705.1",
+    "id": "emgca001483705v1rs",
+    "scientific_name": "Eufriesea mexicana",
+    "taxonomy_id": "516756",
+    "version": "GCA001483705v1"
+  },
+  {
+    "display_name": "Ostreococcus lucimarinus",
+    "id": "olucimarinus",
+    "scientific_name": "Ostreococcus lucimarinus CCE9901",
+    "taxonomy_id": "436017",
+    "version": "ASM9206v1"
+  },
+  {
+    "display_name": "Copidosoma floridanum (CFLO.00-Male) - GCA_000648655.2",
+    "id": "cfgca000648655v2",
+    "scientific_name": "Copidosoma floridanum",
+    "taxonomy_id": "29053",
+    "version": "Cflo_2.0"
+  },
+  {
+    "display_name": "Tigriopus californicus (San Diego)",
+    "id": "tcgca007210705",
+    "scientific_name": "Tigriopus californicus",
+    "taxonomy_id": "6832",
+    "version": "Tcal_SD_v2.1"
+  },
+  {
+    "display_name": "Bemisia tabaci (SSA2 NG)",
+    "id": "btssa2nig",
+    "scientific_name": "Bemisia tabaci",
+    "taxonomy_id": "7038",
+    "version": "SSA2_Nigeria_n785_625mb"
+  },
+  {
+    "display_name": "Drosophila simulans (w501)",
+    "id": "dsimulans",
+    "scientific_name": "Drosophila simulans",
+    "taxonomy_id": "7240",
+    "version": "ASM75419v3"
+  },
+  {
+    "display_name": "Echinococcus oligarthrus (PRJEB31222)",
+    "id": "ecoligprjeb31222",
+    "scientific_name": "Echinococcus oligarthrus",
+    "taxonomy_id": "6212",
+    "version": "v2 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Meloidogyne arenaria (PRJEB8714)",
+    "id": "mearenprjeb8714",
+    "scientific_name": "Meloidogyne arenaria",
+    "taxonomy_id": "6304",
+    "version": "ASM90000398v1 (2018-05-WormBase)"
+  },
+  {
+    "display_name": "Drosophila grimshawi (TSC#15287-2541.00)",
+    "id": "dgrimshawi",
+    "scientific_name": "Drosophila grimshawi",
+    "taxonomy_id": "7222",
+    "version": "dgri_caf1"
+  },
+  {
+    "display_name": "Eurytemora affinis (Calanoid copepod, Atlantic clade) - GCA_000591075.2",
+    "id": "eagca000591075v2",
+    "scientific_name": "Eurytemora affinis",
+    "taxonomy_id": "88015",
+    "version": "Eaff_2.0"
+  },
+  {
+    "display_name": "Triticum spelta",
+    "id": "tspelta",
+    "scientific_name": "Triticum spelta",
+    "taxonomy_id": "58933",
+    "version": "PGSBv2.0_Spelta"
+  },
+  {
+    "display_name": "Lesser hedgehog tenrec",
+    "id": "etelfairi",
+    "scientific_name": "Echinops telfairi",
+    "taxonomy_id": "9371",
+    "version": "TENREC"
+  },
+  {
+    "display_name": "Aspergillus niger",
+    "id": "aniger",
+    "scientific_name": "Aspergillus niger",
+    "taxonomy_id": "5061",
+    "version": "ASM285v2"
+  },
+  {
+    "display_name": "Pythium aphanidermatum",
+    "id": "paphanidermatum",
+    "scientific_name": "Pythium aphanidermatum DAOM BR444",
+    "taxonomy_id": "1223555",
+    "version": "pag1_scaffolds_v1"
+  },
+  {
+    "display_name": "Onthophagus taurus (Dung beetle) - GCA_000648695.2",
+    "id": "otgca000648695v2",
+    "scientific_name": "Onthophagus taurus",
+    "taxonomy_id": "166361",
+    "version": "Otau_2.0"
+  },
+  {
+    "display_name": "Pig - Jinhua",
+    "id": "ssjinhua",
+    "scientific_name": "Sus scrofa",
+    "taxonomy_id": "9823",
+    "version": "Jinhua_pig_v1"
+  },
+  {
+    "display_name": "Bombyx mori (p50T)",
+    "id": "bmori",
+    "scientific_name": "Bombyx mori",
+    "taxonomy_id": "7091",
+    "version": "Bmori_2016v1.0"
+  },
+  {
+    "display_name": "Coho salmon",
+    "id": "okisutch",
+    "scientific_name": "Oncorhynchus kisutch",
+    "taxonomy_id": "8019",
+    "version": "Okis_V2"
+  },
+  {
+    "display_name": "Fasciolopsis buski (PRJNA284521)",
+    "id": "fabuskprjna284521",
+    "scientific_name": "Fasciolopsis buski",
+    "taxonomy_id": "27845",
+    "version": "F_buski_1.0.allpaths-lg (2021-12-WormBase)"
+  },
+  {
+    "display_name": "Bemisia tabaci (ASIAII-5)",
+    "id": "btasiaii5",
+    "scientific_name": "Bemisia tabaci",
+    "taxonomy_id": "7038",
+    "version": "ASIAII5_n227_616Mb"
+  },
+  {
+    "display_name": "Hagfish",
+    "id": "eburgeri",
+    "scientific_name": "Eptatretus burgeri",
+    "taxonomy_id": "7764",
+    "version": "Eburgeri_3.2"
+  },
+  {
+    "display_name": "Hymenolepis microstoma (PRJEB124)",
+    "id": "hmicrostoma",
+    "scientific_name": "Hymenolepis microstoma",
+    "taxonomy_id": "85433",
+    "version": "HMN_v3"
+  },
+  {
+    "display_name": "Caenorhabditis brenneri (PRJNA20035) [WS282]",
+    "id": "cabrenprjna20035",
+    "scientific_name": "Caenorhabditis brenneri",
+    "taxonomy_id": "135651",
+    "version": "C_brenneri-6.0.1b (WS279)"
+  },
+  {
+    "display_name": "Hymenolepis diminuta (PRJEB507)",
+    "id": "hydimiprjeb507",
+    "scientific_name": "Hymenolepis diminuta",
+    "taxonomy_id": "6216",
+    "version": "H_diminuta_Denmark_0011_upd (2014-06-50HGPpatch)"
+  },
+  {
+    "display_name": "Trichuris muris (PRJEB126)",
+    "id": "tmuris",
+    "scientific_name": "Trichuris muris",
+    "taxonomy_id": "70415",
+    "version": "TMUE3.0"
+  },
+  {
+    "display_name": "Triticum aestivum Lancer",
+    "id": "talancer",
+    "scientific_name": "Triticum aestivum",
+    "taxonomy_id": "4565",
+    "version": "PGSBv2.0_Lancer"
+  },
+  {
+    "display_name": "Acromyrmex echinatior (Panamanian leaf-cutter ant) - GCA_000204515.1",
+    "id": "aegca000204515v1rs",
+    "scientific_name": "Acromyrmex echinatior",
+    "taxonomy_id": "103372",
+    "version": "Aech_3.9"
+  },
+  {
+    "display_name": "Onchocerca volvulus (PRJEB513)",
+    "id": "ovolvulus",
+    "scientific_name": "Onchocerca volvulus",
+    "taxonomy_id": "6282",
+    "version": "ASM49940v2"
+  },
+  {
+    "display_name": "Onchocerca volvulus (PRJEB513) [WS282]",
+    "id": "onvolvprjeb513",
+    "scientific_name": "Onchocerca volvulus",
+    "taxonomy_id": "6282",
+    "version": "ASM49940v2 (WS279)"
+  },
+  {
+    "display_name": "Vigna unguiculata",
+    "id": "vunguiculata",
+    "scientific_name": "Vigna unguiculata",
+    "taxonomy_id": "3917",
+    "version": "ASM411807v1"
+  },
+  {
+    "display_name": "Parapristionchus giblindavisi (PRJEB27334)",
+    "id": "pagiblprjeb27334",
+    "scientific_name": "Parapristionchus giblindavisi",
+    "taxonomy_id": "1187980",
+    "version": "Parapristionchus genome (2021-01-WormBase)"
+  },
+  {
+    "display_name": "Rat",
+    "id": "rnorvegicus",
+    "scientific_name": "Rattus norvegicus",
+    "taxonomy_id": "10116",
+    "version": "mRatBN7.2"
+  },
+  {
+    "display_name": "Romanomermis culicivorax (PRJEB1358)",
+    "id": "roculiprjeb1358",
+    "scientific_name": "Romanomermis culicivorax",
+    "taxonomy_id": "13658",
+    "version": "nRc.2.0 (2014-05-WormBase)"
+  },
+  {
+    "display_name": "Caenorhabditis bovis (PRJEB34497)",
+    "id": "caboviprjeb34497",
+    "scientific_name": "Caenorhabditis bovis",
+    "taxonomy_id": "2654633",
+    "version": "CBOVIS_v1 (2020-05-WormBase)"
+  },
+  {
+    "display_name": "Sporisorium reilianum",
+    "id": "sreilianum",
+    "scientific_name": "Sporisorium reilianum SRZ2",
+    "taxonomy_id": "999809",
+    "version": "ASM23024v1"
+  }
+]

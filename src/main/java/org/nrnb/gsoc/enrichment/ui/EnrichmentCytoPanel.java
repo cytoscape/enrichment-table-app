@@ -179,7 +179,7 @@ public class EnrichmentCytoPanel extends JPanel
 			var font = registrar.getService(IconManager.class).getIconFont(14.0f);
 			icon = new TextIcon(IconManager.ICON_REFRESH, font, 16, 16);
     	}
-    	
+
         return icon;
     }
 
