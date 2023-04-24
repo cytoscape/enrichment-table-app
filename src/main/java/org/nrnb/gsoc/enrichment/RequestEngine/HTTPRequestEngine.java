@@ -39,45 +39,6 @@ public class HTTPRequestEngine {
 
     public HTTPRequestEngine() {
     }
-
-    /**
-     * @param endpoint API endpoint
-     * @return
-     * @description function fires GET Request
-     */
-    public JSONArray makeGetRequest(String endpoint) {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        StringBuffer urlConverter = new StringBuffer();
-        urlConverter.append(this.basicURL);
-        urlConverter.append(endpoint);
-        String url = urlConverter.toString();
-        HttpGet httpGet = new HttpGet(url);
-        httpGet.setHeader("Accept", "application/json");
-        CloseableHttpResponse response = null;
-        System.out.println("GET Request details: \n" + httpGet);
-        try {
-            response = httpclient.execute(httpGet);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200 && statusCode != 202) {
-            logger.error("[Enrichment Table] GProfiler organisms could not be fetched. Check network connectivity.");
-            return null;
-        }
-        JSONArray jsonResponse = null;
-        try {
-            jsonResponse = (JSONArray) new JSONParser().parse(new InputStreamReader(response.getEntity().getContent()));
-        } catch (IOException e) {
-            logger.error("[Enrichment Table] Error occurred while trying to generate organism list from GProfiler");
-            e.printStackTrace();
-        } catch (ParseException e) {
-            logger.error("[Enrichment Table] GProfiler organisms response could not be parsed.");
-            e.printStackTrace();
-        }
-        return jsonResponse;
-    }
-
     /**
      * @param network            Network being used for fetching data
      * @param endpoint           API endpoint
