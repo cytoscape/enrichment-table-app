@@ -23,6 +23,12 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import org.json.simple.parser.ParseException;
+import org.json.simple.parser.JSONParser;
+import java.io.InputStream;
 /**
  * @author ighosh98
  * @description
@@ -249,8 +255,22 @@ public class ModelUtils {
         if(scientificNametoID!=null){
             return scientificNametoID;
         }
-        HTTPRequestEngine requestEngine = new HTTPRequestEngine();
-        JSONArray result = requestEngine.makeGetRequest("util/organisms_list/");
+
+        try {
+        InputStream inputStream = ModelUtils.class.getClassLoader().getResourceAsStream("organismsList.json");
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        String jsonString = stringBuilder.toString();
+        JSONParser parser = new JSONParser();
+
+        JSONArray result = (JSONArray) parser.parse(jsonString);
+
+
         if(result == null){
             return scientificNametoID;
         }
@@ -268,6 +288,12 @@ public class ModelUtils {
                 scientificNametoID.put(jsonArrayScientificName.get(i).toString(),jsonArrayID.get(i).toString());
             }
         }
+      }
+        catch (IOException e) {
+        e.printStackTrace();
+      } catch (ParseException e) {
+        e.printStackTrace();
+      }
         return scientificNametoID;
     }
 
@@ -683,7 +709,7 @@ public class ModelUtils {
     public static void setNetSignificanceThresholdMethod(CyNetwork network, String significanceThresholdMethod) {
         if(network.getDefaultNetworkTable()==null){
             logger.warn("No default network table available");
-            System.out.println("No default network table");
+            //System.out.println("No default network table");
             return;
         }
         createColumnIfNeeded(network.getDefaultNetworkTable(), String.class, NET_SIGNIFICANCE_THRESHOLD_METHOD);
