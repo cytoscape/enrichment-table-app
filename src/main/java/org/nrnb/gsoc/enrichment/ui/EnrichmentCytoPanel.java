@@ -860,6 +860,7 @@ public class EnrichmentCytoPanel extends JPanel
     @Override
     public void handleEvent(SelectedNodesAndEdgesEvent event) {
         JTable table = enrichmentTables.get(showTable);
+
         if (table!=null && table.getSelectedRow() > -1 &&
                 table.getSelectedColumnCount() == 1 &&
                 table.getSelectedColumn() != EnrichmentTerm.chartColumnCol)
@@ -872,6 +873,7 @@ public class EnrichmentCytoPanel extends JPanel
         for (final CyNode node : event.getSelectedNodes()) {
             nodesToFilterSUID.add(node.getSUID());
         }
+
         tableModel.filterByNodeSUID(nodesToFilterSUID, true,
                 SessionUtils.getSelectedCategories(network, enrichmentTable),
                 SessionUtils.getSelectedEvidenceCode(network, enrichmentTable),
