@@ -5,7 +5,6 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyUserLog;
 import org.cytoscape.application.swing.*;
 import org.cytoscape.model.*;
-import org.cytoscape.model.events.RowsSetListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.view.model.CyNetworkView;
@@ -325,7 +324,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			Component panel = cytoPanel.getComponentAt(compIndex);
 			if (panel instanceof CytoPanelComponent2) {
 				registrar.unregisterService(panel, CytoPanelComponent.class);
-				registrar.unregisterService(panel, RowsSetListener.class);
 				registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
 			}
 		}
@@ -334,7 +332,6 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			enrichmentPanel.setEnrichmentTable(enrichmentTable);
 
 			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
-			registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 			registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
 				cytoPanel.setState(CytoPanelState.DOCK);

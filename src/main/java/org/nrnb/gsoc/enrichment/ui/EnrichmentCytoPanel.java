@@ -57,7 +57,7 @@ import java.util.List;
  * @description Result Panel which stores the result of the gProfiler querying task and provides other tools to modify the querying tasks
  */
 public class EnrichmentCytoPanel extends JPanel
-        implements CytoPanelComponent2, ActionListener, RowsSetListener, TableModelListener,
+        implements CytoPanelComponent2, ActionListener, TableModelListener,
         SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SessionLoadedListener {
 
     private CyTable enrichmentTable;
@@ -856,10 +856,6 @@ public class EnrichmentCytoPanel extends JPanel
         clearSelection = false;
     }
 
-    @Override
-    public void handleEvent(RowsSetEvent rse) {
-        return;
-    }
 
     @Override
     public void handleEvent(SelectedNodesAndEdgesEvent event) {
@@ -882,17 +878,6 @@ public class EnrichmentCytoPanel extends JPanel
                 SessionUtils.getRemoveRedundantStatus(network, enrichmentTable),
                 SessionUtils.getRemoveRedundantCutoff(network, enrichmentTable));
         updateLabelRows();
-
-        JTable currentTable = enrichmentTables.get(showTable);
-        if (!clearSelection && network != null && currentTable != null) {
-            List<CyNode> nodes = network.getNodeList();
-            for (CyNode node : nodes) {
-                if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
-                    return;
-                }
-            }
-            currentTable.clearSelection();
-        }
     }
 
     @Override
@@ -913,14 +898,12 @@ public class EnrichmentCytoPanel extends JPanel
             Component panel = cytoPanel.getComponentAt(compIndex);
             if (panel instanceof CytoPanelComponent2) {
                 registrar.unregisterService(panel, CytoPanelComponent.class);
-                registrar.unregisterService(panel, RowsSetListener.class);
                 registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
             }
         }
 
         CytoPanelComponent2 panel = new EnrichmentCytoPanel(registrar, noSignificant, null);
         registrar.registerService(panel, CytoPanelComponent.class, new Properties());
-        registrar.registerService(panel, RowsSetListener.class, new Properties());
         registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
         if (cytoPanel.getState() == CytoPanelState.HIDE)
             cytoPanel.setState(CytoPanelState.DOCK);
@@ -936,14 +919,12 @@ public class EnrichmentCytoPanel extends JPanel
             Component panel = cytoPanel.getComponentAt(compIndex);
             if (panel instanceof CytoPanelComponent2) {
                 registrar.unregisterService(panel, CytoPanelComponent.class);
-                registrar.unregisterService(panel, RowsSetListener.class);
                 registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
             }
         }
         //if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") < 0) {
         CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar, noSignificant, null);
         registrar.registerService(panel, CytoPanelComponent.class, new Properties());
-        registrar.registerService(panel, RowsSetListener.class, new Properties());
         registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
         if (cytoPanel.getState() == CytoPanelState.HIDE)
             cytoPanel.setState(CytoPanelState.DOCK);

@@ -7,7 +7,6 @@ import org.cytoscape.application.swing.CytoPanelComponent2;
 import org.cytoscape.application.swing.CytoPanelName;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
-import org.cytoscape.model.events.RowsSetListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
@@ -68,7 +67,6 @@ public class CyActivator extends AbstractCyActivator {
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
 		CytoPanelComponent2 enrichmentPanel =  new EnrichmentCytoPanel(registrar,false,null);
 		registrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
-		registrar.registerService(enrichmentPanel, RowsSetListener.class,new Properties());
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
