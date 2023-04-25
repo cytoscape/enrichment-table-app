@@ -858,36 +858,7 @@ public class EnrichmentCytoPanel extends JPanel
 
     @Override
     public void handleEvent(RowsSetEvent rse) {
-        CyNetworkManager networkManager = registrar.getService(CyNetworkManager.class);
-        CyNetwork selectedNetwork = null;
-        if (rse.containsColumn(CyNetwork.SELECTED)) {
-            Collection<RowSetRecord> columnRecords = rse.getColumnRecords(CyNetwork.SELECTED);
-            for (RowSetRecord rec : columnRecords) {
-                CyRow row = rec.getRow();
-                if (row.toString().indexOf("FACADE") >= 0)
-                    continue;
-                Long networkID = row.get(CyNetwork.SUID, Long.class);
-                Boolean selectedValue = (Boolean) rec.getValue();
-                if (selectedValue && networkManager.networkExists(networkID)) {
-                    selectedNetwork = networkManager.getNetwork(networkID);
-                }
-            }
-        }
-        if (selectedNetwork != null) {
-            initPanel(selectedNetwork, false);
-            return;
-        }
-        CyNetwork network = applicationManager.getCurrentNetwork();
-        JTable currentTable = enrichmentTables.get(showTable);
-        if (!clearSelection && network != null && currentTable != null) {
-            List<CyNode> nodes = network.getNodeList();
-            for (CyNode node : nodes) {
-                if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
-                    return;
-                }
-            }
-            currentTable.clearSelection();
-        }
+        return;
     }
 
     @Override
@@ -911,6 +882,17 @@ public class EnrichmentCytoPanel extends JPanel
                 SessionUtils.getRemoveRedundantStatus(network, enrichmentTable),
                 SessionUtils.getRemoveRedundantCutoff(network, enrichmentTable));
         updateLabelRows();
+
+        JTable currentTable = enrichmentTables.get(showTable);
+        if (!clearSelection && network != null && currentTable != null) {
+            List<CyNode> nodes = network.getNodeList();
+            for (CyNode node : nodes) {
+                if (network.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
+                    return;
+                }
+            }
+            currentTable.clearSelection();
+        }
     }
 
     @Override

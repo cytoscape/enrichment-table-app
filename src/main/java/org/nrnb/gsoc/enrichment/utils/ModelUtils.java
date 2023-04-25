@@ -270,7 +270,6 @@ public class ModelUtils {
 
         JSONArray result = (JSONArray) parser.parse(jsonString);
 
-
         if(result == null){
             return scientificNametoID;
         }
