@@ -21,6 +21,8 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
+import org.cytoscape.application.events.SetCurrentNetworkEvent;
+import org.cytoscape.application.events.SetCurrentNetworkListener;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -325,6 +327,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 			if (panel instanceof CytoPanelComponent2) {
 				registrar.unregisterService(panel, CytoPanelComponent.class);
 				registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
+				registrar.unregisterService(panel, SetCurrentNetworkListener.class);
 			}
 		}
 		if(show){
@@ -333,6 +336,7 @@ public class EnrichmentTask extends AbstractTask implements ObservableTask {
 
 			registrar.registerService(enrichmentPanel,CytoPanelComponent.class,new Properties());
 			registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
+			registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
 				cytoPanel.setState(CytoPanelState.DOCK);
 			cytoPanel.setSelectedIndex(

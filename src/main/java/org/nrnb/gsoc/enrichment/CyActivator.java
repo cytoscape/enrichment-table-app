@@ -7,6 +7,7 @@ import org.cytoscape.application.swing.CytoPanelComponent2;
 import org.cytoscape.application.swing.CytoPanelName;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
+import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
@@ -70,6 +71,7 @@ public class CyActivator extends AbstractCyActivator {
 		registrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
 		registrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
+		registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 		//registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 		//registrar.registerService(enrichmentPanel, NetworkAddedListener.class, new Properties());
 

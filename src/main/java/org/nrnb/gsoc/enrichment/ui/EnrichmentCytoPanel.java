@@ -4,6 +4,8 @@ import static javax.swing.GroupLayout.DEFAULT_SIZE;
 import static javax.swing.GroupLayout.PREFERRED_SIZE;
 import static javax.swing.GroupLayout.Alignment.CENTER;
 
+import org.cytoscape.application.events.SetCurrentNetworkEvent;
+import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
@@ -58,7 +60,7 @@ import java.util.List;
  */
 public class EnrichmentCytoPanel extends JPanel
         implements CytoPanelComponent2, ActionListener, TableModelListener,
-        SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SessionLoadedListener {
+        SelectedNodesAndEdgesListener, NetworkAboutToBeDestroyedListener, SetCurrentNetworkListener, SessionLoadedListener {
 
     private CyTable enrichmentTable;
     EnrichmentTableModel tableModel;
@@ -856,6 +858,13 @@ public class EnrichmentCytoPanel extends JPanel
         clearSelection = false;
     }
 
+    public void handleEvent(SetCurrentNetworkEvent event) {
+       CyNetwork network = event.getNetwork();
+       if (network != null) {
+           initPanel(network, false);
+           return;
+       }
+  	}
 
     @Override
     public void handleEvent(SelectedNodesAndEdgesEvent event) {
@@ -901,12 +910,15 @@ public class EnrichmentCytoPanel extends JPanel
             if (panel instanceof CytoPanelComponent2) {
                 registrar.unregisterService(panel, CytoPanelComponent.class);
                 registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
+                registrar.unregisterService(panel, SetCurrentNetworkListener.class);
             }
         }
 
         CytoPanelComponent2 panel = new EnrichmentCytoPanel(registrar, noSignificant, null);
         registrar.registerService(panel, CytoPanelComponent.class, new Properties());
         registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+        registrar.registerService(panel, SetCurrentNetworkListener.class, new Properties());
+
         if (cytoPanel.getState() == CytoPanelState.HIDE)
             cytoPanel.setState(CytoPanelState.DOCK);
         cytoPanel.setSelectedIndex(
@@ -922,12 +934,14 @@ public class EnrichmentCytoPanel extends JPanel
             if (panel instanceof CytoPanelComponent2) {
                 registrar.unregisterService(panel, CytoPanelComponent.class);
                 registrar.unregisterService(panel, SelectedNodesAndEdgesListener.class);
+                registrar.unregisterService(panel, SetCurrentNetworkListener.class);
             }
         }
         //if (cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") < 0) {
         CytoPanelComponent2 panel =  new EnrichmentCytoPanel(registrar, noSignificant, null);
         registrar.registerService(panel, CytoPanelComponent.class, new Properties());
         registrar.registerService(panel, SelectedNodesAndEdgesListener.class, new Properties());
+        registrar.registerService(panel, SetCurrentNetworkListener.class, new Properties());
         if (cytoPanel.getState() == CytoPanelState.HIDE)
             cytoPanel.setState(CytoPanelState.DOCK);
         cytoPanel.setSelectedIndex(
