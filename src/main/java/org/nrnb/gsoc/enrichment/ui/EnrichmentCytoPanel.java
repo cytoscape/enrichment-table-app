@@ -21,8 +21,6 @@ import org.cytoscape.util.swing.IconManager;
 import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskIterator;
 import org.cytoscape.work.TaskManager;
-import org.cytoscape.model.events.NetworkAboutToBeDestroyedEvent;
-import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
 import org.cytoscape.session.events.SessionLoadedEvent;
 import org.cytoscape.session.events.SessionLoadedListener;
 import org.json.simple.JSONObject;
@@ -44,7 +42,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -85,6 +82,8 @@ public class EnrichmentCytoPanel extends JPanel
     TableColumnModel columnModel;
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
+    JPopupMenu popupMenu;
+
     private String[] columnToolTips = {
             "the full name of the datasource for the term",
             "term ID in its native namespace. For non-GO terms, the ID is prefixed with the datasource abbreviation",
@@ -734,6 +733,22 @@ public class EnrichmentCytoPanel extends JPanel
         jTable.getModel().addTableModelListener(this);
         jTable.setDefaultRenderer(Color.class, new ColorRenderer(true));
         //jTable.setDefaultEditor(Color.class, new ColorEditor(registrar, this, colorChooserFactory, network));
+        CyNetwork network = applicationManager.getCurrentNetwork();
+        popupMenu = new JPopupMenu();
+        JMenuItem menuItemClearRowSelection = new JMenuItem("Clear row selection");
+		menuItemClearRowSelection.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Component c = (Component) e.getSource();
+				JPopupMenu popup = (JPopupMenu) c.getParent();
+				JTable table = (JTable) popup.getInvoker();
+				table.clearSelection();
+				updateLabelRows();
+			}
+		});
+		popupMenu.add(menuItemClearRowSelection);
+        jTable.setComponentPopupMenu(popupMenu);
+
         jTable.addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
@@ -872,8 +887,9 @@ public class EnrichmentCytoPanel extends JPanel
 
         if (table!=null && table.getSelectedRow() > -1 &&
                 table.getSelectedColumnCount() == 1 &&
-                table.getSelectedColumn() != EnrichmentTerm.chartColumnCol)
+                table.getSelectedColumn() != EnrichmentTerm.chartColumnCol){
             return;
+        }
 
         CyNetwork network = applicationManager.getCurrentNetwork();
         if (network == null || tableModel == null)
