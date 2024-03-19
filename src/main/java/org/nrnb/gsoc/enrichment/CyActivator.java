@@ -1,5 +1,9 @@
 package org.nrnb.gsoc.enrichment;
 
+import java.util.Properties;
+
+import org.cytoscape.application.events.SetCurrentNetworkListener;
+import org.cytoscape.application.swing.CyAction;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanel;
 import org.cytoscape.application.swing.CytoPanelComponent;
@@ -7,18 +11,16 @@ import org.cytoscape.application.swing.CytoPanelComponent2;
 import org.cytoscape.application.swing.CytoPanelName;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.model.events.NetworkAboutToBeDestroyedListener;
-import org.cytoscape.application.events.SetCurrentNetworkListener;
 import org.cytoscape.model.events.SelectedNodesAndEdgesListener;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.session.events.SessionLoadedListener;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
+import org.nrnb.gsoc.enrichment.actions.ShowAppTableAction;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.osgi.framework.BundleContext;
-
-import java.util.Properties;
 
 /**
  * @author ighosh98
@@ -52,6 +54,7 @@ public class CyActivator extends AbstractCyActivator {
 	 * environment. You use {@code BundleContext} to import services or ask OSGi
 	 * about the status of some service.
 	 */
+	@Override
 	public void start(BundleContext context) throws Exception {
 		// Get the services we're going to want to use
 		CyServiceRegistrar registrar = getService(context, CyServiceRegistrar.class);
@@ -74,6 +77,9 @@ public class CyActivator extends AbstractCyActivator {
 		registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 		//registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
 		//registrar.registerService(enrichmentPanel, NetworkAddedListener.class, new Properties());
+		
+		ShowAppTableAction showAppTableAction = new ShowAppTableAction(registrar);
+		registerService(context, showAppTableAction, CyAction.class);
 
 		if (cytoPanel.getState() == CytoPanelState.HIDE)
 			cytoPanel.setState(CytoPanelState.DOCK);

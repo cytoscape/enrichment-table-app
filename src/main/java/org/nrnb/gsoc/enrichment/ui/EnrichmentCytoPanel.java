@@ -30,6 +30,7 @@ import org.nrnb.gsoc.enrichment.tasks.*;
 import org.nrnb.gsoc.enrichment.utils.ModelUtils;
 import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.property.CyProperty;
+import org.nrnb.gsoc.enrichment.utils.IconUtil;
 import org.nrnb.gsoc.enrichment.utils.SessionUtils;
 import org.nrnb.gsoc.enrichment.utils.ViewUtils;
 
@@ -177,8 +178,8 @@ public class EnrichmentCytoPanel extends JPanel
     @Override
     public Icon getIcon() {
     	if (icon == null) {
-			var font = registrar.getService(IconManager.class).getIconFont(14.0f);
-			icon = new TextIcon(IconManager.ICON_REFRESH, font, 16, 16);
+			var font = IconUtil.getIconFont(14.0f);
+			icon = new TextIcon(IconUtil.APP_LOGO_MONO, font, 16, 16);
     	}
 
         return icon;
