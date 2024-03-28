@@ -20,7 +20,6 @@ import org.nrnb.gsoc.enrichment.model.EnrichmentTerm;
 import org.nrnb.gsoc.enrichment.model.EnrichmentTerm.TermSource;
 
 import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import java.io.IOException;
@@ -830,5 +829,14 @@ public class ModelUtils {
             super(name, "enrichment.props", policy);
         }
     }
+
+    	// This method will tell us if we have the new side panel functionality (i.e. namespaces)
+	public static boolean ifHaveEnrichmentNS(CyNetwork network) {
+		if (network == null) return false;
+		Collection<CyColumn> columns = network.getDefaultNetworkTable().getColumns(ENRICHMENT_NAMESPACE);
+		if (columns != null && columns.size() > 0)
+			return true;
+		return false;
+	}
 
 }

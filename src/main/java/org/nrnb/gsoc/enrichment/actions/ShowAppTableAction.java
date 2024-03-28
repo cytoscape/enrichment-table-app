@@ -21,6 +21,9 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.session.events.SessionLoadedListener;
 import org.cytoscape.util.swing.TextIcon;
 import org.cytoscape.work.TaskFactory;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskManager;
+import org.nrnb.gsoc.enrichment.tasks.EnrichmentTask;
 import org.nrnb.gsoc.enrichment.tasks.EnrichmentTaskFactory;
 import org.nrnb.gsoc.enrichment.ui.EnrichmentCytoPanel;
 import org.nrnb.gsoc.enrichment.utils.IconUtil;
@@ -42,7 +45,7 @@ public class ShowAppTableAction extends AbstractCyAction {
 		var iconFont = IconUtil.getIconFont(30.0f);
 		var icon = new TextIcon(APP_ICON_LAYERS, iconFont, APP_ICON_COLORS, 32, 32, 1);
 		
-		putValue(SHORT_DESCRIPTION, "Show Enrichment Table"); // Tooltip's short description
+		putValue(SHORT_DESCRIPTION, "Perform Gene Enrichment");
 		putValue(LARGE_ICON_KEY, icon);
 	}
 
@@ -50,26 +53,31 @@ public class ShowAppTableAction extends AbstractCyAction {
 	public void actionPerformed(ActionEvent e) {
 		CySwingApplication swingApplication = serviceRegistrar.getService(CySwingApplication.class);
 		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
-		if (enrichmentPanel == null){
-		enrichmentPanel =  new EnrichmentCytoPanel(serviceRegistrar,false,null);
-		serviceRegistrar.registerService(enrichmentPanel, CytoPanelComponent.class,new Properties());
-		serviceRegistrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
-		serviceRegistrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
-		serviceRegistrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
-		serviceRegistrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
-		//registrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
-		//registrar.registerService(enrichmentPanel, NetworkAddedListener.class, new Properties());
-		if (cytoPanel.getState() == CytoPanelState.HIDE)
-		cytoPanel.setState(CytoPanelState.DOCK);
-	cytoPanel.setSelectedIndex(
-			cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-
+		TaskManager<?, ?> tm = serviceRegistrar.getService(TaskManager.class);
+		if (enrichmentPanel == null) {
+			enrichmentPanel = new EnrichmentCytoPanel(serviceRegistrar, false, null);
+			serviceRegistrar.registerService(enrichmentPanel, CytoPanelComponent.class, new Properties());
+			serviceRegistrar.registerService(enrichmentPanel, SelectedNodesAndEdgesListener.class, new Properties());
+			serviceRegistrar.registerService(enrichmentPanel, NetworkAboutToBeDestroyedListener.class, new Properties());
+			serviceRegistrar.registerService(enrichmentPanel, SessionLoadedListener.class, new Properties());
+			serviceRegistrar.registerService(enrichmentPanel, SetCurrentNetworkListener.class, new Properties());
+			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
+			cytoPanel.setSelectedIndex(cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
 		} else {
 			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
+			cytoPanel.setSelectedIndex(cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
+		}
+	
+		try {
+			tm.execute(new TaskIterator(new EnrichmentTask(serviceRegistrar, enrichmentPanel)));
+		} catch (Exception ex) {
+			System.err.println("Error executing EnrichmentTask: " + ex.getMessage());
+		}
+	
+		if (cytoPanel.getState() == CytoPanelState.HIDE)
 			cytoPanel.setState(CytoPanelState.DOCK);
-		cytoPanel.setSelectedIndex(
-				cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
-
-		}	
+		cytoPanel.setSelectedIndex(cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment"));
 	}
 }

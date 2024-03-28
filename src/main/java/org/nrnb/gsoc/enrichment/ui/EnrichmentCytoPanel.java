@@ -84,6 +84,7 @@ public class EnrichmentCytoPanel extends JPanel
     CyTable filteredEnrichmentTable = null;
     boolean clearSelection = false;
     JPopupMenu popupMenu;
+    private boolean registered = false;
 
     private String[] columnToolTips = {
             "the full name of the datasource for the term",
@@ -148,6 +149,7 @@ public class EnrichmentCytoPanel extends JPanel
         enrichmentTables = new HashMap<String, JTable>();
         this.noSignificant = noSignificant;
         initPanel(this.noSignificant);
+        registered = true;
     }
 
     public void setEnrichmentTable(CyTable enrichmentTable){
@@ -874,13 +876,19 @@ public class EnrichmentCytoPanel extends JPanel
         clearSelection = false;
     }
 
-    public void handleEvent(SetCurrentNetworkEvent event) {
-       CyNetwork network = event.getNetwork();
-       if (network != null) {
-           initPanel(network, false);
-           return;
-       }
-  	}
+	public void handleEvent(SetCurrentNetworkEvent event) {
+		CyNetwork network = event.getNetwork();
+		if (ModelUtils.ifHaveEnrichmentNS(network)) {
+			if (!registered) {
+				showCytoPanel();
+			} else {
+				initPanel(network, false);
+			}
+		} else {
+			hideCytoPanel();
+		}
+
+	}
 
     @Override
     public void handleEvent(SelectedNodesAndEdgesEvent event) {
@@ -942,6 +950,7 @@ public class EnrichmentCytoPanel extends JPanel
                 cytoPanel.indexOfComponent("org.cytoscape.NodeTables"));
     }
 
+
     public void handleEvent(SessionLoadedEvent arg0) {
         CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
         CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
@@ -983,6 +992,26 @@ public class EnrichmentCytoPanel extends JPanel
     public boolean getIsChartEnabled() {
         return isChartEnabled;
     }
+	public void showCytoPanel() {
+		CySwingApplication swingApplication = registrar.getService(CySwingApplication.class);
+		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.SOUTH);
+		if (!registered && cytoPanel.indexOfComponent("org.nrnb.gsoc.enrichment") < 0) {
+			// System.out.println("panel: register enrichment panel");
+			registrar.registerService(this, CytoPanelComponent.class, new Properties());
+			registered = true;
+		}
+		if (cytoPanel.getState() == CytoPanelState.HIDE)
+			cytoPanel.setState(CytoPanelState.DOCK);
+
+		initPanel(false);
+		cytoPanel
+				.setSelectedIndex(cytoPanel.indexOfComponent("edu.ucsf.rbvi.stringApp.Enrichment"));
+	}
+
+    public void hideCytoPanel() {
+		registrar.unregisterService(this, CytoPanelComponent.class);
+        registered = false;
+	}
 
     private boolean isEnrichmentMapInstalled() {
         return availableCommands.getNamespaces().contains("enrichmentmap");
