@@ -32,6 +32,7 @@ import org.nrnb.gsoc.enrichment.utils.IconUtil;
 public class ShowAppTableAction extends AbstractCyAction {
 
 	private final CyServiceRegistrar serviceRegistrar;
+	private static final String DESCRIPTION = "Results are displayed in the Enrichment Table using default organism and gene ID column.";
 	CytoPanelComponent2 enrichmentPanel;
 
 	public ShowAppTableAction(CyServiceRegistrar serviceRegistrar) {
@@ -46,6 +47,7 @@ public class ShowAppTableAction extends AbstractCyAction {
 		var icon = new TextIcon(APP_ICON_LAYERS, iconFont, APP_ICON_COLORS, 32, 32, 1);
 		
 		putValue(SHORT_DESCRIPTION, "Perform Gene Enrichment");
+		putValue(LONG_DESCRIPTION, DESCRIPTION);
 		putValue(LARGE_ICON_KEY, icon);
 	}
 
